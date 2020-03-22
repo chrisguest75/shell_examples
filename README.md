@@ -17,9 +17,13 @@ Steps [README.md](./01_argument_parsing/README.md)
 Demonstrates how to initiate a function as a job.  
 Steps [README.md](./02_job_functions/README.md)  
 
+## Example 3 - Pipe filters
+Demonstrates how read from stdin stream and process it. 
+Steps [README.md](./03_pipe_filter_function/README.md)  
+
+
 
 TODO:
-  * Piping through a bash function
   * Trap example. 
   * Build an apt 
   * Add a man page.
@@ -28,4 +32,6 @@ TODO:
   * String manipulation
   * zsh versus bash
   * unit testing
+  * printing numbers
+
   
