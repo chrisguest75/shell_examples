@@ -25,7 +25,9 @@ Steps [README.md](./03_pipe_filter_function/README.md)
 Demonstrate trap handlers functionality 
 Steps [README.md](./04_trap/README.md)  
 
-
+## Example 6 - Restricted bash shell
+Demonstrate a restricted bash shell
+Steps [README.md](./06_restricted_bash/README.md)  
 
 
 TODO:
