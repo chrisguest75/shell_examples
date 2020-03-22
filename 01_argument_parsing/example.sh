@@ -3,12 +3,15 @@
 
 readonly SCRIPT_NAME=$(basename "$0")
 readonly SCRIPT_PATH=${0:A}
+# shellcheck disable=SC2034
 readonly SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
-if [ ! -z "${DEBUG_ENVIRONMENT}" ];then 
+if [ -n "${DEBUG_ENVIRONMENT}" ];then 
+    # if DEBUG_ENVIRONMENT is set
     env
     export
 fi
+
 #****************************************************************************
 #** Print out usage
 #****************************************************************************
@@ -49,6 +52,7 @@ function main() {
         ;;           
         --debug)
             set -x
+            # shellcheck disable=SC2034
             local -r DEBUG=true   
             shift # past argument=value
         ;;   
