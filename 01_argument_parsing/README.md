@@ -5,7 +5,7 @@ You can modify this basic script to create new scripts that accept arguments.
 
 ## Example usage
 Run through the following examples
-```
+```sh
 ./example.sh                               
 ./example.sh --help
 ./example.sh --action=ls

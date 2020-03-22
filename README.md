@@ -18,13 +18,17 @@ Demonstrates how to initiate a function as a job.
 Steps [README.md](./02_job_functions/README.md)  
 
 ## Example 3 - Pipe filters
-Demonstrates how read from stdin stream and process it. 
+Demonstrates how read from stdin stream and process it.  
 Steps [README.md](./03_pipe_filter_function/README.md)  
+
+## Example 4 - Trap handlers
+Demonstrate trap handlers functionality 
+Steps [README.md](./04_trap/README.md)  
+
 
 
 
 TODO:
-  * Trap example. 
   * Build an apt 
   * Add a man page.
   * Reading input 
@@ -32,6 +36,7 @@ TODO:
   * String manipulation
   * zsh versus bash
   * unit testing
-  * printing numbers
+  * printing and formatting numbers
+  * generating temporary files. 
 
   
