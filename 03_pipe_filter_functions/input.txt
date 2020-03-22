@@ -1,0 +1,11 @@
+apples 20
+pears 30
+pears 1
+pears 5
+apples 12
+oranges 20
+bananas 4
+mangoes 3
+mangoes 3
+avacado 4
+avacado 40
