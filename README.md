@@ -8,7 +8,7 @@ The aim is to use examples to demonstrate how shells behave and squash some assu
     ```
     code --install-extension timonwong.shellcheck
     ```
-    
+
 ## Example 1 - Simple argument parsing
 Demonstrates how to build a script with simple argument parsing.  
 Steps [README.md](./01_argument_parsing/README.md)  
@@ -19,7 +19,13 @@ Steps [README.md](./02_job_functions/README.md)
 
 
 TODO:
-  * Piping through a bash functions
+  * Piping through a bash function
   * Trap example. 
   * Build an apt 
   * Add a man page.
+  * Reading input 
+  * Detecting dotsourcing. 
+  * String manipulation
+  * zsh versus bash
+  * unit testing
+  

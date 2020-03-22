@@ -11,9 +11,9 @@ function loop_test {
     local iterations=$2
     local wait=$3
 
-    for count in $(seq $iterations); do
-        do_work $name $count &
-        sleep $wait 
+    for count in $(seq "$iterations"); do
+        do_work "$name" "$count" &
+        sleep "$wait" 
     done
 
     echo "Finished $name"
@@ -31,6 +31,7 @@ function main() {
     done
 
     echo "Killing Jobs"
+    # shellcheck disable=SC2046
     kill $(jobs -p)
     echo "Remaining Jobs"
     jobs -l
