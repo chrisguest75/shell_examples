@@ -29,6 +29,9 @@ Steps [README.md](./04_trap/README.md)
 Demonstrate a restricted bash shell
 Steps [README.md](./06_restricted_bash/README.md)  
 
+## Example 8 - Paths
+Demonstrates ways of manipulating paths 
+Steps [README.md](./08_paths/README.md)  
 
 TODO:
   * Build an apt 
@@ -36,9 +39,10 @@ TODO:
   * Reading input 
   * Detecting dotsourcing. 
   * String manipulation
+  * printing and formatting numbers
   * zsh versus bash
   * unit testing
-  * printing and formatting numbers
   * generating temporary files. 
-
+  * autocompletion example
+  * man page example
   
