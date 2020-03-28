@@ -1,6 +1,6 @@
 #!/usr/bin/env bash 
 #set -euf -o pipefail
-set -ef -o pipefail
+set -euf -o pipefail
 
 #-e  Exit immediately if a command exits with a non-zero status.
 #-u  Treat unset variables as an error when substituting.
@@ -10,15 +10,15 @@ set -ef -o pipefail
 #                or zero if no command exited with a non-zero status
 
 FILTER=""
-if [[ -n $1 ]]; then
+# Using ${1-} means if we don't set $1 it doesn't fail with unbound variable
+if [[ -n ${1-} ]]; then
   FILTER=$1
 else
   echo "No filter set"
 fi
 
 # hashtable
-#counts=
-declare -A counts   
+declare -A counts=()
 
 # read data and aggregate the counts for each item filtering on a value
 while read -r item count

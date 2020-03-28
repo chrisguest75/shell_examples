@@ -8,6 +8,20 @@ The aim is to use examples to demonstrate how shells behave and squash some assu
     ```
     code --install-extension timonwong.shellcheck
     ```
+## Shell Help
+Depending on the shell you are running the help for builtins is different  
+  
+bash
+```sh
+man bash
+help <builtin>
+```
+
+zsh
+```sh
+man zsh
+man zshbuiltins
+```
 
 ## Example 1 - Simple argument parsing
 Demonstrates how to build a script with simple argument parsing.  
