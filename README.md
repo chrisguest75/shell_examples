@@ -18,19 +18,19 @@ Demonstrates how to initiate a function as a job.
 Steps [README.md](./02_job_functions/README.md)  
 
 ## Example 3 - Pipe filters
-Demonstrates how read from stdin stream and process it.  
+Demonstrates how read from stdin stream and process it.    
 Steps [README.md](./03_pipe_filter_function/README.md)  
 
 ## Example 4 - Trap handlers
-Demonstrate trap handlers functionality 
+Demonstrate trap handlers functionality   
 Steps [README.md](./04_trap/README.md)  
 
 ## Example 6 - Restricted bash shell
-Demonstrate a restricted bash shell
+Demonstrate a restricted bash shell  
 Steps [README.md](./06_restricted_bash/README.md)  
 
 ## Example 8 - Paths
-Demonstrates ways of manipulating paths 
+Demonstrates ways of manipulating paths  
 Steps [README.md](./08_paths/README.md)  
 
 TODO:
@@ -39,10 +39,16 @@ TODO:
   * Reading input 
   * Detecting dotsourcing. 
   * String manipulation
+  * Path manipulation (trailing /)
   * printing and formatting numbers
   * zsh versus bash
   * unit testing
+    * asserts 
+  * defensive programming
+  * functions  
+  * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
   * generating temporary files. 
   * autocompletion example
   * man page example
+  * logging 
   

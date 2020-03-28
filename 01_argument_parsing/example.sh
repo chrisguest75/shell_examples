@@ -1,8 +1,9 @@
 #!/usr/bin/env bash 
 #Use !/bin/bash -x  for debugging 
+set -ef -o pipefail
 
 readonly SCRIPT_NAME=$(basename "$0")
-readonly SCRIPT_PATH=${0:A}
+readonly SCRIPT_PATH=${0}
 # shellcheck disable=SC2034
 readonly SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
@@ -96,6 +97,6 @@ function main() {
     return ${EXITCODE}
 }
 
-echo "Start"
+#echo "Start"
 main "$@"
 exit $?
