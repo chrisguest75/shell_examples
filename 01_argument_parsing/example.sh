@@ -1,13 +1,13 @@
 #!/usr/bin/env bash 
 #Use !/bin/bash -x  for debugging 
-set -ef -o pipefail
+set -euf -o pipefail
 
 readonly SCRIPT_NAME=$(basename "$0")
 readonly SCRIPT_PATH=${0}
 # shellcheck disable=SC2034
 readonly SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
-if [ -n "${DEBUG_ENVIRONMENT}" ];then 
+if [ -n "${DEBUG_ENVIRONMENT-}" ];then 
     # if DEBUG_ENVIRONMENT is set
     env
     export
@@ -43,6 +43,7 @@ EOF
 function main() {
     local EXITCODE=0
     local DEBUG=false  
+    local HELP=false
 
     for i in "$@"
     do
