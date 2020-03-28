@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 set -euf -o pipefail
 
+function add_trailing_slash() {
+    : ${1?"${FUNCNAME[0]}(path) - missing path argument"}
+
+    if [[ -z ${1} ]]; then 
+        #echo "${FUNCNAME[0]}(path) - path is empty" && exit 1
+        echo ""
+        return
+    fi
+    # remove an existing slash and add new one.
+    echo "${1%/}/"
+}
+
 readonly WORKING_PATH=$(pwd)
 readonly SCRIPT_NAME=$(basename "$0")
 readonly SCRIPT_PATH=${0}
@@ -19,3 +31,13 @@ echo "SCRIPT_PATH=${SCRIPT_PATH}"
 echo "SCRIPT_DIR=${SCRIPT_DIR}"
 echo "HOME_DIR=${HOME_DIR}"
 echo "SCRIPT_FULL_PATH=${SCRIPT_FULL_PATH}"
+
+readonly PARAMETER1=${1-}
+echo "PARAMETER1=${PARAMETER1} LENGTH=${#PARAMETER1}"
+
+echo "add_trailing_slash(\"this/is/my/path\") returns \"$(add_trailing_slash "this/is/my/path")\""
+echo "add_trailing_slash(\"this/is/my/path/\") returns \"$(add_trailing_slash "this/is/my/path/")\""
+echo "add_trailing_slash(\"\") returns \"$(add_trailing_slash "")\""
+
+echo "End of script"
+

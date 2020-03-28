@@ -40,7 +40,7 @@ Demonstrate trap handlers functionality
 Steps [README.md](./04_trap/README.md)  
 
 ## Example 5 - Strings
-Demonstrate some examples of string manipulation
+Demonstrate some examples of string manipulation   
 Steps [README.md](./05_strings/README.md)  
 
 ## Example 6 - Restricted bash shell
@@ -56,8 +56,6 @@ TODO:
   * Add a man page.
   * Reading input 
   * Detecting dotsourcing. 
-  * String manipulation
-  * Path manipulation (trailing /)
   * printing and formatting numbers
   * zsh versus bash
   * unit testing
