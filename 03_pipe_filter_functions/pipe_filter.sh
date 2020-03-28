@@ -20,7 +20,7 @@ fi
 #counts=
 declare -A counts   
 
-# read data
+# read data and aggregate the counts for each item filtering on a value
 while read -r item count
 do
   # shellcheck disable=SC2053
@@ -29,6 +29,7 @@ do
   fi
 done
 
+# output the counts
 for item in "${!counts[@]}"
 do
     printf '%-15s %8d\n' "${item}" "${counts[${item}]}"
