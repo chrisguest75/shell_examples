@@ -1,4 +1,5 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env bash
+set -ef -o pipefail
 
 function do_work {
     local name=$1
