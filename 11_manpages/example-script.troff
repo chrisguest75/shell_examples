@@ -1,0 +1,22 @@
+.\" Manpage for an example script.
+.\" This is just a demo of how to write one.
+.TH man 1 "29 Mar 2020" "1.0" "example-script man page"
+.SH NAME
+example-script showing how man pages can be written and formatted
+.SH SYNOPSIS
+example-script [OPTIONS]... [FILE]...
+.SH DESCRIPTION
+Demonstrates how to write a manpage.  
+.SH OPTIONS
+.TP
+\fB\-a\fR, \fB\-\-action\fR=\fI\,create|delete\/\fR
+Specify the action to use 
+.TP
+\fB\-d\fR, \fB\-\-debug\fR
+Turn on debug options to help debug the script 
+.SH SEE ALSO
+other-example(1) another-example(1)
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Chris Guest (chris.guest@email.com)
