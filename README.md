@@ -51,6 +51,10 @@ Steps [README.md](./06_restricted_bash/README.md)
 Demonstrates ways of manipulating paths  
 Steps [README.md](./08_paths/README.md)  
 
+## Example 9 - Debian packaging
+Demonstrates building a debian package
+Steps [README.md](./09_deb_pkg/README.md)  
+
 TODO:
   * Build an apt 
   * Add a man page.
