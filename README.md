@@ -52,16 +52,18 @@ Demonstrates ways of manipulating paths
 Steps [README.md](./08_paths/README.md)  
 
 ## Example 9 - Debian packaging
-Demonstrates building a debian package
+Demonstrates building a debian package  
 Steps [README.md](./09_deb_pkg/README.md)  
 
 ## Example 11 - Man pages
-Demonstrate how to create a manpage. 
+Demonstrate how to create a manpage.  
 Steps [README.md](./11_manpages/README.md)  
 
-TODO:
-  * Build an apt 
-  * Add a man page.
+## Example 12 - CSV parsing
+Demonstrate how to parse a CSV file  
+Steps [README.md](./12_csv/README.md)  
+
+## TODO:
   * Reading input 
   * Detecting dotsourcing. 
   * printing and formatting numbers
@@ -73,6 +75,6 @@ TODO:
   * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
   * generating temporary files. 
   * autocompletion example
-  * man page example
   * logging 
-  
+  * ncurses?
+
