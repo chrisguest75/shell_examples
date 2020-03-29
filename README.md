@@ -55,6 +55,10 @@ Steps [README.md](./08_paths/README.md)
 Demonstrates building a debian package
 Steps [README.md](./09_deb_pkg/README.md)  
 
+## Example 11 - Man pages
+Demonstrate how to create a manpage. 
+Steps [README.md](./11_manpages/README.md)  
+
 TODO:
   * Build an apt 
   * Add a man page.
