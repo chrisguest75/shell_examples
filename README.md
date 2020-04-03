@@ -63,6 +63,10 @@ Steps [README.md](./11_manpages/README.md)
 Demonstrate how to parse a CSV file  
 Steps [README.md](./12_csv/README.md)  
 
+## Example 13 - Bats
+Demonstrate how to use bats for testing  
+Steps [README.md](./13_bats/README.md)  
+
 ## TODO:
   * Reading input 
   * Detecting dotsourcing. 
