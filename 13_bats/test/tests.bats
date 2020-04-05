@@ -4,6 +4,24 @@ load 'test_helper/bats-assert/load'
 
 load "${BATS_TEST_DIRNAME}/../functions.sh"  
 
+setup() {
+    INDEX=$((${BATS_TEST_NUMBER} - 1))
+    echo "##### setup start" >&3 
+    echo "BATS_TEST_NAME:        ${BATS_TEST_NAME}" >&3 
+    echo "BATS_TEST_FILENAME:    ${BATS_TEST_FILENAME}" >&3 
+    echo "BATS_TEST_DIRNAME:     ${BATS_TEST_DIRNAME}" >&3 
+    echo "BATS_TEST_NAMES:       ${BATS_TEST_NAMES[$INDEX]}" >&3 
+    echo "BATS_TEST_DESCRIPTION: ${BATS_TEST_DESCRIPTION}" >&3 
+    echo "BATS_TEST_NUMBER:      ${BATS_TEST_NUMBER}" >&3 
+    echo "BATS_TMPDIR:           ${BATS_TMPDIR}" >&3 
+    echo "##### setup end" >&3 
+}
+
+teardown() {
+    echo -e "##### teardown ${BATS_TEST_NAME}\n" >&3 
+
+}
+
 # FROM https://github.com/ztombol/bats-assert
 # @test 'assert_success() status only' {
 #   run bash -c "echo 'Error!'; exit 1"
