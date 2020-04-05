@@ -5,21 +5,24 @@ load 'test_helper/bats-assert/load'
 load "${BATS_TEST_DIRNAME}/../functions.sh"  
 
 setup() {
-    INDEX=$((${BATS_TEST_NUMBER} - 1))
-    echo "##### setup start" >&3 
-    echo "BATS_TEST_NAME:        ${BATS_TEST_NAME}" >&3 
-    echo "BATS_TEST_FILENAME:    ${BATS_TEST_FILENAME}" >&3 
-    echo "BATS_TEST_DIRNAME:     ${BATS_TEST_DIRNAME}" >&3 
-    echo "BATS_TEST_NAMES:       ${BATS_TEST_NAMES[$INDEX]}" >&3 
-    echo "BATS_TEST_DESCRIPTION: ${BATS_TEST_DESCRIPTION}" >&3 
-    echo "BATS_TEST_NUMBER:      ${BATS_TEST_NUMBER}" >&3 
-    echo "BATS_TMPDIR:           ${BATS_TMPDIR}" >&3 
-    echo "##### setup end" >&3 
+    if [[ -n $DEBUG_BATS ]]; then    
+        INDEX=$((${BATS_TEST_NUMBER} - 1))
+        echo "##### setup start" >&3 
+        echo "BATS_TEST_NAME:        ${BATS_TEST_NAME}" >&3 
+        echo "BATS_TEST_FILENAME:    ${BATS_TEST_FILENAME}" >&3 
+        echo "BATS_TEST_DIRNAME:     ${BATS_TEST_DIRNAME}" >&3 
+        echo "BATS_TEST_NAMES:       ${BATS_TEST_NAMES[$INDEX]}" >&3 
+        echo "BATS_TEST_DESCRIPTION: ${BATS_TEST_DESCRIPTION}" >&3 
+        echo "BATS_TEST_NUMBER:      ${BATS_TEST_NUMBER}" >&3 
+        echo "BATS_TMPDIR:           ${BATS_TMPDIR}" >&3 
+        echo "##### setup end" >&3 
+    fi
 }
 
 teardown() {
-    echo -e "##### teardown ${BATS_TEST_NAME}\n" >&3 
-
+    if [[ -n $DEBUG_BATS ]]; then
+        echo -e "##### teardown ${BATS_TEST_NAME}\n" >&3 
+    fi
 }
 
 # FROM https://github.com/ztombol/bats-assert

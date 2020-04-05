@@ -25,8 +25,9 @@ bats test/tests.bats
 test/tests.bats 
 
 # Output in tap format (shows setup and shutdown logs)
+export DEBUG_BATS=true  
 bats -t test/tests.bats 
-
+unset DEBUG_BATS
 ```
 
 ## Running tests (in docker)
