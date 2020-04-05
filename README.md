@@ -68,6 +68,7 @@ Demonstrate how to use bats for testing
 Steps [README.md](./13_bats/README.md)  
 
 ## TODO:
+  * Process Substition versus command substitution < <() < $()
   * Reading input 
   * Detecting dotsourcing. 
   * printing and formatting numbers
