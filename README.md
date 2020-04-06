@@ -2,6 +2,9 @@
 A repository for showing examples of shell scripts.
 
 The aim is to use examples to demonstrate how shells behave and squash some assumptions. 
+
+[RELEASE_NOTES.md](./RELEASE_NOTES.md)
+
 ## Prequisites 
 1. Install [shellcheck](https://github.com/koalaman/shellcheck)
 1. Install vscode extension for shellcheck
@@ -83,3 +86,9 @@ Steps [README.md](./13_bats/README.md)
   * logging 
   * ncurses?
 
+## Updating RELEASE_NOTES
+[TURN](https://github.com/chrisguest75/turn)
+
+```sh
+docker run -it --rm -v $(pwd):/repo turn --action=create --type=ALL --includenext --tags
+```
