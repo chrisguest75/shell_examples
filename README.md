@@ -70,6 +70,10 @@ Steps [README.md](./12_csv/README.md)
 Demonstrate how to use bats for testing  
 Steps [README.md](./13_bats/README.md)  
 
+## Example 14 - CI Env Overrides
+Demonstrate a way to produce ENV overrides in a CI pipeline  
+Steps [README.md](./14_ci_env_overrides/README.md) 
+
 ## TODO:
   * Process Substition versus command substitution < <() < $()
   * Reading input 
