@@ -90,5 +90,5 @@ Steps [README.md](./13_bats/README.md)
 [TURN](https://github.com/chrisguest75/turn)
 
 ```sh
-docker run -it --rm -v $(pwd):/repo turn --action=create --type=ALL --includenext --tags
+docker run -it --rm -v $(pwd):/repo turn --action=create --type=release --includenext --tags
 ```
