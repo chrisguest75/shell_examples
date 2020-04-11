@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
 screenbuf=[]
+declare -g -a screenbuf
 
-while [[ : ]]; do 
-    clear
-    printf "[$COLUMNS x $LINES]\n"
-    
-    for line in $(seq 0 $(( $LINES - 2 )) ); 
+function generate_background {
+    printf "[$2 x $1]\n"    
+    for line in $(seq 0 $1 ); 
     do
-        for col in $(seq 0 $(( $COLUMNS - 1 )) ); 
+        local lineout=""
+        for col in $(seq 0 $2); 
             do 
-                r=$(( 255 - ( col * 255 / 76 ) ))
-                g=$(( col * 510 / 76 ))
-                b=$(( col * 255 / 76 ))
+                local r=$(( 255 - ( col * 255 / 120 ) ))
+                local g=$(( col * 510 / 120 ))
+                local b=$(( col * 255 / 120 ))
                 if [[ $g -gt 255 ]]; then 
                     g=$(( 510-g ))
                 fi
@@ -35,9 +35,27 @@ while [[ : ]]; do
                 if [[ $b -gt 255 ]]; then 
                     b=255
                 fi
-                printf "\033[48;2;${r};${g};${b}m \033[0m"
+                lineout="${lineout}\033[48;2;${r};${g};${b}m "                
         done
+        screenbuf[$line]=$lineout
+        #printf "${screenbuf[line]}"
     done
-    #sleep 1
+}
+
+clear
+SCREEN_Y=$(( $LINES - 2 ))
+generate_background $SCREEN_Y $(( $COLUMNS - 1 ))
+#exit
+while [[ : ]]; do 
+    printf "\033[0;0H"
+    printf "[$COLUMNS x $LINES]\n"
+    
+    for line in $(seq 0 $(( $LINES - 2 )) ); 
+    do
+        printf "${screenbuf[line]}"
+    done
+
+    printf "\033[0m"
+    sleep 1
 
 done 

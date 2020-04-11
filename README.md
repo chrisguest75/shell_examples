@@ -18,6 +18,7 @@ bash
 ```sh
 man bash
 help <builtin>
+info <command>
 ```
 
 zsh
