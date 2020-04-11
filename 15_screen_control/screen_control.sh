@@ -14,12 +14,8 @@ function generate_sine {
 
     while [ $angle -le 359 ]
     do
-        # Create each floating point value...
         local sinx=$(awk "BEGIN{ printf \"%.12f\", ((sin($angle*($PI/180))*$amplitude)+$centreline)}")
-        #vert_plot=$(bc -l <<< "{print ((s($angle*($PI/180))*$amplitude)+$centreline)}")
-        # Truncate the floating point value to an integer then invert the plot to suit the x y co-ordinates inside a terminal...
         sinx=$(( (centreline * 2)-${sinx/.*} ))
-        # Increment values...
         angle=$((angle+step_angle))
         sine[$index]=$sinx
         index=$(( index+1 ))
