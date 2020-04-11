@@ -2,6 +2,29 @@
 
 screenbuf=[]
 declare -g -a screenbuf
+declare -g -a sine
+
+function generate_sine {
+    local angle=0
+    local step_angle=1
+    local index=0
+    local centreline=12
+    local amplitude=10
+    local PI=3.14159
+
+    while [ $angle -le 359 ]
+    do
+        # Create each floating point value...
+        local sinx=$(awk "BEGIN{ printf \"%.12f\", ((sin($angle*($PI/180))*$amplitude)+$centreline)}")
+        #vert_plot=$(bc -l <<< "{print ((s($angle*($PI/180))*$amplitude)+$centreline)}")
+        # Truncate the floating point value to an integer then invert the plot to suit the x y co-ordinates inside a terminal...
+        sinx=$(( (centreline * 2)-${sinx/.*} ))
+        # Increment values...
+        angle=$((angle+step_angle))
+        sine[$index]=$sinx
+        index=$(( index+1 ))
+    done
+}
 
 function generate_background {
     printf "[$2 x $1]\n"    
@@ -46,19 +69,25 @@ function generate_background {
 clear
 SCREEN_Y=$(( $LINES - 2 ))
 generate_background $SCREEN_Y $(( $COLUMNS - 1 ))
-#exit
+generate_sine
 offset=0
+yoffset=0
 direction=0
+start_sine=0
+sineindex=$start_sine
+sine_add=3
 while [[ : ]]; do 
 
     printf "\033[0;0H"
     printf "[$COLUMNS x $LINES]\n"
-    
+
     for line in $(seq 0 $(( $LINES - 2 )) ); 
     do
-
-        printf "${screenbuf[offset]}"
+        newindex=$(( (sineindex + line * 5 - sine[sineindex]) % 360  ))
+        newline=$(( (sine[newindex] + (sine[line])) % SCREEN_Y ))
+        printf "${screenbuf[newline]}"
     done
+    sineindex=$(( (sineindex + sine[offset]) % 360 ))
 
     if [[ $direction -eq 0 ]]; then
         offset=$(( offset + 1 ))
