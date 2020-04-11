@@ -18,6 +18,7 @@ bash
 ```sh
 man bash
 help <builtin>
+info <command>
 ```
 
 zsh
@@ -74,14 +75,16 @@ Steps [README.md](./13_bats/README.md)
 Demonstrate a way to produce ENV overrides in a CI pipeline  
 Steps [README.md](./14_ci_env_overrides/README.md) 
 
+## Example 15 - Screen Control
+Demonstrates how to control the termninal screen output  
+Steps [README.md](./15_screen_control/README.md) 
+
 ## TODO:
   * Process Substition versus command substitution < <() < $()
   * Reading input 
   * Detecting dotsourcing. 
   * printing and formatting numbers
   * zsh versus bash
-  * unit testing
-    * asserts 
   * defensive programming
   * functions  
   * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
