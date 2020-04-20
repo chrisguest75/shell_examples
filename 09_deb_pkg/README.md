@@ -1,26 +1,43 @@
 # README
-Demonstrates building a .deb packages
+Demonstrates building a .deb packages repository
 
-## Example
-Build the debian package
+## Build .deb Examples 
+Build the debian package locally (on linux)
 ```sh
 dpkg-deb --build hello-world
 ```
 
-Build the debian repository
+Build the debian package in Docker
 ```sh
-docker build -f Dockerfile -t aptrep .
+docker build -t builddeb -f builddeb.Dockerfile . 
+docker run -it -e PACKAGE=hello-world -v=$(pwd):/packages builddeb
 ```
 
+## Build Package
+```sh
+docker build -t buildpackages -f buildpackages.Dockerfile .
+docker run -it -v=$(pwd):/packages buildpackages
+```
+
+## Host and acesss repository
 Host the repository
 ```sh
-docker run --name aptrep --rm -d -p 8080:80 aptrep
+docker build -f hostpackages.Dockerfile -t hostpackages .  
+docker run --name hostpackages --rm -d -p 8080:80 hostpackages
+open http://localhost:8080  
 curl localhost:8080
 curl localhost:8080/debian/hello-world-1.0_amd64.deb
 curl localhost:8080/debian/Packages.gz
 ```
 
-Install the package from the repository
+## Use the package
+Install the package into a Docker container
+```sh
+docker build --build-arg=REPOSITORY_URL=http://0.0.0.0:8080/debian --network="host" -t usepackages --no-cache -f usepackages.Dockerfile . 
+docker stop hostrepository
+```
+
+Install the package from the repository locally 
 ```sh
 echo "deb [trusted=yes] http://localhost:8080/debian ./" | sudo tee -a /etc/apt/sources.list > /dev/null 
 sudo apt-get update   
@@ -39,7 +56,8 @@ docker stop aptrep
 ## Troubleshooting
 Get access inside the container. 
 ```sh
-docker run --name aptrep --rm -it --entrypoint=/bin/bash aptrep 
+docker run --name hostrepository --rm -it --entrypoint=/bin/bash hostrepository 
+docker run -it --entrypoint=/bin/bash ubuntu:16.04 
 ```
 
 

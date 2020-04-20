@@ -56,7 +56,7 @@ Demonstrates ways of manipulating paths
 Steps [README.md](./08_paths/README.md)  
 
 ## Example 9 - Debian packaging
-Demonstrates building a debian package  
+Demonstrates building a debian package repository
 Steps [README.md](./09_deb_pkg/README.md)  
 
 ## Example 11 - Man pages
