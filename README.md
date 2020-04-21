@@ -79,13 +79,16 @@ Steps [README.md](./14_ci_env_overrides/README.md)
 Demonstrates how to control the termninal screen output  
 Steps [README.md](./15_screen_control/README.md) 
 
+## Example 16 - Globbing
+Demonstrates techniques for globbing and operating on sets of files 
+Steps [README.md](./16_globbing/README.md) 
 
 ## Example 17 - Logger
 Demonstrates how to implement a logger for scripts   
 Steps [README.md](./17_logger/README.md) 
 
-
 ## TODO:
+  * Globbing 
   * Process Substition versus command substitution < <() < $()
   * Reading input 
   * Detecting dotsourcing. 
