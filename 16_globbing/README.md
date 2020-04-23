@@ -6,3 +6,10 @@ Demonstrates techniques for globbing and operating on sets of files
 1. Using globbing in scripts
 1. shopts and controlling behaviour
 
+```zsh
+# zsh
+setopt extendedglob
+ls ^d*.txt
+unsetopt extendedglob
+```
+
