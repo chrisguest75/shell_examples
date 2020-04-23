@@ -56,8 +56,18 @@ docker stop aptrep
 ## Troubleshooting
 Get access inside the container. 
 ```sh
+# Debug packaging
+docker run -it -v=$(pwd):/packages --entrypoint /bin/bash buildpackages
+
+# Debug repository
 docker run --name hostrepository --rm -it --entrypoint=/bin/bash hostrepository 
+
+# Debug use package
+docker run -it --entrypoint /bin/bash usepackages 
+
+# Base 
 docker run -it --entrypoint=/bin/bash ubuntu:16.04 
+
 ```
 
 

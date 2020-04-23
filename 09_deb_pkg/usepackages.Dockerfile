@@ -5,7 +5,7 @@ RUN echo "deb [trusted=yes] ${REPOSITORY_URL} ./" | tee -a /etc/apt/sources.list
 
 # Do not clean out package caches so I can play with the image.
 RUN apt-get update && apt-get install bash -y
-
+RUN apt search hello-world
 RUN apt-cache show hello-world
 RUN apt-get update && apt-get install hello-world -y
 RUN which hello-world.sh
