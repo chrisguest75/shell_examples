@@ -75,17 +75,23 @@ teardown() {
 #* add_trailing_slash
 #*******************************************************************
 
-@test "Without a trailing slash it should return a trailing slash" {
+@test "add_trailing_slash - No parameter " {
+    run add_trailing_slash 
+    assert_output --regexp 'add_trailing_slash\(path\) - missing path argument'
+    assert_failure
+}
+
+@test "add_trailing_slash - Without a trailing slash it should return a trailing slash" {
     run add_trailing_slash 'this/is/my/path'
     assert_output 'this/is/my/path/'
 }
 
-@test "With a trailing slash it should not alter the path" {
+@test "add_trailing_slash - With a trailing slash it should not alter the path" {
     run add_trailing_slash 'this/is/my/path/'
     assert_output 'this/is/my/path/'
 }
 
-@test "An empty string does not return a root directory" {
+@test "add_trailing_slash - An empty string does not return a root directory" {
     run add_trailing_slash ''
     assert_output ''
 }
@@ -94,37 +100,43 @@ teardown() {
 # #* trim§
 # #*******************************************************************
 
-@test "Empty string is empty string" {
+@test "trim - No parameter " {
+    run trim 
+    assert_output --regexp 'trim\(string\) - missing string argument'
+    assert_failure
+}
+
+@test "trim - Empty string is empty string" {
     run trim ''
     assert_output ''  
 }
 
-@test "Only whitespace is empty string" {
+@test "trim - Only whitespace is empty string" {
     run trim '    '
     assert_output ''  
 }
 
-@test "No whitespace is same string" {
+@test "trim - No whitespace is same string" {
     run trim 'hello'
     assert_output 'hello'  
 }
 
-@test "Beginning whitespace is removed" {
+@test "trim - Beginning whitespace is removed" {
     run trim '    hello'
     assert_output 'hello'  
 }
 
-@test "End whitespace is removed" {
+@test "trim - End whitespace is removed" {
     run trim 'hello    '
     assert_output 'hello'    
 }
 
-@test "Beginning and end whitespace is removed" {
+@test "trim - Beginning and end whitespace is removed" {
     run trim '    hello    '
     assert_output 'hello'  
 }
 
-@test "All redundant whitespace is removed" {
+@test "trim - All redundant whitespace is removed" {
     run trim '    hello this is    world     '
     assert_output 'hello this is world'
 }
