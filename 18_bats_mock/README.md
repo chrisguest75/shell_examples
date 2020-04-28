@@ -8,6 +8,7 @@ brew install bats-core
 # Add some proper asserts to tests
 git clone https://github.com/bats-core/bats-support test/test_helper/bats-support
 git clone https://github.com/bats-core/bats-assert test/test_helper/bats-assert  
+git clone https://github.com/jasonkarns/bats-mock test/test_helper/bats-mock
 ```
 
 ## Walkthrough
@@ -19,4 +20,11 @@ Wlll show the usage
 Will filter the git log on finding #
 ```bash
 ./script_to_test.sh \#  
+```
+
+## Debugging 
+
+```sh
+export DEBUG_BATS=1   
+./run_tests.sh   
 ```
