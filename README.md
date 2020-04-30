@@ -98,6 +98,7 @@ Steps [README.md](./17_logger/README.md)
   * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
   * generating temporary files. 
   * autocompletion example
+  * google script standards https://google.github.io/styleguide/shellguide.html
 
 ## Updating RELEASE_NOTES
 [TURN](https://github.com/chrisguest75/turn)
