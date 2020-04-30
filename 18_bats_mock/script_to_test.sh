@@ -2,8 +2,8 @@
 
 function filter() {
     if [[ -n $1 ]];then
-        #git log --oneline | grep "$1"
-        git log --oneline 
+        git log --oneline | grep "$1"
+        #git log --oneline 
     else
         echo "Usage: script_to_test.sh <filter>"
         exit 1
