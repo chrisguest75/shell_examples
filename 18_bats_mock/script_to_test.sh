@@ -14,7 +14,8 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
 then
     filter "$1"
     exit 0
-else
-    echo "Script is being sourced"
 fi
+# else
+#     echo "Script is being sourced"
+# fi
 

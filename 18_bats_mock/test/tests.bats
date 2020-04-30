@@ -49,15 +49,33 @@ d406cbc Example of a logger from tfenv
 EOF
 )
 
-@test "script_to_test - Filter " {
+@test "script_to_test - Filtering" {
     #echo "$fake_git_log" >&3 
     mock="$(mock_create)"
     mock_set_side_effect "${mock}" "echo '$fake_git_log' $1 $2" 
     git() { ${mock} "$@"; }
     #echo $mock >&3 
-    run filter "d406cbc" 
-    echo $output >&3 
-    assert_output --regexp '^d406cbc Example of a logger from tfenv$'
+    run filter "6a1d0ff" 
+    #echo $output >&3 
+    assert_output --regexp '^6a1d0ff Add shellcheck tests and fix up the script$'
+    assert_equal "$(mock_get_call_num ${mock})" 1
+    assert_equal "$(mock_get_call_args ${mock})" "log --oneline"
+    assert_success
+}
+
+@test "script_to_test - Multiple lines" {
+    #echo "$fake_git_log" >&3 
+    mock="$(mock_create)"
+    mock_set_side_effect "${mock}" "echo '$fake_git_log' $1 $2" 
+    git() { ${mock} "$@"; }
+    #echo $mock >&3 
+    run filter "a"
+    #echo $output >&3 
+    assert_line --index 0 --regexp '^9ac61e6'
+    assert_line --index 1 --regexp '^7ebf99f'
+    assert_line --index 2 --regexp '^91a5101'
+    assert_line --index 3 --regexp '^6a1d0ff'
+    assert_line --index 4 --regexp '^d406cbc'
     assert_equal "$(mock_get_call_num ${mock})" 1
     assert_equal "$(mock_get_call_args ${mock})" "log --oneline"
     assert_success
