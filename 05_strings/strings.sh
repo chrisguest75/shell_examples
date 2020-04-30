@@ -18,9 +18,16 @@ echo "SCRIPT_DIR=${SCRIPT_DIR}"
 echo "HOME_DIR=${HOME_DIR}"
 echo "SCRIPT_FULL_PATH=${SCRIPT_FULL_PATH}"
 
-readonly PARAMETER1=${1-}
+# default if not set ${name-default}
+readonly PARAMETER1=${1-default1}
 echo "PARAMETER1=${PARAMETER1} LENGTH=${#PARAMETER1}"
 
-readonly PARAMETER2=${2-}
+readonly PARAMETER2=${2-default2}
 echo "PARAMETER2=${PARAMETER2} LENGTH=${#PARAMETER2}"
+
+if [[ ${PARAMETER1} == hello* ]];then
+    echo "PARAMETER1 starts with 'hello'"    
+else
+    echo "PARAMETER1 does not start with 'hello'"    
+fi
 

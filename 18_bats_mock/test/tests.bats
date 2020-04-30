@@ -29,7 +29,6 @@ teardown() {
     #ls -l "${BATS_TMPDIR}"/bats-mock* >&3
 }
 
-
 #*******************************************************************
 #* 
 #*******************************************************************
@@ -42,7 +41,11 @@ teardown() {
 }
 
 git() { 
-    ${git_mock} "$@";
+    if [[ "$*" == "log --oneline" ]]; then
+        ${git_mock} "$@";
+    else
+        echo "Not recognised";
+    fi
     #echo "$@" >&3;    
 }
 fake_git_log=$(cat <<'EOF'
@@ -72,7 +75,7 @@ EOF
     #echo "$fake_git_log" >&3 
     git_mock="$(mock_create)"
     mock_set_output "${git_mock}" "$fake_git_log" 
-    #echo $mock >&3 
+    #echo $git_mock >&3 
     run filter "a"
     #echo $output >&3 
     assert_line --index 0 --regexp '^9ac61e6'

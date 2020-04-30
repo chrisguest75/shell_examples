@@ -5,7 +5,9 @@ Demonstrate some examples of string manipulation
 ```sh
 ./strings
 
-# The ${1-}
+# Default values ${1-defaults} 
+# Also does substring matching "hello*"
+./strings
 ./strings hello world
 ```
 
