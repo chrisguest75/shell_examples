@@ -87,6 +87,11 @@ Steps [README.md](./16_globbing/README.md)
 Demonstrates how to implement a logger for scripts   
 Steps [README.md](./17_logger/README.md) 
 
+## Example 18 - Bats Mocking 
+Demonstrates how to test using mocks with bats. 
+Steps [README.md](./18_bats_mock/README.md) 
+
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
