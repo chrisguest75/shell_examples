@@ -1,6 +1,12 @@
 # README.md
 Demonstrate how to mock dependencies with bats-mock
 
+## Technical details
+The script that is under test is sourced rather than run. 
+We use the mocking library to redirect call to internal functions or external commands. 
+We then control the output of those functions so we can test behaviour of the script under test.
+
+
 ## Prerequisites
 ```sh
 brew install bats-core
@@ -22,8 +28,18 @@ Will filter the git log on finding #
 ./script_to_test.sh \#  
 ```
 
-## Debugging 
+## Run Tests
+Run all the tests 
+```sh
+./run_tests.sh      
+```
 
+Run a sinlge test file
+```sh
+bats -t ./test/tests.bats
+```
+
+## Debugging 
 ```sh
 export DEBUG_BATS=1   
 ./run_tests.sh   
