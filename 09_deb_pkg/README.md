@@ -2,21 +2,23 @@
 Demonstrates building a .deb packages repository
 
 ## Build .deb Examples 
-Build the debian package locally (on linux)
+Build the image to build the packages and index
 ```sh
-dpkg-deb --build hello-world
+docker build -t debianbuilder -f build.Dockerfile . 
 ```
 
 Build the debian package in Docker
 ```sh
-docker build -t builddeb -f builddeb.Dockerfile . 
-docker run -it -e PACKAGE=hello-world -v=$(pwd):/packages builddeb
+mkdir packages
+docker run -it -v=$(pwd):/packages debianbuilder --action=build -p=hello-world -o=./packages/   
 ```
 
-## Build Package
+## Build Packages.gz
 ```sh
-docker build -t buildpackages -f buildpackages.Dockerfile .
-docker run -it -v=$(pwd):/packages buildpackages
+docker run -it -v=$(pwd):/packages debianbuilder --action=package -p=packages
+
+# Add --debug to it if you want to check paths in index
+docker run -it -v=$(pwd):/packages debianbuilder --action=package -p=packages --debug
 ```
 
 ## Host and acesss repository
@@ -26,7 +28,7 @@ docker build -f hostpackages.Dockerfile -t hostpackages .
 docker run --name hostpackages --rm -d -p 8080:80 hostpackages
 open http://localhost:8080  
 curl localhost:8080
-curl localhost:8080/debian/hello-world-1.0_amd64.deb
+curl localhost:8080/debian/packages/hello-world_1.0_all.deb
 curl localhost:8080/debian/Packages.gz
 ```
 
@@ -34,7 +36,7 @@ curl localhost:8080/debian/Packages.gz
 Install the package into a Docker container
 ```sh
 docker build --build-arg=REPOSITORY_URL=http://0.0.0.0:8080/debian --network="host" -t usepackages --no-cache -f usepackages.Dockerfile . 
-docker stop hostrepository
+docker stop hostpackages
 ```
 
 Install the package from the repository locally 
@@ -56,11 +58,11 @@ docker stop aptrep
 ## Troubleshooting
 Get access inside the container. 
 ```sh
-# Debug packaging
-docker run -it -v=$(pwd):/packages --entrypoint /bin/bash buildpackages
+# Debug deb build or packaging
+docker run -it -v=$(pwd):/packages --entrypoint /bin/bash debianbuilder
 
 # Debug repository
-docker run --name hostrepository --rm -it --entrypoint=/bin/bash hostrepository 
+docker run --name hostpackages --rm -it --entrypoint=/bin/bash hostpackages 
 
 # Debug use package
 docker run -it --entrypoint /bin/bash usepackages 
