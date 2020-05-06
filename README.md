@@ -104,6 +104,7 @@ Steps [README.md](./18_bats_mock/README.md)
   * generating temporary files. 
   * autocompletion example
   * google script standards https://google.github.io/styleguide/shellguide.html
+  * snaps
 
 ## Updating RELEASE_NOTES
 [TURN](https://github.com/chrisguest75/turn)
