@@ -53,6 +53,7 @@ echo "Testing \"$FUNCTION_TO_TEST\" for $ITERATIONS iterations"
 for count in $(seq "$ITERATIONS"); do
     echo "Iteration $count"
     time_function $FUNCTION_TO_TEST "$@"
+    #time_samples+=( "$RANDOM.$RANDOM" )
 done
 
 #printf '%s\n' "${time_samples[@]}"
