@@ -91,6 +91,10 @@ Steps [README.md](./17_logger/README.md)
 Demonstrates how to test using mocks with bats. 
 Steps [README.md](./18_bats_mock/README.md) 
 
+## Example 19 - Timing Operations 
+Demonstrate how to time operations in the shell to help with optimisation.
+Steps [README.md](./19_timing_operations/README.md) 
+
 
 ## TODO:
   * Globbing 
