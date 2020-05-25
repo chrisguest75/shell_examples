@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
+# Can't really use pipefail on a dotsourced script.
 #set -ef -o pipefail
 
 declare -g time_samples=()
 
+# Example function to test
 # Copy this function and then dot source the time-it sript
 : <<'COMMENT'
 function under_test() {
@@ -14,6 +16,7 @@ function under_test() {
     echo "sleep $sleeptime"
     sleep $sleeptime
 }
+. ./time-it.sh under_test 10 2  
 COMMENT
 
 FUNCTION_TO_TEST="under_test"
@@ -44,6 +47,7 @@ function time_function() {
     start=${EPOCHREALTIME}
     $func_ptr "$@"
     end=${EPOCHREALTIME}
+    # Using BC as epoch realtime is too big and also it is floating point
     runtime=$(bc <<< "(${end} - ${start})")
     #echo "${runtime} seconds"
     time_samples+=( "$runtime" )

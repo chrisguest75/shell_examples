@@ -1,5 +1,7 @@
 # README 
-Demonstrate how to time operations in the shell
+Demonstrate how to time operations in the shell to help with optimisation.
+
+Example usage can be found [here](https://github.com/chrisguest75/docker_build_examples/tree/volume_images/36_layers_speed)
 
 ## Use EPOCHREALTIME
 Simple example of measuring sleep 10 command
@@ -31,6 +33,6 @@ function under_test() {
     echo "sleep $sleeptime"
     sleep $sleeptime
 }
-# pass function to test, number of iterations and parameters to pass into the function
+# pass function to test, number of iterations and parameters to pass into the function (sleeptime of 2 in this case)
 . ./time-it.sh under_test 10 2  
 ```
