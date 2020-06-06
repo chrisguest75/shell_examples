@@ -41,9 +41,11 @@ EOF
 #****************************************************************************
 
 function main() {
+    local ACTION= 
     local EXITCODE=0
     local DEBUG=false  
     local HELP=false
+    local FLAGS=()
 
     for i in "$@"
     do
@@ -57,7 +59,12 @@ function main() {
             # shellcheck disable=SC2034
             local -r DEBUG=true   
             shift # past argument=value
-        ;;   
+        ;; 
+        -f=*|--flag=*)
+            local flag="${i#*=}"
+            FLAGS+=("$flag")
+            shift # past argument=value
+        ;;             
         -h|--help)
             local -r HELP=true            
             shift # past argument=value
@@ -84,7 +91,13 @@ function main() {
                     jobs
                 ;;
                 ls)
-                    ls -la
+                    local options=""
+                    for item in "${!FLAGS[@]}"
+                    do
+                       options="$options ${FLAGS[${item}]} "
+                    done   
+                    # shellcheck disable=SC2086                 
+                    ls $options
                 ;;                
                 *)
                     echo "Unrecognised ${ACTION}"; 
