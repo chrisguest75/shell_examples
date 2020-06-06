@@ -14,10 +14,20 @@ Features include:
 ## Example usage
 Run through the following examples
 ```sh
+# No args prints usage
 ./example.sh                               
+
+# Print usage
 ./example.sh --help
+
+# Perform ls action
 ./example.sh --action=ls
-./example.sh --action=ls
+
+# Perform ps action
+./example.sh --action=ps
+
+# Pass in multiple flags to ls
+./example.sh --action=ls -f=-l -f=-R -f=-a --debug    
 ```
 
 
