@@ -110,6 +110,19 @@ Steps [README.md](./19_timing_operations/README.md)
   * google script standards https://google.github.io/styleguide/shellguide.html
   * snaps
 
+## Shellchecking
+
+```sh
+find . -iname '*.sh' -exec shellcheck {} \; 
+```
+
+## Pre-commit hook (shellcheck)
+Install the pre-commit hook.  
+```sh
+# hardlink the script 
+ln ./hooks/pre-commit .git/hooks/pre-commit  
+```
+
 ## Updating RELEASE_NOTES
 [TURN](https://github.com/chrisguest75/turn)
 
