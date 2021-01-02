@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+ERROR_REASON=""
+function error_exit() {
+    echo "pre-commit failed - $ERROR_REASON"
+    # you can overwrite the exit code.
+    exit 1
+}
+
+trap error_exit ERR
+
+echo "pre-commit hook start"
+echo "** ARG **"
+echo "$# args, $*"
+readonly SCRIPT_NAME=$(basename "$0")
+readonly SCRIPT_PATH=${0}
+# shellcheck disable=SC2034
+readonly SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+echo "\$SCRIPT_NAME=$SCRIPT_NAME"
+echo "\$SCRIPT_PATH=$SCRIPT_PATH"
+echo "\$SCRIPT_DIR=$SCRIPT_DIR"
+echo "PWD=$(pwd)"
+#echo "** ENV **"
+#env
+FILES=$(git diff --cached --name-only --diff-filter=ACMR "*.sh" | sed 's| |\\ |g')
+echo "** FILES **"
+echo "$FILES"
+[ -z "$FILES" ] && exit 0
+
+ERROR_REASON="shellcheck tool is not installed"
+command -v shellcheck > /dev/null
+ERROR_REASON="shellcheck errors"
+# Prettify all selected files
+echo "$FILES" | xargs shellcheck
+
+echo "pre-commit hook end"
+
+exit 0
