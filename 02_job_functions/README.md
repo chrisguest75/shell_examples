@@ -16,18 +16,17 @@ Run the example.  It runs a couple of functions as background jobs and then kill
 We can run the script in as a background screen terminal. 
 
 ```sh
-screen ./call_function_async_killjobs.sh 100 200 2 5 
-
-# Detach with ctrl+a d
-
-# View processes
-ps -a 
+# start a detached session (you can detach with ctrl+a d)
+screen -dmS asyncsession1 ./call_function_async_killjobs.sh 10 20 2 5
 
 # Now list screens 
 screen -list
 
-ps -t <ttyid>
+# View processes
+ps -a 
 
+# Attach to screen
+screen -r <name>
 
 ```
 
