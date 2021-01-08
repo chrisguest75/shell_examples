@@ -14,8 +14,8 @@ git clone https://github.com/bats-core/bats-assert test/test_helper/bats-assert
 ```sh
 which bats
 ls -al /usr/local/bin/bats   
-ls -la /usr/local/Cellar/bats-core/1.1.0
-cat /usr/local/Cellar/bats-core/1.1.0/README.md   
+ls -la /usr/local/Cellar/bats-core/1.2.1
+cat /usr/local/Cellar/bats-core/1.2.1/README.md     
 ```
 
 ## Running tests (in shell)
@@ -23,6 +23,9 @@ cat /usr/local/Cellar/bats-core/1.1.0/README.md
 # Pretty printed tests
 bats test/tests.bats 
 test/tests.bats 
+
+# JUnit test results
+bats -t ./test/tests.bats --formatter junit -T
 
 # Output in tap format (shows setup and shutdown logs)
 export DEBUG_BATS=true  
@@ -32,6 +35,6 @@ unset DEBUG_BATS
 
 ## Running tests (in docker)
 ```sh
-docker run -it bats/bats:latest --version
-docker run -it -v $(pwd):/mnt --workdir /mnt bats/bats:latest test/tests.bats         
+docker run -it bats/bats:1.2.1 --version
+docker run -it -v $(pwd):/mnt --workdir /mnt bats/bats:1.2.1 test/tests.bats         
 ```
