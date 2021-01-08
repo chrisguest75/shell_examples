@@ -1,6 +1,8 @@
 # README.md
 Demonstrate how to unittest functions with bats-core
 
+NOTE: Also check [18_bats_mock](../18_bats_mock/README.md)
+
 ## Prerequisites
 ```sh
 brew install bats-core

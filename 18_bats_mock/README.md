@@ -1,6 +1,8 @@
 # README.md
 Demonstrate how to mock dependencies with bats-mock
 
+NOTE: Also check [13_bats](../13_bats/README.md)
+
 ## Technical details
 The script that is under test is sourced rather than run. 
 We use the mocking library to redirect call to internal functions or external commands. 
@@ -18,8 +20,8 @@ git clone https://github.com/grayhemp/bats-mock test/test_helper/bats-mock
 ```
 
 ## Walkthrough
-Wlll show the usage
 ```bash
+# Show the usage
 ./script_to_test.sh 
 ```
 
