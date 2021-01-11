@@ -1,10 +1,18 @@
 # README 
+TODO: Find code for my envelope encryption for mysql.
+
 
 ```sh
 sudo apt-get install gpg
 
 ```
-## Generate keys and encrpyt a file
+## Generate keys
+
+```sh
+docker build -t gpg_generate_keys -f Dockerfile.key_generation .
+```
+
+## Encrpyt a file
 
 ```sh
 gpg --gen-key
