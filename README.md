@@ -95,6 +95,9 @@ Steps [README.md](./18_bats_mock/README.md)
 Demonstrate how to time operations in the shell to help with optimisation.
 Steps [README.md](./19_timing_operations/README.md) 
 
+## Example 20 - GPG examples 
+Demonstrate how use GPG to encrypt and decrpyt files.
+Steps [README.md](./20_gpg/README.md) 
 
 ## TODO:
   * Globbing 
