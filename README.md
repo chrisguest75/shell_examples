@@ -80,7 +80,7 @@ Demonstrates how to control the termninal screen output
 Steps [README.md](./15_screen_control/README.md) 
 
 ## Example 16 - Globbing
-Demonstrates techniques for globbing and operating on sets of files 
+Demonstrates techniques for globbing and operating on sets of files  
 Steps [README.md](./16_globbing/README.md) 
 
 ## Example 17 - Logger
@@ -88,21 +88,25 @@ Demonstrates how to implement a logger for scripts
 Steps [README.md](./17_logger/README.md) 
 
 ## Example 18 - Bats Mocking 
-Demonstrates how to test using mocks with bats. 
+Demonstrates how to test using mocks with bats.  
 Steps [README.md](./18_bats_mock/README.md) 
 
 ## Example 19 - Timing Operations 
-Demonstrate how to time operations in the shell to help with optimisation.
+Demonstrate how to time operations in the shell to help with optimisation.  
 Steps [README.md](./19_timing_operations/README.md) 
 
 ## Example 20 - GPG examples 
-Demonstrate how use GPG to encrypt and decrpyt files.
+Demonstrate how use GPG to encrypt and decrpyt files.  
 Steps [README.md](./20_gpg/README.md) 
 
+## Example 21 - Webserver 
+Demonstrate how set up a webserver in bash  
+Steps [README.md](./21_webserver/README.md)
 
 ## Example 22 - SystemD Service
 Demonstrate how create a systemd service.
 Steps [README.md](./22_systemd_service/README.md) 
+
 
 ## TODO:
   * Globbing 
