@@ -99,6 +99,11 @@ Steps [README.md](./19_timing_operations/README.md)
 Demonstrate how use GPG to encrypt and decrpyt files.
 Steps [README.md](./20_gpg/README.md) 
 
+
+## Example 22 - SystemD Service
+Demonstrate how create a systemd service.
+Steps [README.md](./22_systemd_service/README.md) 
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
