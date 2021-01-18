@@ -7,8 +7,8 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-User=chrisguest
-ExecStart=/usr/bin/env bash -c "/home/chrisguest/Code/shell_examples/22_systemd_service/webservice.sh 8081 'Hello from systemd'"
+User=${USER}
+ExecStart=/usr/bin/env bash -c "${PWD}/webservice.sh 8081 'Hello from systemd'"
 
 [Install]
 WantedBy=multi-user.target
