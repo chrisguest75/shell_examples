@@ -7,7 +7,7 @@ Original: [sinatra](https://github.com/benrady/shinatra)
 
 ```sh
 # Setup the server
-./webserver.sh 8081 "The response"   
+./webserver.sh 8081 "Hello from bash" &
 ```
 
 ```sh
