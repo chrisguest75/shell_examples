@@ -103,6 +103,10 @@ Steps [README.md](./20_gpg/README.md)
 Demonstrate how set up a webserver in bash  
 Steps [README.md](./21_webserver/README.md)
 
+## Example 22 - SystemD Service
+Demonstrate how create a systemd service.
+Steps [README.md](./22_systemd_service/README.md) 
+
 
 ## TODO:
   * Globbing 
