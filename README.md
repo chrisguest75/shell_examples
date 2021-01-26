@@ -129,6 +129,9 @@ Steps [README.md](./24_finding_files/README.md)
   * google script standards https://google.github.io/styleguide/shellguide.html
   * snaps
   * strace cmd 
+  * debugfs
+  * awk & sed
+  * cronjobs
 
 ## Shellchecking
 
