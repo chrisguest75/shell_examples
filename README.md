@@ -129,6 +129,7 @@ Steps [README.md](./24_finding_files/README.md)
   * autocompletion example
   * google script standards https://google.github.io/styleguide/shellguide.html
   * snaps
+  * strace cmd 
 
 ## Shellchecking
 
