@@ -1,0 +1,23 @@
+# README
+Demonstrate how to use whiptail for file selection.
+
+## Configure
+
+```sh
+apt install whiptail
+```
+
+```sh
+# create temporary files
+mkdir ./files
+touch ./files/selection_file{1..4}.txt
+```
+
+## Run 
+
+```sh
+./file_selector.sh
+```
+
+Example:
+[Filebrowse](https://github.com/pageauc/FileBrowser/blob/master/filebrowse.sh)

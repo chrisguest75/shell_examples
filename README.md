@@ -96,7 +96,7 @@ Demonstrate how to time operations in the shell to help with optimisation.
 Steps [README.md](./19_timing_operations/README.md) 
 
 ## Example 20 - GPG examples 
-Demonstrate how use GPG to encrypt and decrpyt files.  
+Demonstrate how to use GPG to encrypt and decrpyt files.  
 Steps [README.md](./20_gpg/README.md) 
 
 ## Example 21 - Webserver 
@@ -104,9 +104,12 @@ Demonstrate how set up a webserver in bash
 Steps [README.md](./21_webserver/README.md)
 
 ## Example 22 - SystemD Service
-Demonstrate how create a systemd service.
+Demonstrate how create a systemd service.  
 Steps [README.md](./22_systemd_service/README.md) 
 
+## Example 23 - Whiptail Selector
+Demonstrate how to use whiptail for file selection.  
+Steps [README.md](./23_whiptail_selection/README.md) 
 
 ## Example 24 - Finding files
 A few examples on using shell to find files
@@ -125,6 +128,7 @@ Steps [README.md](./24_finding_files/README.md)
   * autocompletion example
   * google script standards https://google.github.io/styleguide/shellguide.html
   * snaps
+  * strace cmd 
 
 ## Shellchecking
 
