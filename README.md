@@ -27,6 +27,10 @@ man zsh
 man zshbuiltins
 ```
 
+## Example 0 - Cheatsheet
+Cheatsheets are a great way to quickly get an answer to your question.  
+Steps [README.md](./00_cheatsheet/README.md)  
+
 ## Example 1 - Simple argument parsing
 Demonstrates how to build a script with simple argument parsing.  
 Steps [README.md](./01_argument_parsing/README.md)  
