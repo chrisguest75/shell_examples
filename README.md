@@ -108,6 +108,10 @@ Demonstrate how create a systemd service.
 Steps [README.md](./22_systemd_service/README.md) 
 
 
+## Example 24 - Finding files
+A few examples on using shell to find files
+Steps [README.md](./24_finding_files/README.md) 
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
