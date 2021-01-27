@@ -115,6 +115,10 @@ Steps [README.md](./23_whiptail_selection/README.md)
 A few examples on using shell to find files
 Steps [README.md](./24_finding_files/README.md) 
 
+## Example 26 - Crom
+Demonstrate how to setup a cronjob
+Steps [README.md](./26_cron/README.md) 
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
@@ -131,7 +135,6 @@ Steps [README.md](./24_finding_files/README.md)
   * strace cmd 
   * debugfs
   * awk & sed
-  * cronjobs
 
 ## Shellchecking
 
