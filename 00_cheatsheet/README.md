@@ -22,3 +22,8 @@ cheatsheet "python/open a file"
 # git rollback
 cheatsheet "git/rollback" 
 ```
+
+## Resources
+Some resources for shell programming
+[awesome-cheatsheets/bash](https://github.com/LeCoupa/awesome-cheatsheets/blob/master/languages/bash.sh)  
+[shellmagic](https://shellmagic.xyz/)  
