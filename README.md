@@ -77,55 +77,59 @@ Steps [README.md](./13_bats/README.md)
 
 ## Example 14 - CI Env Overrides
 Demonstrate a way to produce ENV overrides in a CI pipeline  
-Steps [README.md](./14_ci_env_overrides/README.md) 
+Steps [README.md](./14_ci_env_overrides/README.md)  
 
 ## Example 15 - Screen Control
 Demonstrates how to control the termninal screen output  
-Steps [README.md](./15_screen_control/README.md) 
+Steps [README.md](./15_screen_control/README.md)  
 
 ## Example 16 - Globbing
 Demonstrates techniques for globbing and operating on sets of files  
-Steps [README.md](./16_globbing/README.md) 
+Steps [README.md](./16_globbing/README.md)  
 
 ## Example 17 - Logger
 Demonstrates how to implement a logger for scripts   
-Steps [README.md](./17_logger/README.md) 
+Steps [README.md](./17_logger/README.md)  
 
 ## Example 18 - Bats Mocking 
 Demonstrates how to test using mocks with bats.  
-Steps [README.md](./18_bats_mock/README.md) 
+Steps [README.md](./18_bats_mock/README.md)  
 
 ## Example 19 - Timing Operations 
 Demonstrate how to time operations in the shell to help with optimisation.  
-Steps [README.md](./19_timing_operations/README.md) 
+Steps [README.md](./19_timing_operations/README.md)  
 
 ## Example 20 - GPG examples 
-Demonstrate how to use GPG to encrypt and decrpyt files.  
-Steps [README.md](./20_gpg/README.md) 
+Demonstrate how to use GPG to encrypt and decrpyt files.   
+Steps [README.md](./20_gpg/README.md)  
 
 ## Example 21 - Webserver 
 Demonstrate how to set up a webserver in bash  
-Steps [README.md](./21_webserver/README.md)
+Steps [README.md](./21_webserver/README.md)  
 
 ## Example 22 - SystemD Service
 Demonstrate how to create a systemd service.  
-Steps [README.md](./22_systemd_service/README.md) 
+Steps [README.md](./22_systemd_service/README.md)  
 
 ## Example 23 - Whiptail Selector
 Demonstrate how to use whiptail for file selection.  
-Steps [README.md](./23_whiptail_selection/README.md) 
+Steps [README.md](./23_whiptail_selection/README.md)  
 
 ## Example 24 - Finding files
-A few examples on using shell to find files
-Steps [README.md](./24_finding_files/README.md) 
+A few examples on using shell to find files  
+Steps [README.md](./24_finding_files/README.md)  
+
+## Example 25 - Autocompletions
+Demonstrate how to write autocomplete scripts  
+Steps [README.md](./25_autocomplete/README.md)  
 
 ## Example 26 - Crom
-Demonstrate how to setup a cronjob
-Steps [README.md](./26_cron/README.md) 
+Demonstrate how to setup a cronjob  
+Steps [README.md](./26_cron/README.md)  
 
 ## Example 27 - JournalCtl
-Demonstrate how to use journalctl to discover logs
-Steps [README.md](./27_journalctl/README.md) 
+Demonstrate how to use journalctl to discover logs  
+Steps [README.md](./27_journalctl/README.md)  
 
 
 ## TODO:
