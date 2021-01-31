@@ -123,6 +123,11 @@ Steps [README.md](./24_finding_files/README.md)
 Demonstrate how to setup a cronjob
 Steps [README.md](./26_cron/README.md) 
 
+## Example 27 - JournalCtl
+Demonstrate how to use journalctl to discover logs
+Steps [README.md](./27_journalctl/README.md) 
+
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
