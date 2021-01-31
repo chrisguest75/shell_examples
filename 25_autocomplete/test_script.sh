@@ -59,7 +59,7 @@ function main() {
                 if [ -z "${1-}" ];then
                     exit 0
                 fi 
-                if [[ $1 = "all" ]]; then
+                if [[ $1 = "moreoptions" ]]; then
                     find . -type f -exec basename {} \;
                 else
                     find . -type d -exec basename {} \;
@@ -103,10 +103,13 @@ function main() {
                     help
                 ;;
                 ps)
-                    ps -a
-                ;;
-                jobs)
-                    jobs
+                    local options=""
+                    for item in "${!FLAGS[@]}"
+                    do
+                       options="$options ${FLAGS[${item}]} "
+                    done   
+                    # shellcheck disable=SC2086                 
+                    ps $options
                 ;;
                 ls)
                     local options=""
