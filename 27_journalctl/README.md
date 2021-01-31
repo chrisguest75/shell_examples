@@ -1,5 +1,9 @@
 # README
 
+* Add a basic service or daemon. 
+* Control logs for it.  
+
+
 ```sh
 journalctl --disk-usage  
 cat /etc/systemd/journald.conf 
