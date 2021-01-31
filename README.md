@@ -104,11 +104,11 @@ Demonstrate how to use GPG to encrypt and decrpyt files.
 Steps [README.md](./20_gpg/README.md) 
 
 ## Example 21 - Webserver 
-Demonstrate how set up a webserver in bash  
+Demonstrate how to set up a webserver in bash  
 Steps [README.md](./21_webserver/README.md)
 
 ## Example 22 - SystemD Service
-Demonstrate how create a systemd service.  
+Demonstrate how to create a systemd service.  
 Steps [README.md](./22_systemd_service/README.md) 
 
 ## Example 23 - Whiptail Selector

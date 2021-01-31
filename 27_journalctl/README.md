@@ -62,4 +62,12 @@ I'm not sure why dpkg does not use systemd and journald logging/
 # dpkg logs
 cat /var/log/dpkg.log   
 ```
+## Maintenance
 
+```sh
+journalctl --verify
+```
+
+## Resources 
+[Journalctl usage](https://www.debugpoint.com/2020/12/systemd-journalctl/)  
+[Cleaning up logs](https://www.debugpoint.com/2021/01/systemd-journald-clean/)
