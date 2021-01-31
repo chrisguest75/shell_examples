@@ -131,10 +131,9 @@ Steps [README.md](./26_cron/README.md)
 Demonstrate how to use journalctl to discover logs  
 Steps [README.md](./27_journalctl/README.md)  
 
-
-## Example 27 - Checking Resources
+## Example 28 - Checking Resources
 Demonstrate how to use various commands to verify resource usage in the OS.
-Steps [README.md](./27_checking_resources/README.md) 
+Steps [README.md](./28_checking_resources/README.md) 
 
 ## TODO:
   * Globbing 
