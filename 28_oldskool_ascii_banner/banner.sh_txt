@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+
+FONT_GFX_FILE=cuddly.jpg
+FONT_OUTPUT_FILE=./font.txt
+
+jp2a --width=320 "${FONT_GFX_FILE}" --output=${FONT_OUTPUT_FILE}
+
+function chr () {
+   local val
+   [ "$1" -lt 256 ] || return 1
+   # shellcheck disable=SC2059
+   printf -v val %o "$1"; printf "\\$val"
+   # That one requires bash 3.1 or above.
+}
+
+function print_letter() {
+    local letter=$1
+    local offset=$2
+    local x=${TOPLEFT[$letter]} 
+    local width=32
+    local height=15
+    for cur_y in $(seq 0 $height); 
+    do
+        local start_copy=$(( (cur_y * 321) + x )) 
+        local line=${FONT:$start_copy:$width}
+        #echo "$line"
+
+        banner_buffer[$(( cur_y + offset ))]=$line
+    done
+}
+
+FONT=$(cat ${FONT_OUTPUT_FILE})
+declare -g FONT 
+declare -g -A TOPLEFT 
+# shellcheck disable=SC2178
+banner_buffer=[]
+declare -g -a banner_buffer
+
+# x=0 
+# for letter in $(seq 0 9); 
+#     do
+#         character=$(chr $((letter + 32)) )  
+#         TOPLEFT[$character]=$x
+#         x=$(( x + 32 ))
+#     done
+# x=$(( 0 + (321 * 16) ))     
+# for letter in $(seq 10 19); 
+#     do
+#         character=$(chr $((letter + 32)) )  
+#         TOPLEFT[$character]=$x
+#         x=$(( x + 32 ))
+#     done
+# x=$(( 0 + (321 * 16 * 2) ))     
+# for letter in $(seq 20 29); 
+#     do
+#         character=$(chr $((letter + 32)) )  
+#         TOPLEFT[$character]=$x
+#         x=$(( x + 32 ))
+#     done
+# x=$(( 0 + (321 * 16 * 3) ))     
+# for letter in $(seq 40 49); 
+#     do
+#         character=$(chr $((letter + 32)) )  
+#         TOPLEFT[$character]=$x
+#         x=$(( x + 32 ))
+#     done
+# x=$(( 0 + (321 * 16 * 4) ))     
+# for letter in $(seq 50 59); 
+#     do
+#         character=$(chr $((letter + 32)) )  
+#         TOPLEFT[$character]=$x
+#         x=$(( x + 32 ))
+#     done
+
+
+# space
+TOPLEFT[" "]=$(( (6 * 32) + (321 * 16 * 2) )) 
+x=0 
+for letter in $(seq 0 9); 
+    do
+        character=$(chr $((letter + 65)) )  
+        lower_character=$(chr $((letter + 65 + 32)) )  
+        TOPLEFT[$character]=$x
+        TOPLEFT[$lower_character]=$x
+        x=$(( x + 32 ))
+    done
+x=$(( 0 + (321 * 16) )) 
+for letter in $(seq 0 9); 
+    do
+        character=$(chr $((letter + 75)) )  
+        lower_character=$(chr $((letter + 75 + 32)) )  
+        TOPLEFT[$character]=$x
+        TOPLEFT[$lower_character]=$x
+        x=$(( x + 32 ))
+    done
+x=$(( 0 + (321 * 16 * 2) )) 
+for letter in $(seq 0 5); 
+    do
+        character=$(chr $((letter + 85)) )  
+        lower_character=$(chr $((letter + 85 + 32)) )  
+        TOPLEFT[$character]=$x
+        TOPLEFT[$lower_character]=$x
+        x=$(( x + 32 ))
+    done
+
+
+
+
+#SCREEN_Y=$(( $LINES - 2 ))
+#generate_background $SCREEN_Y $(( $COLUMNS - 1 ))
+
+text=$1
+textlen=${#text}
+buffer_offset=0
+for index in $(seq 0 $(( textlen - 1)) ); 
+do 
+    letter=${text:$index:1}
+    #echo $letter
+    print_letter "$letter" $buffer_offset
+    buffer_offset=$(( buffer_offset+16 ))
+done
+
+base=0
+for index in $(seq 0 15); 
+do
+    line=""
+    for letter in $(seq 0 $(( textlen - 1)) ); 
+    do
+        line="$line${banner_buffer[$(( base+( letter * 16))) ]}"
+    done
+    line=${line:0:$COLUMNS-1}
+    echo "$line"
+    base=$(( base+1 ))
+done
