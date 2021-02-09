@@ -160,7 +160,7 @@ function main() {
                     #echo $filelist
 
                     BANNERFILE=./banner.jpg
-                    rm ${BANNERFILE} && /bin/true
+                    rm ${BANNERFILE} &> /dev/null && /bin/true
                     convert $filelist +append ${BANNERFILE}
 
                     if [[ $(( textlen * ${fontwidth} )) -gt ${COLUMNS} ]]; then
