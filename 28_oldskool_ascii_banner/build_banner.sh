@@ -25,5 +25,9 @@ done
 #echo $filelist
 
 convert $filelist +append banner.jpg
-#jp2a --term-width --colors --color-depth=24 --fill ./banner.jpg
-jp2a --width=$(( textlen * 32 )) --colors --color-depth=24 --fill ./banner.jpg
+
+if [[ $(( textlen * 32 )) -gt ${COLUMNS} ]]; then
+  jp2a --term-width --colors --color-depth=24 --fill ./banner.jpg
+else
+  jp2a --width=$(( textlen * 32 )) --colors --color-depth=24 --fill ./banner.jpg
+fi
