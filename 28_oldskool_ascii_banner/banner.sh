@@ -50,8 +50,8 @@ function main() {
     local FONT="./carebear.jpg" 
     local BANNER="BANNER" 
     local EXITCODE=0
-    local FONTWIDTH=32
-    local FONTHEIGHT=32
+    local FONTWIDTH=26
+    local FONTHEIGHT=26
     local DEBUG=false  
     local RENDER=false  
     local HELP=false
@@ -143,13 +143,17 @@ function main() {
                         letter=${text:$index:1}
                         #echo $letter
                         #echo $(ord $letter)
-                        filelist="$filelist ${OUT}/$(ord $letter).jpg"
+                        if [ -f "${OUT}/$(ord $letter).jpg" ]; then
+                            filelist="$filelist ${OUT}/$(ord $letter).jpg"
+                        else
+                            echo "${OUT}/$(ord $letter).jpg - not found"
+                        fi
                     done
                     #echo $filelist
 
                     BANNERFILE=./banner.jpg
                     rm ${BANNERFILE} && /bin/true
-                    convert $filelist +append banner.jpg
+                    convert $filelist +append ${BANNERFILE}
 
                     if [[ $(( textlen * ${fontwidth} )) -gt ${COLUMNS} ]]; then
                         jp2a --term-width --colors --color-depth=24 --fill ${BANNERFILE}
