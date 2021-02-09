@@ -47,11 +47,13 @@ EOF
 function main() {
     local BASEA=false 
     local ACTION="render" 
-    local FONT="./carebear.jpg" 
+    local FONT="./fonts/carebear.jpg" 
     local BANNER="BANNER" 
     local EXITCODE=0
     local FONTWIDTH=26
     local FONTHEIGHT=26
+    local FONT_CHARS_PER_ROW=12
+    local FONT_ROWS=5
     local DEBUG=false  
     local RENDER=false  
     local HELP=false
@@ -79,7 +81,15 @@ function main() {
         -h=*|--height=*)
             local -r FONTHEIGHT="${i#*=}"
             shift # past argument=value
+        ;;    
+        -r=*|--rows=*)
+            local -r FONT_ROWS="${i#*=}"
+            shift # past argument=value
         ;;                   
+        -c=*|--chars_per_row=*)
+            local -r FONT_CHARS_PER_ROW="${i#*=}"
+            shift # past argument=value
+        ;;                         
         --basea)
             # shellcheck disable=SC2034
             local -r BASEA=true   
@@ -117,13 +127,11 @@ function main() {
 
                     fontwidth=${FONTWIDTH}
                     fontheight=${FONTHEIGHT}
+                    chars_per_row=${FONT_CHARS_PER_ROW}
+                    number_of_rows=${FONT_ROWS}
                     if [ "${BASEA}" = false ]; then
-                        chars_per_row=12
-                        number_of_rows=5
                         letter=32
                     else
-                        chars_per_row=10
-                        number_of_rows=5
                         letter=65
                     fi
                     for row in $(seq 0 ${fontheight} $(( fontheight * (number_of_rows - 1) )) ); 
