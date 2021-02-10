@@ -5,4 +5,5 @@ WORKDIR /workbench
 COPY ./banner.sh ./banner.sh
 COPY ./fonts ./fonts
 
-CMD ["/workbench/banner.sh", "--banner=HELLO"]
+#CMD ["/workbench/banner.sh", "--banner=HELLO"]
+ENTRYPOINT ["/workbench/banner.sh"]
