@@ -28,12 +28,18 @@ function help() {
 usage: $SCRIPT_NAME options
 
 OPTIONS:
-    -a --action              [ps|jobs|ls]
+    -a --action=[render]
+    -f --font=[jpg bitmap font path]    
+    -w --width=[font width]    
+    -h --height=[font height]    
+    -c --chars_per_row=[characters]     characters per row on bitmap 
+    -r --rows=[rows]                    numbers of rows of characters on bitmap
+    --basea                             if the first character on the bitmap is A (default is false assumes space)                                              
     --debug                  
-    -h --help                show this help
+    -h --help                           show this help
 
 Examples:
-    $SCRIPT_NAME --action=ps 
+    $SCRIPT_NAME --action=render
 
 EOF
 
@@ -55,9 +61,7 @@ function main() {
     local FONT_CHARS_PER_ROW=12
     local FONT_ROWS=5
     local DEBUG=false  
-    local RENDER=false  
     local HELP=false
-    local FLAGS=()
 
     for i in "$@"
     do
@@ -122,8 +126,8 @@ function main() {
                 ;;
                 render)
                     OUT=./letters
-                    rm -rf "${OUT}" && /bin/true
-                    mkdir "${OUT}" &> /dev/null && /bin/true
+                    rm -rf "${OUT}" && true
+                    mkdir "${OUT}" &> /dev/null && true
 
                     fontwidth=${FONTWIDTH}
                     fontheight=${FONTHEIGHT}
@@ -134,11 +138,11 @@ function main() {
                     else
                         letter=65
                     fi
-                    for row in $(seq 0 ${fontheight} $(( fontheight * (number_of_rows - 1) )) ); 
+                    for row in $(seq 0 "${fontheight}" $(( fontheight * (number_of_rows - 1) )) ); 
                     do
-                        for column in $(seq 0 ${fontwidth} $(( fontwidth * (chars_per_row - 1) ))); 
+                        for column in $(seq 0 "${fontwidth}" $(( fontwidth * (chars_per_row - 1) ))); 
                         do
-                            convert ${FONT} -crop ${fontwidth}x${fontheight}+${column}+${row} ${OUT}/${letter}.jpg
+                            convert "${FONT}" -crop "${fontwidth}x${fontheight}+${column}+${row}" "${OUT}/${letter}.jpg"
                             letter=$(( letter + 1 ))
                         done
                     done
@@ -151,22 +155,45 @@ function main() {
                         letter=${text:$index:1}
                         #echo $letter
                         #echo $(ord $letter)
-                        if [ -f "${OUT}/$(ord $letter).jpg" ]; then
+                        if [ -f "${OUT}/$(ord "$letter").jpg" ]; then
+                            # shellcheck disable=SC2086
                             filelist="$filelist ${OUT}/$(ord $letter).jpg"
                         else
-                            echo "${OUT}/$(ord $letter).jpg - not found"
+                            echo "${OUT}/$(ord "$letter").jpg - not found"
                         fi
                     done
                     #echo $filelist
+                    OSNAME="$(uname -s)"
+                    case "${OSNAME}" in
+                        Linux*)     readonly OSTYPE=LINUX;;
+                        Darwin*)    readonly OSTYPE=MAC;;
+                        CYGWIN*)    readonly OSTYPE=CYGWIN;;
+                        MINGW*)     readonly OSTYPE=MINGW;;
+                        *)          readonly OSTYPE="UNKNOWN:${OSNAME}"
+                    esac
+
+                    case "${OSTYPE}" in
+                        LINUX)     
+                            COLOUR_DEPTH="--color-depth=24"
+                        ;;
+                        MAC)    
+                            COLOUR_DEPTH=
+                        ;;   
+                    esac                 
 
                     BANNERFILE=./banner.jpg
-                    rm ${BANNERFILE} &> /dev/null && /bin/true
-                    convert $filelist +append ${BANNERFILE}
+                    rm "${BANNERFILE}" &> /dev/null && true
+                    # shellcheck disable=SC2086
+                    convert $filelist +append "${BANNERFILE}"
 
+                    # shellcheck disable=SC2004
                     if [[ $(( textlen * ${fontwidth} )) -gt ${COLUMNS} ]]; then
-                        jp2a --term-width --colors --color-depth=24 --fill ${BANNERFILE}
+                        #echo "term width"
+                        # shellcheck disable=SC2086    
+                        jp2a --term-width --colors ${COLOUR_DEPTH} --fill "${BANNERFILE}"
                     else
-                        jp2a --width=$(( textlen * ${fontwidth} )) --colors --color-depth=24 --fill ${BANNERFILE}
+                        # shellcheck disable=SC2086
+                        jp2a --width=$(( textlen * ${fontwidth} )) --colors ${COLOUR_DEPTH} --fill "${BANNERFILE}"
                     fi
 
                 ;;
