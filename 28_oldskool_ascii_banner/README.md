@@ -27,17 +27,18 @@ Cut out tiles and concat them back together based on a string.
 docker build -t banner .
 
 # render banners
-docker run -e COLUMNS=${COLUMNS} banner
-docker run -e COLUMNS=${COLUMNS} banner --banner="ALPHA" --font=/workbench/fonts/carebear.jpg -w=26 -h=26 -c=12 -r=5
-docker run -e COLUMNS=${COLUMNS} banner --banner="BETA" --font=/workbench/fonts/cuddly.jpg --basea -w=32 -h=32 -c=10 -r=5
-docker run -e COLUMNS=${COLUMNS} banner --banner="GAMMA" --font=/workbench/fonts/knight4.jpg -w=32 -h=25 -c=10 -r=5
-docker run -e COLUMNS=${COLUMNS} banner --banner="PHI" --font=/workbench/fonts/tcb.jpg -w=32 -h=32 -c=10 -r=5
+# -e TERM=xterm-256color
+docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner
+docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="ALPHA" --font=/workbench/fonts/carebear.jpg -w=26 -h=26 -c=12 -r=5
+docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="BETA" --font=/workbench/fonts/cuddly.jpg --basea -w=32 -h=32 -c=10 -r=5
+docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="GAMMA" --font=/workbench/fonts/knight4.jpg -w=32 -h=25 -c=10 -r=5
+docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="PHI" --font=/workbench/fonts/tcb.jpg -w=32 -h=32 -c=10 -r=5
 
 
-docker run -e COLUMNS=${COLUMNS} banner --banner="TERRAFORM" --font=/workbench/fonts/carebear.jpg -w=26 -h=26 -c=12 -r=5
-docker run -e COLUMNS=${COLUMNS} banner --banner="CIRCLECI" --font=/workbench/fonts/cuddly.jpg --basea -w=32 -h=32 -c=10 -r=5
-docker run -e COLUMNS=${COLUMNS} banner --banner="PHI" --font=/workbench/fonts/tcb.jpg -w=32 -h=32 -c=10 -r=5
-docker run -e COLUMNS=${COLUMNS} banner --banner="AWS" --font=/workbench/fonts/knight4.jpg -w=32 -h=25 -c=10 -r=5
+docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="TERRAFORM" --font=/workbench/fonts/carebear.jpg -w=26 -h=26 -c=12 -r=5
+docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="CIRCLECI" --font=/workbench/fonts/cuddly.jpg --basea -w=32 -h=32 -c=10 -r=5
+docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="PHI" --font=/workbench/fonts/tcb.jpg -w=32 -h=32 -c=10 -r=5
+docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="AWS" --font=/workbench/fonts/knight4.jpg -w=32 -h=25 -c=10 -r=5
 
 
 ```
