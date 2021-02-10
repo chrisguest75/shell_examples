@@ -55,6 +55,10 @@ Steps [README.md](./05_strings/README.md)
 Demonstrate a restricted bash shell  
 Steps [README.md](./06_restricted_bash/README.md)  
 
+## Example 7 - OS Detection
+Demonstrate how to detect the OS type in script to change parameters to commands.  
+Steps [README.md](./07_os_detection/README.md)  
+
 ## Example 8 - Paths
 Demonstrates ways of manipulating paths  
 Steps [README.md](./08_paths/README.md)  
