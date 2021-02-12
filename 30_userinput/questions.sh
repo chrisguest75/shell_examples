@@ -9,7 +9,7 @@ age=-1
 while [[ $age -lt 0 ]]; do
     echo "How old are you?"
     read age
-    if [[ "$age" != ?(+|-)+([0-9]) ]]; then
+     if [[ "$age" != ?(+|-)+([0-9]) ]]; then
         echo "$age is invalid"
         age=-1
     elif [[ $age -lt 0 ]]; then
