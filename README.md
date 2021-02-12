@@ -135,6 +135,13 @@ Steps [README.md](./26_cron/README.md)
 Demonstrate how to use journalctl to discover logs  
 Steps [README.md](./27_journalctl/README.md)  
 
+## Example 28 - Old Skool Ascii Banner
+An old skool banner printer.   
+Steps [README.md](./28_oldskool_ascii_banner/README.md)  
+
+## Example 30 - User input
+Demonstrate how to use user input in scripts
+Steps [README.md](./30_userinput/README.md)  
 
 ## TODO:
   * Globbing 
