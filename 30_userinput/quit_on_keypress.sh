@@ -25,7 +25,7 @@ while true; do
         echo -ne "\e[3A\r"
     fi
 
-    # Check for 'q' keypress *waiting very briefly*  and exit the loop, if found.
+    # Check for keypress *waiting very briefly.
     read -t 0.01 -r -s -N 1 
     case "${REPLY}" in
         'q'|'Q')
