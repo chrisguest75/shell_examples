@@ -11,3 +11,6 @@ Demonstrate how to use user input in scripts
 # Have an infinite loop and listen for keys
 ./quit_on_keypresses.sh
 ```
+
+## Resources
+[Bash Cursor Movement](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html)  
