@@ -23,11 +23,14 @@ echo "OS Type is ${OSTYPE}"
 case "${OSTYPE}" in
     LINUX)     
         lsb_release -a 
+        echo "Hostname: $(hostname)"
     ;;
     MAC)    
         sw_vers -productName
         sw_vers -productVersion
         sw_vers -buildVersion
+        echo "Hostname (VPN): $(scutil --get HostName)"
+        echo "LocalHostName: $(scutil --get LocalHostName)"        
     ;;
     CYGWIN)
     

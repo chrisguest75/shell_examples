@@ -143,17 +143,19 @@ Steps [README.md](./28_oldskool_ascii_banner/README.md)
 Demonstrate how to use user input in scripts
 Steps [README.md](./30_userinput/README.md)  
 
+## Example 31 - Dependency checking
+Demonstrates how to check dependencies exist before a script runs
+Steps [README.md](./31_dependency_checking/README.md)  
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
-  * Reading input 
   * Detecting dotsourcing. 
   * printing and formatting numbers
   * zsh versus bash
   * defensive programming
   * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
   * generating temporary files. 
-  * autocompletion example
   * google script standards https://google.github.io/styleguide/shellguide.html
   * snaps
   * strace cmd 
