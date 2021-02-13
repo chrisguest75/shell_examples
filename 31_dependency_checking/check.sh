@@ -15,15 +15,16 @@ if [ -n "${DEBUG_ENVIRONMENT-}" ];then
 fi
 
 function check_prerequisites() {
-    local dependency=$1
+    for i in "$@"
+    do
+        local dependency=$i
 
-    # check code exists
-    if [[ ! $(command -v "$dependency") ]]; then
-        echo "$dependency is not-installed"
-        exit 0
-    fi
+        if [[ ! $(command -v "$dependency") ]]; then
+            echo "$dependency is not-installed"
+            exit 0
+        fi
+    done
 }
 
-# pass in a list here.
-# checking versions?
-check_prerequisites "whiptail"
+echo "Checking $@"
+check_prerequisites $@
