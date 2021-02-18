@@ -151,6 +151,10 @@ Steps [README.md](./31_dependency_checking/README.md)
 Demonstrates some examples of using jq to process json files
 Steps [README.md](./32_jq/README.md)  
 
+## Example 33 - AWSCLI
+Demonstrates using awscli to query resources in an AWS account.  
+Steps [README.md](./33_awscli/README.md)  
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()

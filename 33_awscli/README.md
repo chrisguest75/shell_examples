@@ -1,5 +1,5 @@
 # README
-Demonatrates using awscli to query resources in an AWS account.
+Demonstrates using awscli to query resources in an AWS account.
 
 TODO:
 * Sorting by columns
