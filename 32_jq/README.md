@@ -1,4 +1,5 @@
 # README
+Demonstrates some examples of using jq to process json files
 
 ```sh
 # Strip double quotes from field.
@@ -9,6 +10,13 @@ jq '.channel' --raw-output
 # NOTE: If using array indexers it needs to be quoted. 
 jq '.blocks[1].text.text' --raw-output
 ```
+
+
+```sh
+curl -s https://registry.hub.docker.com/api/content/v1/repositories/public/library/bash/tags | jq    
+```
+
+
 
 gcloud compute instances list --filter='name ~ ^prod-*' --format='json' | jq '.[] | "\(.name), \(.networkInterfaces[0].networkIP)"'
 
@@ -34,4 +42,6 @@ https://github.com/stedolan/jq
 
 http://rosettacode.org/wiki/Strip_control_codes_and_extended_characters_from_a_string#jq
 
+
+https://www.slideshare.net/btiernay/jq-json-like-a-boss
 
