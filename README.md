@@ -139,6 +139,10 @@ Steps [README.md](./27_journalctl/README.md)
 An old skool banner printer.   
 Steps [README.md](./28_oldskool_ascii_banner/README.md)  
 
+## Example 29 - Imagemagick
+Examples of using imagemagick to process images.  
+Steps [README.md](./29_imagemagick/README.md)  
+
 ## Example 30 - User input
 Demonstrate how to use user input in scripts
 Steps [README.md](./30_userinput/README.md)  
