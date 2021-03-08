@@ -147,6 +147,14 @@ Steps [README.md](./30_userinput/README.md)
 Demonstrates how to check dependencies exist before a script runs
 Steps [README.md](./31_dependency_checking/README.md)  
 
+## Example 32 - JQ
+Demonstrates some examples of using jq to process json files
+Steps [README.md](./32_jq/README.md)  
+
+## Example 33 - AWSCLI
+Demonstrates using awscli to query resources in an AWS account.  
+Steps [README.md](./33_awscli/README.md)  
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
