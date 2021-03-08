@@ -1,47 +1,52 @@
 # README
 Demonstrates some examples of using jq to process json files
 
+[Github JQ](https://github.com/stedolan/jq)
+
+## Tricks
+```sh
+# takes json logs and pretty print them 
+pbpaste | jq '.'
+```
+
+## Processing files
 ```sh
 # Strip double quotes from field.
-jq '.channel' --raw-output
-```
-
-```sh
 # NOTE: If using array indexers it needs to be quoted. 
-jq '.blocks[1].text.text' --raw-output
+cat ./pokedex.json | jq ".[][].name" --raw-output
+
+# multiple fields
+cat ./pokedex.json | jq -c ".[][] | {name, id}"    
+
+# filter and output as json
+jq -c ".[][] | {name, id}" ./pokedex.json 
+# filter and output as fields    
+jq -c ".[][] | (.name, .id)" ./pokedex.json
+# filter and output as csv     
+jq -cr ".[][] | [.name, .id] | @csv" ./pokedex.json     
+
+# individual array items
+jq -r ".[][2].img" ./pokedex.json
+
+# extract height in metres 
+jq -r ".[][].height | split(\" \") | .[0] | tonumber" ./pokedex.json
+
+# filtering by value
+jq -r ".[][] | select(.id > 150)" ./pokedex.json 
+
+
 ```
 
-
+## APIs
 ```sh
+# make webrequest and pretty print
 curl -s https://registry.hub.docker.com/api/content/v1/repositories/public/library/bash/tags | jq    
 ```
 
+# Resources
+* [jq-json-like-a-boss](https://www.slideshare.net/btiernay/jq-json-like-a-boss)
+* [jq cookbook](https://github.com/stedolan/jq/wiki/Cookbook)
+* ```cheatsheet jq```    
 
 
-gcloud compute instances list --filter='name ~ ^prod-*' --format='json' | jq '.[] | "\(.name), \(.networkInterfaces[0].networkIP)"'
-
-
-
-jq "(.[] | select(.name | contains(\"k8s-eu-workers\")) | {name, launch_config, desired})" 
-
-echo '{"key1":"val1", "myarray":["abc", "def", "ghi"]}' | jq -r '.myarray | @csv'
-
-aws route53 list-hosted-zones | jq -r ".[][].Name" | sort | sed "s/^/\\$AWS_OKTA_PROFILE /"
-
-	curl https://registry.hub.docker.com/api/content/v1/repositories/public/library/bash/tags | jq
-
-export BASELAYER=$(docker inspect ubuntu:18.04 | jq ".[].GraphDriver.Data.LowerDir | split(\":\")[-1]" --raw-output)
-
-https://dev.to/olore/jq-the-json-cli-tool-2om0
-
-https://github.com/stedolan/jq/wiki/Cookbook
-
-https://michaelheap.com/extract-keys-using-jq/
-
-https://github.com/stedolan/jq
-
-http://rosettacode.org/wiki/Strip_control_codes_and_extended_characters_from_a_string#jq
-
-
-https://www.slideshare.net/btiernay/jq-json-like-a-boss
 
