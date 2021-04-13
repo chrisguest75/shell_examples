@@ -4,9 +4,14 @@ Demonstrate how to use whiptail for file selection.
 ## Configure
 
 ```sh
+# Debian
 apt install whiptail
+
+# MacOS
+brew install newt
 ```
 
+## Create test files
 ```sh
 # create temporary files
 mkdir ./files
