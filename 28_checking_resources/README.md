@@ -12,6 +12,10 @@ TODO:
 * debugfs
 https://github.com/raboof/nethogs
 
+## Check limits
+```sh
+ulimit -a
+```
 ## Disk
 
 ```sh
@@ -22,9 +26,20 @@ df -h
 ## Sockets
 
 ```sh
+# summary of all the sockets
+ss -s 
+
 # listening sockets
 ss -l 
+
+# listening sockets with processes
+sudo ss -lp
+
+# tcp connections with information
+ss -ti 
 ```
+
+
 ## Memory
 
 ```sh
