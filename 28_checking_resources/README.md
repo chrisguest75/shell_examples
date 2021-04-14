@@ -3,6 +3,7 @@ Demonstrate how to use various commands to verify resource usage in the OS.
 
 
 TODO:
+* cgroups
 * Open sockets
 * Free memory 
 * File handles
@@ -12,10 +13,33 @@ TODO:
 * debugfs
 https://github.com/raboof/nethogs
 
+
+```sh
+# booted with
+cat /proc/cmdline 
+
+# built with
+cat /boot/config-5.8.0-49-generic | grep CGROUP
+
+# global limits
+systemctl show     
+```
+
 ## Check limits
 ```sh
-ulimit -a
+# limits inside a container
+docker run -it ubuntu:20.04 /bin/bash -c "ulimit -a" 
+
+# limits on host
+ulimit -a 
+
+# limits for current pid
+cat /proc/$$/limits 
+
+# show global config
+systemctl show    
 ```
+
 ## Disk
 
 ```sh
