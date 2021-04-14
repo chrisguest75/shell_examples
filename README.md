@@ -159,6 +159,10 @@ Steps [README.md](./32_jq/README.md)
 Demonstrates using awscli to query resources in an AWS account.  
 Steps [README.md](./33_awscli/README.md)  
 
+## Example 35 - APT and DPKG
+Demonstrate examples of working with APT and DPKG
+Steps [README.md](./35_apt_and_dpkg/README.md) 
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
