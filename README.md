@@ -159,6 +159,10 @@ Steps [README.md](./32_jq/README.md)
 Demonstrates using awscli to query resources in an AWS account.  
 Steps [README.md](./33_awscli/README.md)  
 
+## Example 36 - Git Querying
+Demonstrates some examples of using git queries  
+Steps [README.md](./36_git_querying/README.md)  
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
