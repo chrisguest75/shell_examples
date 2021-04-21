@@ -172,6 +172,11 @@ Steps [README.md](./35_apt_and_dpkg/README.md)
 Demonstrates some examples of using git queries  
 Steps [README.md](./36_git_querying/README.md)  
 
+## Example 37 - Guid generation
+Demonstrates techniques for generating guids in scripts.   
+Steps [README.md](./37_guids/README.md)  
+
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
