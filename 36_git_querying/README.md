@@ -2,8 +2,7 @@
 Demonstrates some examples of using git queries
 
 ## Git Extras
-
-
+Git extras are a set of helpers for git
 ```sh
 # macosx
 brew install git-extras
@@ -12,10 +11,13 @@ brew install git-extras
 apt install git-extras
 ```
 
-## Processing files
+##  Examining repos
 ```sh
+# Files changed since yesterday on current branch.
+git effort -- --since='yesterday'
 
 
+./build_commits_histogram_data.sh --action=histogram 
 ```
 
 
