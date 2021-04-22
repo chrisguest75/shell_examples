@@ -173,18 +173,17 @@ Demonstrates some examples of using git queries
 Steps [README.md](./36_git_querying/README.md)  
 
 ## Example 37 - Guid generation
-Demonstrates techniques for generating guids in scripts.   
+Demonstrates techniques for generating unique ids in scripts.  
 Steps [README.md](./37_guids/README.md)  
 
 
 ## TODO:
-  * Globbing 
   * Process Substition versus command substitution < <() < $()
   * Detecting dotsourcing. 
+  * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
   * printing and formatting numbers
   * zsh versus bash
   * defensive programming
-  * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
   * generating temporary files. 
   * google script standards https://google.github.io/styleguide/shellguide.html
   * snaps
@@ -192,6 +191,8 @@ Steps [README.md](./37_guids/README.md)
   * debugfs
   * awk & sed
   * understanding tabs output https://unix.stackexchange.com/questions/389255/determine-how-long-tabs-t-are-on-a-line
+  * subst
+  * cut
 
 ## Shellchecking
 
