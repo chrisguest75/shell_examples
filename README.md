@@ -177,6 +177,7 @@ Steps [README.md](./36_git_querying/README.md)
   * strace cmd 
   * debugfs
   * awk & sed
+  * understanding tabs output https://unix.stackexchange.com/questions/389255/determine-how-long-tabs-t-are-on-a-line
 
 ## Shellchecking
 
