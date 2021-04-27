@@ -15,22 +15,30 @@ longest=
 pr_branches=()
 tabs=$max  
 while IFS= read -r line; do
-    pr_branches+=( "$line" )
+    if [[ $line == renovate* ]]; then
+        # skip renovate
+        # pr_branches+=( "$line" )
+        skip=true
+    else
+        pr_branches+=( "origin/$line" )
+    fi
     (( ${#line} > max )) && max=${#line} && longest="$line"
 done < <(gh pr list --json headRefName | jq -r ".[].headRefName")
 
-echo "$max, $longest"
+#echo "$max, $longest"
 
 REPO=./ 
 BRANCH=master
-echo -e "${BRANCH}:\t $($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram --repo=${REPO} --branch=${BRANCH} --sparkline | spark)" 
+LINE=$(echo -e "${BRANCH}:\t $($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram --repo=${REPO} --branch=${BRANCH} --sparkline | spark)") 
+echo "$LINE" | expand -t $((max + 10)),100 
 
 for BRANCHNAME in "${pr_branches[@]}"
 do
     BASEBRANCH=master
-    BRANCH=origin/$BRANCHNAME
-    echo "$BASEBRANCH -> $BRANCH"
-    #echo -e "${BRANCH}:\t $($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram --repo=${REPO} --basebranch=${BASEBRANCH} --branch=${BRANCH} --sparkline | spark)" 
+    BRANCH=$BRANCHNAME
+    #echo "$BASEBRANCH -> $BRANCH"
+    LINE=$(echo -e "${BRANCH}:\t $($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram --repo=${REPO} --basebranch=${BASEBRANCH} --branch=${BRANCH} --sparkline | spark)") 
+    echo "$LINE" | expand -t $((max + 10)),100 
 done
 
 

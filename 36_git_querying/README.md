@@ -4,6 +4,7 @@ Demonstrates some examples of using git queries
 TODO:
 * Use the github api to query PR https://cli.github.com/manual/gh_api
 * Iterate over PRs to get the data
+* Walkthrough GH commands - commit PR through the cmdline only. 
 
 ## Git Extras
 Git extras are a set of helpers for git
@@ -20,7 +21,7 @@ apt install git-extras
 # Files changed since yesterday on current branch.
 git effort -- --since='yesterday'
 
-
+brew install spark
 ./build_commits_histogram_data.sh --action=histogram 
 ./build_commits_histogram_data.sh --action=histogram --repo=./  
 ./build_commits_histogram_data.sh --action=histogram --repo=./ --sparkline 
