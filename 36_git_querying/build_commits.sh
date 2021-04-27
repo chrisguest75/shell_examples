@@ -17,7 +17,6 @@ fi
 max=
 longest=
 pr_branches=()
-tabs=$max  
 while IFS= read -r line; do
     if [[ $line == renovate* ]]; then
         # skip renovate
