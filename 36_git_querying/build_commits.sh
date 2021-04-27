@@ -9,6 +9,10 @@ readonly SCRIPT_DIR=$(greadlink -f $(dirname "$SCRIPT_PATH"))
 
 echo $SCRIPT_DIR
 pushd "$1" > /dev/null
+MODE=
+if [[ "$2" == "hours" ]]; then
+    MODE=--hours    
+fi
 
 max=
 longest=
@@ -29,7 +33,7 @@ done < <(gh pr list --json headRefName | jq -r ".[].headRefName")
 
 REPO=./ 
 BRANCH=master
-LINE=$(echo -e "${BRANCH}:\t $($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram --repo=${REPO} --branch=${BRANCH} --sparkline | spark)") 
+LINE=$(echo -e "${BRANCH}:\t $($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram ${MODE} --repo=${REPO} --branch=${BRANCH} --sparkline | spark)") 
 echo "$LINE" | expand -t $((max + 10)),100 
 
 for BRANCHNAME in "${pr_branches[@]}"
@@ -37,7 +41,7 @@ do
     BASEBRANCH=master
     BRANCH=$BRANCHNAME
     #echo "$BASEBRANCH -> $BRANCH"
-    LINE=$(echo -e "${BRANCH}:\t $($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram --repo=${REPO} --basebranch=${BASEBRANCH} --branch=${BRANCH} --sparkline | spark)") 
+    LINE=$(echo -e "${BRANCH}:\t $($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram ${MODE} --repo=${REPO} --basebranch=${BASEBRANCH} --branch=${BRANCH} --sparkline | spark)") 
     echo "$LINE" | expand -t $((max + 10)),100 
 done
 

@@ -20,8 +20,18 @@ apt install git-extras
 ```sh
 # Files changed since yesterday on current branch.
 git effort -- --since='yesterday'
+```
 
+
+##  Commit counts for master and PRs
+```sh
+# install sparklines shell script
 brew install spark
+
+# get prs and analyse commits 
+./build_commits.sh ./ hours 
+
+# data generator
 ./build_commits_histogram_data.sh --action=histogram 
 ./build_commits_histogram_data.sh --action=histogram --repo=./  
 ./build_commits_histogram_data.sh --action=histogram --repo=./ --sparkline 

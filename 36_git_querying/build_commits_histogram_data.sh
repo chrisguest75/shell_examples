@@ -47,7 +47,8 @@ function main() {
     local BRANCH="master" 
     local EXITCODE=0
     local DEBUG=false 
-    local SPARKLINE=false      
+    local SPARKLINE=false   
+    local HOURS=false      
     local HELP=false
     local FLAGS=()
 
@@ -81,6 +82,11 @@ function main() {
             local -r SPARKLINE=true   
             shift # past argument=value
         ;;         
+        --hours)
+            # shellcheck disable=SC2034
+            local -r HOURS=true   
+            shift # past argument=value
+        ;;         
         -f=*|--flag=*)
             local flag="${i#*=}"
             FLAGS+=("$flag")
@@ -109,6 +115,9 @@ function main() {
                     pushd "${REPOPATH}" > /dev/null
                     # one day in seconds
                     TIME_GAP=$((60*60*24))
+                    if $HOURS; then
+                        TIME_GAP=$((60*60))
+                    fi
                     NOW=$(date +%s)
                     CURRENT=$NOW
                     # 3 months
