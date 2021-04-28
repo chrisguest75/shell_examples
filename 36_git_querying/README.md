@@ -11,6 +11,7 @@ Git extras are a set of helpers for git
 ```sh
 # macosx
 brew install git-extras
+brew install gh
 
 # debian
 apt install git-extras
@@ -30,6 +31,7 @@ brew install spark
 
 # get prs and analyse commits 
 ./build_commits.sh ./ hours 
+./build_commits.sh ./my-repo days
 
 # data generator
 ./build_commits_histogram_data.sh --action=histogram 
@@ -40,10 +42,29 @@ brew install spark
 
 
 
+# FAQ
+How do I work with PRs on a repo from cli?
+```sh
+# turn off pager 
+PAGER= 
+# list PRs using github cli
+gh pr list
+# look at changes in PR. 
+gh pr diff <id>
+# you can edit the title of the pr
+gh pr edit <id>
+
+```
+
+How do I look at the latest commit on each branch?
+
+ 
+
+
 
 
 
 # Resources
 
-[git-extras](https://github.com/tj/git-extras/blob/master/Commands.md)
-
+[git-extras](https://github.com/tj/git-extras/blob/master/Commands.md)  
+[github cli](https://github.com/cli/cli)  
