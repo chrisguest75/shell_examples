@@ -55,6 +55,10 @@ Steps [README.md](./05_strings/README.md)
 Demonstrate a restricted bash shell  
 Steps [README.md](./06_restricted_bash/README.md)  
 
+## Example 7 - OS Detection
+Demonstrate how to detect the OS type in script to change parameters to commands.  
+Steps [README.md](./07_os_detection/README.md)  
+
 ## Example 8 - Paths
 Demonstrates ways of manipulating paths  
 Steps [README.md](./08_paths/README.md)  
@@ -131,26 +135,57 @@ Steps [README.md](./26_cron/README.md)
 Demonstrate how to use journalctl to discover logs  
 Steps [README.md](./27_journalctl/README.md)  
 
-## Example 28 - Checking Resources
+## Example 28 - Old Skool Ascii Banner
+An old skool banner printer.   
+Steps [README.md](./28_oldskool_ascii_banner/README.md)  
+
+## Example 29 - Imagemagick
+Examples of using imagemagick to process images.  
+Steps [README.md](./29_imagemagick/README.md)  
+
+## Example 30 - User input
+Demonstrate how to use user input in scripts
+Steps [README.md](./30_userinput/README.md)  
+
+## Example 31 - Dependency checking
+Demonstrates how to check dependencies exist before a script runs
+Steps [README.md](./31_dependency_checking/README.md)  
+
+## Example 32 - JQ
+Demonstrates some examples of using jq to process json files
+Steps [README.md](./32_jq/README.md)  
+
+## Example 33 - AWSCLI
+Demonstrates using awscli to query resources in an AWS account.  
+Steps [README.md](./33_awscli/README.md)  
+
+## Example 35 - APT and DPKG
+Demonstrate examples of working with APT and DPKG  
+Steps [README.md](./35_apt_and_dpkg/README.md)  
+
+## Example 36 - Git Querying
+Demonstrates some examples of using git queries  
+Steps [README.md](./36_git_querying/README.md)  
+
+## Example 37 - Checking Resources
 Demonstrate how to use various commands to verify resource usage in the OS.
-Steps [README.md](./28_checking_resources/README.md) 
+Steps [README.md](./37_checking_resources/README.md) 
 
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
-  * Reading input 
   * Detecting dotsourcing. 
   * printing and formatting numbers
   * zsh versus bash
   * defensive programming
   * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
   * generating temporary files. 
-  * autocompletion example
   * google script standards https://google.github.io/styleguide/shellguide.html
   * snaps
   * strace cmd 
   * debugfs
   * awk & sed
+  * understanding tabs output https://unix.stackexchange.com/questions/389255/determine-how-long-tabs-t-are-on-a-line
 
 ## Shellchecking
 
@@ -171,3 +206,4 @@ ln ./hooks/pre-commit .git/hooks/pre-commit
 ```sh
 docker run -it --rm -v $(pwd):/repo chrisguest/turn --action=create --type=release --includenext --tags
 ```
+
