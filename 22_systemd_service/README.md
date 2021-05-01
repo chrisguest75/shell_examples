@@ -3,7 +3,7 @@ Install a basic systemd service
 
 TODO:
 * Add an apt installer with manpage.
-* Journalctl logs 
+
 ## Configure
 ```sh
 # generate config from shell variables $USER and $PWD
@@ -26,6 +26,14 @@ systemctl status chrisguest75webservice
 ```sh
 # test the webservice
 curl -vvvv localhost:8081/clientpath  
+# stop service
+sudo systemctl stop chrisguest75webservice 
+# test should fail
+curl -vvvv localhost:8081/clientpath  
+# start service
+sudo systemctl start chrisguest75webservice
+# logs for service
+journalctl -b -u chrisguest75webservice.service --no-pager
 ```
 
 ## Remove
@@ -39,3 +47,8 @@ systemctl stop chrisguest75webservice
 # remove the service
 sudo rm /etc/systemd/system/chrisguest75webservice.service  
 ```
+
+
+# Resources
+
+[systemd wiki](https://www.freedesktop.org/wiki/Software/systemd/)  
