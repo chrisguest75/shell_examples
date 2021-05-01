@@ -112,6 +112,15 @@ function main() {
                     help
                 ;;
                 histogram)
+                    if [[ $(command -v "gdate") ]]; then
+                        readonly DATE_TOOL=gdate
+                    elif [[ $(command -v "date") ]]; then
+                        readonly DATE_TOOL=date
+                    else
+                        echo "Cannot find date or gdate"
+                        exit 1
+                    fi
+
                     pushd "${REPOPATH}" > /dev/null
                     # one day in seconds
                     TIME_GAP=$((60*60*24))
@@ -138,7 +147,7 @@ function main() {
                             echo -n "$DAY_COUNT "
                         else
                             #if [[ $DAY_COUNT -ne 0 ]]; then
-                            echo "DAY_COUNT:$DAY_COUNT - CURRENT:$(gdate -d @$CURRENT) - PREVIOUS_HOUR:$(gdate -d @$PREVIOUS_HOUR)"
+                            echo "DAY_COUNT:$DAY_COUNT - CURRENT:$($DATE_TOOL -d @$CURRENT) - PREVIOUS_HOUR:$($DATE_TOOL -d @$PREVIOUS_HOUR)"
                             #fi
                         fi
                         ITERATIONS_BACK=$((ITERATIONS_BACK - 1))

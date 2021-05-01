@@ -5,7 +5,25 @@ set -euf -o pipefail
 readonly SCRIPT_NAME=$(basename "$0")
 readonly SCRIPT_PATH=${0}
 # shellcheck disable=SC2034
-readonly SCRIPT_DIR=$(greadlink -f $(dirname "$SCRIPT_PATH"))
+
+if [ -n "${DEBUG_ENVIRONMENT-}" ];then 
+    # if DEBUG_ENVIRONMENT is set
+    env
+    export
+fi
+
+if [[ $(command -v "greadlink") ]]; then
+    readonly SCRIPT_DIR=$(greadlink -f $(dirname "$SCRIPT_PATH"))
+elif [[ $(command -v "readlink") ]]; then
+    readonly SCRIPT_DIR=$(readlink -f $(dirname "$SCRIPT_PATH"))
+else
+    echo "Cannot find readlink or greadlink"
+    exit 1
+fi
+if [[ ! $(command -v "spark") ]]; then
+    echo "Cannot find spark"
+    exit 1
+fi
 
 echo $SCRIPT_DIR
 pushd "$1" > /dev/null
