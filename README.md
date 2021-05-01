@@ -160,8 +160,12 @@ Demonstrates using awscli to query resources in an AWS account.
 Steps [README.md](./33_awscli/README.md)  
 
 ## Example 35 - APT and DPKG
-Demonstrate examples of working with APT and DPKG
-Steps [README.md](./35_apt_and_dpkg/README.md) 
+Demonstrate examples of working with APT and DPKG  
+Steps [README.md](./35_apt_and_dpkg/README.md)  
+
+## Example 36 - Git Querying
+Demonstrates some examples of using git queries  
+Steps [README.md](./36_git_querying/README.md)  
 
 ## TODO:
   * Globbing 
@@ -177,6 +181,7 @@ Steps [README.md](./35_apt_and_dpkg/README.md)
   * strace cmd 
   * debugfs
   * awk & sed
+  * understanding tabs output https://unix.stackexchange.com/questions/389255/determine-how-long-tabs-t-are-on-a-line
 
 ## Shellchecking
 
@@ -197,3 +202,4 @@ ln ./hooks/pre-commit .git/hooks/pre-commit
 ```sh
 docker run -it --rm -v $(pwd):/repo chrisguest/turn --action=create --type=release --includenext --tags
 ```
+
