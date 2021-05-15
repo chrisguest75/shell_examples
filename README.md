@@ -1,71 +1,76 @@
 # Shell Examples and Demos
 A repository for showing examples of shell scripts.
 
-The aim is to use examples to demonstrate how shells behave and squash some assumptions. 
+The aim is to use examples to demonstrate how shells behave and squash some assumptions.  
+It's also a repository used for collecting various shell related tooling.  
 
-[RELEASE_NOTES.md](./RELEASE_NOTES.md)
+[RELEASE_NOTES.md](./RELEASE_NOTES.md)   
 
 ## Prequisites 
 1. Install [shellcheck](https://github.com/koalaman/shellcheck)
 1. Install vscode extension for shellcheck
-    ```
+    ```sh
     code --install-extension timonwong.shellcheck
     ```
 ## Shell Help
 Depending on the shell you are running the help for builtins is different  
   
-bash
+`bash`
 ```sh
 man bash
 help <builtin>
 info <command>
 ```
 
-zsh
+`zsh`
 ```sh
 man zsh
 man zshbuiltins
 ```
 
-## Example 0 - Cheatsheet
+## Example 00 - Cheatsheet
 Cheatsheets are a great way to quickly get an answer to your question.  
 Steps [README.md](./00_cheatsheet/README.md)  
 
-## Example 1 - Simple argument parsing
+## Example 01 - Simple argument parsing
 Demonstrates how to build a script with simple argument parsing.  
 Steps [README.md](./01_argument_parsing/README.md)  
 
-## Example 2 - Functions as jobs
+## Example 02 - Functions as jobs
 Demonstrates how to initiate a function as a job.  
 Steps [README.md](./02_job_functions/README.md)  
 
-## Example 3 - Pipe filters
+## Example 03 - Pipe filters
 Demonstrates how read from stdin stream and process it.    
 Steps [README.md](./03_pipe_filter_function/README.md)  
 
-## Example 4 - Trap handlers
+## Example 04 - Trap handlers
 Demonstrate trap handlers functionality   
 Steps [README.md](./04_trap/README.md)  
 
-## Example 5 - Strings
+## Example 05 - Strings
 Demonstrate some examples of string manipulation   
 Steps [README.md](./05_strings/README.md)  
 
-## Example 6 - Restricted bash shell
+## Example 06 - Restricted bash shell
 Demonstrate a restricted bash shell  
 Steps [README.md](./06_restricted_bash/README.md)  
 
-## Example 7 - OS Detection
+## Example 07 - OS Detection
 Demonstrate how to detect the OS type in script to change parameters to commands.  
 Steps [README.md](./07_os_detection/README.md)  
 
-## Example 8 - Paths
+## Example 08 - Paths
 Demonstrates ways of manipulating paths  
 Steps [README.md](./08_paths/README.md)  
 
-## Example 9 - Debian packaging
-Demonstrates building a debian package repository
+## Example 09 - Debian packaging
+Demonstrates building a debian package repository  
 Steps [README.md](./09_deb_pkg/README.md)  
+
+## Example 10 - Functions
+Demonstrates different types of techniques for using functions    
+Steps [README.md](./10_functions/README.md)  
 
 ## Example 11 - Man pages
 Demonstrate how to create a manpage.  
@@ -144,15 +149,15 @@ Examples of using imagemagick to process images.
 Steps [README.md](./29_imagemagick/README.md)  
 
 ## Example 30 - User input
-Demonstrate how to use user input in scripts
+Demonstrate how to use user input in scripts  
 Steps [README.md](./30_userinput/README.md)  
 
 ## Example 31 - Dependency checking
-Demonstrates how to check dependencies exist before a script runs
+Demonstrates how to check dependencies exist before a script runs  
 Steps [README.md](./31_dependency_checking/README.md)  
 
 ## Example 32 - JQ
-Demonstrates some examples of using jq to process json files
+Demonstrates some examples of using jq to process json files  
 Steps [README.md](./32_jq/README.md)  
 
 ## Example 33 - AWSCLI

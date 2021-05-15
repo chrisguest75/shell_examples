@@ -1,4 +1,4 @@
-# README.md
+# README
 Demonstrates ways of manipulating paths 
 
 Demonstrates techniques for discovering paths 
