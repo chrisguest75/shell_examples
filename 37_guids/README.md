@@ -4,15 +4,14 @@ Demonstrates techniques for generating unique ids in scripts.
 
 ## UUIDGEN
 ```sh
+# macosx
 uuidgen
-
 ```
 ## Using timestamp from date
 ```sh
 date +%s
 
-
-macosx
+# macosx
 $ date -r 1282368345
 Sat Aug 21 07:25:45 CEST 2010
 $ date -r 1282368345 +%Y-%m-%d
@@ -28,7 +27,8 @@ $ date -d @1282368345 --rfc-3339=date
 
 
 
+
 # Resources
 
-
+https://gist.github.com/5c0tt/b9f452a9076daca4fa35
 
