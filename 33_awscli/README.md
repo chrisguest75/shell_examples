@@ -155,7 +155,11 @@ aws route53 change-resource-record-sets --cli-input-json file://record.json
 aws route53 get-change --id /change/C3RJ6YPQRNEZJA
 ```
 
-
+# VPC
+```sh
+aws ec2 describe-vpcs 
+aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-<id> | jq '.Subnets[].AvailableIpAddressCount'
+```
 
 # Resources
 [aws-cli-with-jq](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)  
