@@ -172,6 +172,10 @@ Steps [README.md](./35_apt_and_dpkg/README.md)
 Demonstrates some examples of using git queries  
 Steps [README.md](./36_git_querying/README.md)  
 
+## Example 38 - Mapping inputs to outputs
+Demonstrate how to map an input to an output
+Steps [README.md](./38_value_maps/README.md)  
+
 ## TODO:
   * Globbing 
   * Process Substition versus command substitution < <() < $()
