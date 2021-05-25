@@ -23,6 +23,7 @@ gh gist list
 # view gist 
 gh gist view b6bf4770237e1307b3fef4ffa3d4a187 --web   
 # grab the url and run from a gist
+# NOTE: This is not working yet. 
 npx https://gist.github.com/b6bf4770237e1307b3fef4ffa3d4a187
 
 gh gist delete b6bf4770237e1307b3fef4ffa3d4a187
