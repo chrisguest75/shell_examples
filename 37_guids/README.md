@@ -1,6 +1,9 @@
 # README
 Demonstrates techniques for generating unique ids in scripts.   
 
+TODO:
+* crypto hash
+* /dev/random
 
 ## UUIDGEN
 ```sh
@@ -25,7 +28,9 @@ $ date -d @1282368345 --rfc-3339=date
 
 ## Random
 
-
+```sh
+echo $RANDOM
+```
 
 
 # Resources
