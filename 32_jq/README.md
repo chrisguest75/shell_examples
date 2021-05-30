@@ -9,7 +9,7 @@ Demonstrates some examples of using jq to process json files
 pbpaste | jq '.'
 ```
 
-## Processing files
+## Transforming and Processing files
 ```sh
 # Strip double quotes from field.
 # NOTE: If using array indexers it needs to be quoted. 
@@ -18,11 +18,11 @@ cat ./pokedex.json | jq ".[][].name" --raw-output
 # multiple fields
 cat ./pokedex.json | jq -c ".[][] | {name, id}"    
 
-# filter and output as json
+# transform and output as json
 jq -c ".[][] | {name, id}" ./pokedex.json 
-# filter and output as fields    
+# transform and output as fields    
 jq -c ".[][] | (.name, .id)" ./pokedex.json
-# filter and output as csv     
+# transform and output as csv     
 jq -cr ".[][] | [.name, .id] | @csv" ./pokedex.json     
 
 # individual array items
@@ -30,7 +30,10 @@ jq -r ".[][2].img" ./pokedex.json
 
 # extract height in metres 
 jq -r ".[][].height | split(\" \") | .[0] | tonumber" ./pokedex.json
+```
 
+## Filering
+```sh
 # filtering by value
 jq -r ".[][] | select(.id > 150)" ./pokedex.json 
 
