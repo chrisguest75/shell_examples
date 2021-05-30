@@ -71,7 +71,7 @@ jq -r '.[][] | select(.weaknesses | contains( ["Rock"] )) | .id' ./pokedex.json
 # count how many records have weakness of flying
 https://stackoverflow.com/questions/48321235/sql-style-group-by-aggregate-functions-in-jq-count-sum-and-etc
 
-
+aws ec2 describe-instances | jq -r "[[.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }]|group_by(.state)|.[]|{state: .[0].state, types: [.[].type]|[group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
 ```
 
 
