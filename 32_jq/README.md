@@ -34,20 +34,46 @@ jq -r ".[][2].img" ./pokedex.json
 jq -r ".[][].height | split(\" \") | .[0] | tonumber" ./pokedex.json
 ```
 
-## Filtering
+## Selecting and Filtering
 ```sh
 # filtering by value
+jq -r ".[][] | select(.id == 150)" ./pokedex.json 
+
+# greater than
 jq -r ".[][] | select(.id > 150)" ./pokedex.json 
 
+# filter by a value passed as an argument
+jq --arg myid 150 -r '.[][] | select(.id == ($myid | tonumber))' ./pokedex.json 
+
+# argjson does implicit conversion to type number
+jq --argjson myid 120 -r '.[][] | select(.id == $myid)' ./pokedex.json 
+
 # filter and transform fields as json
-jq -r ".[][] | select(.id > 150) | {name, id}" ./pokedex.json 
+jq -r ".[][] | select(.id == 150) | {name, id}" ./pokedex.json 
 
 # if array contains an element then return object
 jq -r '.[][] | select(.weaknesses | contains( ["Rock"] ))' ./pokedex.json 
-
 ```
 
 ## Aggregations
+
+```sh
+# count objects in array
+jq -r ".[] | length" ./pokedex.json 
+
+# count how many records have weakness of flying
+
+```
+
+
+
+## Variables??
+
+## Functions??
+
+## Joining??
+Is this even possible?
+
 
 ## APIs
 ```sh
