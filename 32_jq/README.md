@@ -3,6 +3,11 @@ Demonstrates some examples of using jq to process json files
 
 [Github JQ](https://github.com/stedolan/jq)
 
+```sh
+# get version
+jq --version  
+```
+
 ## Tricks
 ```sh
 # takes json logs and pretty print them 
@@ -64,24 +69,34 @@ jq -r ".[] | length" ./pokedex.json
 # show all possible weaknesses
 jq -r "[.[][].weaknesses] | flatten | unique" ./pokedex.json 
 
-# TODO: get the count of the id outputs 
-jq -r '.[][] | select(.weaknesses | contains( ["Rock"] )) | .id' ./pokedex.json
-
-
 # count how many records have weakness of flying
-https://stackoverflow.com/questions/48321235/sql-style-group-by-aggregate-functions-in-jq-count-sum-and-etc
-
-aws ec2 describe-instances | jq -r "[[.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }]|group_by(.state)|.[]|{state: .[0].state, types: [.[].type]|[group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
+jq -r '.[][] | select(.weaknesses | contains( ["Flying"] )) | .id' ./pokedex.json | jq --slurp '. | length'
 ```
 
+## Functions
+```sh
+# print out a basic json object paths 
+jq -r 'def schema($path): $path | paths | map(tostring) | join("/"); schema(.[][2])' ./pokedex.json
+```
 
+## Modules
+```sh
+# load schema function from a module
+export ORIGIN=$(pwd)/lib
+echo '{"a":{"c":2}, "b":2}' | jq 'import "schema" as lib; lib::schema(.)'
 
-## Variables??
+# load schema from global module
+cp ./lib/schema.jq ~/.jq    
+echo '{"a":{"c":2}, "b":2}' | jq 'schema(.)'
+rm ~/.jq   
+```
 
-## Functions??
+## Joining datasets
 
-## Joining??
-Is this even possible?
+```sh
+# multiple streams from a single document 
+jq -c '(.[][] | {name, id}), (.[][] | select(.weaknesses | contains( ["Rock"])) | { "name": .name, "weakness": "rock" })' ./pokedex.json 
+```
 
 
 ## APIs
@@ -91,9 +106,9 @@ curl -s https://registry.hub.docker.com/api/content/v1/repositories/public/libra
 ```
 
 # Resources
-* [jq-json-like-a-boss](https://www.slideshare.net/btiernay/jq-json-like-a-boss)
-* [jq cookbook](https://github.com/stedolan/jq/wiki/Cookbook)
+* [jq-json-like-a-boss](https://www.slideshare.net/btiernay/jq-json-like-a-boss)  
+* [jq cookbook](https://github.com/stedolan/jq/wiki/Cookbook)  
 * ```cheatsheet jq```    
-https://remysharp.com/drafts/jq-recipes
-https://gist.github.com/olih/f7437fb6962fb3ee9fe95bda8d2c8fa4
+* [jq-recipes](https://remysharp.com/drafts/jq-recipes)  
+* [cheatsheet](https://gist.github.com/olih/f7437fb6962fb3ee9fe95bda8d2c8fa4)  
 
