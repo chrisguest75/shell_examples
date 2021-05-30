@@ -61,7 +61,16 @@ jq -r '.[][] | select(.weaknesses | contains( ["Rock"] ))' ./pokedex.json
 # count objects in array
 jq -r ".[] | length" ./pokedex.json 
 
+# show all possible weaknesses
+jq -r "[.[][].weaknesses] | flatten | unique" ./pokedex.json 
+
+# TODO: get the count of the id outputs 
+jq -r '.[][] | select(.weaknesses | contains( ["Rock"] )) | .id' ./pokedex.json
+
+
 # count how many records have weakness of flying
+https://stackoverflow.com/questions/48321235/sql-style-group-by-aggregate-functions-in-jq-count-sum-and-etc
+
 
 ```
 
@@ -85,6 +94,6 @@ curl -s https://registry.hub.docker.com/api/content/v1/repositories/public/libra
 * [jq-json-like-a-boss](https://www.slideshare.net/btiernay/jq-json-like-a-boss)
 * [jq cookbook](https://github.com/stedolan/jq/wiki/Cookbook)
 * ```cheatsheet jq```    
-
-
+https://remysharp.com/drafts/jq-recipes
+https://gist.github.com/olih/f7437fb6962fb3ee9fe95bda8d2c8fa4
 
