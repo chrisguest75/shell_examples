@@ -15,13 +15,15 @@ pbpaste | jq '.'
 # NOTE: If using array indexers it needs to be quoted. 
 cat ./pokedex.json | jq ".[][].name" --raw-output
 
-# multiple fields
+# extract multiple fields
 cat ./pokedex.json | jq -c ".[][] | {name, id}"    
 
 # transform and output as json
 jq -c ".[][] | {name, id}" ./pokedex.json 
+
 # transform and output as fields    
 jq -c ".[][] | (.name, .id)" ./pokedex.json
+
 # transform and output as csv     
 jq -cr ".[][] | [.name, .id] | @csv" ./pokedex.json     
 
@@ -32,13 +34,20 @@ jq -r ".[][2].img" ./pokedex.json
 jq -r ".[][].height | split(\" \") | .[0] | tonumber" ./pokedex.json
 ```
 
-## Filering
+## Filtering
 ```sh
 # filtering by value
 jq -r ".[][] | select(.id > 150)" ./pokedex.json 
 
+# filter and transform fields as json
+jq -r ".[][] | select(.id > 150) | {name, id}" ./pokedex.json 
+
+# if array contains an element then return object
+jq -r '.[][] | select(.weaknesses | contains( ["Rock"] ))' ./pokedex.json 
 
 ```
+
+## Aggregations
 
 ## APIs
 ```sh
