@@ -59,6 +59,15 @@ How do I look at the latest commit on each branch?
 git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 ```
 
+How do I clean up my local branches?
+```sh
+git fetch --prune
+
+# using git-extras 
+git show-unmerged-branches   
+git show-merged-branches     
+git delete-merged-branches          
+```
 
 # Resources
 
