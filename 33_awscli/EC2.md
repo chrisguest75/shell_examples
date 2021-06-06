@@ -1,9 +1,9 @@
+# EC2 
 
-# EC2 Instances
 ## Describe Instances
 ```sh
 # filter out terminated instances
-aws ec2 describe-instances  --query "Reservations[*].Instances[*].{name: Tags[?Key=='Name'] | [0].Value, instance_id: InstanceId, ip_address: PrivateIpAddress, state: State.Name, imageid: ImageId}" --filters "Name=instance-state-name,Values=pending,running,shutting-down,stopping,stopped" --output table
+aws ec2 describe-instances --query "Reservations[*].Instances[*].{name: Tags[?Key=='Name'] | [0].Value, instance_id: InstanceId, ip_address: PrivateIpAddress, state: State.Name, imageid: ImageId}" --filters "Name=instance-state-name,Values=pending,running,shutting-down,stopping,stopped" --output table
 ```
 
 ## Multiple compound filters
