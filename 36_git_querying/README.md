@@ -15,6 +15,12 @@ brew install gh
 apt install git-extras
 ```
 
+## Open repo in code
+```sh
+# sometimes you might be in a subdirectory in the repo
+code $(git root)
+```
+
 ##  Examining repos
 ```sh
 # Files changed since yesterday on current branch.
