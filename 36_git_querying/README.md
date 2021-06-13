@@ -21,13 +21,14 @@ apt install git-extras
 code $(git root)
 ```
 
-##  Examining repos
+## Examining repos
 ```sh
 # Files changed since yesterday on current branch.
 git effort -- --since='yesterday'
+git effort -- --since='1 month ago'
 ```
 
-##  Commit counts for master and PRs
+## Commit counts for master and PRs
 ```sh
 # install sparklines shell script
 brew install spark
@@ -75,9 +76,29 @@ git show-merged-branches
 git delete-merged-branches          
 ```
 
+How do I know what changes were in a commit?
+```sh
+# show last 4 commits on a branch
+git log -n 4 --oneline <branch>
+
+# choose a commit and list files
+git show <commitid> --name-only --oneline            
+```
+
+Keeping branches up-to-date
+```sh
+# have a look at the differences
+git log -n 10 --graph --oneline master
+git log -n 10 --graph --oneline <branch>
+git diff master..<branch> --name-only
+# rebase the branch
+git rebase master
+```
+
+
 # Resources
 
-[git-extras](https://github.com/tj/git-extras/blob/master/Commands.md)  
-[github cli](https://github.com/cli/cli)  
-[sparklines](https://github.com/holman/spark)  
+* [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.    
+* [github cli](https://github.com/cli/cli) tool that supports creating PRs directly from the shell  
+* [sparklines](https://github.com/holman/spark)  
 
