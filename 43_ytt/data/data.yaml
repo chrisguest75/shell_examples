@@ -1,4 +1,4 @@
 
 #@data/values
 ---
-instances: 8
+terraform_image: terraform:1.0.0

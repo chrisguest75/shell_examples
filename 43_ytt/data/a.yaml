@@ -1,10 +1,15 @@
 #@ load("@ytt:data", "data")
 
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: my-app
-spec:
-  replicas: #@ data.values.instances
-  
+version: 2.1
+
+plan: &plan
+  resource_class: small
+  docker:
+    - image: #@ data.values.terraform_image
+  steps:
+    - checkout
+    - run:
+        name: hello
+        command: echo "hello world"
+
