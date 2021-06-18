@@ -1,0 +1,3 @@
+  
+terraform_image: &terraform_image terraform:1.0.0
+

@@ -1,0 +1,13 @@
+version: 2.1
+
+plan: &plan
+  resource_class: small
+  docker:
+    - image: *terraform_image
+  steps:
+    - checkout
+    - run:
+        name: hello
+        command: echo "hello world"
+
+        
