@@ -22,6 +22,7 @@ ytt -f data
 ```
 
 ```sh
+# anchors will be resolved before merge :-(
 ytt -f merge
 ```
 ## Resources
@@ -30,3 +31,4 @@ ytt -f merge
 * [how-it-works](https://carvel.dev/ytt/docs/latest/how-it-works/)  
 * [releases](https://github.com/vmware-tanzu/carvel-ytt/releases)  
 * [ytt playground](https://carvel.dev/ytt/#example:example-load)  
+https://redhatspain.com/yaml/
