@@ -1,0 +1,7 @@
+# a comment
+a:
+  b:
+    c:
+      - v1
+      - v2
+      - v3
