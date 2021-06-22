@@ -1,5 +1,5 @@
 # README.md
-A few examples on using shell to find files
+A few examples on using shell cmd to find files
 
 ## ls 
 ls - list directory contents
@@ -7,8 +7,8 @@ ls - list directory contents
 ```sh
 cd 24_finding_files
 
-#find files and folders beginning with 2
-ls -ld ../2* 
+#find files and folders beginning with 2 (filenames only) 
+ls -1d ../2* 
 ```
 
 ## Find
@@ -29,10 +29,13 @@ find ../ -iname "*.md" -ctime +3
 grep, egrep, fgrep, rgrep - print lines that match patterns
 
 ```sh
-# find files containing readme. 
-grep README ../*
+# find files containing case-insenitive 'readme'. 
+grep -i README ../*
+
+# find all files with a shebang
+grep -R "/usr/bin/env" --include="*.sh" ../* 
 ```
-## Locate
+## Locate (debian)
 locate - list files in databases that match a pattern
 
 ```sh

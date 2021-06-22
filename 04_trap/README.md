@@ -2,9 +2,9 @@
 Demonstrate trap handlers functionality 
 
 ## Examples
-
-List the possible trap signals
+List the possible trap signals 
 ```sh
+# in bash
 trap -l
  1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP
  6) SIGABRT      7) SIGEMT       8) SIGFPE       9) SIGKILL     10) SIGBUS
@@ -16,21 +16,24 @@ trap -l
 ```
 
 ```sh
+# debian
 man 7 signal
 ```
 
 ```sh
+# trap handler on an error
 ./trap_err_example.sh   
 ```
 
 ```sh
+# trap handler on exit
 ./trap_exit_example.sh   
 ```
 
 ```sh
+# debug tracing with a handler
 ./trap_debug_example.sh   
 ```
-
 
 ```sh
 # THIS IS NOT WORKING
