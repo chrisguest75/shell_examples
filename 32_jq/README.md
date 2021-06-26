@@ -60,6 +60,11 @@ jq -r ".[][] | select(.id == 150) | {name, id}" ./pokedex.json
 jq -r '.[][] | select(.weaknesses | contains( ["Rock"] ))' ./pokedex.json 
 ```
 
+## Sorting
+```sh
+# sort by name
+jq '.pokemon | sort_by(.name) | .[].name' ./pokedex.json 
+```
 ## Aggregations
 
 ```sh
@@ -71,6 +76,10 @@ jq -r "[.[][].weaknesses] | flatten | unique" ./pokedex.json
 
 # count how many records have weakness of flying
 jq -r '.[][] | select(.weaknesses | contains( ["Flying"] )) | .id' ./pokedex.json | jq --slurp '. | length'
+
+# group by candy and count
+jq '.pokemon | group_by(.candy) | map({"candy":.[0].candy, "count":length})' ./pokedex.json 
+
 ```
 
 ## Functions
