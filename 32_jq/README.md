@@ -41,7 +41,7 @@ jq -r ".[][].height | split(\" \") | .[0] | tonumber" ./pokedex.json
 
 ## Add a field to document 
 ```sh
-# merge in a processed on field
+# merge in a processed on field (if field exists it will update it)
 jq --arg date "$(date)" '. + {processed: $date}' ./pokedex.json
 ```
 
