@@ -60,11 +60,18 @@ jq -r ".[][] | select(.id == 150) | {name, id}" ./pokedex.json
 jq -r '.[][] | select(.weaknesses | contains( ["Rock"] ))' ./pokedex.json 
 ```
 
+## Conditional checks
+```sh
+# Pulls all the data and then slurps it back into a single array. 
+jq '.pokemon[] | { name: .name,  version: (if .version == null then 0 else .version end)}' ./pokedex.json | jq  -s '{pokemon: (.)}'
+```
+
 ## Sorting
 ```sh
 # sort by name
 jq '.pokemon | sort_by(.name) | .[].name' ./pokedex.json 
 ```
+
 ## Aggregations
 
 ```sh
@@ -83,12 +90,16 @@ jq '.pokemon | group_by(.candy) | map({"candy":.[0].candy, "count":length})' ./p
 ```
 
 ## Functions
+You can create custom functions to reuse common functionality.
 ```sh
 # print out a basic json object paths 
 jq -r 'def schema($path): $path | paths | map(tostring) | join("/"); schema(.[][2])' ./pokedex.json
 ```
 
 ## Modules
+It's possible to store functions in modules for sharing.
+More information is available at [manual](https://stedolan.github.io/jq/manual/#Modules) and
+[wiki](https://github.com/stedolan/jq/wiki/Modules)  
 ```sh
 # load schema function from a module
 export ORIGIN=$(pwd)/lib
@@ -100,7 +111,7 @@ echo '{"a":{"c":2}, "b":2}' | jq 'schema(.)'
 rm ~/.jq   
 ```
 
-## Joining datasets
+## Joining datasets (multiple streams)
 
 ```sh
 # multiple streams from a single document 
@@ -115,9 +126,11 @@ curl -s https://registry.hub.docker.com/api/content/v1/repositories/public/libra
 ```
 
 # Resources
+* Manual [here](https://stedolan.github.io/jq/manual/v1.6/)
 * [jq-json-like-a-boss](https://www.slideshare.net/btiernay/jq-json-like-a-boss)  
 * [jq cookbook](https://github.com/stedolan/jq/wiki/Cookbook)  
 * ```cheatsheet jq```    
 * [jq-recipes](https://remysharp.com/drafts/jq-recipes)  
 * [cheatsheet](https://gist.github.com/olih/f7437fb6962fb3ee9fe95bda8d2c8fa4)  
-
+* [modules](https://github.com/stedolan/jq/wiki/Modules)
+* [pokedex](https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json)  
