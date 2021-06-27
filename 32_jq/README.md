@@ -39,6 +39,12 @@ jq -r ".[][2].img" ./pokedex.json
 jq -r ".[][].height | split(\" \") | .[0] | tonumber" ./pokedex.json
 ```
 
+## Add a field to document 
+```sh
+# merge in a processed on field
+jq --arg date "$(date)" '. + {processed: $date}' ./pokedex.json
+```
+
 ## Selecting and Filtering
 ```sh
 # filtering by value
@@ -47,7 +53,7 @@ jq -r ".[][] | select(.id == 150)" ./pokedex.json
 # greater than
 jq -r ".[][] | select(.id > 150)" ./pokedex.json 
 
-# filter by a value passed as an argument
+# filter by a value passed as an argument (--arg is always a string) 
 jq --arg myid 150 -r '.[][] | select(.id == ($myid | tonumber))' ./pokedex.json 
 
 # argjson does implicit conversion to type number
