@@ -127,6 +127,24 @@ rm ~/.jq
 jq -c '(.[][] | {name, id}), (.[][] | select(.weaknesses | contains( ["Rock"])) | { "name": .name, "weakness": "rock" })' ./pokedex.json 
 ```
 
+## Merging fragments into files
+Create fragments
+```sh
+# export a fragment containing pokemon with flying weakness
+jq '.[][] | select(.weaknesses | contains( ["Flying"] )) | .name' ./pokedex.json | jq -s ". | { has_flying_weakness: .}" > flying_weakness_fragment.json
+
+# export a fragment containing pokemon with psychic weakness
+jq '.[][] | select(.weaknesses | contains( ["Psychic"] )) | .name' ./pokedex.json | jq -s ". | { has_psychic_weakness: .}" > psychic_weakness_fragment.json
+```
+
+Merge fragments
+```sh
+# merge the fragments into objecft stream
+jq -n 'inputs' *fragment.json 
+
+# controlled merge
+jq -s '{ "merged":{"a":.[0].has_flying_weakness, "b":.[1].has_psychic_weakness}}' ./flying_weakness_fragment.json ./psychic_weakness_fragment.json
+```
 
 ## APIs
 ```sh
