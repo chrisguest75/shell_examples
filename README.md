@@ -176,6 +176,9 @@ Steps [README.md](./36_git_querying/README.md)
 Demonstrates techniques for generating unique ids in scripts.  
 Steps [README.md](./37_guids/README.md)  
 
+## Example 43 - AWK
+Demonstrates techniques for using awk to process files.   
+Steps [README.md](./43_awk/README.md)   
 
 ## TODO:
   * Process Substition versus command substitution < <() < $()
