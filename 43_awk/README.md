@@ -2,6 +2,7 @@
 Demonstrates techniques for using awk to process files.
 
 ## Examples 
+This example was created for creating for breaking multi container pod images listed on a single line of output into multiple lines. 
 ```sh
 # lines of 2 and 3 items 
 cat example1.txt | awk '{print $1,$2}'
