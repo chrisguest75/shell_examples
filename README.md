@@ -164,13 +164,21 @@ Steps [README.md](./32_jq/README.md)
 Demonstrates using awscli to query resources in an AWS account.  
 Steps [README.md](./33_awscli/README.md)  
 
+## Example 34 - Checking Resources
+Demonstrate how to use various commands to verify resource usage in the OS.
+Steps [README.md](./34_checking_resources/README.md) 
+
 ## Example 35 - APT and DPKG
 Demonstrate examples of working with APT and DPKG  
 Steps [README.md](./35_apt_and_dpkg/README.md)  
 
 ## Example 36 - Git Querying
-Demonstrates some examples of using git queries  
-Steps [README.md](./36_git_querying/README.md)  
+Demonstrates some examples of using git queries   
+Steps [README.md](./36_git_querying/README.md)   
+
+## Example 37 - Checking Resources
+Demonstrate how to use various commands to verify resource usage in the OS.  
+Steps [README.md](./37_checking_resources/README.md)  
 
 ## Example 37 - Guid generation
 Demonstrates techniques for generating unique ids in scripts.  
