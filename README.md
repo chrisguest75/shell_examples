@@ -132,7 +132,7 @@ Steps [README.md](./24_finding_files/README.md)
 Demonstrate how to write autocomplete scripts  
 Steps [README.md](./25_autocomplete/README.md)  
 
-## Example 26 - Crom
+## Example 26 - Cron
 Demonstrate how to setup a cronjob  
 Steps [README.md](./26_cron/README.md)  
 
@@ -180,6 +180,11 @@ Steps [README.md](./37_guids/README.md)
 Demonstrates techniques for using awk to process files.   
 Steps [README.md](./43_awk/README.md)   
 
+## Example 44 - Looping over indexed envvars
+Demonstrates techniques processing environment variables.   
+Steps [README.md](./44_indexed_envvars/README.md)   
+
+
 ## TODO:
   * Process Substition versus command substitution < <() < $()
   * Detecting dotsourcing. 
@@ -196,6 +201,7 @@ Steps [README.md](./43_awk/README.md)
   * understanding tabs output https://unix.stackexchange.com/questions/389255/determine-how-long-tabs-t-are-on-a-line
   * subst
   * cut
+  * Add a keywords index for links through to examples.  
 
 ## Shellchecking
 
