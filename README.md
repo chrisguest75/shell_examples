@@ -180,9 +180,9 @@ Steps [README.md](./37_guids/README.md)
 Demonstrates techniques for using awk to process files.   
 Steps [README.md](./43_awk/README.md)   
 
-## Example 44 - Looping over envvars
+## Example 44 - Looping over indexed envvars
 Demonstrates techniques processing environment variables.   
-Steps [README.md](./44_loop_over_envvars/README.md)   
+Steps [README.md](./44_indexed_envvars/README.md)   
 
 
 ## TODO:
