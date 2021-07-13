@@ -13,7 +13,6 @@ jq --version
 # takes json logs and pretty print them 
 pbpaste | jq '.'
 ```
-
 ## Transforming and Processing files
 ```sh
 # Strip double quotes from field.
@@ -41,9 +40,12 @@ jq -r ".[][2].img" ./pokedex.json
 # extract height in metres 
 jq -r ".[][].height | split(\" \") | .[0] | tonumber" ./pokedex.json
 ```
-
-## Add a field to document 
+## Document creation and modification
 ```sh
+# add fields to an empty document - have to have {}
+echo '{}' | jq --arg argument1 "value1" --arg argument2 "value2" '[. + {field1: $argument1, field2: $argument2, array_of_stuff: []} ]'  
+
+# Add a field to an existing document 
 # merge in a processed on field (if field exists it will update it)
 jq --arg date "$(date)" '. + {processed: $date}' ./pokedex.json
 ```
@@ -141,10 +143,10 @@ jq '.[][] | select(.weaknesses | contains( ["Psychic"] )) | .name' ./pokedex.jso
 
 Merge fragments
 ```sh
-# merge the fragments into objecft stream
+# merge the fragments into object stream
 jq -n 'inputs' *fragment.json 
 
-# controlled merge
+# controlled merge .[0] = document1, .[1] = document2
 jq -s '{ "merged":{"a":.[0].has_flying_weakness, "b":.[1].has_psychic_weakness}}' ./flying_weakness_fragment.json ./psychic_weakness_fragment.json
 ```
 
