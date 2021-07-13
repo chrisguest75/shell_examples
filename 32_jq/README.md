@@ -96,6 +96,8 @@ jq -r '.[][] | select(.weaknesses | contains( ["Flying"] )) | .id' ./pokedex.jso
 # group by candy and count
 jq '.pokemon | group_by(.candy) | map({"candy":.[0].candy, "count":length})' ./pokedex.json 
 
+# group names by candy type (map reduce)
+jq '[ .pokemon[] | {"key":.candy, "value":.name} ] | map([.] | from_entries) | reduce .[] as $o ({}; reduce ($o|keys)[] as $key (.; .[$key] += [$o[$key]] ))' ./pokedex.json
 ```
 
 ## Functions
