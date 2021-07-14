@@ -45,6 +45,9 @@ jq -r ".[][].height | split(\" \") | .[0] | tonumber" ./pokedex.json
 # add fields to an empty document - have to have {}
 echo '{}' | jq --arg argument1 "value1" --arg argument2 "value2" '[. + {field1: $argument1, field2: $argument2, array_of_stuff: []} ]'  
 
+# or use a null-input to construct
+jq --null-input --arg argument1 "value1" --arg argument2 "value2" '[. + {field1: $argument1, field2: $argument2, array_of_stuff: []} ]' 
+
 # Add a field to an existing document 
 # merge in a processed on field (if field exists it will update it)
 jq --arg date "$(date)" '. + {processed: $date}' ./pokedex.json
@@ -130,7 +133,6 @@ rm ~/.jq
 # multiple streams from a single document 
 jq -c '(.[][] | {name, id}), (.[][] | select(.weaknesses | contains( ["Rock"])) | { "name": .name, "weakness": "rock" })' ./pokedex.json 
 ```
-
 ## Merging fragments into files
 Create fragments
 ```sh
@@ -154,6 +156,15 @@ jq -s '{ "merged":{"a":.[0].has_flying_weakness, "b":.[1].has_psychic_weakness}}
 ```sh
 # make webrequest and pretty print
 curl -s https://registry.hub.docker.com/api/content/v1/repositories/public/library/bash/tags | jq    
+```
+
+## More complex examples (docker scan outputs)
+```sh
+# group cves by severity - sort them and remove duplicates. 
+jq '[ .vulnerabilities[] | {"key":.severity | ascii_downcase, "value":.identifiers.CVE[0]} ] | map([.] | from_entries) | reduce .[] as $o ({}; reduce ($o|keys)[] as $key (.; .[$key] += [$o[$key]] )) | {low:(.low + []) | sort | unique, high:(.high + []) | sort | unique, critical:(.critical + []) | sort | unique, medium:(.medium + []) | sort | unique}' ./nginx1_20_1.json
+
+# group packages by severity and CVE.  
+jq '[ .vulnerabilities[] | {"key":.severity | ascii_downcase, "value":{"value":.name, "key":.identifiers.CVE[0]}} ] | map([.] | from_entries) | reduce .[] as $o ({}; reduce ($o|keys)[] as $key (.; .[$key] += [$o[$key]] )) | . as $cve | keys[] | . as $sev |  { ($sev):($cve[.] | map([.] | from_entries) | reduce .[] as $o ({}; reduce ($o|keys)[] as $key (.; .[$key] += [$o[$key]] )))} ' ./nginx1_20_1.json
 ```
 
 # Resources
