@@ -5,6 +5,9 @@ Demonstrate trap handlers functionality
 List the possible trap signals 
 ```sh
 # in bash
+bash 
+
+# list traps
 trap -l
  1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP
  6) SIGABRT      7) SIGEMT       8) SIGFPE       9) SIGKILL     10) SIGBUS
@@ -36,6 +39,9 @@ man 7 signal
 ```
 
 ```sh
-# THIS IS NOT WORKING
+# handler on ctrl+c
 ./trap_ctrlc_example.sh   
 ```
+
+# Resources
+* Traps docs [here](https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_12_02.html)  
