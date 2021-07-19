@@ -23,21 +23,25 @@ trap -l
 man 7 signal
 ```
 
+# On ERR
 ```sh
 # trap handler on an error
 ./trap_err_example.sh   
 ```
 
+## On EXIT
 ```sh
 # trap handler on exit
 ./trap_exit_example.sh   
 ```
 
+## On DEBUG
 ```sh
 # debug tracing with a handler
 ./trap_debug_example.sh   
 ```
 
+## SIGINT
 ```sh
 # handler on ctrl+c
 ./trap_ctrlc_example.sh   
