@@ -46,7 +46,7 @@ brew install spark
 
 
 # FAQ
-How do I work with PRs on a repo from cli?
+#### How do I work with PRs on a repo from cli?
 ```sh
 # turn off pager 
 PAGER= 
@@ -60,13 +60,13 @@ gh pr edit <id>
 gh pr commit <id>
 ```
 
-How do I look at the latest commit on each branch?
+#### How do I look at the latest commit on each branch?
 ```sh
 # latest commit on each branch.  
 git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 ```
 
-How do I clean up my local branches?
+#### How do I clean up my local branches?
 ```sh
 git fetch --prune
 
@@ -76,7 +76,7 @@ git show-merged-branches
 git delete-merged-branches          
 ```
 
-How do I know what changes were in a commit?
+#### How do I know what changes were in a commit?
 ```sh
 # show last 4 commits on a branch
 git log -n 4 --oneline <branch>
@@ -85,7 +85,7 @@ git log -n 4 --oneline <branch>
 git show <commitid> --name-only --oneline            
 ```
 
-Keeping branches up-to-date
+#### Keeping branches up-to-date
 ```sh
 # have a look at the differences
 git log -n 10 --graph --oneline master
@@ -95,6 +95,11 @@ git diff master..<branch> --name-only
 git rebase master
 ```
 
+#### Rollback the last commit
+```sh
+# pop the last commit off and move the changed files into staging
+git reset head~1         
+```
 
 # Resources
 
