@@ -23,7 +23,7 @@ trap -l
 man 7 signal
 ```
 
-# On ERR
+## On ERR
 ```sh
 # trap handler on an error
 ./trap_err_example.sh   
