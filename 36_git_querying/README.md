@@ -40,8 +40,17 @@ brew install spark
 # data generator
 ./build_commits_histogram_data.sh --action=histogram 
 ./build_commits_histogram_data.sh --action=histogram --repo=./  
-./build_commits_histogram_data.sh --action=histogram --repo=./ --sparkline 
+
+# output sparkline
+./build_commits_histogram_data.sh --action=histogram --repo=./ --sparkline | spark
 ```
+
+## Git repo sync
+
+git branch --show-current
+basename $(git rev-parse --show-toplevel) 
+[[ -z $(git status -s) ]] || echo 'modified and/or untracked'
+git remote show origin | grep 'HEAD branch' | cut -d' ' -f5
 
 
 
