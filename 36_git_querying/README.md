@@ -47,12 +47,9 @@ brew install spark
 
 ## Git repo sync
 
-git branch --show-current
-basename $(git rev-parse --show-toplevel) 
-[[ -z $(git status -s) ]] || echo 'modified and/or untracked'
-git remote show origin | grep 'HEAD branch' | cut -d' ' -f5
-
-
+```sh
+find ../../ -maxdepth 1 -type d -exec ./git_sync_status.sh {} \; | jq -s .
+```
 
 # FAQ
 #### How do I work with PRs on a repo from cli?
