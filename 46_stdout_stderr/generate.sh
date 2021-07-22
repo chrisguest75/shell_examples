@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 echo "from stdout"
-# >&2 maps stdout FD to stderr FD
+# shorthand for 1>&2 maps stdout FD to stderr FD - so will echo on stderr
 >&2 echo "from stderr"
