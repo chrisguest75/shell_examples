@@ -77,7 +77,7 @@ Demonstrate how to create a manpage.
 Steps [README.md](./11_manpages/README.md)  
 
 ## Example 12 - CSV parsing
-Demonstrate how to parse a CSV file  
+Demonstrate how to parse and work with CSV files.  
 Steps [README.md](./12_csv/README.md)  
 
 ## Example 13 - Bats
