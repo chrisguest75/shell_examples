@@ -1,7 +1,7 @@
 # README
 Demonstrates how to build a script with simple argument parsing.
 
-You can modify this basic script to create new scripts that accept arguments. 
+You can modify this basic script `example.sh` to create new scripts that accept arguments. 
 
 Features include:
 * Flag values such as --debug 
@@ -11,6 +11,7 @@ Features include:
 * Heredoc help example
 * Shellchecked
 
+For more simple scripts there is a more `simple_example.sh`
 ## Example usage
 Run through the following examples
 ```sh
@@ -30,5 +31,12 @@ Run through the following examples
 ./example.sh --action=ls -f=-l -f=-R -f=-a --debug    
 ```
 
+## Simple Example usage
+Run through the following examples
+```sh
+# No args performs work
+./simple_example.sh                               
 
-
+# Print usage 
+./simple_example.sh --help
+```
