@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+name=""
+if [[ -z $1 ]]; then
+    echo "Warning: no env name provided"
+else
+    name=$1
+fi
+
+accounts=./account.json
+
+query=".[] | select(.name | test(\"^$name.*$\")) | \"\(.name)\""
+roles=$(jq -c -r --arg name "$1" "$query" $accounts | wc -l)
+
+if [[ $roles -ne 1 ]]; then
+    query=".[] | select(.name | test(\"^$name.*$\")) | \"\(.name)\""
+    jq -c -r --arg name "$1" "$query" $accounts
+else
+    query=".[] | select(.name | test(\"^$name.*$\")) | \"\(.name) \(.role)\""
+    out=$(jq -c -r --arg name "$1" "$query" $accounts)
+
+    name=$(echo "$out" | awk '{print $1}')
+    role=$(echo "$out" | awk '{print $2}')
+    echo "Logon to $name with $role"
+    #saml2aws --cache-saml --session-duration=7200 --role "$role" login --force && eval $(saml2aws script)
+fi
