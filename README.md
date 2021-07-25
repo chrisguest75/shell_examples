@@ -196,6 +196,15 @@ Steps [README.md](./46_stdout_stderr/README.md)
   * oh-my-zsh and oh-my-bash
   * Process Substition versus command substitution < <() < $()
   * Detecting dotsourcing. 
+        ```sh
+        (return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
+          if [[ $SOURCED == 1 ]]; then
+            #echo "Script is being sourced"
+            return 1
+            #else
+            #echo "Script is a subshell"
+          fi
+        ```
   * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
   * printing and formatting numbers
   * zsh versus bash
@@ -210,13 +219,22 @@ Steps [README.md](./46_stdout_stderr/README.md)
   * subst
   * cut
   * Add a keywords index for links through to examples.  
-  * Opptions 
+  * Options 
     ```sh
     set +o noclobber
     set -o 
     set -o noclobber
     https://en.wikipedia.org/wiki/Clobbering
     ```
+  * running commands from gists. 
+
+    ```sh
+    ## Run with curl from gist
+    export MAP_FILE=$(pwd)/test.map
+    ROLE=$(curl -s https://gist.githubusercontent.com/chrisguest75/b6bf4770237e1307b3fef4ffa3d4a187/raw/0f05f1ae43ce0102fe9394b6dead9d502876be0d/get_mapped_value.sh | bash -s account1)
+    echo $ROLE
+    ```
+
 
 ## Shellchecking
 

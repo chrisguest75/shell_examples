@@ -5,6 +5,7 @@ TODO:
 * admin, viewonly, etc
 * select idp
 * exit autocomplete
+* check dotsource on autocompletions
 
 ## Install completions
 ```sh
@@ -28,21 +29,6 @@ LOGIN2AWS_ACCOUNTS=./account.json ./login2aws <tab>
 ```sh
 ./remove-completions.bash      
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Resources 
 [Checking sourcing](https://stackoverflow.com/questions/2683279/how-to-detect-if-a-script-is-being-sourced)  
