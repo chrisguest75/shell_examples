@@ -1,0 +1,47 @@
+[
+  {
+    "name": "account1",
+    "account": "000000111111",
+    "role": "arn:aws:iam::000000111111:role/Admin"
+  },
+  {
+    "name": "account2",
+    "account": "222222111111",
+    "role": "arn:aws:iam::222222111111:role/Admin"
+  },
+  {
+    "name": "account3",
+    "account": "222222333333",
+    "role": "arn:aws:iam::222222333333:role/Admin"
+  },
+  {
+    "name": "account4",
+    "account": "333333444444",
+    "role": "arn:aws:iam::333333444444:role/Admin"
+  },
+  {
+    "name": "account5",
+    "account": "681330447424",
+    "role": "arn:aws:iam::681330447424:role/Admin"
+  },
+  {
+    "name": "account6",
+    "account": "555555555555",
+    "role": "arn:aws:iam::555555555555:role/Admin"
+  },
+  {
+    "name": "account7",
+    "account": "666666666666",
+    "role": "arn:aws:iam::666666666666:role/Admin"
+  },
+  {
+    "name": "account8",
+    "account": "777777777777",
+    "role": "arn:aws:iam::777777777777:role/Admin"
+  },
+  {
+    "name": "account9",
+    "account": "888888888888",
+    "role": "arn:aws:iam::888888888888:role/Admin"
+  }
+]

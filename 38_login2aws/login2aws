@@ -1,13 +1,48 @@
 #!/usr/bin/env bash
+set -ef -o pipefail
+
+readonly SCRIPT_NAME=$(basename "$0")
+readonly SCRIPT_PATH=${0}
+# shellcheck disable=SC2034
+readonly SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+
+readonly accounts=./account.json
+
+function help() {
+    cat <<- EOF
+usage: $SCRIPT_NAME options
+
+OPTIONS:
+    -h --help -?               show this help
+
+Examples:
+    $SCRIPT_NAME --help 
+
+EOF
+}
+
+for i in "$@"
+do
+case $i in
+    -h|--help)
+        help
+        exit 0
+    ;; 
+    -a|--autocomplete)
+        query=".[] | select(.name | test(\"^$name.*$\")) | \"\(.name)\""
+        jq -c -r --arg name "$1" "$query" $accounts
+        exit 0
+    ;; 
+esac
+done  
 
 name=""
 if [[ -z $1 ]]; then
-    echo "Warning: no env name provided"
+    #echo "Warning: no env name provided"
+    name=""
 else
     name=$1
 fi
-
-accounts=./account.json
 
 query=".[] | select(.name | test(\"^$name.*$\")) | \"\(.name)\""
 roles=$(jq -c -r --arg name "$1" "$query" $accounts | wc -l)
