@@ -1,11 +1,11 @@
-account1, 000000111111, arn:aws:iam::000000111111:role/Admin
-account2, 222222111111, arn:aws:iam::222222111111:role/Admin
+account1  ,000000111111,arn:aws:iam::000000111111:role/Admin    
+  account2,   222222111111,    arn:aws:iam::222222111111:role/Admin   
 account3, 222222333333, arn:aws:iam::222222333333:role/Admin
-account4, 333333444444, arn:aws:iam::333333444444:role/Admin
-account5, 681330447424, arn:aws:iam::681330447424:role/Admin
-account6, 555555555555, arn:aws:iam::555555555555:role/Admin
-account7, 666666666666, arn:aws:iam::666666666666:role/Admin
-account8, 777777777777, arn:aws:iam::777777777777:role/Admin
-account9, 888888888888, arn:aws:iam::888888888888:role/Admin
+account4,  333333444444, arn:aws:iam::333333444444:role/Admin     
+  account5,   681330447424,    arn:aws:iam::681330447424:role/Admin
+  account6,555555555555,    arn:aws:iam::555555555555:role/Admin     
+account7,  666666666666, arn:aws:iam::666666666666:role/Admin
+  account8  ,    777777777777,   arn:aws:iam::777777777777:role/Admin
+account9, 888888888888,arn:aws:iam::888888888888:role/Admin  
 
 

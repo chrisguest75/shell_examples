@@ -12,7 +12,7 @@ TODO: Fix the empty string handling
 ## CSV 2 JSON
 ```sh
 # simple example using jq to create a json doc
-cat ./test.map | ./csv2json.sh         
+cat ./test.map | ./csv2json.sh       
 ```
 
 # Resources 

@@ -34,6 +34,7 @@ do
     if [[ -z "$name" ]]; then
         break
     fi
-    jq --null-input --arg name "$name" --arg account "$account" --arg role "$role" '. + {name: $name, account: $account, role: $role}' 
+    jq --null-input --arg name "$name" --arg account "$account" --arg role "$role" 'def trim($value): $value | match("([ ]*)(.*)").captures[1].string | match("([^ ]*)([ ]*)").captures[0].string;. + {name: $name | trim(.), account:  $account | trim(.), role: $role | trim(.)}' 
+
 done | jq -s . 
 

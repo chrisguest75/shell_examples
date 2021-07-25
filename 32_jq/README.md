@@ -1,6 +1,9 @@
 # README
 Demonstrates some examples of using jq to process json files
 
+TODO: 
+* removing nodes in the document
+
 [Github JQ](https://github.com/stedolan/jq)
 
 ```sh
@@ -165,6 +168,18 @@ jq '[ .vulnerabilities[] | {"key":.severity | ascii_downcase, "value":.identifie
 
 # group packages by severity and CVE.  
 jq '[ .vulnerabilities[] | {"key":.severity | ascii_downcase, "value":{"value":.name, "key":.identifiers.CVE[0]}} ] | map([.] | from_entries) | reduce .[] as $o ({}; reduce ($o|keys)[] as $key (.; .[$key] += [$o[$key]] )) | . as $cve | keys[] | . as $sev |  { ($sev):($cve[.] | map([.] | from_entries) | reduce .[] as $o ({}; reduce ($o|keys)[] as $key (.; .[$key] += [$o[$key]] )))} ' ./nginx1_20_1.json
+```
+
+## Trim whitespace 
+Use regex functions to trim whitespace  
+Ref: [csv2json](../12_csv/README.md)  
+```sh
+# no trimming
+jq --null-input --arg none "none" --arg leading "    leading" --arg trailing "trailing     " --arg both "   both    " '. + {none: $none, leading: $leading, trailing: $trailing, both: $both}'
+
+# trimming whitespace
+export ORIGIN=$(pwd)/lib
+jq --null-input --arg none "none" --arg leading "    leading" --arg trailing "trailing     " --arg both "   both    " 'import "trim" as lib; . + {none: $none | lib::trim(.), leading: $leading | lib::trim(.), trailing: $trailing | lib::trim(.), both: $both | lib::trim(.)}' 
 ```
 
 # Resources
