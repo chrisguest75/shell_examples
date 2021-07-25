@@ -27,7 +27,17 @@ _test_script_completion()
     # COMP_CWORD is the current work completion index
     case ${COMP_CWORD} in
       1)
-        COMPREPLY=($(compgen -W "$(./login2aws --autocomplete)"))
+        accounts=$(./login2aws --complete)
+        if [[ $? -eq 0 ]]; then
+          COMPREPLY=($(compgen -W "$accounts"))
+          if [[ $? -ne 0 ]]; then
+              exit 1
+          fi
+        else
+            exit 1
+        fi
+
+        #COMPREPLY=($(compgen -W "$(./login2aws --complete)"))
       ;;    
       *)
         COMPREPLY=()

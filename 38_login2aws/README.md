@@ -1,6 +1,11 @@
 # README
 Demonstrate how to map an input to an output
 
+TODO:
+* admin, viewonly, etc
+* select idp
+* exit autocomplete
+
 ## Install completions
 ```sh
 # source the completion script
@@ -11,11 +16,18 @@ source ./login2aws-completion.bash
 
 ## See basic account options
 ```sh
+export LOGIN2AWS_ACCOUNTS=./account.json   
+
 # print options
 ./login2aws <tab>
+
+LOGIN2AWS_ACCOUNTS=./account.json ./login2aws <tab>
 ```
 
-
+## Remove completions 
+```sh
+./remove-completions.bash      
+```
 
 
 
