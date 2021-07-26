@@ -226,6 +226,7 @@ Steps [README.md](./46_stdout_stderr/README.md)
     set -o noclobber
     https://en.wikipedia.org/wiki/Clobbering
     ```
+  * listing state; functions, env, paths, etc  
   * running commands from gists. 
 
     ```sh

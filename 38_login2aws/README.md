@@ -12,7 +12,9 @@ TODO:
 # source the completion script
 . ./login2aws-completion.bash             
 # or
-source ./login2aws-completion.bash             
+source ./login2aws-completion.bash    
+# or 
+. ./login2aws           
 ```
 
 ## See basic account options
@@ -25,9 +27,33 @@ export LOGIN2AWS_ACCOUNTS=./account.json
 LOGIN2AWS_ACCOUNTS=./account.json ./login2aws <tab>
 ```
 
-## Remove completions 
+## Cleanup
 ```sh
-./remove-completions.bash      
+# Remove completions 
+. ./remove-completions.bash      
+
+# unset the accounts path
+unset LOGIN2AWS_ACCOUNTS         
+```
+
+## Testing and Debugging
+1. Open a clean shell
+1. Do not run the autocompletions
+
+### Tests
+```sh
+# without autocomplete
+./login2aws
+
+# look at autocomplete output
+LOGIN2AWS_ACCOUNTS=$(pwd)/test.json ./login2aws --complete 
+
+# load from ~/.aws                                    
+cp cp ./test.json /Users/cguest/.aws/account.json    
+./login2aws --complete                                     
+
+# load autocomplete
+. ./login2aws
 ```
 
 ## Resources 

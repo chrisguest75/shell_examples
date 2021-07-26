@@ -1,17 +1,83 @@
 #!/usr/bin/env bash
+#Use !/bin/bash -x  for debugging 
 set -ef -o pipefail
 
 readonly SCRIPT_NAME=$(basename "$0")
 readonly SCRIPT_PATH=${0}
 # shellcheck disable=SC2034
-readonly SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+readonly HOME_DIR=~
+if [[ $(command -v greadlink) ]]; then 
+    # mac requires 'brew install coreutils'
+    readonly SCRIPT_FULL_PATH="$(dirname "$(greadlink -f "$0")")/${SCRIPT_NAME}"
+else
+    readonly SCRIPT_FULL_PATH="$(dirname "$(readlink -f "$0")")/${SCRIPT_NAME}"
+fi 
+readonly SCRIPT_DIR=$(dirname "$SCRIPT_FULL_PATH")
 
-#echo "SCRIPT_NAME=${SCRIPT_NAME}"
-#echo "SCRIPT_PATH=${SCRIPT_PATH}"
-#echo "SCRIPT_DIR=${SCRIPT_DIR}"
-accounts=$SCRIPT_DIR/account.json
+# echo "SCRIPT_NAME=${SCRIPT_NAME}"
+# echo "SCRIPT_PATH=${SCRIPT_PATH}"
+# echo "SCRIPT_DIR=${SCRIPT_DIR}"
+# echo "HOME_DIR=${HOME_DIR}"
+# echo "SCRIPT_FULL_PATH=${SCRIPT_FULL_PATH}"
 
-if [[ -n ${LOGIN2AWS_ACCOUNTS} ]]; then
+_login2aws_script_completion()
+{
+  if [[ -n $COMPLETION_DEBUG ]]; then
+    # Used for debugging.
+    COMPREPLY=()
+    echo ""
+    echo "$$1 : $1"
+    echo "$$2 : $2"
+    echo "$$3 : $3"
+    echo "COMP_WORDS : ${COMP_WORDS}"
+    echo "COMP_CWORD : ${COMP_CWORD}"
+    echo "COMP_WORDS[COMP_CWORD] : ${COMP_WORDS[COMP_CWORD]}"
+    echo "COMP_WORDS[COMP_CWORD-1] : ${COMP_WORDS[COMP_CWORD-1]}"
+    echo "COMP_LINE : ${COMP_LINE}"
+    echo "COMP_POINT : ${COMP_POINT}"
+    echo "COMP_KEY : ${COMP_KEY}"
+    echo "COMP_TYPE : ${COMP_TYPE}"
+    echo "args : $@"
+    echo "reply : ${COMPREPLY}"
+  else
+    # COMP_CWORD is the current work completion index
+    case ${COMP_CWORD} in
+      1)
+        accounts=$(${SCRIPT_DIR}/login2aws --complete)
+        if [[ $? -eq 0 ]]; then
+          COMPREPLY=($(compgen -W "$accounts"))
+          if [[ $? -ne 0 ]]; then
+              exit 1
+          fi
+        else
+            exit 1
+        fi
+
+        #COMPREPLY=($(compgen -W "$(./login2aws --complete)"))
+      ;;    
+      *)
+        COMPREPLY=()
+      ;;
+    esac
+
+  fi
+}
+
+# If we are being dotsourced we'll just do autocomplete
+(return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
+if [[ $SOURCED == 1 ]]; then
+    echo "Script is being sourced (adding autocompletion)"
+    autoload bashcompinit
+    bashcompinit
+    complete -F _login2aws_script_completion login2aws
+    echo "Autocompletions enabled"
+    return 0
+fi
+
+#echo ${LOGIN2AWS_ACCOUNTS}
+accounts=${LOGIN2AWS_ACCOUNTS}
+if [ -n "${LOGIN2AWS_ACCOUNTS-}" ];then 
+    #echo "LOGIN2AWS_ACCOUNTS exists"
     if [[ -f ${LOGIN2AWS_ACCOUNTS} ]]; then
         accounts=${LOGIN2AWS_ACCOUNTS}
     else
@@ -19,9 +85,14 @@ if [[ -n ${LOGIN2AWS_ACCOUNTS} ]]; then
         exit 1
     fi
 else
+    accounts=$HOME_DIR/.aws/account.json
     if [[ ! -f ${accounts} ]]; then
         >&2 echo "ERROR: Default location '${accounts}' does not exist"
-        exit 1
+        accounts=$SCRIPT_DIR/account.json
+        if [[ ! -f ${accounts} ]]; then
+            >&2 echo "ERROR: Default location '${accounts}' does not exist"
+            exit 1
+        fi
     fi
 fi
 
@@ -31,59 +102,16 @@ usage: $SCRIPT_NAME options
 
 OPTIONS:
     -h --help -?               show this help
-    --autocompletescript       output the autocompletion 
 
-Examples:
+AUTOCOMPLETE:
+    . ./login2aws               enable autocompletion
+
+EXAMPLES:
     $SCRIPT_NAME --help 
+    $SCRIPT_NAME <tab>
 
 EOF
 }
-
-# function autocompletion_script() {
-#     cat <<- EOF
-# #!/bin/bash -x 
-# #!/usr/bin/env bash 
-# #Use !/bin/bash -x  for debugging 
-# autoload bashcompinit
-# bashcompinit
-
-# _test_script_completion()
-# {
-#   if [[ -n $COMPLETION_DEBUG ]]; then
-#     # Used for debugging.
-#     COMPREPLY=()
-#     echo ""
-#     echo "$$1 : $1"
-#     echo "$$2 : $2"
-#     echo "$$3 : $3"
-#     echo "COMP_WORDS : ${COMP_WORDS}"
-#     echo "COMP_CWORD : ${COMP_CWORD}"
-#     echo "COMP_WORDS[COMP_CWORD] : ${COMP_WORDS[COMP_CWORD]}"
-#     echo "COMP_WORDS[COMP_CWORD-1] : ${COMP_WORDS[COMP_CWORD-1]}"
-#     echo "COMP_LINE : ${COMP_LINE}"
-#     echo "COMP_POINT : ${COMP_POINT}"
-#     echo "COMP_KEY : ${COMP_KEY}"
-#     echo "COMP_TYPE : ${COMP_TYPE}"
-#     echo "args : $@"
-#     echo "reply : ${COMPREPLY}"
-#   else
-#     # COMP_CWORD is the current work completion index
-#     case ${COMP_CWORD} in
-#       1)
-#         COMPREPLY=($(compgen -W "$(./login2aws --complete)"))
-#       ;;    
-#       *)
-#         COMPREPLY=()
-#       ;;
-#     esac
-
-#   fi
-# }
-
-# complete -F _test_script_completion login2aws
-# EOF
-# }
-
 
 for i in "$@"
 do
@@ -97,16 +125,11 @@ case $i in
         jq -c -r --arg name "$1" "$query" $accounts
         exit 0
     ;; 
-    --autocompletescript)
-        #autocompletion_script
-        exit 0
-    ;;     
 esac
 done  
 
 name=""
 if [[ -z $1 ]]; then
-    #echo "Warning: no env name provided"
     name=""
 else
     name=$1

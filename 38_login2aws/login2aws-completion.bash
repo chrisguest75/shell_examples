@@ -4,7 +4,7 @@
 autoload bashcompinit
 bashcompinit
 
-_test_script_completion()
+_login2aws_script_completion()
 {
   if [[ -n $COMPLETION_DEBUG ]]; then
     # Used for debugging.
@@ -47,4 +47,14 @@ _test_script_completion()
   fi
 }
 
-complete -F _test_script_completion login2aws
+# If we are being dotsourced we'll just do autocomplete
+(return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
+if [[ $SOURCED == 0 ]]; then
+    echo "Script needs to be sourced 'source ./login2aws-completion.bash'"
+    exit 1
+else
+    echo "Script is being sourced (adding login2aws autocompletion)"
+    complete -F _login2aws_script_completion login2aws
+fi
+
+
