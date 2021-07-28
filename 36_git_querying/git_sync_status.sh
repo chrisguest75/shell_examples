@@ -1,11 +1,49 @@
 #!/usr/bin/env bash
+set -ef -o pipefail
 
-# find ../../ -max-depth 0 -type d -exec ./git_sync_status.sh {} \;
+readonly SCRIPT_NAME=$(basename "$0")
+readonly SCRIPT_PATH=${0}
+# shellcheck disable=SC2034
+readonly SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+
+function help() {
+    cat <<- EOF
+usage: $SCRIPT_NAME <git repo path> options
+
+OPTIONS:
+    -h --help -?               show this help
+    -s --sync -?               sync
+
+Examples:
+    # Output this help
+    $SCRIPT_NAME --help 
+
+    # Get data for repo
+    $SCRIPT_NAME ./myrepo
+
+    # Iterating over directories
+    find ../../ -max-depth 0 -type d -exec $SCRIPT_NAME {} \;
+
+EOF
+}
+
+for i in "$@"
+do
+case $i in
+    -h|--help)
+        help
+        exit 0
+    ;; 
+esac
+done    
 
 if [[ ! -d $1 ]]; then
+    >&2 echo "ERROR: '$1' is not a directory"
+    help
     exit 1
 fi
 if [[ ! -d $1/.git ]]; then
+    >&2 echo "WARNING: '$1/.git' does not exist"
     exit 1
 fi
 

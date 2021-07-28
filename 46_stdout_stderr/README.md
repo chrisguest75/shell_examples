@@ -3,6 +3,9 @@ Demonstrate and work through some stdout and stderr redirection
 
 TODO:
 * find out if people use a 3rd FD for warnings and trace.. 
+* piping just stderr to stdin `git fetch --dry-run 2>| tee`
+* prefixing name of pipe to each line....  
+
 ## File Descriptors
 ```sh
 # show what tty my stdin, stdout and stderr are connected to.

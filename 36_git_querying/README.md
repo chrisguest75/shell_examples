@@ -48,7 +48,20 @@ brew install spark
 ## Git repo sync
 
 ```sh
-find ../../ -maxdepth 1 -type d -exec ./git_sync_status.sh {} \; | jq -s .
+# out folder
+mkdir -p ./out
+# get repo status
+find ../../../code -maxdepth 1 -type d -exec ./git_sync_status.sh {} \; | jq -s . > ./out/my_repos.json
+
+# show all up to date repos
+
+# show repos not on default branch
+jq -r '.[] | select(.on_default_branch == "false")' ./out/my_repos.json
+
+# sync repos that can be safely synced
+
+
+
 ```
 
 # FAQ
@@ -56,14 +69,25 @@ find ../../ -maxdepth 1 -type d -exec ./git_sync_status.sh {} \; | jq -s .
 ```sh
 # turn off pager 
 PAGER= 
+
 # list PRs using github cli
 gh pr list
+
+# create a draft pr
+gh pr create --draft
+
 # look at changes in PR. 
 gh pr diff <id>
+
 # you can edit the title of the pr
 gh pr edit <id>
+
+# promote a draft pr to ready
+gh pr ready <id>
+
 # merge to master
 gh pr commit <id>
+gh pr merge <id>
 ```
 
 #### How do I look at the latest commit on each branch?
@@ -106,6 +130,13 @@ git rebase master
 # pop the last commit off and move the changed files into staging
 git reset head~1         
 ```
+
+#### Diff between two commits
+```sh
+# diff changes 
+git diff head..head~1         
+```
+
 
 # Resources
 

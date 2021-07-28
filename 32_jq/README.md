@@ -64,6 +64,9 @@ jq -r ".[][] | select(.id == 150)" ./pokedex.json
 # greater than
 jq -r ".[][] | select(.id > 150)" ./pokedex.json 
 
+# boolean conditions "or"
+jq -r ".[][] | select(.id > 150 or .id == 3)" ./pokedex.json 
+
 # filter by a value passed as an argument (--arg is always a string) 
 jq --arg myid 150 -r '.[][] | select(.id == ($myid | tonumber))' ./pokedex.json 
 
