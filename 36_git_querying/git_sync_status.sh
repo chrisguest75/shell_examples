@@ -51,6 +51,7 @@ pushd "$1" > /dev/null
 rootpath=$(pwd)
 default_branch=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
 current_branch=$(git branch --show-current)
+headcommit=$(git rev-parse $default_branch)    
 on_default_branch=true
 [[ "$default_branch" == "$current_branch" ]] || on_default_branch=false
 reponame=$(basename $(git rev-parse --show-toplevel)) 
@@ -67,11 +68,12 @@ popd > /dev/null
 #echo "modified=$modified"
 jq --null-input \
     --arg rootpath "$rootpath" \
+    --arg commit "$headcommit" \
     --arg reponame "$reponame" \
     --arg default_branch "$default_branch" \
     --arg current_branch "$current_branch" \
     --arg on_default_branch "$on_default_branch" \
     --arg modified "$modified" \
     --arg unfetched_changes "$unfetched_changes" \
-    '{rootpath: $rootpath, reponame: $reponame, default_branch: $default_branch, current_branch: $current_branch, on_default_branch: $on_default_branch, modified: $modified, unfetched_changes: $unfetched_changes}'
+    '{rootpath: $rootpath, reponame: $reponame, default_branch: $default_branch, commit: $commit, current_branch: $current_branch, on_default_branch: $on_default_branch, modified: $modified, unfetched_changes: $unfetched_changes}'
 

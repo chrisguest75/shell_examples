@@ -50,13 +50,13 @@ brew install spark
 ```sh
 # out folder
 mkdir -p ./out
-# get repo status
-find ../../../code -maxdepth 1 -type d -exec ./git_sync_status.sh {} \; | jq -s . > ./out/my_repos.json
+# get repo status (sort so we can diff)
+find ../../../conde -maxdepth 1 -type d -exec ./git_sync_status.sh {} \; | jq -s '. | sort_by(.reponame)' > ./out/my_repos.json
 
 # show all up to date repos
 
 # show repos not on default branch
-jq -r '.[] | select(.on_default_branch == "false")' ./out/my_repos.json
+jq -r '.[] | select(.on_default_branch == "true" and .modified == "false")' ./out/my_repos.json
 
 # sync repos that can be safely synced
 
@@ -137,6 +137,14 @@ git reset head~1
 git diff head..head~1         
 ```
 
+#### Get the top commitid
+```sh
+# head on current branch
+git rev-parse HEAD     
+
+# head on current branch
+git rev-parse $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+```
 
 # Resources
 
