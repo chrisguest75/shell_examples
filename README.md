@@ -184,6 +184,9 @@ Steps [README.md](./43_awk/README.md)
 Demonstrates techniques processing environment variables.   
 Steps [README.md](./44_indexed_envvars/README.md)   
 
+## Example 46 - stdout and stderr redirection   
+Demonstrate and work through some stdout and stderr redirection   
+Steps [README.md](./46_stdout_stderr/README.md)   
 
 ## TODO:
   * Process Substition versus command substitution < <() < $()
