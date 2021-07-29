@@ -58,8 +58,10 @@ fi
 
 TMP_OUT=./out/my_repos.json
 
+echo "Get status for all repos"
 find ${PARENT_PATH} -maxdepth 1 -type d -exec ./git_sync_status.sh --path={} --status \; | jq -s '. | sort_by(.reponame)' > ${TMP_OUT}
 
+echo "Iterate over the repos on_default_branch and not modified"
 while IFS=" ", read -r rootpath reponame default_branch commit origincommit current_branch on_default_branch modified unfetched_changes
 do
     echo "reponame=$reponame, unfetched_changes=$unfetched_changes, on_default_branch=$on_default_branch, modified=$modified"
@@ -67,8 +69,12 @@ do
     ./git_sync_status.sh --path=${rootpath} --fetch
     ./git_sync_status.sh --path=${rootpath} --diff 
     ./git_sync_status.sh --path=${rootpath} --status
+    # merge if triggered
     if [[ $ACTION_MERGE == true ]]; then
         ./git_sync_status.sh --path=${rootpath} --merge    
         ./git_sync_status.sh --path=${rootpath} --status
     fi
 done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false") | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ${TMP_OUT})
+
+echo "Repos not on default"
+jq -r '.[] | select(.on_default_branch == "false" or .modified == "true") | "\(.rootpath)"' ./out/my_repos.json

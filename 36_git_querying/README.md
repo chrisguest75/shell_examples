@@ -2,6 +2,8 @@
 Demonstrates some examples of using git queries
 
 TODO:
+* Verify branch exists
+* Table outputs
 * Use the github api to query PR https://cli.github.com/manual/gh_api
 
 ## Git Extras
@@ -34,8 +36,13 @@ git effort -- --since='1 month ago'
 brew install spark
 
 # get prs and analyse commits 
-./build_commits.sh ./ hours 
-./build_commits.sh ./my-repo days
+./build_commits.sh --path=./ --hours 
+./build_commits.sh --path=./my-repo --days --json
+
+# iterate over repositories
+find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days --json \;                                                
+find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days --json \;                                                
+find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days --json \; | jq -s . > ./out/branch_activity.json  
 
 # data generator
 ./build_commits_histogram_data.sh --action=histogram 
@@ -64,7 +71,7 @@ mkdir -p ./out
 ./git_sync_status.sh --path=../../../code/my-repo --merge
 
 # get repo status (sort so we can diff)
-find ../../../conde -maxdepth 1 -type d -exec ./git_sync_status.sh --path={} --status \; | jq -s '. | sort_by(.reponame)' > ./out/my_repos.json
+find ../../../code -maxdepth 1 -type d -exec ./git_sync_status.sh --path={} --status \; | jq -s '. | sort_by(.reponame)' > ./out/my_repos.json
 
 # show repos on default branch, unmodifiied with unfetched_changes 
 jq -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "true")' ./out/my_repos.json

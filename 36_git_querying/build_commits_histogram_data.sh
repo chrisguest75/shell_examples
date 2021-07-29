@@ -50,6 +50,7 @@ function main() {
     local SPARKLINE=false   
     local HOURS=false      
     local HELP=false
+    local ITERATIONS=$((35*3))
     local FLAGS=()
 
     for i in "$@"
@@ -86,7 +87,11 @@ function main() {
             # shellcheck disable=SC2034
             local -r HOURS=true   
             shift # past argument=value
-        ;;         
+        ;;  
+        --iterations=*)
+            local -r ITERATIONS="${i#*=}"
+            shift # past argument=value
+        ;;                
         -f=*|--flag=*)
             local flag="${i#*=}"
             FLAGS+=("$flag")
@@ -130,7 +135,7 @@ function main() {
                     NOW=$(date +%s)
                     CURRENT=$NOW
                     # 3 months
-                    ITERATIONS_BACK=$((30*3))
+                    ITERATIONS_BACK=$ITERATIONS
 
                     while [[ $ITERATIONS_BACK -gt 0 ]]; do 
                         PREVIOUS_HOUR=$((CURRENT - TIME_GAP))

@@ -25,13 +25,75 @@ if [[ ! $(command -v "spark") ]]; then
     exit 1
 fi
 
-echo $SCRIPT_DIR
-pushd "$1" > /dev/null
+function help() {
+    cat <<- EOF
+usage: $SCRIPT_NAME options
+
+OPTIONS:
+    -h --help -?               show this help
+    -p --path                  path of repo
+    -m --merge                 merge origin into default branch
+
+Examples:
+    $SCRIPT_NAME --help 
+
+EOF
+}
+
+ACTION_JSON=false
+ACTION_HOURS=false
+REPOSITORY_PATH=""
+
+for i in "$@"
+do
+case $i in
+    -h|--help)
+        help
+        exit 0
+    ;; 
+    -p=*|--path=*)
+        REPOSITORY_PATH="${i#*=}"
+        shift # past argument=value
+    ;; 
+    --json)
+        ACTION_JSON=true
+    ;; 
+    --hours)
+        ACTION_HOURS=true
+    ;;   
+    --days)
+        ACTION_HOURS=false
+    ;;                  
+esac
+done   
+
+if [[ "$REPOSITORY_PATH"  == "" ]]; then
+    >&2 echo "ERROR: path is not specified"
+    echo ""
+    exit 1
+fi
+
+if [[ ! -d $REPOSITORY_PATH ]]; then
+    >&2 echo "ERROR: '$REPOSITORY_PATH' is not a directory"
+    echo ""
+    exit 1
+fi
+if [[ ! -d $REPOSITORY_PATH/.git ]]; then
+    >&2 echo "WARNING: '$REPOSITORY_PATH/.git' does not exist"
+    exit 1
+fi
+
+pushd "$REPOSITORY_PATH" > /dev/null
 MODE=
-if [[ "$2" == "hours" ]]; then
+if [[ $ACTION_HOURS == true ]]; then
     MODE=--hours    
 fi
 
+reponame=$(basename $(git rev-parse --show-toplevel)) 
+if [[ $ACTION_JSON == false ]]; then
+    echo
+    echo "REPOSITORY=$reponame"
+fi
 max=
 longest=
 pr_branches=()
@@ -48,20 +110,42 @@ done < <(gh pr list --json headRefName | jq -r ".[].headRefName")
 
 #echo "$max, $longest"
 
+PAD_SIZE=60
+#ITERATIONS=$((COLUMNS-PAD_SIZE-1))     
+ITERATIONS=134                  
+#echo "ITERATIONS=${ITERATIONS}"
+printf -v EMPTY_PAD %${PAD_SIZE}s
+
 REPO=./ 
-BRANCH=master
-LINE=$(echo -e "${BRANCH}:\t $($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram ${MODE} --repo=${REPO} --branch=${BRANCH} --sparkline | spark)") 
-echo "$LINE" | expand -t $((max + 10)),100 
+BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+BASEBRANCH=${BRANCH}
+
+PADDED_BRANCH="${BRANCH}:${EMPTY_PAD}"
+PADDED_BRANCH="${PADDED_BRANCH:0:$PAD_SIZE}"
+SPARK=$($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram ${MODE} --repo=${REPO} --branch=${BRANCH} --iterations=${ITERATIONS} --sparkline)
+RENDERED=$(echo "${SPARK}" | spark)
+if [[ $ACTION_JSON == true ]]; then
+        jq --null-input --arg reponame "$reponame" --arg branch "$BRANCH" --arg spark "${SPARK}" --arg rendered "${RENDERED}" '. + {reponame: $reponame, branch: $branch, spark: $spark, rendered: $rendered}'
+else
+    echo "${PADDED_BRANCH} ${RENDERED}"
+fi
 
 for BRANCHNAME in "${pr_branches[@]}"
 do
-    BASEBRANCH=master
     BRANCH=$BRANCHNAME
-    #echo "$BASEBRANCH -> $BRANCH"
-    LINE=$(echo -e "${BRANCH}:\t $($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram ${MODE} --repo=${REPO} --basebranch=${BASEBRANCH} --branch=${BRANCH} --sparkline | spark)") 
-    echo "$LINE" | expand -t $((max + 10)),100 
-done
+    PADDED_BRANCH="${BRANCH}:${EMPTY_PAD}"
+    PADDED_BRANCH="${PADDED_BRANCH:0:$PAD_SIZE}"
 
+    #echo "$BASEBRANCH -> $BRANCH"
+    SPARK=$($SCRIPT_DIR/build_commits_histogram_data.sh --action=histogram ${MODE} --repo=${REPO} --basebranch=${BASEBRANCH} --branch=${BRANCH} --iterations=${ITERATIONS} --sparkline)
+    RENDERED=$(echo "${SPARK}" | spark)
+
+    if [[ $ACTION_JSON == true ]]; then
+        jq --null-input --arg reponame "$reponame" --arg branch "$BRANCH" --arg spark "${SPARK}" --arg rendered "${RENDERED}" '. + {reponame: $reponame, branch: $branch, spark: $spark, rendered: $rendered}'
+    else
+        echo "${PADDED_BRANCH} ${RENDERED}"
+    fi
+done
 
 popd > /dev/null
 
