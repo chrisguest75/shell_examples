@@ -57,8 +57,9 @@ on_default_branch=true
 reponame=$(basename $(git rev-parse --show-toplevel)) 
 modified=false
 [[ -z $(git status -s) ]] || modified=true
+# get fetch --dry-run writes everything to stderr
 unfetched_changes=false
-#[[ -z $(git fetch --dry-run) ]] || unfetched_changes=true
+[[ -z $(git fetch --dry-run 2> >(awk '{print "stderr:" $0}') > >(awk '{print "stdout:" $0}')) ]] || unfetched_changes=true
 popd > /dev/null
 
 #echo "reponame=$reponame"
