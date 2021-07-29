@@ -40,24 +40,90 @@ brew install spark
 # data generator
 ./build_commits_histogram_data.sh --action=histogram 
 ./build_commits_histogram_data.sh --action=histogram --repo=./  
-./build_commits_histogram_data.sh --action=histogram --repo=./ --sparkline 
+
+# output sparkline
+./build_commits_histogram_data.sh --action=histogram --repo=./ --sparkline | spark
 ```
 
+## Git repo sync
+Split into two parts the first is the all up run it and update all repos that can be merged without conflict.
 
+```sh
+# will only merge repos that have no local edits.
+./git_refresh_all_repos.sh -p=../../../code --merge 
+```
+
+This is how it works step-by-step.
+```sh
+# out folder
+mkdir -p ./out
+
+./git_sync_status.sh --path=../../../code/my-repo --status   
+./git_sync_status.sh --path=../../../code/my-repo --fetch
+./git_sync_status.sh --path=../../../code/my-repo --diff 
+./git_sync_status.sh --path=../../../code/my-repo --merge
+
+# get repo status (sort so we can diff)
+find ../../../conde -maxdepth 1 -type d -exec ./git_sync_status.sh --path={} --status \; | jq -s '. | sort_by(.reponame)' > ./out/my_repos.json
+
+# show repos on default branch, unmodifiied with unfetched_changes 
+jq -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "true")' ./out/my_repos.json
+
+# show repos on default branch, unmodifiied that are up-to-date 
+jq -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false" and .commit == .origincommit)' ./out/my_repos.json
+
+# show repos not on default branch
+jq -r '.[] | select(.on_default_branch == "false")' ./out/my_repos.json
+
+# show repos where origin commit for default branch does not match head commit for default branch
+jq -r '.[] | select(.commit != .origincommit)' ./out/my_repos.json
+
+# sync repos that can be safely synced (note: ./out/my_repos.json needs to be  up-to-date)
+# output fields as env vars
+while IFS=" ", read -r rootpath reponame default_branch commit origincommit current_branch on_default_branch modified unfetched_changes
+do
+    echo "reponame=$reponame, unfetched_changes=$unfetched_changes, on_default_branch=$on_default_branch, modified=$modified"
+    ./git_sync_status.sh --path=${rootpath} --status
+    ./git_sync_status.sh --path=${rootpath} --fetch
+    ./git_sync_status.sh --path=${rootpath} --diff 
+    ./git_sync_status.sh --path=${rootpath} --status
+done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "true") | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./out/my_repos.json)
+
+# merge the changes on default branch with no changes
+while IFS=" ", read -r rootpath reponame default_branch commit origincommit current_branch on_default_branch modified unfetched_changes
+do
+    echo "reponame=$reponame, unfetched_changes=$unfetched_changes, on_default_branch=$on_default_branch, modified=$modified, commit=$commit, origincommit=$origincommit"
+    ./git_sync_status.sh --path=${rootpath} --status
+    ./git_sync_status.sh --path=${rootpath} --merge
+    ./git_sync_status.sh --path=${rootpath} --status
+done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false" and .commit != .origincommit) | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./out/my_repos.json)
+
+```
 
 # FAQ
 #### How do I work with PRs on a repo from cli?
 ```sh
 # turn off pager 
 PAGER= 
+
 # list PRs using github cli
 gh pr list
+
+# create a draft pr
+gh pr create --draft
+
 # look at changes in PR. 
 gh pr diff <id>
+
 # you can edit the title of the pr
 gh pr edit <id>
+
+# promote a draft pr to ready
+gh pr ready <id>
+
 # merge to master
 gh pr commit <id>
+gh pr merge <id>
 ```
 
 #### How do I look at the latest commit on each branch?
@@ -99,6 +165,21 @@ git rebase master
 ```sh
 # pop the last commit off and move the changed files into staging
 git reset head~1         
+```
+
+#### Diff between two commits
+```sh
+# diff changes 
+git diff head..head~1         
+```
+
+#### Get the top commitid
+```sh
+# head on current branch
+git rev-parse HEAD     
+
+# head on current branch
+git rev-parse $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
 ```
 
 # Resources

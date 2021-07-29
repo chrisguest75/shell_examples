@@ -64,6 +64,9 @@ jq -r ".[][] | select(.id == 150)" ./pokedex.json
 # greater than
 jq -r ".[][] | select(.id > 150)" ./pokedex.json 
 
+# boolean conditions "or"
+jq -r ".[][] | select(.id > 150 or .id == 3)" ./pokedex.json 
+
 # filter by a value passed as an argument (--arg is always a string) 
 jq --arg myid 150 -r '.[][] | select(.id == ($myid | tonumber))' ./pokedex.json 
 
@@ -139,11 +142,12 @@ jq -c '(.[][] | {name, id}), (.[][] | select(.weaknesses | contains( ["Rock"])) 
 ## Merging fragments into files
 Create fragments
 ```sh
+mkdir -p ./out
 # export a fragment containing pokemon with flying weakness
-jq '.[][] | select(.weaknesses | contains( ["Flying"] )) | .name' ./pokedex.json | jq -s ". | { has_flying_weakness: .}" > flying_weakness_fragment.json
+jq '.[][] | select(.weaknesses | contains( ["Flying"] )) | .name' ./pokedex.json | jq -s ". | { has_flying_weakness: .}" > ./out/flying_weakness_fragment.json
 
 # export a fragment containing pokemon with psychic weakness
-jq '.[][] | select(.weaknesses | contains( ["Psychic"] )) | .name' ./pokedex.json | jq -s ". | { has_psychic_weakness: .}" > psychic_weakness_fragment.json
+jq '.[][] | select(.weaknesses | contains( ["Psychic"] )) | .name' ./pokedex.json | jq -s ". | { has_psychic_weakness: .}" > ./out/psychic_weakness_fragment.json
 ```
 
 Merge fragments
@@ -180,6 +184,18 @@ jq --null-input --arg none "none" --arg leading "    leading" --arg trailing "tr
 # trimming whitespace
 export ORIGIN=$(pwd)/lib
 jq --null-input --arg none "none" --arg leading "    leading" --arg trailing "trailing     " --arg both "   both    " 'import "trim" as lib; . + {none: $none | lib::trim(.), leading: $leading | lib::trim(.), trailing: $trailing | lib::trim(.), both: $both | lib::trim(.)}' 
+```
+
+## Loading fields into environment vars
+```sh
+# output fields as env vars
+while IFS=" ", read -r rootpath reponame default_branch commit origincommit current_branch on_default_branch modified unfetched_changes
+do
+    echo "rootpath=$rootpath, reponame=$reponame"
+    echo "default_branch=$default_branch, current_branch=$current_branch, on_default_branch=$on_default_branch"
+    echo "commit=$commit, origincommit=$origincommit"
+    echo "modified=$modified, unfetched_changes=$unfetched_changes"
+done < <(jq -c -r '.[] | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./repos.json)
 ```
 
 # Resources

@@ -12,6 +12,11 @@ cat example1.txt | awk '{print $1,$2,$3}'
 cat example1.txt | awk '{if(!$3) {print $1,$2} else {print $1,$3;print $1,$2}}'
 ```
 
+```sh
+# prepending text to output
+cat example1.txt | awk '{print "stdout:" $0;}'
+```
+
 # Resources
 * `cheatsheet awk`
 

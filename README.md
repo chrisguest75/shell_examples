@@ -189,6 +189,7 @@ Demonstrate and work through some stdout and stderr redirection
 Steps [README.md](./46_stdout_stderr/README.md)   
 
 ## TODO:
+  * oh-my-zsh and oh-my-bash
   * Process Substition versus command substitution < <() < $()
   * Detecting dotsourcing. 
   * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
@@ -205,6 +206,13 @@ Steps [README.md](./46_stdout_stderr/README.md)
   * subst
   * cut
   * Add a keywords index for links through to examples.  
+  * Opptions 
+    ```sh
+    set +o noclobber
+    set -o 
+    set -o noclobber
+    https://en.wikipedia.org/wiki/Clobbering
+    ```
 
 ## Shellchecking
 
