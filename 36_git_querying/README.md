@@ -1,11 +1,6 @@
 # README
 Demonstrates some examples of using git queries
 
-TODO:
-* Verify branch exists
-* Table outputs
-* Use the github api to query PR https://cli.github.com/manual/gh_api
-
 ## Git Extras
 Git extras are a set of helpers for git
 ```sh
@@ -40,7 +35,6 @@ brew install spark
 ./build_commits.sh --path=./my-repo --days --json
 
 # iterate over repositories
-find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days --json \;                                                
 find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days --json \;                                                
 find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days --json \; | jq -s . > ./out/branch_activity.json  
 

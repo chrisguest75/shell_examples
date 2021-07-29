@@ -103,7 +103,11 @@ while IFS= read -r line; do
         # pr_branches+=( "$line" )
         skip=true
     else
-        pr_branches+=( "origin/$line" )
+        if [[ $(git rev-parse --verify "origin/$line" 2> /dev/null) ]]; then
+            pr_branches+=( "origin/$line" )
+        else
+            >&2 echo "origin/$line not found"
+        fi
     fi
     (( ${#line} > max )) && max=${#line} && longest="$line"
 done < <(gh pr list --json headRefName | jq -r ".[].headRefName")
