@@ -12,14 +12,18 @@ usage: $SCRIPT_NAME <git repo path> options
 
 OPTIONS:
     -h --help -?               show this help
-    -s --sync -?               sync
+    -p --path                  path of repo
+    -s --status                get repo status
+    -f --fetch                 fetch from origin
+    -d --diff                  show diff from default branch to origin
+    -m --merge                 merge origin into default branch
 
 Examples:
     # Output this help
     $SCRIPT_NAME --help 
 
     # Get data for repo
-    $SCRIPT_NAME ./myrepo
+    $SCRIPT_NAME 
 
     # Iterating over directories
     find ../../ -max-depth 0 -type d -exec $SCRIPT_NAME {} \;
@@ -91,10 +95,23 @@ function git_diff() {
 }
 
 #****************************************************************************
+#** Merge
+#** Diff default branch repository from origin
+#****************************************************************************
+
+function git_merge() {
+    pushd "$1" > /dev/null
+    default_branch=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+    git merge origin/${default_branch} 
+    popd > /dev/null
+}
+
+#****************************************************************************
 
 ACTION_STATUS=false
 ACTION_FETCH=false
 ACTION_DIFF=false
+ACTION_MERGE=false
 
 REPOSITORY_PATH=""
 
@@ -113,7 +130,10 @@ case $i in
     ;; 
     -d|--diff)
         ACTION_DIFF=true
-    ;;         
+    ;;   
+    -m|--merge)
+        ACTION_MERGE=true
+    ;;            
     -p=*|--path=*)
         REPOSITORY_PATH="${i#*=}"
         shift # past argument=value
@@ -152,7 +172,10 @@ if [[ $ACTION_DIFF == true ]]; then
     git_diff $REPOSITORY_PATH
     PERFORMED_ACTION=true
 fi
-
+if [[ $ACTION_MERGE == true ]]; then
+    git_merge $REPOSITORY_PATH
+    PERFORMED_ACTION=true
+fi
 if [[ $PERFORMED_ACTION == false ]]; then
     echo "No action is specified"
 fi

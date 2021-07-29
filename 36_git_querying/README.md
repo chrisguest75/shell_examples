@@ -46,7 +46,14 @@ brew install spark
 ```
 
 ## Git repo sync
+Split into two parts the first is the all up run it and update all repos that can be merged without conflict.
 
+```sh
+# will only merge repos that have no local edits.
+./git_refresh_all_repos.sh -p=../../../code --merge 
+```
+
+This is how it works step-by-step.
 ```sh
 # out folder
 mkdir -p ./out
@@ -54,17 +61,16 @@ mkdir -p ./out
 ./git_sync_status.sh --path=../../../code/my-repo --status   
 ./git_sync_status.sh --path=../../../code/my-repo --fetch
 ./git_sync_status.sh --path=../../../code/my-repo --diff 
+./git_sync_status.sh --path=../../../code/my-repo --merge
 
 # get repo status (sort so we can diff)
 find ../../../conde -maxdepth 1 -type d -exec ./git_sync_status.sh --path={} --status \; | jq -s '. | sort_by(.reponame)' > ./out/my_repos.json
 
-# show all up to date repos
-
 # show repos on default branch, unmodifiied with unfetched_changes 
 jq -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "true")' ./out/my_repos.json
 
-# show repos on default branch, unmodifiied that  are up-to-date 
-jq -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false")' ./out/my_repos.json
+# show repos on default branch, unmodifiied that are up-to-date 
+jq -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false" and .commit == .origincommit)' ./out/my_repos.json
 
 # show repos not on default branch
 jq -r '.[] | select(.on_default_branch == "false")' ./out/my_repos.json
@@ -82,6 +88,16 @@ do
     ./git_sync_status.sh --path=${rootpath} --diff 
     ./git_sync_status.sh --path=${rootpath} --status
 done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "true") | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./out/my_repos.json)
+
+# merge the changes on default branch with no changes
+while IFS=" ", read -r rootpath reponame default_branch commit origincommit current_branch on_default_branch modified unfetched_changes
+do
+    echo "reponame=$reponame, unfetched_changes=$unfetched_changes, on_default_branch=$on_default_branch, modified=$modified, commit=$commit, origincommit=$origincommit"
+    ./git_sync_status.sh --path=${rootpath} --status
+    ./git_sync_status.sh --path=${rootpath} --merge
+    ./git_sync_status.sh --path=${rootpath} --status
+done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false" and .commit != .origincommit) | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./out/my_repos.json)
+
 ```
 
 # FAQ
