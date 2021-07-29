@@ -186,6 +186,18 @@ export ORIGIN=$(pwd)/lib
 jq --null-input --arg none "none" --arg leading "    leading" --arg trailing "trailing     " --arg both "   both    " 'import "trim" as lib; . + {none: $none | lib::trim(.), leading: $leading | lib::trim(.), trailing: $trailing | lib::trim(.), both: $both | lib::trim(.)}' 
 ```
 
+## Loading fields into environment vars
+```sh
+# output fields as env vars
+while IFS=" ", read -r rootpath reponame default_branch commit origincommit current_branch on_default_branch modified unfetched_changes
+do
+    echo "rootpath=$rootpath, reponame=$reponame"
+    echo "default_branch=$default_branch, current_branch=$current_branch, on_default_branch=$on_default_branch"
+    echo "commit=$commit, origincommit=$origincommit"
+    echo "modified=$modified, unfetched_changes=$unfetched_changes"
+done < <(jq -c -r '.[] | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./repos.json)
+```
+
 # Resources
 * Manual [here](https://stedolan.github.io/jq/manual/v1.6/)
 * [jq-json-like-a-boss](https://www.slideshare.net/btiernay/jq-json-like-a-boss)  

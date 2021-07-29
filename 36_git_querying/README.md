@@ -66,16 +66,22 @@ jq -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .u
 # show repos on default branch, unmodifiied that  are up-to-date 
 jq -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false")' ./out/my_repos.json
 
+# show repos not on default branch
+jq -r '.[] | select(.on_default_branch == "false")' ./out/my_repos.json
+
 # show repos where origin commit for default branch does not match head commit for default branch
 jq -r '.[] | select(.commit != .origincommit)' ./out/my_repos.json
 
-# sync repos that can be safely synced
-
-
-
-
-
-
+# sync repos that can be safely synced (note: ./out/my_repos.json needs to be  up-to-date)
+# output fields as env vars
+while IFS=" ", read -r rootpath reponame default_branch commit origincommit current_branch on_default_branch modified unfetched_changes
+do
+    echo "reponame=$reponame, unfetched_changes=$unfetched_changes, on_default_branch=$on_default_branch, modified=$modified"
+    ./git_sync_status.sh --path=${rootpath} --status
+    ./git_sync_status.sh --path=${rootpath} --fetch
+    ./git_sync_status.sh --path=${rootpath} --diff 
+    ./git_sync_status.sh --path=${rootpath} --status
+done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "true") | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./out/my_repos.json)
 ```
 
 # FAQ
