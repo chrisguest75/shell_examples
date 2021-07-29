@@ -8,6 +8,6 @@ if [[ $SOURCED == 0 ]]; then
     echo "Script needs to be sourced 'source ./remove-completion.bash'"
     exit 1
 else
-    echo "Script is being sourced (removing test_script.sh autocompletion)"
-    complete -r _test_script_completion test_script.sh
+    echo "Script is being sourced (removing login2aws autocompletion)"
+    complete -r login2aws
 fi

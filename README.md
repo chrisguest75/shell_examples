@@ -176,6 +176,10 @@ Steps [README.md](./36_git_querying/README.md)
 Demonstrates techniques for generating unique ids in scripts.  
 Steps [README.md](./37_guids/README.md)  
 
+## Example 38 - Mapping inputs to outputs
+Demonstrate how to map an input to an output
+Steps [README.md](./38_value_maps/README.md)  
+
 ## Example 43 - AWK
 Demonstrates techniques for using awk to process files.   
 Steps [README.md](./43_awk/README.md)   
@@ -192,6 +196,15 @@ Steps [README.md](./46_stdout_stderr/README.md)
   * oh-my-zsh and oh-my-bash
   * Process Substition versus command substitution < <() < $()
   * Detecting dotsourcing. 
+        ```sh
+        (return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
+          if [[ $SOURCED == 1 ]]; then
+            #echo "Script is being sourced"
+            return 1
+            #else
+            #echo "Script is a subshell"
+          fi
+        ```
   * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
   * printing and formatting numbers
   * zsh versus bash
@@ -206,13 +219,23 @@ Steps [README.md](./46_stdout_stderr/README.md)
   * subst
   * cut
   * Add a keywords index for links through to examples.  
-  * Opptions 
+  * Options 
     ```sh
     set +o noclobber
     set -o 
     set -o noclobber
     https://en.wikipedia.org/wiki/Clobbering
     ```
+  * listing state; functions, env, paths, etc  
+  * running commands from gists. 
+
+    ```sh
+    ## Run with curl from gist
+    export MAP_FILE=$(pwd)/test.map
+    ROLE=$(curl -s https://gist.githubusercontent.com/chrisguest75/b6bf4770237e1307b3fef4ffa3d4a187/raw/0f05f1ae43ce0102fe9394b6dead9d502876be0d/get_mapped_value.sh | bash -s account1)
+    echo $ROLE
+    ```
+
 
 ## Shellchecking
 

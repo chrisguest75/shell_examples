@@ -4,7 +4,7 @@
 autoload bashcompinit
 bashcompinit
 
-_test_script_completion()
+_login2aws_script_completion()
 {
   if [[ -n $COMPLETION_DEBUG ]]; then
     # Used for debugging.
@@ -27,15 +27,18 @@ _test_script_completion()
     # COMP_CWORD is the current work completion index
     case ${COMP_CWORD} in
       1)
-        COMPREPLY=($(compgen -W "--action=ps --action=ls"))
+        accounts=$(./login2aws --complete)
+        if [[ $? -eq 0 ]]; then
+          COMPREPLY=($(compgen -W "$accounts"))
+          if [[ $? -ne 0 ]]; then
+              exit 1
+          fi
+        else
+            exit 1
+        fi
+
+        #COMPREPLY=($(compgen -W "$(./login2aws --complete)"))
       ;;    
-      2)
-         COMPREPLY=($(compgen -W "--flag= --debug"))
-      ;;  
-      3)
-        # go get options from the script itself
-         COMPREPLY=($(compgen -W "$(./test_script.sh autocomplete moreoptions)"))
-      ;;         
       *)
         COMPREPLY=()
       ;;
@@ -47,9 +50,11 @@ _test_script_completion()
 # If we are being dotsourced we'll just do autocomplete
 (return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
 if [[ $SOURCED == 0 ]]; then
-    echo "Script needs to be sourced 'source ./example-completion.bash'"
+    echo "Script needs to be sourced 'source ./login2aws-completion.bash'"
     exit 1
 else
-    echo "Script is being sourced (adding example autocompletion)"
-    complete -F _test_script_completion test_script.sh
+    echo "Script is being sourced (adding login2aws autocompletion)"
+    complete -F _login2aws_script_completion login2aws
 fi
+
+

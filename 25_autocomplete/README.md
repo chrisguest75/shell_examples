@@ -55,6 +55,10 @@ man builtins
 source ./remove-completions.bash    
 ```
 
+```sh
+./test-script.sh <tab> <tab>
+```
+
 ## Research
 [bash-programmable-completion-tutorial](https://iridakos.com/programming/2018/03/01/bash-programmable-completion-tutorial)  
 [how-to-create-script-with-auto-complete](https://askubuntu.com/questions/68175/how-to-create-script-with-auto-complete)  

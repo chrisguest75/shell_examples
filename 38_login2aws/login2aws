@@ -1,0 +1,152 @@
+#!/usr/bin/env bash
+#Use !/bin/bash -x  for debugging 
+set -ef -o pipefail
+
+readonly SCRIPT_NAME=$(basename "$0")
+readonly SCRIPT_PATH=${0}
+# shellcheck disable=SC2034
+readonly HOME_DIR=~
+if [[ $(command -v greadlink) ]]; then 
+    # mac requires 'brew install coreutils'
+    readonly SCRIPT_FULL_PATH="$(dirname "$(greadlink -f "$0")")/${SCRIPT_NAME}"
+else
+    readonly SCRIPT_FULL_PATH="$(dirname "$(readlink -f "$0")")/${SCRIPT_NAME}"
+fi 
+readonly SCRIPT_DIR=$(dirname "$SCRIPT_FULL_PATH")
+
+# echo "SCRIPT_NAME=${SCRIPT_NAME}"
+# echo "SCRIPT_PATH=${SCRIPT_PATH}"
+# echo "SCRIPT_DIR=${SCRIPT_DIR}"
+# echo "HOME_DIR=${HOME_DIR}"
+# echo "SCRIPT_FULL_PATH=${SCRIPT_FULL_PATH}"
+
+_login2aws_script_completion()
+{
+  if [[ -n $COMPLETION_DEBUG ]]; then
+    # Used for debugging.
+    COMPREPLY=()
+    echo ""
+    echo "$$1 : $1"
+    echo "$$2 : $2"
+    echo "$$3 : $3"
+    echo "COMP_WORDS : ${COMP_WORDS}"
+    echo "COMP_CWORD : ${COMP_CWORD}"
+    echo "COMP_WORDS[COMP_CWORD] : ${COMP_WORDS[COMP_CWORD]}"
+    echo "COMP_WORDS[COMP_CWORD-1] : ${COMP_WORDS[COMP_CWORD-1]}"
+    echo "COMP_LINE : ${COMP_LINE}"
+    echo "COMP_POINT : ${COMP_POINT}"
+    echo "COMP_KEY : ${COMP_KEY}"
+    echo "COMP_TYPE : ${COMP_TYPE}"
+    echo "args : $@"
+    echo "reply : ${COMPREPLY}"
+  else
+    # COMP_CWORD is the current work completion index
+    case ${COMP_CWORD} in
+      1)
+        accounts=$(${SCRIPT_DIR}/login2aws --complete)
+        if [[ $? -eq 0 ]]; then
+          COMPREPLY=($(compgen -W "$accounts"))
+          if [[ $? -ne 0 ]]; then
+              exit 1
+          fi
+        else
+            exit 1
+        fi
+
+        #COMPREPLY=($(compgen -W "$(./login2aws --complete)"))
+      ;;    
+      *)
+        COMPREPLY=()
+      ;;
+    esac
+
+  fi
+}
+
+# If we are being dotsourced we'll just do autocomplete
+(return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
+if [[ $SOURCED == 1 ]]; then
+    echo "Script is being sourced (adding autocompletion)"
+    autoload bashcompinit
+    bashcompinit
+    complete -F _login2aws_script_completion login2aws
+    echo "Autocompletions enabled"
+    return 0
+fi
+
+#echo ${LOGIN2AWS_ACCOUNTS}
+accounts=${LOGIN2AWS_ACCOUNTS}
+if [ -n "${LOGIN2AWS_ACCOUNTS-}" ];then 
+    #echo "LOGIN2AWS_ACCOUNTS exists"
+    if [[ -f ${LOGIN2AWS_ACCOUNTS} ]]; then
+        accounts=${LOGIN2AWS_ACCOUNTS}
+    else
+        >&2 echo "ERROR: 'LOGIN2AWS_ACCOUNTS=${LOGIN2AWS_ACCOUNTS}' does not exist"
+        exit 1
+    fi
+else
+    accounts=$HOME_DIR/.aws/account.json
+    if [[ ! -f ${accounts} ]]; then
+        >&2 echo "ERROR: Default location '${accounts}' does not exist"
+        accounts=$SCRIPT_DIR/account.json
+        if [[ ! -f ${accounts} ]]; then
+            >&2 echo "ERROR: Default location '${accounts}' does not exist"
+            exit 1
+        fi
+    fi
+fi
+
+function help() {
+    cat <<- EOF
+usage: $SCRIPT_NAME options
+
+OPTIONS:
+    -h --help -?               show this help
+
+AUTOCOMPLETE:
+    . ./login2aws               enable autocompletion
+
+EXAMPLES:
+    $SCRIPT_NAME --help 
+    $SCRIPT_NAME <tab>
+
+EOF
+}
+
+for i in "$@"
+do
+case $i in
+    -h|--help)
+        help
+        exit 0
+    ;; 
+    -c|--complete)
+        query=".[] | select(.name | test(\"^$name.*$\")) | \"\(.name)\""
+        jq -c -r --arg name "$1" "$query" $accounts
+        exit 0
+    ;; 
+esac
+done  
+
+name=""
+if [[ -z $1 ]]; then
+    name=""
+else
+    name=$1
+fi
+
+query=".[] | select(.name | test(\"^$name.*$\")) | \"\(.name)\""
+roles=$(jq -c -r --arg name "$1" "$query" $accounts | wc -l)
+
+if [[ $roles -ne 1 ]]; then
+    query=".[] | select(.name | test(\"^$name.*$\")) | \"\(.name)\""
+    jq -c -r --arg name "$1" "$query" $accounts
+else
+    query=".[] | select(.name | test(\"^$name.*$\")) | \"\(.name) \(.role)\""
+    out=$(jq -c -r --arg name "$1" "$query" $accounts)
+
+    name=$(echo "$out" | awk '{print $1}')
+    role=$(echo "$out" | awk '{print $2}')
+    echo "Logon to $name with $role"
+    saml2aws --session-duration=7200 --role "$role" login --force --idp-account=default && eval $(saml2aws script)
+fi
