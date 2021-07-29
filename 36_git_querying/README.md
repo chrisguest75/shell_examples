@@ -50,15 +50,29 @@ brew install spark
 ```sh
 # out folder
 mkdir -p ./out
+
+./git_sync_status.sh --path=../../../code/my-repo --status   
+./git_sync_status.sh --path=../../../code/my-repo --fetch
+./git_sync_status.sh --path=../../../code/my-repo --diff 
+
 # get repo status (sort so we can diff)
-find ../../../conde -maxdepth 1 -type d -exec ./git_sync_status.sh {} \; | jq -s '. | sort_by(.reponame)' > ./out/my_repos.json
+find ../../../conde -maxdepth 1 -type d -exec ./git_sync_status.sh --path={} --status \; | jq -s '. | sort_by(.reponame)' > ./out/my_repos.json
 
 # show all up to date repos
 
-# show repos not on default branch
-jq -r '.[] | select(.on_default_branch == "true" and .modified == "false")' ./out/my_repos.json
+# show repos on default branch, unmodifiied with unfetched_changes 
+jq -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "true")' ./out/my_repos.json
+
+# show repos on default branch, unmodifiied that  are up-to-date 
+jq -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false")' ./out/my_repos.json
+
+# show repos where origin commit for default branch does not match head commit for default branch
+jq -r '.[] | select(.commit != .origincommit)' ./out/my_repos.json
 
 # sync repos that can be safely synced
+
+
+
 
 
 

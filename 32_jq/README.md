@@ -142,11 +142,12 @@ jq -c '(.[][] | {name, id}), (.[][] | select(.weaknesses | contains( ["Rock"])) 
 ## Merging fragments into files
 Create fragments
 ```sh
+mkdir -p ./out
 # export a fragment containing pokemon with flying weakness
-jq '.[][] | select(.weaknesses | contains( ["Flying"] )) | .name' ./pokedex.json | jq -s ". | { has_flying_weakness: .}" > flying_weakness_fragment.json
+jq '.[][] | select(.weaknesses | contains( ["Flying"] )) | .name' ./pokedex.json | jq -s ". | { has_flying_weakness: .}" > ./out/flying_weakness_fragment.json
 
 # export a fragment containing pokemon with psychic weakness
-jq '.[][] | select(.weaknesses | contains( ["Psychic"] )) | .name' ./pokedex.json | jq -s ". | { has_psychic_weakness: .}" > psychic_weakness_fragment.json
+jq '.[][] | select(.weaknesses | contains( ["Psychic"] )) | .name' ./pokedex.json | jq -s ". | { has_psychic_weakness: .}" > ./out/psychic_weakness_fragment.json
 ```
 
 Merge fragments
