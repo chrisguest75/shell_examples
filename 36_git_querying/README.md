@@ -2,12 +2,18 @@
 Demonstrates some examples of using git queries
 
 ## Git Extras
-Git extras are a set of helpers for git
+Git extras are a set of helpers for git.
+
+MacOS  
 ```sh
-# macosx
+# macosx extras and gh cli
 brew install git-extras
 brew install gh
+```
 
+Linux  
+[brew.sh](https://docs.brew.sh) required for gh on ubuntu/debian [linuxbrew](https://docs.brew.sh/Homebrew-on-Linux)   
+```sh
 # debian
 apt install git-extras
 ```
