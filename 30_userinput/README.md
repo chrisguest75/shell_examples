@@ -9,7 +9,7 @@ Demonstrate how to use user input in scripts
 
 ```sh
 # Have an infinite loop and listen for keys
-./quit_on_keypresses.sh
+./quit_on_keypress.sh
 ```
 
 ## Resources
