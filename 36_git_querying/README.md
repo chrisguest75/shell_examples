@@ -189,6 +189,12 @@ git rev-parse HEAD
 git rev-parse $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
 ```
 
+#### Show the staged diff
+```sh
+# diff head agasint staged
+git diff --staged   
+```
+
 # Resources
 
 * [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.    
