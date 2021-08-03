@@ -42,6 +42,7 @@ EOF
 
 ACTION_JSON=false
 ACTION_HOURS=false
+IGNORE_ERRORS=false
 REPOSITORY_PATH=""
 
 for i in "$@"
@@ -64,22 +65,35 @@ case $i in
     --days)
         ACTION_HOURS=false
     ;;                  
+    --ignore-errors)
+        IGNORE_ERRORS=true
+    ;;       
 esac
 done   
 
 if [[ "$REPOSITORY_PATH"  == "" ]]; then
-    >&2 echo "ERROR: path is not specified"
-    echo ""
+    if [[ $IGNORE_ERRORS == false ]]; then
+        >&2 echo ""
+        >&2 echo "ERROR: path is not specified"
+        >&2 echo ""
+    fi
     exit 1
 fi
 
 if [[ ! -d $REPOSITORY_PATH ]]; then
-    >&2 echo "ERROR: '$REPOSITORY_PATH' is not a directory"
-    echo ""
+    if [[ $IGNORE_ERRORS == false ]]; then
+        >&2 echo ""
+        >&2 echo "ERROR: '$REPOSITORY_PATH' is not a directory"
+        >&2 echo ""
+    fi
     exit 1
 fi
 if [[ ! -d $REPOSITORY_PATH/.git ]]; then
-    >&2 echo "WARNING: '$REPOSITORY_PATH/.git' does not exist"
+    if [[ $IGNORE_ERRORS == false ]]; then
+        >&2 echo ""
+        #>&2 print u"\u001b[33m Warning: '$REPOSITORY_PATH/.git' does not exist \u001b[0m"
+        >&2 echo "Warning: '$REPOSITORY_PATH/.git' does not exist"
+    fi
     exit 1
 fi
 
@@ -90,10 +104,7 @@ if [[ $ACTION_HOURS == true ]]; then
 fi
 
 reponame=$(basename $(git rev-parse --show-toplevel)) 
-if [[ $ACTION_JSON == false ]]; then
-    echo
-    echo "REPOSITORY=$reponame"
-fi
+
 max=
 longest=
 pr_branches=()
@@ -113,12 +124,29 @@ while IFS= read -r line; do
 done < <(gh pr list --json headRefName | jq -r ".[].headRefName")
 
 #echo "$max, $longest"
+if [ -z "${COLUMNS-}" ];then 
+    #LINES=$(tput lines)
+    COLUMNS=$(tput cols)
+fi
+
 
 PAD_SIZE=60
-#ITERATIONS=$((COLUMNS-PAD_SIZE-1))     
-ITERATIONS=134                  
+ITERATIONS=$((COLUMNS - PAD_SIZE - 1))     
+#ITERATIONS=134                  
 #echo "ITERATIONS=${ITERATIONS}"
 printf -v EMPTY_PAD %${PAD_SIZE}s
+
+#echo "Lines: " $LINES
+#echo "Columns: " $COLUMNS
+
+if [[ $ACTION_JSON == false ]]; then
+    echo
+    if [[ $ACTION_HOURS == true ]]; then
+        echo "Repository: $reponame (last $ITERATIONS hours)"
+    else
+        echo "Repository: $reponame (last $ITERATIONS days)"
+    fi
+fi
 
 REPO=./ 
 BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
