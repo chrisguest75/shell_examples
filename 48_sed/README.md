@@ -5,7 +5,7 @@ Demonstrates techniques for using sed to process files.
 
 
 ```sh
-sed -i 's/listen[ ]*80;/listen[ ]*8080;/g' ./nginx.conf 
+sed -i .bak "s/listen[ ]*80;/listen 9123;/g" ./nginx.conf  
 ```
 
 # Resources
