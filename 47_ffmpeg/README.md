@@ -1,5 +1,20 @@
 # README
 
+TODO:
+* Get the duration of the asset
+* Get the bitrate etc.  
+* Codec.  
+* Audio bitrate.  
+* Print out metrics
+
+## Probe
+```sh
+ffprobe -v error -show_format -show_streams ~/Desktop/bluejam/bj1-1a.ra            
+ffprobe -v error -show_format -show_streams ~/Desktop/bluejam/bj1-1a.mp3
+
+# json
+ffprobe -v error -show_format -print_format json -show_streams ~/Desktop/bluejam/bj1-1a.mp3                  
+```
 
 
 ffmpeg -i ~/Desktop/bluejam/bj1-1a.ra bj1-1a.ra.mp3
