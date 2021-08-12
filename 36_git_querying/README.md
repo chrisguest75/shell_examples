@@ -170,6 +170,13 @@ git diff master..<branch> --name-only
 git rebase master
 ```
 
+### Checkout a file from another branch 
+Can be used to undo file changes in a branch.
+```sh
+# Get the version of the file from origin/master
+git checkout origin/master filename 
+``` 
+
 #### Rollback the last commit
 ```sh
 # pop the last commit off and move the changed files into staging
@@ -197,6 +204,21 @@ git rev-parse $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
 git diff --staged   
 ```
 
+#### Git switch origin
+This is useful after syncing a repo with `https` rather than `ssh`
+```sh
+git remote show origin
+# add a new origin
+git remote add originssh git@github.com:chrisguest75/default_dotfiles.git
+# push local changes up to it to test it is configured correctly
+git push originssh
+git remote
+# remove old origin
+git remote remove origin
+git remote rename originssh origin
+git remote
+git remote show origin
+```
 # Resources
 
 * [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.    
