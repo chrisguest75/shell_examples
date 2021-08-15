@@ -8,6 +8,9 @@ TODO:
 
 brew list coreutils  
 
+brew list 
+brew list --cask
+
 # Resources
 
 https://medium.com/ballerina-techblog/how-to-create-your-own-homebrew-package-or-formula-8dfbf8e001d3
