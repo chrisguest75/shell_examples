@@ -51,5 +51,6 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./release/git-activity-release.tar.gz
           asset_name: git-activity-release.tar.gz
-
+          asset_content_type: application/gzip
+          
   
