@@ -30,6 +30,12 @@ code $(git root)
 git effort -- --since='yesterday'
 git effort -- --since='1 month ago'
 ```
+## Command for brew example
+Brew example [here](../49_brew/README.md)
+```sh
+# hides the find command in a script.
+./git-activity.sh --path=../../../../Code/scratch
+```
 
 ## Commit counts for master and PRs
 ```sh
