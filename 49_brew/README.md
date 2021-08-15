@@ -4,56 +4,49 @@ Demonstrate how to create a brew package.
 TODO:
 * Build a homebrew package.
 * Show some examples of updating and outdated
-* Put the git querying scripts into a package.  
+* Do a linuxbrew and homebrew example.  
 
-
+```sh
 brew list coreutils  
+```
 
+```sh
 brew list 
 brew list --cask
+```
 
-
+```sh
 brew developer off
 brew developer on 
+```
 
-
-
+```sh
 export HOMEBREW_EDITOR=code
-brew create https://github.com/chrisguest75/shell_examples/releases/download/0.0.1-865a1fd/git-activity-release.tar.gz
+brew create --set-name git-activity https://github.com/chrisguest75/shell_examples/releases/download/0.0.1-f43376d/git-activity-release.tar.gz 
+``` 
 
- sha256 "3269ef7af68ab0f6570dc12f9579bc36f9217b9f76c44ee0a4315a1e03d97baf"
+```sh
+brew audit --new git-activity
+```
 
-
-/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/shell_examples.rb
-
-brew audit --new shell_examples
-
-
-shell_examples:
-  * 1: col 1: Please remove default template comments
-  * 3: col 1: Please remove default template comments
-  * 5: col 33: Description shouldn't end with a full stop.
-  * 6: col 12: Formula should have a homepage.
-  * 11: col 3: Commented-out dependency "cmake" => :build
-  * 14: col 5: Please remove default template comments
-  * 15: col 5: Please remove default template comments
-  * 18: col 5: Please remove default template comments
-  * Formulae in homebrew/core must specify a license.
-  * GitHub repository not notable enough (<30 forks, <30 watchers and <75 stars)
-Error: 10 problems in 1 formula detected
-
+```sh
 brew --repo homebrew/core        
 code $(brew --repo homebrew/core)    
 
+cp ./git-activity.rb $(brew --repo homebrew/core)    
+```
+
+
+```sh
+brew info git-activity       
+
+# this is failing 
+brew install --debug git-activity 
+
+```
+
 # Resources 
-
-https://medium.com/ballerina-techblog/how-to-create-your-own-homebrew-package-or-formula-8dfbf8e001d3
-
-https://docs.brew.sh/How-to-Create-and-Maintain-a-Tap
-
-Brew API
-https://rubydoc.brew.sh/Formula
-
-
-https://docs.brew.sh/Formula-Cookbook
-
+* Creating homebrew package blog [here](https://medium.com/ballerina-techblog/how-to-create-your-own-homebrew-package-or-formula-8dfbf8e001d3)
+* Brew API [here](https://rubydoc.brew.sh/Formula)
+* Formula cookbook [here](https://docs.brew.sh/Formula-Cookbook)
+* Maintaining Taps [here](https://docs.brew.sh/How-to-Create-and-Maintain-a-Tap)
