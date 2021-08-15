@@ -4,6 +4,7 @@
 TODO:
 * Build a homebrew package.
 * Show some examples of updating and outdated
+* Put the git querying scripts into a package.  
 
 
 brew list coreutils  
