@@ -5,6 +5,8 @@ Uses imagemagick and jp2a to convert strings to banners in the terminal
 
 Cut out tiles and concat them back together based on a string.  
 
+NOTE: This does not seem to work on `jp2a 1.0.9` that `brew` on mac installs 
+
 ## Shell 
 ```sh
 # defaults
@@ -39,6 +41,14 @@ docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="TERRAFORM" --f
 docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="CIRCLECI" --font=/workbench/fonts/cuddly.jpg --basea -w=32 -h=32 -c=10 -r=5
 docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="PHI" --font=/workbench/fonts/tcb.jpg -w=32 -h=32 -c=10 -r=5
 docker run -e COLUMNS=${COLUMNS} -e TERM=${TERM} banner --banner="AWS" --font=/workbench/fonts/knight4.jpg -w=32 -h=25 -c=10 -r=5
-
-
 ```
+## Debugging 
+
+```sh
+# enter the container
+docker run -it --entrypoint /bin/bash banner
+```
+
+# Resources
+* Original jp2a [here](https://github.com/cslarsen/jp2a)
+* Linux jp2a [here](https://github.com/Talinx/jp2a)
