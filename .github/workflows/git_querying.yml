@@ -1,0 +1,24 @@
+name: ci
+on:
+  push:
+    branches: [ brew ]
+  pull_request:
+    branches: [ brew ]
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - macos-latest
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Check out code.
+        uses: actions/checkout@v2
+      - name: Brew release
+        if: matrix.platform == 'macos-latest'
+        run: |
+          mkdir ./release 
+          cp ./36_git_querying/build_commits_histogram_data.sh ./release 
+          cp ./36_git_querying/build_commits.sh ./release 
+          tar -czvf ./git-activity-release.tar.gz ./release
