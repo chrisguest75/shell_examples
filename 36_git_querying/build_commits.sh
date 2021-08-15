@@ -31,9 +31,13 @@ usage: $SCRIPT_NAME options
 
 OPTIONS:
     -h --help -?               show this help
-    -p --path                  path of repo
-    -m --merge                 merge origin into default branch
+    -p --path                  base path of repos
 
+    --json                     output as json
+    --days                     aggregate as days
+    --hours                    aggregate as hours
+
+    --ignore-errors            ignore errors from 
 Examples:
     $SCRIPT_NAME --help 
 

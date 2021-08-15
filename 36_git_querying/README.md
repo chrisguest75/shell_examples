@@ -219,6 +219,12 @@ git remote rename originssh origin
 git remote
 git remote show origin
 ```
+
+#### Check tag format
+```sh
+git check-ref-format "tags/0.0.1-a39f8a821fc9" 
+```
+
 # Resources
 
 * [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.    
