@@ -123,6 +123,33 @@ done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "f
 ```
 
 
+#### Show the staged diff
+```sh
+# diff head agasint staged
+git diff --staged   
+```
+
+#### Git switch origin
+This is useful after syncing a repo with `https` rather than `ssh`
+```sh
+git remote show origin
+# add a new origin
+git remote add originssh git@github.com:chrisguest75/default_dotfiles.git
+# push local changes up to it to test it is configured correctly
+git push originssh
+git remote
+# remove old origin
+git remote remove origin
+git remote rename originssh origin
+git remote
+git remote show origin
+```
+
+#### Check tag format
+```sh
+git check-ref-format "tags/0.0.1-a39f8a821fc9" 
+```
+
 # Resources
 
 * [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.    
