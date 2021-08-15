@@ -15,6 +15,11 @@ jobs:
     steps:
       - name: Check out code.
         uses: actions/checkout@v2
+
+      - name: Get short-sha
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
       - name: Brew release
         if: matrix.platform == 'macos-latest'
         run: |
@@ -37,8 +42,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           # ${{ github.ref }}
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
+          tag_name: "0.0.1 - ${{ steps.vars.outputs.sha_short }}"
+          release_name: "0.0.1 - ${{ steps.vars.outputs.sha_short }}"
           draft: false
           prerelease: false
 
@@ -53,5 +58,4 @@ jobs:
           asset_path: ./git-activity-release.tar.gz
           asset_name: git-activity-release.tar.gz
           asset_content_type: application/gzip
-          
-  
+
