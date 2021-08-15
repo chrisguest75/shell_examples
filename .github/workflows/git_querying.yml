@@ -1,4 +1,4 @@
-name: ci
+name: git_querying
 on:
   push:
     branches: [ brew ]
@@ -22,3 +22,10 @@ jobs:
           cp ./36_git_querying/build_commits_histogram_data.sh ./release 
           cp ./36_git_querying/build_commits.sh ./release 
           tar -czvf ./git-activity-release.tar.gz ./release
+          ls -la ./release
+
+      - name: Copy release to artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: release
+          path: ./release
