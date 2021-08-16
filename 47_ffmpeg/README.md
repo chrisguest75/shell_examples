@@ -1,4 +1,5 @@
 # README
+Demonstrate how to use ffmpeg to perform different types of encodings
 
 TODO:
 * Get the duration of the asset
