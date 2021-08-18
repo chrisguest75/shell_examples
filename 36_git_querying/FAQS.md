@@ -61,15 +61,29 @@ git rebase master
 git merge-base mybranch master
 ```
 
+#### Changes to a branch since creation
+```sh
+git diff $(git merge-base $(git branch --show-current) master)..head --name-only
+```
+
 #### Checkout a file from another branch 
 Can be used to undo file changes in a branch.
 ```sh
 # Get the version of the file from origin/master
 git checkout origin/master filename 
+
+# revert directory back to state of common ancestor
+git checkout $(git merge-base $(git branch --show-current) master) -- <directory>
 ``` 
 
 
 ## Commits 
+
+```sh
+git show head --name-only
+git show master~4 --name-only
+git show master^1 --name-only
+```
 
 #### How do I know what changes were in a commit?
 ```sh
