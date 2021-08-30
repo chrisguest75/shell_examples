@@ -8,10 +8,22 @@ Based on `nice prompt` example [here](https://github.com/chrisguest75/docker_bui
 # build and run
 docker build -f Dockerfile.alpine -t vimcontainer . 
 docker run --rm -it -d --name vimcontainer vimcontainer
-
-docker exec -it vimcontainer /bin/zsh   
-docker exec -it vimcontainer /bin/bash   
 ```
+
+
+## Running
+
+```sh
+docker exec -it vimcontainer /bin/zsh   
+# or 
+docker exec -it vimcontainer /bin/bash   
+
+tmux
+
+vim 
+:PlugInstall
+```
+
 
 ## Cleanup
 ```sh
@@ -28,3 +40,7 @@ docker stop vimcontainer
 https://github.com/chrisguest75/default_dotfiles
 https://github.com/junegunn/vim-plug
 https://github.com/junegunn/vim-plug/wiki/tutorial
+
+https://vimawesome.com/
+
+
