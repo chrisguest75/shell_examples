@@ -1,0 +1,30 @@
+# README.md
+Demonstrates configuring a container for `vim`
+
+Based on `nice prompt` example [here](https://github.com/chrisguest75/docker_build_examples/tree/master/21_nice_prompt) 
+
+## Installation
+```sh
+# build and run
+docker build -f Dockerfile.alpine -t vimcontainer . 
+docker run --rm -it -d --name vimcontainer vimcontainer
+
+docker exec -it vimcontainer /bin/zsh   
+docker exec -it vimcontainer /bin/bash   
+```
+
+## Cleanup
+```sh
+# cleanup the container
+docker stop vimcontainer 
+```
+
+
+# Resources 
+* oh-my-zsh [here](https://ohmyz.sh/#install)  
+* oh-my-bash [here](https://github.com/ohmybash/oh-my-bash)  
+* locales [here](http://jaredmarkell.com/docker-and-locales/)
+
+https://github.com/chrisguest75/default_dotfiles
+https://github.com/junegunn/vim-plug
+https://github.com/junegunn/vim-plug/wiki/tutorial
