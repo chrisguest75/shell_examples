@@ -1,6 +1,8 @@
 # FAQ
-
+A set of example uses of git.  
 #### How do I work with PRs on a repo from cli?
+Using the github cli command.  
+
 ```sh
 # turn off pager 
 PAGER= 

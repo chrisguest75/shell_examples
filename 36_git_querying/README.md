@@ -1,6 +1,9 @@
 # README
 Demonstrates some examples of using git queries
 
+TODO:
+* Gitlab cli [glab](https://glab.readthedocs.io/en/latest/) [glab source](https://github.com/profclems/glab)
+
 ## Files
 * FAQS - [here](./FAQS.md)  
 * Squashing Walkthrough - [here](./SQUASHING_WALKTHROUGHS.md)  
@@ -13,7 +16,12 @@ MacOS
 ```sh
 # macosx extras and gh cli
 brew install git-extras
+
+# github cli
 brew install gh
+
+# gitlab cli
+brew install glab  
 ```
 
 Linux  

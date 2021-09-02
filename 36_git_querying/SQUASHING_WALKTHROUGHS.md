@@ -1,5 +1,5 @@
 # Squashing commmits on master
-
+Quick walkthrough of squashing some commits.
 ## Create repo
 ```sh
 mkdir -p ./git_testing && cd ./git_testing
@@ -8,7 +8,7 @@ git init
 
 ### Add files 
 ```sh
-# add data
+# add example files to squash
 echo "testing" > ./example.txt
 git add .
 git commit -m "example change"
@@ -30,9 +30,11 @@ git log --oneline
 # squash master (remove all the log entries)
 git reset --soft <firstid>
 git status
+
 # example txt is now final version 
 cat example.txt
 git log -n 4
+
 ## commit it back
 git add .
 git commit -m "example change3"
