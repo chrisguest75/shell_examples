@@ -127,30 +127,6 @@ do
 done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false" and .commit != .origincommit) | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./out/my_repos.json)
 
 ```
-
-
-#### Show the staged diff
-```sh
-# diff head agasint staged
-git diff --staged   
-```
-
-#### Git switch origin
-This is useful after syncing a repo with `https` rather than `ssh`
-```sh
-git remote show origin
-# add a new origin
-git remote add originssh git@github.com:chrisguest75/default_dotfiles.git
-# push local changes up to it to test it is configured correctly
-git push originssh
-git remote
-# remove old origin
-git remote remove origin
-git remote rename originssh origin
-git remote
-git remote show origin
-```
-
 #### Check tag format
 ```sh
 git check-ref-format "tags/0.0.1-a39f8a821fc9" 
