@@ -30,6 +30,12 @@ code $(git root)
 git effort -- --since='yesterday'
 git effort -- --since='1 month ago'
 ```
+## Command for brew example
+Brew example [here](../49_brew/README.md)
+```sh
+# hides the find command in a script.
+./git-activity.sh --path=../../../../Code/scratch
+```
 
 ## Commit counts for master and PRs
 ```sh
@@ -219,6 +225,12 @@ git remote rename originssh origin
 git remote
 git remote show origin
 ```
+
+#### Check tag format
+```sh
+git check-ref-format "tags/0.0.1-a39f8a821fc9" 
+```
+
 # Resources
 
 * [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.    
