@@ -12,3 +12,5 @@ trap error_exit ERR
 
 #echo $COUNT
 ls /directory_does_not_exist
+
+echo "this will not execute"
