@@ -199,6 +199,10 @@ Steps [README.md](./47_ffmpeg/README.md)
 Demonstrates techniques for using sed to process files.  
 Steps [README.md](./48_sed/README.md)  
 
+## Example 50 - tmux
+Demonstrate some tmux examples and common commands.  
+Steps [README.md](./50_tmux/README.md) 
+
 ## TODO:
   * oh-my-zsh and oh-my-bash
   * Process Substition versus command substitution < <() < $()
