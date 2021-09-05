@@ -9,7 +9,7 @@ class GitActivity < Formula
     sha256 cellar: :any_skip_relocation, all: "66c940e56f22cd2f5fdb3cfd2e1ddd741400c0739bb91ded95f5ddf5fa3c9902"
   end
 
-  depends_on "gh"
+  #depends_on "gh"
   depends_on "spark"
 
   def install
@@ -26,6 +26,8 @@ class GitActivity < Formula
     #
     # The installed folder is not in the path, so use the entire path to any
     # executables being tested: `system "#{bin}/program", "do", "something"`.
-    #system "false"
+    # system "false"
+
+    assert_match "usage: git-activity.sh options", shell_output("#{bin}/git-activity.sh --help")
   end
 end
