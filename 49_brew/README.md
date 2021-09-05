@@ -24,6 +24,8 @@ ls /usr/local/Homebrew
 ls /usr/local/Cellar     
 ls /usr/local/Caskroom
 
+# view the download cache
+brew --cache
 ```
 
 ## Basic commands
@@ -60,7 +62,7 @@ code $(brew --repo homebrew/core)
 ## Install example
 ```sh
 # !!! probably soft link instead of copy 
-cp ./git-activity.rb $(brew --repo homebrew/core)    
+cp ./git-activity.rb $(brew --repo homebrew/core)/Formula/git-activity.rb    
 
 # once copied into the main repo we have a formula to get info on
 brew info git-activity       
@@ -71,6 +73,7 @@ brew audit --new git-activity
 # this is failing 
 brew install --debug git-activity 
 brew install --interactive --debug git-activity
+brew install --build-from-source --verbose --debug git-activity
 
 # test install
  ./git-activity.sh --path=$(git root) 
