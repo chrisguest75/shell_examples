@@ -89,6 +89,10 @@ ffmpeg -f avfoundation -framerate 30 -i "0:0" ./recordings/output.mp4
 # record segments
 ffmpeg -f avfoundation -framerate 30 -video_size 640x480 -i "0:0" -flags +global_header -f segment -segment_time 60 -segment_format_options movflags=+faststart -reset_timestamps 1 ./recordings/test%d.mp4
 
-# NOT WORKING
-ffmpeg -f avfoundation -framerate 30 -video_size 640x480 -i "0:0" -vcodec libx264 -preset ultrafast -tune zerolatency -pix_fmt yuv422p -f mpegts udp://localhost:12345
+# NOT WORKING (host a stream for VLC)
+ffmpeg -f avfoundation -framerate 30 -video_size 640x480 -i "0:0" -vcodec libx264 -preset ultrafast -tune zerolatency -pix_fmt yuv422p -f mpegts udp://0.0.0.0:12345
 ```
+
+# host a stream (push a stream to server)
+ffmpeg -f avfoundation -framerate 30 -video_size 640x480 -i "0" -vcodec libx264 -preset ultrafast -tune zerolatency -f flv
+rtmps://stream.trint.com/live/cc0f38b9-52f8-4cc1-981f-9222ebb53023
