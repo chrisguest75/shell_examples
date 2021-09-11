@@ -36,6 +36,10 @@ git branch -vvv -a
 
 # latest commit on each branch.  
 git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+
+# latest commit on remote branches
+git for-each-ref --sort=committerdate refs/remotes/origin --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+
 ```
 
 #### How do I clean up my local branches?
@@ -45,7 +49,16 @@ git fetch --prune
 # using git-extras 
 git show-unmerged-branches   
 git show-merged-branches     
-git delete-merged-branches          
+git delete-merged-branches  
+
+# show merged branches (gets confused if squash commits have been done on web).
+git branch -r -vvv --merged origin/master   
+# and unmerged
+git branch -r -vvv --no-merged origin/master   
+
+# delete a local and a remote branch
+git delete-branch <branch>
+
 ```
 
 #### Keeping branches up-to-date
@@ -119,8 +132,14 @@ git rev-parse $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
 
 #### Show the staged diff
 ```sh
-# diff head agasint staged
+# diff head against staged
 git diff --staged   
+```
+
+#### Show missing commits between branches
+```sh
+# show commits missing between branches
+git-missing master feat/testing  
 ```
 
 ## Origins
