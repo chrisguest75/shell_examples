@@ -112,20 +112,38 @@ reponame=$(basename $(git rev-parse --show-toplevel))
 max=
 longest=
 pr_branches=()
+# while IFS= read -r line; do
+#     if [[ $line == renovate* ]]; then
+#         # skip renovate
+#         # pr_branches+=( "$line" )
+#         skip=true
+#     else
+#         if [[ $(git rev-parse --verify "origin/$line" 2> /dev/null) ]]; then
+#             pr_branches+=( "origin/$line" )
+#         else
+#             >&2 echo "origin/$line not found"
+#         fi
+#     fi
+#     (( ${#line} > max )) && max=${#line} && longest="$line"
+# done < <(gh pr list --json headRefName | jq -r ".[].headRefName")
+
 while IFS= read -r line; do
+    line=$(echo "$line" | xargs)
     if [[ $line == renovate* ]]; then
         # skip renovate
         # pr_branches+=( "$line" )
         skip=true
     else
-        if [[ $(git rev-parse --verify "origin/$line" 2> /dev/null) ]]; then
-            pr_branches+=( "origin/$line" )
+        if [[ $(git rev-parse --verify "$line" 2> /dev/null) ]]; then
+            pr_branches+=( "$line" )
         else
-            >&2 echo "origin/$line not found"
+            >&2 echo "$line not found"
         fi
     fi
     (( ${#line} > max )) && max=${#line} && longest="$line"
-done < <(gh pr list --json headRefName | jq -r ".[].headRefName")
+done < <(git branch -a)
+
+
 
 #echo "$max, $longest"
 if [ -z "${COLUMNS-}" ];then 
