@@ -3,6 +3,7 @@ Demonstrates techniques for generating unique ids in scripts.
 
 TODO:
 * crypto hash
+* nanoid 
 
 ## UUIDGEN
 ```sh

@@ -192,6 +192,17 @@ Steps [README.md](./44_indexed_envvars/README.md)
 Demonstrate and work through some stdout and stderr redirection   
 Steps [README.md](./46_stdout_stderr/README.md)   
 
+## Example 47 - FFMPEG
+Demonstrate how to use ffmpeg to perform different types of encodings.  
+Steps [README.md](./47_ffmpeg/README.md)  
+## Example 48 - SED
+Demonstrates techniques for using sed to process files.  
+Steps [README.md](./48_sed/README.md)  
+
+## Example 50 - tmux
+Demonstrate some tmux examples and common commands.  
+Steps [README.md](./50_tmux/README.md) 
+
 ## TODO:
   * oh-my-zsh and oh-my-bash
   * Process Substition versus command substitution < <() < $()
@@ -214,7 +225,6 @@ Steps [README.md](./46_stdout_stderr/README.md)
   * snaps
   * strace cmd 
   * debugfs
-  * awk & sed
   * understanding tabs output https://unix.stackexchange.com/questions/389255/determine-how-long-tabs-t-are-on-a-line
   * subst
   * cut
