@@ -71,10 +71,14 @@ brew info git-activity
 # we can audit it (downloads and installs some tooling) 
 brew audit --new git-activity
 
+# NOTE: this will print out the hash it you change the release bin
+brew install --build-from-source --verbose --debug git-activity
+
 # this is failing 
+
+
 brew install --debug git-activity 
 brew install --interactive --debug git-activity
-brew install --build-from-source --verbose --debug git-activity
 
 # test install
  ./git-activity.sh --path=$(git root) 

@@ -1,8 +1,8 @@
 class GitActivity < Formula
   desc "Generate a report on git repos and PR branches"
   homepage "https://github.com/chrisguest75/shell_examples"
-  url "https://github.com/chrisguest75/shell_examples/releases/download/0.0.1-f43376d/git-activity-release.tar.gz"
-  sha256 "1a97b6ac991f8f2547c7807603663373223c7faad79239031af29427a398816b"
+  url "https://github.com/chrisguest75/shell_examples/releases/download/0.0.1-9e37e9e/git-activity-release.tar.gz"
+  sha256 "0099c9b699d832e1202f03ff88f4065b999bf0e7d824248a4ecd8b4213e564ae"
   license "MIT"
 
   bottle do
