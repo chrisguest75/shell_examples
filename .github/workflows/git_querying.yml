@@ -1,0 +1,62 @@
+name: git_querying
+on:
+  push:
+    branches: [ master, homebrewexample ]
+  pull_request:
+    branches: [ homebrewexample ]
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - macos-latest
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Check out code.
+        uses: actions/checkout@v2
+
+      - name: Get short-sha
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Brew release
+        if: matrix.platform == 'macos-latest'
+        run: |
+          mkdir -p ./release/git-activity 
+          cp ./36_git_querying/build_commits_histogram_data.sh ./release/git-activity  
+          cp ./36_git_querying/build_commits.sh ./release/git-activity  
+          cp ./36_git_querying/git-activity.sh ./release/git-activity  
+          tar -czvf ./git-activity-release.tar.gz ./release
+          ls -la ./release
+
+      - name: Copy release to artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: release
+          path: ./release
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # ${{ github.ref }}
+          tag_name: "0.0.1-${{ steps.vars.outputs.sha_short }}"
+          release_name: "0.0.1 - ${{ steps.vars.outputs.sha_short }}"
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # This pulls from the CREATE RELEASE step above, referencing its ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./git-activity-release.tar.gz
+          asset_name: git-activity-release.tar.gz
+          asset_content_type: application/gzip
+
