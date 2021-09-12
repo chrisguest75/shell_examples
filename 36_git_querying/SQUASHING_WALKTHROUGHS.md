@@ -25,7 +25,7 @@ git commit -m "example change3"
 git log --oneline
 ```
 
-### Squashing
+### Squashing by reverting
 ```sh
 # squash master (remove all the log entries)
 git reset --soft <firstid>
@@ -44,3 +44,8 @@ git log --oneline
 git diff head~1..head
 ```
 
+### Squashing using git-extras
+```sh
+# squash top two commmits
+git squash --squash-msg head~2                         
+```

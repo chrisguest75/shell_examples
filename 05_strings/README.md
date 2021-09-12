@@ -18,4 +18,5 @@ Demonstrate some examples of string manipulation
 1. [parameter-substitution](https://www.tldp.org/LDP/abs/html/parameter-substitution.html#PARAMSUBREF) 
 1. `cheatsheet bash+string`
 
-
+1. Trimming
+https://stackoverflow.com/questions/369758/how-to-trim-whitespace-from-a-bash-variable

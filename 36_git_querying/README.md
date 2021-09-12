@@ -43,6 +43,12 @@ code $(git root)
 git effort -- --since='yesterday'
 git effort -- --since='1 month ago'
 ```
+## Command for brew example
+Brew example [here](../49_brew/README.md)
+```sh
+# hides the find command in a script.
+./git-activity.sh --path=../../../../Code/scratch
+```
 
 ## Commit counts for master and PRs
 ```sh
@@ -121,7 +127,10 @@ do
 done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false" and .commit != .origincommit) | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./out/my_repos.json)
 
 ```
-
+#### Check tag format
+```sh
+git check-ref-format "tags/0.0.1-a39f8a821fc9" 
+```
 
 # Resources
 
