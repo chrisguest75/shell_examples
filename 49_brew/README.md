@@ -10,22 +10,23 @@ Questions:
 * Local packages/taps?
 
 ## How it works
-* To create an official package you'll 
-* Taps are third party packages
+* To create an official formula you'll need to create a PR on the brew repository [here](https://github.com/Homebrew/homebrew-core)
+* Taps are third party packages [Taps](https://docs.brew.sh/Taps)
+* Formulas are the scripts that install the software [Formula Cookbook](https://docs.brew.sh/Formula-Cookbook)
 
-https://docs.brew.sh/Taps
-https://docs.brew.sh/Formula-Cookbook
 
 ### Directories
 ```sh
 # installation directory
 ls /usr/local/Homebrew  
 
+# list formulas installed
 ls /usr/local/Cellar     
+# casks are macnative apps
 ls /usr/local/Caskroom
 
 # view the download cache
-brew --cache
+ls -la $(brew --cache)               
 ```
 
 ## Basic commands
@@ -67,7 +68,7 @@ cp ./git-activity.rb $(brew --repo homebrew/core)/Formula/git-activity.rb
 # once copied into the main repo we have a formula to get info on
 brew info git-activity       
 
-# we can audit it 
+# we can audit it (downloads and installs some tooling) 
 brew audit --new git-activity
 
 # this is failing 

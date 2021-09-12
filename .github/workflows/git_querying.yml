@@ -1,9 +1,9 @@
 name: git_querying
 on:
   push:
-    branches: [ brew ]
+    branches: [ master, homebrewexample ]
   pull_request:
-    branches: [ brew ]
+    branches: [ homebrewexample ]
 jobs:
   build:
     strategy:
