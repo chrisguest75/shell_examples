@@ -20,16 +20,16 @@ OPTIONS:
     -h --help -?               show this help
     -p --path                  base path of repos
 
-    --ignore-errors            ignore errors from 
+    --include-commits          include the commit messages 
+
 Examples:
     $SCRIPT_NAME --help 
 
 EOF
 }
 
-IGNORE_ERRORS=false
 REPOSITORY_PATH=""
-
+INCLUDE_COMMITS=false
 for i in "$@"
 do
 case $i in
@@ -41,43 +41,44 @@ case $i in
         REPOSITORY_PATH="${i#*=}"
         shift # past argument=value
     ;; 
-    --ignore-errors)
-        IGNORE_ERRORS=true
-    ;;       
+    --include-commits)
+        INCLUDE_COMMITS=true
+    ;;      
 esac
 done   
 
 if [[ "$REPOSITORY_PATH"  == "" ]]; then
-    if [[ $IGNORE_ERRORS == false ]]; then
-        >&2 echo ""
-        >&2 echo "ERROR: path is not specified"
-        >&2 echo ""
-    fi
+    >&2 echo ""
+    >&2 echo "ERROR: path is not specified"
+    >&2 echo ""
     exit 1
 fi
 
 if [[ ! -d $REPOSITORY_PATH ]]; then
-    if [[ $IGNORE_ERRORS == false ]]; then
-        >&2 echo ""
-        >&2 echo "ERROR: '$REPOSITORY_PATH' is not a directory"
-        >&2 echo ""
-    fi
+    >&2 echo ""
+    >&2 echo "ERROR: '$REPOSITORY_PATH' is not a directory"
+    >&2 echo ""
     exit 1
 fi
 
 pushd "$REPOSITORY_PATH" > /dev/null 
 echo "Merged"
 echo "------"
+# loop over each branch
 while IFS=, read -r __branch __commitid __relative
 do
+    # remove origin from front of branch
     __remote="${__branch/origin\//}" 
     if [[ $__remote != "HEAD" ]] && [[ $__remote != "master" ]] && [[ $__remote != "develop" ]]; then
-        __log=$(git log --oneline --grep="Merge branch [']$__remote['] into")
+        # find merge commits for branch 
+        __log=$(git log --pretty=format:"%h %cr '%s'" --grep="Merge branch [']$__remote['] into")
         if [[ "$__log" != "" ]]; then
             echo "$__branch"
             #echo "[Merged] $__remote $__commitid $__relative"
-            #echo "$__log"
-            #echo ""
+            if [[ $INCLUDE_COMMITS == true ]]; then
+                echo "$__log"
+                echo ""
+            fi
 
         #else 
             #echo "[Unmerged] $__remote"

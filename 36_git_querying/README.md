@@ -50,6 +50,13 @@ Brew example [here](../49_brew/README.md)
 ./git-activity.sh --path=../../../../Code/scratch
 ```
 
+## Detect merged branches
+If you use github web to squash ad merge.  It seems to make it difficult to determine if the branch was merged or not using `--merged`.  
+```sh
+# uses git log to try and determine if branch was merged at some point
+./git-merged-branches.sh --path=../../../../Code/scratch
+```
+
 ## Commit counts for master and PRs
 ```sh
 # install sparklines shell script
