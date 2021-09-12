@@ -26,7 +26,10 @@ ls /usr/local/Cellar
 ls /usr/local/Caskroom
 
 # view the download cache
-ls -la $(brew --cache)               
+ls -la $(brew --cache)     
+
+# view softlinks to installed packages
+ls -la /usr/local/bin    
 ```
 
 ## Basic commands
@@ -74,17 +77,16 @@ brew audit --new git-activity
 # NOTE: this will print out the hash it you change the release bin
 brew install --build-from-source --verbose --debug git-activity
 
-# this is failing 
-
-
-brew install --debug git-activity 
-brew install --interactive --debug git-activity
+ls -la $(brew --cellar git-activity)/0.0.1/bin/git-activity
 
 # test install
- ./git-activity.sh --path=$(git root) 
+gitactivity --path=$(git root)        
 
+brew reinstall --build-from-source --verbose --debug git-activity
+
+# cleanup
+brew remove git-activity  
 ```
-
 
 ## Creation
 ```sh
@@ -92,13 +94,10 @@ export HOMEBREW_EDITOR=code
 brew create --set-name git-activity https://github.com/chrisguest75/shell_examples/releases/download/0.0.1-f43376d/git-activity-release.tar.gz 
 ``` 
 
-
-https://rubydoc.brew.sh/Homebrew/Assertions.html
-
-
-
 # Resources 
 * Creating homebrew package blog [here](https://medium.com/ballerina-techblog/how-to-create-your-own-homebrew-package-or-formula-8dfbf8e001d3)
 * Brew API [here](https://rubydoc.brew.sh/Formula)
 * Formula cookbook [here](https://docs.brew.sh/Formula-Cookbook)
 * Maintaining Taps [here](https://docs.brew.sh/How-to-Create-and-Maintain-a-Tap)
+* Ruby asseertions [here](https://rubydoc.brew.sh/Homebrew/Assertions.html)
+

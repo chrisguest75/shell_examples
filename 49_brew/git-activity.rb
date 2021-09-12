@@ -1,8 +1,8 @@
 class GitActivity < Formula
   desc "Generate a report on git repos and PR branches"
   homepage "https://github.com/chrisguest75/shell_examples"
-  url "https://github.com/chrisguest75/shell_examples/releases/download/0.0.1-9e37e9e/git-activity-release.tar.gz"
-  sha256 "0099c9b699d832e1202f03ff88f4065b999bf0e7d824248a4ecd8b4213e564ae"
+  url "https://github.com/chrisguest75/shell_examples/releases/download/0.0.1-1fc2e83/git-activity-release.tar.gz"
+  sha256 "b8c2253f4928afd7d4c548adaeda3f95e63294dcea8845d9fb4f027f095d6dd7"
   license "MIT"
 
   bottle do
@@ -13,7 +13,10 @@ class GitActivity < Formula
   depends_on "spark"
 
   def install
-    bin.install "git-activity"
+    bin.install "git-activity/git-activity.sh" => "gitactivity"
+    bin.install "git-activity/build_commits.sh" => "build_commits.sh"
+    bin.install "git-activity/build_commits_histogram_data.sh" => "build_commits_histogram_data.sh"
+    # bin.install "git-activity"
   end
 
   test do
