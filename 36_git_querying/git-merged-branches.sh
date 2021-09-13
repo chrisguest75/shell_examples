@@ -76,6 +76,10 @@ do
             echo "$__branch"
             #echo "[Merged] $__remote $__commitid $__relative"
             if [[ $INCLUDE_COMMITS == true ]]; then
+                echo "[BRANCH HEAD]"
+                echo $(git log --pretty=format:"%h %cr '%s'" -n 1 $__branch)
+                echo ""
+                echo "[MASTER LOG]"
                 echo "$__log"
                 echo ""
             fi
