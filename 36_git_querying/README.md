@@ -55,6 +55,8 @@ If you use github web to squash ad merge.  It seems to make it difficult to dete
 ```sh
 # uses git log to try and determine if branch was merged at some point
 ./git-merged-branches.sh --path=../../../../Code/scratch
+# or give option to delete merged branches (git-extras)
+./git-merged-branches.sh --path=../../../../Code/scratch --include-commits --delete-branches
 ```
 
 ## Commit counts for master and PRs

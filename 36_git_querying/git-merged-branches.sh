@@ -30,6 +30,7 @@ EOF
 
 REPOSITORY_PATH=""
 INCLUDE_COMMITS=false
+DELETE_BRANCHES=false
 for i in "$@"
 do
 case $i in
@@ -44,6 +45,10 @@ case $i in
     --include-commits)
         INCLUDE_COMMITS=true
     ;;      
+    --delete-branches)
+        DELETE_BRANCHES=true
+    ;;      
+
 esac
 done   
 
@@ -84,12 +89,23 @@ do
                 echo ""
             fi
 
+            if [[ $DELETE_BRANCHES == true ]]; then
+                read -p "Do you want to delete '$__remote'? Y/n " yescontinue < /dev/tty
+                if [ "$yescontinue" == ""  ] || [ "$yescontinue" == "Y"  ] || [ "$yescontinue" == "y"  ]  ; then
+                    echo "Deleting $__remote"
+                    git delete-branch $__remote
+                else
+                    echo "Skip delete $__remote"
+                fi
+
+            fi
         #else 
             #echo "[Unmerged] $__remote"
-
         fi 
     fi
 done < <(git for-each-ref --sort=committerdate refs/remotes/origin --format='%(refname:short), %(objectname:short), %(committerdate:relative)')
 
 
 popd > /dev/null
+
+
