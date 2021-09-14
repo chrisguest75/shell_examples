@@ -66,6 +66,15 @@ if [[ ! -d $REPOSITORY_PATH ]]; then
     exit 1
 fi
 
+function branch-diff() {
+    local ORIGIN=$1
+    local BRANCH=$2
+    local BRANCH_COMMIT=$(git log --pretty=format:"%H" -n 1 $ORIGIN$BRANCH) 
+    local BRANCH_BASE_COMMIT=$(git merge-base $ORIGIN$BRANCH $ORIGIN$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5))
+    git diff $BRANCH_BASE_COMMIT..$BRANCH_COMMIT 
+    #git difftool --tool=vscode $BRANCH_BASE_COMMIT..$BRANCH_COMMIT 
+}
+
 pushd "$REPOSITORY_PATH" > /dev/null 
 echo "Merged"
 echo "------"
@@ -90,6 +99,11 @@ do
             fi
 
             if [[ $DELETE_BRANCHES == true ]]; then
+                read -p "Do you want to diff '$__remote'? Y/n " yescontinue < /dev/tty
+                if [ "$yescontinue" == ""  ] || [ "$yescontinue" == "Y"  ] || [ "$yescontinue" == "y"  ]  ; then
+                    branch-diff origin/ $__remote
+                fi
+
                 read -p "Do you want to delete '$__remote'? Y/n " yescontinue < /dev/tty
                 if [ "$yescontinue" == ""  ] || [ "$yescontinue" == "Y"  ] || [ "$yescontinue" == "y"  ]  ; then
                     echo "Deleting $__remote"
@@ -97,7 +111,7 @@ do
                 else
                     echo "Skip delete $__remote"
                 fi
-
+                echo ""
             fi
         #else 
             #echo "[Unmerged] $__remote"
