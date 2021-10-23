@@ -1,8 +1,15 @@
 # README
 Examples of using imagemagick to process images.  
 
-```cheatsheet convert```  
+Cheatsheet has some commands `cheatsheet convert`.  
 
+## Info
+```sh 
+# get type info on a file 
+file ./image_00001.png
+```
+
+## Resize
 ```sh
 # create output          
 mkdir ./out
@@ -25,3 +32,18 @@ for file in original/image/path/*; do
 done
 
 ```
+
+## Mask out regions 
+```sh
+# create output          
+mkdir ./converted_frames
+
+for file in ./frames/headlooktest_*.jpg; do
+    # remove extension
+    outname="${file%.*}"
+    convert "$file" -fill white -draw "rectangle 0,0 500,720 rectangle 750,0 1280,720" ./converted_frames/"$(basename $outname).bmp"
+done
+```
+
+# Resources
+* A lot of example scripts [here](http://www.fmwconcepts.com/imagemagick/magicwand/index.php)  
