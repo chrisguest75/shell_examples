@@ -203,6 +203,10 @@ Steps [README.md](./48_sed/README.md)
 Demonstrate some tmux examples and common commands.  
 Steps [README.md](./50_tmux/README.md) 
 
+## Example 51 - grep
+Demonstrates examples of how to use grep.  
+Steps [README.md](./51_grep/README.md) 
+
 ## TODO:
   * oh-my-zsh and oh-my-bash
   * Process Substition versus command substitution < <() < $()
