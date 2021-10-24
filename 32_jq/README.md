@@ -3,6 +3,7 @@ Demonstrates some examples of using jq to process json files
 
 TODO: 
 * removing nodes in the document
+* capture - `capture(".*[[:digit:]]+)}]`
 
 [Github JQ](https://github.com/stedolan/jq)
 
@@ -54,6 +55,22 @@ jq --null-input --arg argument1 "value1" --arg argument2 "value2" '[. + {field1:
 # Add a field to an existing document 
 # merge in a processed on field (if field exists it will update it)
 jq --arg date "$(date)" '. + {processed: $date}' ./pokedex.json
+
+# Create index of files 
+cat <<- EOF > "./files.json"
+{
+    "files": [
+    ]
+}
+EOF
+TEMPFILE=$(mktemp)
+while IFS=, read -r _filename
+do
+    _no_extension="${_filename%.*}"
+    echo "File ${_filename} exists as ${_no_extension}"
+    jq --arg filename "${_no_extension}" '.files += [$filename]' "./files.json" > $TEMPFILE
+    cp $TEMPFILE "./files.json"
+done < <(ls ../)
 ```
 
 ## Selecting and Filtering
@@ -196,6 +213,22 @@ do
     echo "commit=$commit, origincommit=$origincommit"
     echo "modified=$modified, unfetched_changes=$unfetched_changes"
 done < <(jq -c -r '.[] | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./repos.json)
+```
+
+
+
+## Loading files into fields (--rawfile)
+```sh
+cat <<- EOF > "./frames.json"
+{
+    "frames": [
+    ]
+}
+EOF
+_filename="./danceloop_00009.svg"
+_no_extension="${_filename%.*}"
+_frame_number=$(echo ${_no_extension} | grep --color=never -o -E '[0-9]+')
+jq --rawfile path ./README.md --arg filename "${_no_extension}" --arg number "${_frame_number}" '.frames += [ {"name":$filename, "path":$path, "number":$number | tonumber }]' "./frames.json"
 ```
 
 # Resources

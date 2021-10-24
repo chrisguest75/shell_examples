@@ -29,6 +29,23 @@ xmllint --debug --xpath "//*[local-name()='path']" ./danceloop_00009.svg
 xmllint --debug --xpath "string(//*[local-name()='path']/@d)" ./danceloop_00009.svg
 ```
 
+## Convert into JSON 
+Refer to the [jq examples](../32_jq/README.md)
+
+```sh
+cat <<- EOF > "./frames.json"
+{
+    "frames": [
+    ]
+}
+EOF
+_filename="./danceloop_00009.svg"
+_no_extension="${_filename%.*}"
+_frame_number=$(echo ${_no_extension} | grep --color=never -o -E '[0-9]+')
+xmllint --debug --xpath "string(//*[local-name()='path']/@d)" ./danceloop_00009.svg > /path.txt
+jq --rawfile path ./path.txt --arg filename "${_no_extension}" --arg number "${_frame_number}" '.frames += [ {"name":$filename, "path":$path, "number":$number | tonumber }]' "./frames.json"
+```
+
 
 # Resources 
 * Some example Xml tooling [here](https://stackoverflow.com/questions/15461737/how-to-execute-xpath-one-liners-from-shell/15461774)
