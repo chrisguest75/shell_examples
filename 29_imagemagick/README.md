@@ -47,3 +47,5 @@ done
 
 # Resources
 * A lot of example scripts [here](http://www.fmwconcepts.com/imagemagick/magicwand/index.php)  
+* An example set of edge detections [here](https://blog.jiayu.co/2019/05/edge-detection-with-imagemagick/)
+
