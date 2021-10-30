@@ -25,9 +25,10 @@ repositoryId="$(gh api graphql -f query='{repository(owner:"'$owner'",name:"'$na
 echo $repositoryId  
 
 # -F for int 
+# isAdminEnforced: false means I can override
 gh api graphql -f query='mutation($repositoryId:ID!, $branch:String! $requiredReviews:Int!) {  
 createBranchProtectionRule(input: {  
-isAdminEnforced: true     
+isAdminEnforced: false     
 repositoryId: $repositoryId  
 pattern: $branch  
 requiresApprovingReviews: true  
