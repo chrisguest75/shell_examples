@@ -5,9 +5,9 @@ TODO:
 * Gitlab cli [glab](https://glab.readthedocs.io/en/latest/) [glab source](https://github.com/profclems/glab)
 
 ## Files
-* FAQS - [here](./FAQS.md)  
-* Squashing Walkthrough - [here](./SQUASHING_WALKTHROUGHS.md)  
-
+* FAQS - [./FAQS.md](./FAQS.md)  
+* Squashing Walkthrough - [./SQUASHING_WALKTHROUGHS.md](./SQUASHING_WALKTHROUGHS.md)  
+* Creating new repos - [./NEW_REPOS.md](./NEW_REPOS.md)  
 
 ## Git Extras
 Git extras are a set of helpers for git.

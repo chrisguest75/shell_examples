@@ -240,3 +240,4 @@ jq --rawfile path ./README.md --arg filename "${_no_extension}" --arg number "${
 * [cheatsheet](https://gist.github.com/olih/f7437fb6962fb3ee9fe95bda8d2c8fa4)  
 * [modules](https://github.com/stedolan/jq/wiki/Modules)
 * [pokedex](https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json)  
+* [jq-command-json](https://www.baeldung.com/linux/jq-command-json)
