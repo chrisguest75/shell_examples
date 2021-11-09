@@ -1,6 +1,20 @@
 # README
 Demonstrate how to use journalctl to discover logs
 
+## Existing logs
+```sh
+# syslog 
+cat /var/log/syslog
+# kernel log
+cat /var/log/kern.log
+# 
+dmesg
+```
+
+```sh
+# remove the logs 
+sudo dmesg --clear
+```
 ## Configuration and space
 ```sh
 # look at the diskspace the logs are taking.
@@ -65,9 +79,13 @@ cat /var/log/dpkg.log
 ## Maintenance
 
 ```sh
+# validate the logs
 journalctl --verify
+
+# shrink the size
+sudo journalctl --vacuum-size=10M
 ```
 
 ## Resources 
-[Journalctl usage](https://www.debugpoint.com/2020/12/systemd-journalctl/)  
-[Cleaning up logs](https://www.debugpoint.com/2021/01/systemd-journald-clean/)
+* Journalctl usage [here](https://www.debugpoint.com/2020/12/systemd-journalctl/)  
+* Cleaning up logs [here](https://www.debugpoint.com/2021/01/systemd-journald-clean/)
