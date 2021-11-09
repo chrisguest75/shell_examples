@@ -69,6 +69,12 @@ journalctl -u [servicename].service --no-pager --output=json
 ```sh
 journalctl -b 0 -k -p 4 
 ```
+
+## Logs for audit (apparmor)
+```sh
+sudo journalctl _TRANSPORT=audit
+```
+
 ## Why are logs for apt and dpkg not in journald?
 I'm not sure why dpkg does not use systemd and journald logging/
 
