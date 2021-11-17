@@ -1,15 +1,21 @@
 # README
+
 Examples of using imagemagick to process images.  
 
 Cheatsheet has some commands `cheatsheet convert`.  
 
 ## Info
+
 ```sh 
 # get type info on a file 
 file ./image_00001.png
+
+# imagemagick tool for identifying type
+identify ./image_00001.png
 ```
 
 ## Resize
+
 ```sh
 # create output          
 mkdir ./out
@@ -33,7 +39,18 @@ done
 
 ```
 
+## Change colour model
+
+Sometimes you may wish to force a colour model so a particular package can load it. 
+
+```sh
+# remove the auto greyscale save for imaes only containing greyscale
+convert oldgrey.png -define png:color-type=6 newrgb.png
+```
+
+
 ## Mask out regions 
+
 ```sh
 # create output          
 mkdir ./converted_frames
@@ -45,7 +62,8 @@ for file in ./frames/headlooktest_*.jpg; do
 done
 ```
 
-# Resources
+## Resources
+
 * A lot of example scripts [here](http://www.fmwconcepts.com/imagemagick/magicwand/index.php)  
 * An example set of edge detections [here](https://blog.jiayu.co/2019/05/edge-detection-with-imagemagick/)
 
