@@ -4,9 +4,19 @@ Examples of using imagemagick to process images.
 
 Cheatsheet has some commands `cheatsheet convert`.  
 
+## Install
+
+```sh
+# linuxbrew & homebrew
+brew install imagemagick
+
+# debian
+apt install imagemagick
+```
+
 ## Info
 
-```sh 
+```sh
 # get type info on a file 
 file ./image_00001.png
 
@@ -36,20 +46,18 @@ convert ./source_image.jpg -resize 50%x ./out/convert_image_50p_x.png
 for file in original/image/path/*; do
     convert "$file" -resize 150 converted/image/path/"$file"
 done
-
 ```
 
 ## Change colour model
 
-Sometimes you may wish to force a colour model so a particular package can load it. 
+Sometimes you may wish to force a colour model so a particular package can load it.
 
 ```sh
 # remove the auto greyscale save for imaes only containing greyscale
 convert oldgrey.png -define png:color-type=6 newrgb.png
 ```
 
-
-## Mask out regions 
+## Mask out regions
 
 ```sh
 # create output          
