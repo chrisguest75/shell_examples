@@ -30,6 +30,7 @@ EOF
 
 REPOSITORY_PATH=""
 INCLUDE_COMMITS=false
+DELETE_BRANCHES=false
 for i in "$@"
 do
 case $i in
@@ -44,6 +45,10 @@ case $i in
     --include-commits)
         INCLUDE_COMMITS=true
     ;;      
+    --delete-branches)
+        DELETE_BRANCHES=true
+    ;;      
+
 esac
 done   
 
@@ -60,6 +65,15 @@ if [[ ! -d $REPOSITORY_PATH ]]; then
     >&2 echo ""
     exit 1
 fi
+
+function branch-diff() {
+    local ORIGIN=$1
+    local BRANCH=$2
+    local BRANCH_COMMIT=$(git log --pretty=format:"%H" -n 1 $ORIGIN$BRANCH) 
+    local BRANCH_BASE_COMMIT=$(git merge-base $ORIGIN$BRANCH $ORIGIN$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5))
+    git diff $BRANCH_BASE_COMMIT..$BRANCH_COMMIT 
+    #git difftool --tool=vscode $BRANCH_BASE_COMMIT..$BRANCH_COMMIT 
+}
 
 pushd "$REPOSITORY_PATH" > /dev/null 
 echo "Merged"
@@ -84,12 +98,28 @@ do
                 echo ""
             fi
 
+            if [[ $DELETE_BRANCHES == true ]]; then
+                read -p "Do you want to diff '$__remote'? Y/n " yescontinue < /dev/tty
+                if [ "$yescontinue" == ""  ] || [ "$yescontinue" == "Y"  ] || [ "$yescontinue" == "y"  ]  ; then
+                    branch-diff origin/ $__remote
+                fi
+
+                read -p "Do you want to delete '$__remote'? Y/n " yescontinue < /dev/tty
+                if [ "$yescontinue" == ""  ] || [ "$yescontinue" == "Y"  ] || [ "$yescontinue" == "y"  ]  ; then
+                    echo "Deleting $__remote"
+                    git delete-branch $__remote
+                else
+                    echo "Skip delete $__remote"
+                fi
+                echo ""
+            fi
         #else 
             #echo "[Unmerged] $__remote"
-
         fi 
     fi
 done < <(git for-each-ref --sort=committerdate refs/remotes/origin --format='%(refname:short), %(objectname:short), %(committerdate:relative)')
 
 
 popd > /dev/null
+
+
