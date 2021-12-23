@@ -22,6 +22,10 @@ export AWS_PAGER=
 
 [EC2.md](./EC2.md)  
 
+## Batch
+
+[BATCH.md](./BATCH.md)  
+
 ## VPC
 
 [VPC.md](./VPC.md)  
@@ -31,7 +35,7 @@ export AWS_PAGER=
 [Route53.md](./Route53.md)  
 
 
-# Sts
+## Sts
 
 You can use `STS` to work out your assumed role when trying to debug why you might be getting an Access Denied style issue.  
 

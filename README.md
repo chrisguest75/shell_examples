@@ -263,7 +263,17 @@ Steps [README.md](./51_grep/README.md)
 Demonstrate how to handle Xml in shell scripts.  
 Steps [README.md](./52_xml/README.md)  
 
-## TODO:
+## Example 53 - syncing files
+
+Demonstrate some examples syncing directories  
+Steps [README.md](./53_sync_files/README.md)  
+
+## Example 54 - date handling
+
+Demonstrate date handling in shell.  
+Steps [README.md](./54_date_handling/README.md)  
+
+## TODO
 
   * oh-my-zsh and oh-my-bash
   * Process Substition versus command substitution < <() < $()

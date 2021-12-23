@@ -1,6 +1,6 @@
 # README
 
-Demonstrate some examples on syncing directories
+Demonstrate some examples syncing directories
 
 ## Examples
 
