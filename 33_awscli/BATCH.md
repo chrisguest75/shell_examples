@@ -32,7 +32,7 @@ aws --profile $AWS_PROFILE --region us-east-1 batch list-jobs --job-status FAILE
 aws --profile $AWS_PROFILE --region us-east-1 batch list-jobs --job-status SUCCEEDED --job-queue batch-queue-name
 
 # get the jobid only
-aws --profile $AWS_PROFILE --region us-east-1 batch list-jobs --job-status FAILED --job-queue prod-batch-transcode-standard-queue-c5 | jq '.jobSummaryList[].jobId'
+aws --profile $AWS_PROFILE --region us-east-1 batch list-jobs --job-status FAILED --job-queue batch-queue-name | jq '.jobSummaryList[].jobId'
 ```
 
 ## Look at jobs
