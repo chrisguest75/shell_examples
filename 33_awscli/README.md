@@ -2,9 +2,13 @@
 
 Demonstrates using awscli to query resources in an AWS account.
 
+Powershell examples can be found [here](https://github.com/chrisguest75/powershell_examples)
+
 TODO:
 
-* Sorting by columns
+* lambda and api gateway.  
+* pulling cloud watch metrics.  
+* Sorting by columns  
 
 ```sh
 export AWS_PAGER=   
