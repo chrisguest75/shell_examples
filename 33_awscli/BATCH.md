@@ -6,10 +6,12 @@ NOTES ON BATCH:
 
 * A queue only has 10000 entries
 
-## 
+## Compute Environments
+
 ```sh
-aws --profile $AWS_PROFILE batch describe-compute-environments | jq
+aws --profile $AWS_PROFILE --region eu-west-1 batch describe-compute-environments | jq
 ```
+
 ## Get the Queues
 
 ```sh
@@ -27,12 +29,21 @@ aws --profile $AWS_PROFILE --region eu-west-1 batch describe-job-queues | jq -r 
 List jobs by status in queues
 
 ```sh
-aws --profile $AWS_PROFILE --region us-east-1 batch list-jobs --job-status FAILED --job-queue batch-queue-name
+aws --profile $AWS_PROFILE --region eu-west-1 batch list-jobs --job-status FAILED --job-queue batch-queue-name
 
-aws --profile $AWS_PROFILE --region us-east-1 batch list-jobs --job-status SUCCEEDED --job-queue batch-queue-name
+aws --profile $AWS_PROFILE --region eu-west-1 batch list-jobs --job-status SUCCEEDED --job-queue batch-queue-name
 
 # get the jobid only
-aws --profile $AWS_PROFILE --region us-east-1 batch list-jobs --job-status FAILED --job-queue batch-queue-name | jq '.jobSummaryList[].jobId'
+aws --profile $AWS_PROFILE --region eu-west-1 batch list-jobs --job-status FAILED --job-queue batch-queue-name | jq '.jobSummaryList[].jobId'
+
+# get number of RUNNING jobs in queue
+aws --profile $AWS_PROFILE --region eu-west-1 batch list-jobs --job-status RUNNING --job-queue batch-queue-name | jq -r ".jobSummaryList | length"
+
+# get date and time of failed jobs. 
+aws --profile $AWS_PROFILE --region us-east-1 batch list-jobs --job-queue batch-queue-name --job-status FAILED | jq "(.jobSummaryList[].startedAt/1000 | floor)" | xargs -I {} gdate --date=@{}
+
+# parse job failed data 
+aws --profile $AWS_PROFILE --region us-east-1 batch list-jobs --job-queue cbatch-queue-name --job-status FAILED | jq ".jobSummaryList[] | { startedAt: (.startedAt/1000 | floor), status:.status, jobname:.jobName, jobid: .jobId, reason: .container.reason}"
 ```
 
 ## Look at jobs
