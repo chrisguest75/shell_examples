@@ -5,8 +5,7 @@ Demonstrates using awscli to query resources in an AWS account.
 Powershell examples can be found [here](https://github.com/chrisguest75/powershell_examples)
 
 TODO:
-
-* lambda and api gateway.  
+ 
 * pulling cloud watch metrics.  
 * Sorting by columns  
 
@@ -14,30 +13,16 @@ TODO:
 export AWS_PAGER=   
 ```
 
-## ECR 
+## Environment
 
-[ECR.md](./ECR.md)  
+A lot of the examples are using `AWS_PROFILE` and `AWS_REGION`.  
 
-## S3
-
-[S3.md](./S3.md)  
-
-## EC2
-
-[EC2.md](./EC2.md)  
-
-## Batch
-
-[BATCH.md](./BATCH.md)  
-
-## VPC
-
-[VPC.md](./VPC.md)  
-
-## Route53
-
-[Route53.md](./Route53.md)  
-
+```sh
+cp ./.env.template ./.env
+cat ./.env
+nano ./.env
+. ./.env     
+```
 
 ## Sts
 
@@ -46,6 +31,34 @@ You can use `STS` to work out your assumed role when trying to debug why you mig
 ```sh
 aws sts get-caller-identity
 ```
+
+## ECR
+
+Elastic Container Registry [ECR.md](./ECR.md)  
+
+## S3
+
+S3 [S3.md](./S3.md)  
+
+## EC2
+
+Elastic Compute [EC2.md](./EC2.md)  
+
+## Batch
+
+AWS Batch [BATCH.md](./BATCH.md)  
+
+## VPC
+
+VPC [VPC.md](./VPC.md)  
+
+## Route53
+
+Route 53 [Route53.md](./Route53.md)  
+
+## Lambda
+
+Lambda [LAMBDA.md](./LAMBDA.md)  
 
 ## Resources
 
