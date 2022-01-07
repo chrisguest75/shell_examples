@@ -2,10 +2,6 @@
 
 Demonstrate some example commands for managing AWS Lambda services
 
-TODO:
-
-* Get most recent logstream
-
 ## Listing functions
 
 ```sh
@@ -27,7 +23,7 @@ aws logs describe-log-streams --profile $AWS_PROFILE --region $AWS_REGION --log-
 ## Log events
 
 ```sh
-# use single quote to prevent substitution
+# use single quote to prevent substitution of $LATEST
 aws --profile $AWS_PROFILE --region $AWS_REGION logs get-log-events --log-group-name "/aws/lambda/${functionname}" --log-stream-name '2022/01/07/[$LATEST]e573471430114176a11841482cfa66c1'
 ```
 

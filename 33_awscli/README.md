@@ -60,6 +60,10 @@ Route 53 [Route53.md](./Route53.md)
 
 Lambda [LAMBDA.md](./LAMBDA.md)  
 
+## API Gateway
+
+API Gateway [APIGATEWAY.md](./APIGATEWAY.md)  
+
 ## Resources
 
 * AWS CLI with jq and Bash [here](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)  
