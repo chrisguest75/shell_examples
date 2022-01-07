@@ -7,6 +7,10 @@ Demonstrate some example commands for managing Cloud Formation Stacks
 ```sh
 export stackname=python-lambda-s3-get-dev
 aws --profile $AWS_PROFILE --region $AWS_REGION cloudformation describe-stacks | jq -r ".Stacks[] | select(.StackName == \"$stackname\")"
+
+# extract an output value
+export stackname=python-lambda-s3-get-dev
+aws --profile $AWS_PROFILE --region $AWS_REGION cloudformation describe-stacks | jq -r ".Stacks[] | select(.StackName == \"$stackname\").Outputs | .[] | select(.OutputKey == \"ServiceEndpoint\").OutputValue" 
 ```
 
 ## Resources
