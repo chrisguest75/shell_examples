@@ -2,7 +2,7 @@
 
 Demonstrate some example commands for managing AWS Lambda services
 
-## Get the gateway details
+## Get the apigateway details
 
 ```sh
 # get the rest-api details (including tags)
@@ -19,6 +19,8 @@ aws --profile $AWS_PROFILE --region $AWS_REGION apigateway get-resources --rest-
 
 ## Build URL
 
+NOTE: In Serverless Stack the url can be pulled from the CloudFormation output.  
+
 ```sh
 # example of how to construct api url 
 export stage=dev
@@ -27,15 +29,13 @@ export apigatewayid=$(aws --profile $AWS_PROFILE --region $AWS_REGION apigateway
 echo "https://${apigatewayid}.execute-api.${AWS_REGION}.amazonaws.com/${stage}"
 ```
 
-
+## Get the apigatewayv2 details
 
 ```sh
 aws --profile $AWS_PROFILE --region $AWS_REGION apigatewayv2 get-apis 
 ```
 
-
 ## Resources
 
-* apigateway https://docs.aws.amazon.com/cli/latest/reference/apigateway/index.html#cli-aws-apigateway
-
-* apigatewayv2 https://docs.aws.amazon.com/cli/latest/reference/apigatewayv2/index.html
+* apigateway [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/apigateway/index.html)
+* apigatewayv2 [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/apigatewayv2/index.html)

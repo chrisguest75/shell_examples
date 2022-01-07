@@ -64,6 +64,10 @@ Lambda [LAMBDA.md](./LAMBDA.md)
 
 API Gateway [APIGATEWAY.md](./APIGATEWAY.md)  
 
+## Cloud Formation
+
+Cloud Formation [CLOUD_FORMATION.md](./CLOUD_FORMATION.md)  
+
 ## Resources
 
 * AWS CLI with jq and Bash [here](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)  
