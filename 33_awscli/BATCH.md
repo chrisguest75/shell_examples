@@ -26,7 +26,8 @@ aws --profile $AWS_PROFILE --region $AWS_REGION batch describe-job-queues | jq -
 
 ## List jobs
 
-List jobs by status in queues
+List jobs by status in queues  
+Status - SUBMITTED | PENDING | RUNNABLE | STARTING | RUNNING | SUCCEEDED | FAILED  
 
 ```sh
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status FAILED --job-queue batch-queue-name
@@ -79,6 +80,8 @@ aws --profile $AWS_PROFILE --region $AWS_REGION logs get-log-events --log-group-
 ## Filters
 
 ```sh
+aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue com-trint-prod-speechmatics-normal --filters "name=JOB_NAME,values=5c4734c69a8608bfaa3ca94c*"
+
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue batch-queue --job-status FAILED --filters "name=BEFORE_CREATED_AT,values=1640124949"
 ```
 

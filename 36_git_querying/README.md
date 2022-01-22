@@ -1,20 +1,25 @@
 # README
+
 Demonstrates some examples of using git queries and tools
 
 TODO:
+
 * Gitlab cli [glab](https://glab.readthedocs.io/en/latest/)  
 * [glab source](https://github.com/profclems/glab)
 
 ## Files
+
 * FAQS - [FAQS.md](./FAQS.md)  
 * Squashing Walkthrough - [SQUASHING_WALKTHROUGHS.md](./SQUASHING_WALKTHROUGHS.md)  
 * Creating new repos - [NEW_REPOS.md](./NEW_REPOS.md)  
 * Patching - [PATCHING.md](./PATCHING.md)  
 
 ## Git Extras
+
 Git extras are a set of helpers for git.
 
 MacOS  
+
 ```sh
 # macosx extras and gh cli
 brew install git-extras
@@ -27,33 +32,41 @@ brew install glab
 ```
 
 Linux  
-[brew.sh](https://docs.brew.sh) required for gh on ubuntu/debian [linuxbrew](https://docs.brew.sh/Homebrew-on-Linux)   
+[brew.sh](https://docs.brew.sh) required for gh on ubuntu/debian [linuxbrew](https://docs.brew.sh/Homebrew-on-Linux)  
+
 ```sh
 # debian
 apt install git-extras
 ```
 
 ## Open repo in code
+
 ```sh
 # sometimes you might be in a subdirectory in the repo
 code $(git root)
 ```
 
 ## Examining repos
+
 ```sh
 # Files changed since yesterday on current branch.
 git effort -- --since='yesterday'
 git effort -- --since='1 month ago'
 ```
+
 ## Command for brew example
+
 Brew example [here](../49_brew/README.md)
+
 ```sh
 # hides the find command in a script.
 ./git-activity.sh --path=../../../../Code/scratch
 ```
 
 ## Detect merged branches
+
 If you use github web to squash ad merge.  It seems to make it difficult to determine if the branch was merged or not using `--merged`.  
+
 ```sh
 # uses git log to try and determine if branch was merged at some point
 ./git-merged-branches.sh --path=../../../../Code/scratch
@@ -62,6 +75,7 @@ If you use github web to squash ad merge.  It seems to make it difficult to dete
 ```
 
 ## Commit counts for master and PRs
+
 ```sh
 # install sparklines shell script
 brew install spark
@@ -85,6 +99,7 @@ find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days
 ```
 
 ## Git repo sync
+
 Split into two parts the first is the all up run it and update all repos that can be merged without conflict.
 
 ```sh
@@ -93,6 +108,7 @@ Split into two parts the first is the all up run it and update all repos that ca
 ```
 
 This is how it works step-by-step.
+
 ```sh
 # out folder
 mkdir -p ./out
@@ -136,16 +152,17 @@ do
     ./git_sync_status.sh --path=${rootpath} --merge
     ./git_sync_status.sh --path=${rootpath} --status
 done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false" and .commit != .origincommit) | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./out/my_repos.json)
-
 ```
+
 #### Check tag format
+
 ```sh
 git check-ref-format "tags/0.0.1-a39f8a821fc9" 
 ```
 
-# Resources
+## Resources
 
-* [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.    
+* [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.  
 * [github cli](https://github.com/cli/cli) tool that supports creating PRs directly from the shell  
 * [sparklines](https://github.com/holman/spark)  
 
