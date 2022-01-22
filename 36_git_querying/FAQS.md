@@ -1,10 +1,13 @@
 # FAQ
+
 A set of example uses of git.  
 
 ## Git Clis
+
 Github and Gitlab both have cli tooling for working with PR/MR and issues, etc.  
 
 #### How do I work with PRs on a repo from cli?
+
 Using the github cli command.  
 
 ```sh
@@ -47,6 +50,7 @@ git for-each-ref --sort=committerdate refs/remotes/origin --format='%(HEAD) %(co
 ```
 
 #### How do I clean up my local branches?
+
 ```sh
 git fetch --prune
 
@@ -65,6 +69,7 @@ git delete-branch <branch>
 ```
 
 #### Keeping branches up-to-date
+
 ```sh
 # have a look at the differences
 git log -n 10 --graph --oneline master
@@ -76,19 +81,23 @@ git rebase master
 ```
 
 #### Find common ancestor between branches
+
 ```sh
 # get a common ancestor commitid
 git merge-base mybranch master
 ```
 
 #### Changes to a branch since creation
+
 ```sh
 # files changed from master in the current branch
 git diff $(git merge-base $(git branch --show-current) master)..head --name-only
 ```
 
-#### Checkout a file from another branch 
+#### Checkout a file from another branch
+
 Can be used to undo file changes in a branch.
+
 ```sh
 # Get the version of the file from origin/master
 git checkout origin/master filename 
@@ -98,10 +107,9 @@ git checkout $(git merge-base $(git branch --show-current) master) -- <directory
 
 # get a file from another branch
 git restore --source brew -- FAQS.md 
-``` 
+```
 
-
-## Commits 
+## Commits
 
 ```sh
 git show head --name-only
@@ -109,7 +117,8 @@ git show master~4 --name-only
 git show master^1 --name-only
 ```
 
-#### How do I know what changes were in a commit?
+### How do I know what changes were in a commit?
+
 ```sh
 # show last 4 commits on a branch
 git log -n 4 --oneline <branch>
@@ -118,13 +127,15 @@ git log -n 4 --oneline <branch>
 git show <commitid> --name-only --oneline            
 ```
 
-#### Rollback the last commit
+### Rollback the last commit
+
 ```sh
 # pop the last commit off and move the changed files into staging
 git reset head~1         
 ```
 
 #### Diff between two commits
+
 ```sh
 # diff changes on current branch
 git diff head..head~1   
@@ -146,6 +157,7 @@ branch-diff "" gitactivity
 ```
 
 #### Get the top commitid
+
 ```sh
 # head on current branch
 git rev-parse HEAD     
@@ -155,20 +167,33 @@ git rev-parse $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
 ```
 
 #### Show the staged diff
+
 ```sh
 # diff head against staged
 git diff --staged   
 ```
 
 #### Show missing commits between branches
+
 ```sh
 # show commits missing between branches
 git-missing master feat/testing  
 ```
 
+#### Show commits for current directory
+
+```sh
+# show commits containing entries for current directory
+git log .
+```
+
+
 ## Origins
+
 #### Git switch origin
+
 This is useful after syncing a repo with `https` rather than `ssh`
+
 ```sh
 git remote show origin
 # add a new origin

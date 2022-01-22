@@ -5,7 +5,7 @@ Demonstrates using awscli to query resources in an AWS account.
 Powershell examples can be found [here](https://github.com/chrisguest75/powershell_examples)
 
 TODO:
- 
+
 * pulling cloud watch metrics.  
 * Sorting by columns  
 
@@ -76,6 +76,4 @@ Cloud Formation [CLOUD_FORMATION.md](./CLOUD_FORMATION.md)
 
 * AWS CLI with jq and Bash [here](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)  
 * AWS-cli [here](https://docs.aws.amazon.com/cli/latest/userguide/aws-cli.pdf)  
-
-
-https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html
+* Filtering AWS CLI output [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html)
