@@ -1,21 +1,29 @@
 # Configuration for new repos
+
 When configuring a new repo consider the following.  
+
 ## Adding LICENSE file
+
 Click `Add File` button in `github` portal.  Type in name as `LICENSE` and choose the template you require.
+
 ## Adding CODEOWNERS
+
 More info on [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 
 ```txt
 @chrisguest75
 ```
-## Adding pipelines 
+
+## Adding pipelines
+
 Create a `./.github./workflows` folder
 
 ```sh
 mkdir -p ./.github./workflows
 ```
 
-## Adding branch protections 
+## Adding branch protections
+
 Use graphQL to create branch protections [docs](https://docs.github.com/en/graphql/reference/input-objects#createbranchprotectionruleinput)
 
 ```sh
@@ -36,7 +44,8 @@ requiredApprovingReviewCount: $requiredReviews
  }) { clientMutationId }}' -f repositoryId="$repositoryId" -f branch="[main,master]*" -F requiredReviews=1
 ```
 
-# Resources 
+## Resources
+
 * [issue 3528](https://github.com/cli/cli/issues/3528)
 * [GraphQL explorer](https://docs.github.com/en/graphql/overview/explorer)
 * [GraphQL](https://docs.github.com/en/graphql)

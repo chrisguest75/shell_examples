@@ -208,10 +208,10 @@ Steps [README.md](./33_awscli/README.md)
 Demonstrate examples of working with APT and DPKG  
 Steps [README.md](./35_apt_and_dpkg/README.md)  
 
-## Example 36 - Git Querying
+## Example 36 - Git Querying and Examples
 
-Demonstrates some examples of using git queries  
-Steps [README.md](./36_git_querying/README.md)  
+Demonstrates some examples of using `git` queries and tools  
+Steps [README.md](./36_git/README.md)  
 
 ## Example 37 - Guid generation
 

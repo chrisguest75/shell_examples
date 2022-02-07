@@ -1,7 +1,9 @@
 # README
+
 Quick walkthrough of how to use git patching.  
 
 TODO:
+
 * Be careful with binary files
 
 ## Creating a patch from diff
@@ -22,4 +24,5 @@ git diff HEAD > file_name.patch
 ```
 
 ## Resources
+
 * Send A Patch To Someone Using `git format-patch` [here](https://thoughtbot.com/blog/send-a-patch-to-someone-using-git-format-patch)
