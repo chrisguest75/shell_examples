@@ -1,6 +1,6 @@
 # README
 
-Demonstrates some examples of using git queries and tools
+Demonstrates some examples of using `git` queries and tools  
 
 TODO:
 
@@ -13,6 +13,17 @@ TODO:
 * Squashing Walkthrough - [SQUASHING_WALKTHROUGHS.md](./SQUASHING_WALKTHROUGHS.md)  
 * Creating new repos - [NEW_REPOS.md](./NEW_REPOS.md)  
 * Patching - [PATCHING.md](./PATCHING.md)  
+* Hooks - [HOOKS.md](./HOOKS.md)  
+* Worktrees - [WORKTREES.md](./WORKTREES.md)  
+
+## Upgrade
+
+```sh
+# see latest version of git
+brew info git
+
+# 
+```
 
 ## Git Extras
 
@@ -65,7 +76,7 @@ Brew example [here](../49_brew/README.md)
 
 ## Detect merged branches
 
-If you use github web to squash ad merge.  It seems to make it difficult to determine if the branch was merged or not using `--merged`.  
+If you use github web to squash and merge.  It seems to make it difficult to determine if the branch was merged or not using `--merged`.  
 
 ```sh
 # uses git log to try and determine if branch was merged at some point
@@ -154,7 +165,7 @@ do
 done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false" and .commit != .origincommit) | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./out/my_repos.json)
 ```
 
-#### Check tag format
+### Check tag format
 
 ```sh
 git check-ref-format "tags/0.0.1-a39f8a821fc9" 
@@ -165,4 +176,5 @@ git check-ref-format "tags/0.0.1-a39f8a821fc9"
 * [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.  
 * [github cli](https://github.com/cli/cli) tool that supports creating PRs directly from the shell  
 * [sparklines](https://github.com/holman/spark)  
-
+* Git Release Notes [here](https://github.com/git/git/tree/master/Documentation/RelNotes)  
+* Git blog from github [here](https://github.blog/tag/git/)  

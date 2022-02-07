@@ -34,6 +34,15 @@ gh pr commit <id>
 gh pr merge <id>
 ```
 
+## Clean
+
+```sh
+# -x Don’t use the standard ignore rules
+# -d Specify -d to have it recurse into such directories
+# -f Force
+git clean -xfd
+```
+
 ## Branches
 
 #### How do I look at the latest commit on each branch?
@@ -186,7 +195,6 @@ git-missing master feat/testing
 # show commits containing entries for current directory
 git log .
 ```
-
 
 ## Origins
 
