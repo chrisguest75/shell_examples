@@ -15,22 +15,27 @@ NOTE:
 git worktree list 
 
 # create a worktree (if local branch does not exist)
-git worktree add -b gitchanges $(git root)/../shell_examples_wt_gitchanges origin/gitchanges
+export BRANCH_NAME=vim
+git worktree add -b $BRANCH_NAME $(git root)/../shell_examples_wt_$BRANCH_NAME origin/$BRANCH_NAME
 
 # if local branch already exists
-git worktree add $(git root)/../shell_examples_wt_gitchanges gitchanges
+export BRANCH_NAME=vim
+git worktree add $(git root)/../shell_examples_wt_$BRANCH_NAME $BRANCH_NAME
+
+# switch to the directory
+pushd $(git root)/../shell_examples_wt_$BRANCH_NAME
 
 # list my folders 
 ls -la $(git root)/../
 
 # worktree .git is now a file
-cat $(git root)/../shell_examples_wt_gitchanges/.git
+cat $(git root)/../shell_examples_wt_$BRANCH_NAME/.git
 
 # open up in code.
-code $(git root)/../shell_examples_wt_gitchanges
+code $(git root)/../shell_examples_wt_$BRANCH_NAME
 
 # remove the worktree
-rm -rf $(git root)/../shell_examples_wt_gitchanges
+rm -rf $(git root)/../shell_examples_wt_$BRANCH_NAME
 
 # list prunable (after deleting)
 git worktree list 
