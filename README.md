@@ -21,6 +21,7 @@ It's also a repository used for collecting various shell related tooling.
 Depending on the shell you are running the help for builtins is different  
   
 `bash`
+
 ```sh
 man bash
 help <builtin>
@@ -28,9 +29,20 @@ info <command>
 ```
 
 `zsh`
+
 ```sh
 man zsh
 man zshbuiltins
+```
+
+## Useful commands
+
+```sh
+# list all aliases
+alias
+
+# list all functions (zsh)
+print -l ${(ok)functions}
 ```
 
 ## Example 00 - Cheatsheet

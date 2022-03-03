@@ -1,19 +1,24 @@
 # README
-Demonstrates how to build a script with simple argument parsing.
 
-You can modify this basic script `example.sh` to create new scripts that accept arguments. 
+Demonstrates how to build a script with simple argument parsing.  
+
+You can modify this basic script `example.sh` to create new scripts that accept arguments.  
 
 Features include:
-* Flag values such as --debug 
+
+* Flag values such as --debug
 * Long and abbreviated options
 * Value based options --option=value
 * Case switched options
 * Heredoc help example
 * Shellchecked
 
-For more simple scripts there is a more `simple_example.sh`
+For more simple scripts there is a more `simple_example.sh`  
+
 ## Example usage
+
 Run through the following examples
+
 ```sh
 # No args prints usage
 ./example.sh                               
@@ -32,7 +37,9 @@ Run through the following examples
 ```
 
 ## Simple Example usage
+
 Run through the following examples
+
 ```sh
 # No args performs work
 ./simple_example.sh                               
