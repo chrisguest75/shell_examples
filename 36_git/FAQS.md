@@ -6,7 +6,7 @@ A set of example uses of git.
 
 Github and Gitlab both have cli tooling for working with PR/MR and issues, etc.  
 
-#### How do I work with PRs on a repo from cli?
+### How do I work with PRs on a repo from cli?
 
 Using the github cli command.  
 
@@ -45,7 +45,7 @@ git clean -xfd
 
 ## Branches
 
-#### How do I look at the latest commit on each branch?
+### How do I look at the latest commit on each branch?
 
 ```sh
 # latest commit on each branch.  
@@ -58,7 +58,7 @@ git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yell
 git for-each-ref --sort=committerdate refs/remotes/origin --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 ```
 
-#### How do I clean up my local branches?
+### How do I clean up my local branches?
 
 ```sh
 git fetch --prune
@@ -77,7 +77,7 @@ git branch -r -vvv --no-merged origin/master
 git delete-branch <branch>
 ```
 
-#### Keeping branches up-to-date
+### Keeping branches up-to-date
 
 ```sh
 # have a look at the differences
@@ -89,21 +89,21 @@ git diff master..<branch> --name-only
 git rebase master
 ```
 
-#### Find common ancestor between branches
+### Find common ancestor between branches
 
 ```sh
 # get a common ancestor commitid
 git merge-base mybranch master
 ```
 
-#### Changes to a branch since creation
+### Changes to a branch since creation
 
 ```sh
 # files changed from master in the current branch
 git diff $(git merge-base $(git branch --show-current) master)..head --name-only
 ```
 
-#### Checkout a file from another branch
+### Checkout a file from another branch
 
 Can be used to undo file changes in a branch.
 
@@ -114,8 +114,10 @@ git checkout origin/master filename
 # revert directory back to state of common ancestor
 git checkout $(git merge-base $(git branch --show-current) master) -- <directory>
 
-# get a file from another branch
+# get a file from another branch (cherry-pick a single file)
 git restore --source brew -- FAQS.md 
+# or 
+git checkout -m <branchname> ./package-lock.json
 ```
 
 ## Commits
@@ -143,7 +145,7 @@ git show <commitid> --name-only --oneline
 git reset head~1         
 ```
 
-#### Diff between two commits
+### Diff between two commits
 
 ```sh
 # diff changes on current branch
@@ -165,7 +167,7 @@ branch-diff origin/ awsvpcs
 branch-diff "" gitactivity
 ```
 
-#### Get the top commitid
+### Get the top commitid
 
 ```sh
 # head on current branch
@@ -175,21 +177,21 @@ git rev-parse HEAD
 git rev-parse $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
 ```
 
-#### Show the staged diff
+### Show the staged diff
 
 ```sh
 # diff head against staged
 git diff --staged   
 ```
 
-#### Show missing commits between branches
+### Show missing commits between branches
 
 ```sh
 # show commits missing between branches
 git-missing master feat/testing  
 ```
 
-#### Show commits for current directory
+### Show commits for current directory
 
 ```sh
 # show commits containing entries for current directory
