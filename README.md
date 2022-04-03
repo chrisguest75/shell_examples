@@ -320,6 +320,7 @@ Steps [README.md](./54_date_handling/README.md)
     https://en.wikipedia.org/wiki/Clobbering
     ```
   * listing state; functions, env, paths, etc  
+  * Changing file extensions `find . -name "*.js" -exec sh -c 'mv "$1" "${1%.js}.ts"' _ {} \;`
   * running commands from gists. 
 
     ```sh
