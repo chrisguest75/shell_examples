@@ -215,6 +215,10 @@ Steps [README.md](./32_jq/README.md)
 Demonstrates using awscli to query resources in an AWS account.  
 Steps [README.md](./33_awscli/README.md)  
 
+## Example 34 - Checking Resources
+Demonstrate how to use various commands to verify resource usage in the OS.
+Steps [README.md](./34_checking_resources/README.md) 
+
 ## Example 35 - APT and DPKG
 
 Demonstrate examples of working with APT and DPKG  
@@ -284,10 +288,6 @@ Steps [README.md](./53_sync_files/README.md)
 
 Demonstrate date handling in shell.  
 Steps [README.md](./54_date_handling/README.md)  
-
-## Example 55 - Checking Resources
-Demonstrate how to use various commands to verify resource usage in the OS.
-Steps [README.md](./55_checking_resources/README.md) 
 
 ## TODO:
   * oh-my-zsh and oh-my-bash
