@@ -216,8 +216,9 @@ Demonstrates using awscli to query resources in an AWS account.
 Steps [README.md](./33_awscli/README.md)  
 
 ## Example 34 - Checking Resources
-Demonstrate how to use various commands to verify resource usage in the OS.
-Steps [README.md](./34_checking_resources/README.md) 
+
+Demonstrate how to use various commands to verify resource usage in the OS.  
+Steps [README.md](./34_checking_resources/README.md)  
 
 ## Example 35 - APT and DPKG
 
