@@ -1,11 +1,12 @@
 # README
 
-My personal cheatsheet for simple examples
+My personal cheatsheet for simple examples  
 
 ## Loops
 
+A `for` loop
+
 ```sh
-# for looping 
 for index in $(seq 0 10 ); 
 do
   # break from a for loop
@@ -20,6 +21,47 @@ do
 done
 # index exists outside of loop
 echo "Exited loop $index"
+```
+
+A `while` loop
+
+```sh
+_continue=true
+_count=0
+while $_continue; 
+do
+  _count=$(( _count + 1 ))
+
+  # continue the loop
+  if [[ $_count == 2 ]] continue
+
+  # break from a while loop (uncomment one or other)
+  #if [[ $_count == 5 ]] break
+  if [[ $_count == 5 ]] _continue=false
+
+  echo "$_count"
+done
+# index exists outside of loop
+echo "Exited loop $_count"
+```
+
+## Calculations
+
+Calculations can be performed using $(( expression ))  
+
+```sh
+for index in $(seq 0 10 ); 
+do
+  # use modulus
+  echo $(( index % 2 * (10 + 1) ))
+
+  # calculations in if blocks
+  if [[ $(( index - 5 )) -ge 0 ]] then;
+    echo "condition met $(( index - 5 ))"
+  else
+    echo "condition not met $(( index - 5 ))"
+  fi
+done
 ```
 
 ## Resources
