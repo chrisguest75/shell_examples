@@ -290,6 +290,7 @@ Steps [README.md](./54_date_handling/README.md)
   * oh-my-zsh and oh-my-bash
   * Process Substition versus command substitution < <() < $()
   * Detecting dotsourcing.
+        https://stackoverflow.com/questions/2683279/how-to-detect-if-a-script-is-being-sourced
         ```sh
         (return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
           if [[ $SOURCED == 1 ]]; then
@@ -313,6 +314,7 @@ Steps [README.md](./54_date_handling/README.md)
   * cut
   * Add a keywords index for links through to examples.  
   * Options 
+    https://unix.stackexchange.com/questions/310957/how-to-restore-the-value-of-shell-options-like-set-x
     ```sh
     set +o noclobber
     set -o 
