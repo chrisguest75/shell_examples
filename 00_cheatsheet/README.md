@@ -2,6 +2,10 @@
 
 Cheatsheets are a great way to quickly get an answer to your question.  
 
+My personal [CHEATSHEET.md](./CHEATSHEET.md)  
+
+## Cheat.sh
+
 [cheat.sh](https://github.com/chubin/cheat.sh)  
 
 ```sh
