@@ -257,6 +257,18 @@ _frame_number=$(echo ${_no_extension} | grep --color=never -o -E '[0-9]+')
 jq --rawfile path ./README.md --arg filename "${_no_extension}" --arg number "${_frame_number}" '.frames += [ {"name":$filename, "path":$path, "number":$number | tonumber }]' "./frames.json"
 ```
 
+## Propgating errors
+
+Using `-e` to use the exitcode for detection of errors.  
+
+```sh
+WEAKNESS=Swimming
+jq -e --arg weakness "$WEAKNESS" '.[][] | select(.weaknesses | contains( [$weakness] )) | .name' ./pokedex.json; if [[ $? != 0 ]] echo "$WEAKNESS not found"
+
+WEAKNESS=Fighting
+jq -e --arg weakness "$WEAKNESS" '.[][] | select(.weaknesses | contains( [$weakness] )) | .name' ./pokedex.json; if [[ $? != 0 ]] echo "$WEAKNESS not found"
+```
+
 ## Resources
 
 * jq 1.6 Manual [here](https://stedolan.github.io/jq/manual/v1.6/)
