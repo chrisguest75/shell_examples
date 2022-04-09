@@ -2,6 +2,8 @@
 
 My personal cheatsheet for simple examples  
 
+NOTE: Each script should be checked in `bash`, `zsh` and `sh`  
+
 ## Loops
 
 A `for` loop
@@ -10,10 +12,10 @@ A `for` loop
 for index in $(seq 0 10 ); 
 do
   # break from a for loop
-  if [[ $index == 5 ]] break
+  if [[ $index == 5 ]]; then break; fi
 
   # continue the loop
-  if [[ $index == 1 ]] continue
+  if [[ $index == 1 ]]; then continue; fi
 
   echo "Sleep $index"
   sleep 1
@@ -33,11 +35,11 @@ do
   _count=$(( _count + 1 ))
 
   # continue the loop
-  if [[ $_count == 2 ]] continue
+  if [[ $_count == 2 ]]; then continue; fi
 
   # break from a while loop (uncomment one or other)
   #if [[ $_count == 5 ]] break
-  if [[ $_count == 5 ]] _continue=false
+  if [[ $_count == 5 ]]; then break; fi
 
   echo "$_count"
 done
@@ -56,7 +58,7 @@ do
   echo $(( index % 2 * (10 + 1) ))
 
   # calculations in if blocks
-  if [[ $(( index - 5 )) -ge 0 ]] then;
+  if [[ $(( index - 5 )) -ge 0 ]]; then
     echo "condition met $(( index - 5 ))"
   else
     echo "condition not met $(( index - 5 ))"
