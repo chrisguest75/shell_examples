@@ -25,6 +25,18 @@ done
 echo "Exited loop $index"
 ```
 
+Iterate over a list in a `for` loop  
+
+```sh
+for index in hello world tomorrow is thursday; 
+do
+  echo "Sleep $index"
+  sleep 1
+done
+# index exists outside of loop
+echo "Exited loop $index"
+```
+
 A `while` loop
 
 ```sh
