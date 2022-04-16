@@ -1,0 +1,25 @@
+services:
+
+    nginx:
+        image: "nginx:1.21.6"
+        volumes:
+            - type: bind
+              source: ./default.conf
+              target: /etc/nginx/templates/default.conf.template
+            - type: bind
+              source: ./nginx.conf
+              target: /etc/nginx/nginx.conf
+            - type: bind
+              source: ./html
+              target: /usr/share/nginx/html                                
+        ports:
+            - "8080:80"
+        environment:
+            - VERSION=nginx:1.21.6
+        networks:
+            - service_bridge
+    
+networks:
+    service_bridge:
+        driver: bridge
+
