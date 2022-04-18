@@ -1,6 +1,6 @@
 # README
 
-Demonstrates examples of how to use grep.
+Demonstrates examples of how to use grep and regex.  
 
 ```sh
 grep --version    
@@ -37,4 +37,18 @@ curl -o ./conwaylife.html https://www.conwaylife.com/patterns/
 cat ./conwaylife.html | ggrep -Po 'href="\K.*?(?=")' | grep ".*\.cells"
 ```
 
+## Rematch
+
+```sh
+regex=""
+input=""
+
+if [[ $input =~ $regex ]]; then
+  match1="${BASH_REMATCH[1]}"
+  match2="${BASH_REMATCH[2]}"
+fi
+```
+
 ## Resources
+
+* Bash Regular Expressions [here](https://www.linuxjournal.com/content/bash-regular-expressions)
