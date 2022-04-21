@@ -265,10 +265,10 @@ Steps [README.md](./48_sed/README.md)
 Demonstrate some tmux examples and common commands.  
 Steps [README.md](./50_tmux/README.md)  
 
-## Example 51 - grep
+## Example 51 - grep and regex
 
-Demonstrates examples of how to use grep.  
-Steps [README.md](./51_grep/README.md)  
+Demonstrates examples of how to use grep and regex.  
+Steps [README.md](./51_grep_and_regex/README.md)  
 
 ## Example 52 - xml
 
