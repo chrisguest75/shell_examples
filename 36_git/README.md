@@ -6,7 +6,9 @@ TODO:
 
 * Gitlab cli [glab](https://glab.readthedocs.io/en/latest/)  
 * [glab source](https://github.com/profclems/glab)
-* submodules
+* Deleting branches
+* Submodules
+* git filter-repo
 
 ## Files
 
