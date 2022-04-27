@@ -1,0 +1,11 @@
+{
+  "type": "config",
+  "config": {
+    "field1": "field1",
+    "field2": "field2",
+    "array_field": ["item1", "item2", "rûah"],
+    "base64_array_field": ["item1", "item2", "rûah"],
+    "field3": "field3",
+    "base64_field3": "field3"
+  }
+}

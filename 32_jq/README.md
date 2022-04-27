@@ -6,6 +6,7 @@ TODO:
 
 * removing nodes in the document
 * capture - `capture(".*[[:digit:]]+)}]`
+* base64 encoding and decoding a field
 
 Github [JQ](https://github.com/stedolan/jq) repo.  
 
@@ -280,6 +281,25 @@ jq -e --arg weakness "$WEAKNESS" '.[][] | select(.weaknesses | contains( [$weakn
 
 WEAKNESS=Fighting
 jq -e --arg weakness "$WEAKNESS" '.[][] | select(.weaknesses | contains( [$weakness] )) | .name' ./pokedex.json; if [[ $? != 0 ]] echo "$WEAKNESS not found"
+```
+
+## base64 handling
+
+```sh
+# create a base64 encoded string.
+echo -n "this is a normal string" | base64
+
+# decode a field
+jq -r '.base64_normal | @base64d' < ./base64.json
+
+# encode a field
+jq -r '.normal | @base64' < ./base64.json
+
+TODO base64_config.json:
+* Is it possible to iterate over an array decoding each value?
+* Finding fields to decode?
+* 
+
 ```
 
 ## Resources
