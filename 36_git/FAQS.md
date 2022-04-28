@@ -140,9 +140,28 @@ git show <commitid> --name-only --oneline
 
 ### Rollback the last commit
 
+Rollback in the current local branch  
+
 ```sh
 # pop the last commit off and move the changed files into staging
-git reset head~1         
+git reset head~1    
+```
+
+Rollback on default branch.  
+
+```sh
+# create a new branch
+git checkout -b reverting
+
+# revert commit 
+git revert head|commitid
+
+# push and create an MR
+git push 
+
+# or switch to main and merge the commit in
+git switch main
+git merge reverting
 ```
 
 ### Diff between two commits
