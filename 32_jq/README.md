@@ -202,6 +202,16 @@ jq -n 'inputs' *fragment.json
 jq -s '{ "merged":{"a":.[0].has_flying_weakness, "b":.[1].has_psychic_weakness}}' ./flying_weakness_fragment.json ./psychic_weakness_fragment.json
 ```
 
+## Field manipulation
+
+```sh
+# add a new field 
+jq -r '. + {"newfield": "new field"}' ./base64.json
+
+# delete a field 
+jq -r '. | del(.normal)' ./base64.json
+```
+
 ## APIs
 
 ```sh
@@ -285,21 +295,27 @@ jq -e --arg weakness "$WEAKNESS" '.[][] | select(.weaknesses | contains( [$weakn
 
 ## base64 handling
 
+Simple examples of single field encoding and decoding.  
+
 ```sh
 # create a base64 encoded string.
 echo -n "this is a normal string" | base64
 
 # decode a field
-jq -r '.base64_normal | @base64d' < ./base64.json
+jq -r '.base64_normal | @base64d' ./base64.json
 
 # encode a field
-jq -r '.normal | @base64' < ./base64.json
+jq -r '.normal | @base64' ./base64.json
+```
 
-TODO base64_config.json:
-* Is it possible to iterate over an array decoding each value?
-* Finding fields to decode?
-* 
+More complex decoding
 
+```sh
+# iterate over an array and encode them
+jq -r '. | .config.base64_array_field | map_values(@base64)' ./base64_config.json
+
+# TODO: This removes the base of the document..  Needs to merge back into full doc
+jq -r '.config + { "array_field_new": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field)' ./base64_config.json
 ```
 
 ## Resources
