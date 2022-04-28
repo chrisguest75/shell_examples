@@ -1,17 +1,20 @@
-# Checking Resources 
+# Checking Resources
+
 Demonstrate how to use various commands to verify resource usage in the OS.
 
+REF: [14_interrogate_resources](https://github.com/chrisguest75/sysadmin_examples/tree/master/14_interrogate_resources)  
 
 TODO:
+
 * cgroups
 * Open sockets
-* Free memory 
+* Free memory
 * File handles
 * Look at the brenden gregg resources http://www.brendangregg.com/linuxperf.html
 * Filesystem
 * Procfs
 * debugfs
-https://github.com/raboof/nethogs
+* https://github.com/raboof/nethogs
 
 
 ```sh
@@ -26,6 +29,7 @@ systemctl show
 ```
 
 ## Check limits
+
 ```sh
 # limits inside a container
 docker run -it ubuntu:20.04 /bin/bash -c "ulimit -a" 
