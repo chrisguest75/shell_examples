@@ -315,7 +315,21 @@ More complex decoding
 jq -r '. | .config.base64_array_field | map_values(@base64)' ./base64_config.json
 
 # TODO: This removes the base of the document..  Needs to merge back into full doc
-jq -r '.config + { "array_field_new": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field)' ./base64_config.json
+jq -r '.config + { "array_field": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field)' ./base64_config.json
+
+
+jq '(. | del(.config)), (.config + { "array_field": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field))' ./base64_config.json  
+
+
+jq '(. | del(.config)), (.config + { "array_field": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field) | { "config": (.)}) ' ./base64_config.json  
+
+# this is close 
+jq '(. | del(.config)), (.config + { "array_field": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field) | { "config": (.)})' ./base64_config.json  
+
+
+
+
+
 ```
 
 ## Resources
