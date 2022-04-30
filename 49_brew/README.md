@@ -1,6 +1,6 @@
 # README
 
-Demonstrate how to create a brew package.  
+Demonstrate how to create a `brew` package.  
 
 TODO:
 

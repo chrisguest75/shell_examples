@@ -1,0 +1,13 @@
+image: ubuntu:22.04
+
+stages: &myanchor
+  - lint
+  - build
+  - dev
+  - deploy
+
+mystages:
+  *myanchor
+
+mystages2:
+  << : *myanchor

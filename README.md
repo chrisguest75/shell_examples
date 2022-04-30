@@ -235,6 +235,11 @@ Steps [README.md](./37_guids/README.md)
 Demonstrate how to map an input to an output
 Steps [README.md](./38_value_maps/README.md)  
 
+## Example 42 - yq and yaml
+
+Demonstrates some examples of using `yq` to process yaml files  
+Steps [README.md](./42_yq_yaml/README.md)  
+
 ## Example 43 - AWK
 
 Demonstrates techniques for using awk to process files.  
@@ -259,6 +264,11 @@ Steps [README.md](./47_ffmpeg/README.md)
 
 Demonstrates techniques for using sed to process files.  
 Steps [README.md](./48_sed/README.md)  
+
+## Example 49 - brew
+
+Demonstrate how to create a `brew` package.  
+Steps [README.md](./49_brew/README.md)  
 
 ## Example 50 - tmux
 
@@ -355,4 +365,3 @@ ln ./hooks/pre-commit .git/hooks/pre-commit
 ```sh
 docker run -it --rm -v $(pwd):/repo chrisguest/turn --action=create --type=release --includenext --tags
 ```
-

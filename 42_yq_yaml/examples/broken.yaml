@@ -1,0 +1,14 @@
+image: ubuntu:22.04
+
+stages:
+  - lint
+  - build
+  dev
+  - deploy
+
+script: | 
+    echo "*Install dependencies*"
+    apt-get update && apt-get install -qq -y jq docker-compose-plugin
+    jq --version 
+    docker compose version
+
