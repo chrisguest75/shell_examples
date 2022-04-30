@@ -36,6 +36,12 @@ yq eval ./examples/anchors.yaml
 yq '. | explode(.)' ./examples/anchors.yaml  
 ```
 
+## Merging
+
+```sh
+yq '. *= load("./examples/simple.yaml")' ./examples/anchors.yaml
+```
+
 ## Validation
 
 ```sh
@@ -47,19 +53,6 @@ yq -P ./examples/broken.yaml
 * mikefarah/yq repo [here](https://github.com/mikefarah/yq)
 * How It Works [here](https://mikefarah.gitbook.io/yq/how-it-works)
 * Anchor and Alias Operators [here](https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators)
-
-
-Merging YAML with yq
-https://mikefarah.gitbook.io/yq/operators/multiply-merge
-
-
-
-
-Yq mastering.... 
-https://towardsdatascience.com/yq-mastering-yaml-processing-in-command-line-e1ff5ebc0823
-
-The yq gitbook has all three listed. 
-https://mikefarah.gitbook.io/yq/upgrading-from-v3
-
-https://github.com/mikefarah/yq/issues/520
-
+* Multiply (Merge) [here](https://mikefarah.gitbook.io/yq/operators/multiply-merge)
+* The yq gitbook has lots of good examples [here](https://mikefarah.gitbook.io/yq/upgrading-from-v3)
+* yq: Mastering YAML Processing in Command Line [here](https://towardsdatascience.com/yq-mastering-yaml-processing-in-command-line-e1ff5ebc0823)
