@@ -72,8 +72,8 @@ Steps [README.md](./04_trap/README.md)
 
 ## Example 05 - Strings
 
-Demonstrate some examples of string manipulation  
-Steps [README.md](./05_strings/README.md)  
+Demonstrate some examples of string manipulation and variables  
+Steps [README.md](./05_strings_and_variables/README.md)  
 
 ## Example 06 - Restricted bash shell
 
