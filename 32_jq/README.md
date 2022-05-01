@@ -44,8 +44,8 @@ jq -c ".[][] | (.name, .id)" ./pokedex.json
 # transform and output as fields (single line sing string interpolation)   
 jq -c -r '.[][] | "\(.name) \(.id)"' ./pokedex.json
 
-# transform and output as csv     
-jq -cr ".[][] | [.name, .id] | @csv" ./pokedex.json     
+# transform and output as csv (with a header)    
+jq -cr '["Name","Id"], (.[][] | [.name, .id]) | @csv' ./pokedex.json     
 
 # individual array items
 jq -r ".[][2].img" ./pokedex.json
@@ -280,3 +280,4 @@ jq -e --arg weakness "$WEAKNESS" '.[][] | select(.weaknesses | contains( [$weakn
 * Example [modules](https://github.com/stedolan/jq/wiki/Modules)
 * Example [pokedex](https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json) json file
 * Guide to Linux jq Command for JSON Processing [here](https://www.baeldung.com/linux/jq-command-json)
+* How to add a header to CSV export in jq? [here](https://stackoverflow.com/questions/30015555/how-to-add-a-header-to-csv-export-in-jq)
