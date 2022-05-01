@@ -61,7 +61,6 @@ echo "'$_uppercase' becomes '${_uppercase,}'"
 echo "'$_uppercase' becomes '${_uppercase,,}'"
 echo ""
 
-
 # **********************************************
 # substring matching
 # **********************************************
@@ -93,6 +92,37 @@ echo ""
 echo "** Replace in string **"
 _imagename="alpine:3.15"
 echo "$_imagename becomes ${_imagename//:/}"
+echo ""
+
+# **********************************************
+# trim whitespace
+# **********************************************
+
+echo "** Trim whitepace from string **"
+function trim() {
+    : ${1?"${FUNCNAME[0]}(string) - missing string argument"}
+
+    if [[ -z ${1} ]]; then 
+        echo ""
+        return
+    fi
+    # remove an 
+    trimmed=${1##*( )}
+    echo ${trimmed%%*( )}
+}
+
+out=$(trim "  hello  ")
+echo "|$out|"
+out=$(trim "hello   ")
+echo "|$out|"
+out=$(trim "   hello")
+echo "|$out|"
+out=$(trim " ")
+echo "|$out|"
+out=$(trim "  hello world  ")
+echo "|$out|"
+out=$(trim "")
+echo "|$out|"
 echo ""
 
 # **********************************************
