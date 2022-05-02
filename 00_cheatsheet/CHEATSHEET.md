@@ -6,7 +6,7 @@ NOTE: Each script should be checked in `bash`, `zsh` and `sh`
 
 ## Loops
 
-A `for` loop
+A `for` loop with count  
 
 ```sh
 for index in $(seq 0 10 ); 

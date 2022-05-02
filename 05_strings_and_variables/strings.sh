@@ -110,19 +110,32 @@ function trim() {
     trimmed=${1##*( )}
     echo ${trimmed%%*( )}
 }
+_trim="  hello  " 
+out=$(trim "$_trim")
+echo "Before |$_trim| After |$out|"
+_trim="hello    " 
+out=$(trim "$_trim")
+echo "Before |$_trim| After |$out|"
+_trim="   hello" 
+out=$(trim "$_trim")
+echo "Before |$_trim| After |$out|"
+_trim=" " 
+out=$(trim "$_trim")
+echo "Before |$_trim| After |$out|"
+_trim="  hello world  "
+out=$(trim "$_trim")
+echo "Before |$_trim| After |$out|"
+_trim=""
+out=$(trim "$_trim")
+echo "Before |$_trim| After |$out|"
+_trim=$(cat <<- EOF
+    hello
 
-out=$(trim "  hello  ")
-echo "|$out|"
-out=$(trim "hello   ")
-echo "|$out|"
-out=$(trim "   hello")
-echo "|$out|"
-out=$(trim " ")
-echo "|$out|"
-out=$(trim "  hello world  ")
-echo "|$out|"
-out=$(trim "")
-echo "|$out|"
+    
+EOF
+)
+out=$(trim "$_trim")
+echo "Before |$_trim| After |$out|"
 echo ""
 
 # **********************************************

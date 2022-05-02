@@ -48,6 +48,15 @@ yq '. *= load("./examples/simple.yaml")' ./examples/anchors.yaml
 yq -P ./examples/broken.yaml                
 ```
 
+## Looping overs arrays in bash
+
+Take an array defined in yaml and loop over it in bash.
+
+```sh
+# run the example script
+./loop_array.sh             
+```
+
 ## Resources
 
 * mikefarah/yq repo [here](https://github.com/mikefarah/yq)
@@ -56,3 +65,4 @@ yq -P ./examples/broken.yaml
 * Multiply (Merge) [here](https://mikefarah.gitbook.io/yq/operators/multiply-merge)
 * The yq gitbook has lots of good examples [here](https://mikefarah.gitbook.io/yq/upgrading-from-v3)
 * yq: Mastering YAML Processing in Command Line [here](https://towardsdatascience.com/yq-mastering-yaml-processing-in-command-line-e1ff5ebc0823)
+* Tips, Tricks, Troubleshooting [here](https://mikefarah.gitbook.io/yq/usage/tips-and-tricks)  

@@ -23,6 +23,9 @@ jq --version
 ```sh
 # takes json logs and pretty print them 
 pbpaste | jq '.'
+
+# Take an array defined in json and loop over it in bash.
+./loop_array.sh
 ```
 
 ## Transforming and Processing files
