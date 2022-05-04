@@ -48,6 +48,19 @@ yq '. *= load("./examples/simple.yaml")' ./examples/anchors.yaml
 yq -P ./examples/broken.yaml                
 ```
 
+## Replace values
+
+```sh
+# replace a simple value
+yq e '(.replacethis) |= "REPLACED"' ./examples/replace.yaml
+
+# replace a substring
+yq e '(.embedded) |= sub("\${APIKEY}", "theapikey")' ./examples/replace.yaml
+
+# replace a value in an array
+yq e '(.service[]) |= sub("\${APIKEY}", "theapikey")' ./examples/replace.yaml
+```
+
 ## Looping overs arrays in bash
 
 Take an array defined in yaml and loop over it in bash.
