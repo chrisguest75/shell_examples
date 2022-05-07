@@ -2,6 +2,10 @@
 
 Example helper scripts.
 
+TODO:
+
+* All these need testing again and also the brew example.  
+
 ## Command for brew example
 
 Brew example [here](../../49_brew/README.md)
