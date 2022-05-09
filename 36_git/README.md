@@ -14,14 +14,15 @@ TODO:
 ## Files
 
 * FAQS - [FAQS.md](./sections/FAQS.md)  
-* Squashing Walkthrough - [SQUASHING_WALKTHROUGHS.md](./sections/SQUASHING_WALKTHROUGHS.md)  
+* Squashing Walkthrough - [SQUASHING_WALKTHROUGH.md](./sections/SQUASHING_WALKTHROUGH.md)  
 * Reverting Walkthrough - [REVERTING_WALKTHROUGH.md](./sections/REVERTING_WALKTHROUGH.md)  
 * Creating new repos - [NEW_REPOS.md](./sections/NEW_REPOS.md)  
 * Patching - [PATCHING.md](./sections/PATCHING.md)  
 * Hooks - [HOOKS.md](./sections/HOOKS.md)  
 * Worktrees - [WORKTREES.md](./sections/WORKTREES.md)  
-* Helper Scripts - [HELPER_SCRIPTS.md](./sections/HELPER_SCRIPTS.md)  
 * Searching - [SEARCHING.md](./sections/SEARCHING.md)  
+* Git Crypt - [GIT_CRYPT.md](./sections/GIT_CRYPT.md)  
+* Helper Scripts - [HELPER_SCRIPTS.md](./sections/HELPER_SCRIPTS.md)  
 
 ## Upgrade
 
@@ -86,6 +87,5 @@ git check-ref-format "tags/0.0.1-a39f8a821fc9"
 
 * [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.  
 * [github cli](https://github.com/cli/cli) tool that supports creating PRs directly from the shell  
-* [sparklines](https://github.com/holman/spark)  
 * Git Release Notes [here](https://github.com/git/git/tree/master/Documentation/RelNotes)  
 * Git blog from github [here](https://github.blog/tag/git/)  

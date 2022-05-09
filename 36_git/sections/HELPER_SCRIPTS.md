@@ -12,7 +12,7 @@ Brew example [here](../../49_brew/README.md)
 
 ```sh
 # hides the find command in a script.
-./helpers/git-activity.sh --path=../../../../Code/scratch
+./helpers/git-activity.sh --path="$(git root)/../"
 ```
 
 ## Detect merged branches
@@ -21,9 +21,10 @@ If you use github web to squash and merge.  It seems to make it difficult to det
 
 ```sh
 # uses git log to try and determine if branch was merged at some point
-./helpers/git-merged-branches.sh --path=../../../../Code/scratch
+./helpers/git-merged-branches.sh --path="$(git root)"
+
 # or give option to delete merged branches (git-extras)
-./helpers/git-merged-branches.sh --path=../../../../Code/scratch --include-commits --delete-branches
+./helpers/git-merged-branches.sh --path="$(git root)" --include-commits --delete-branches
 ```
 
 ## Commit counts for master and PRs
@@ -33,8 +34,8 @@ If you use github web to squash and merge.  It seems to make it difficult to det
 brew install spark
 
 # get prs and analyse commits 
-./build_commits.sh --path=./ --hours 
-./build_commits.sh --path=./my-repo --days --json
+./helpers/build_commits.sh --path="$(git root)" --hours 
+./helpers/build_commits.sh --path="$(git root)" --days --json
 
 # iterate over repositories
 find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --ignore-errors --days \;
@@ -43,11 +44,11 @@ find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days
 find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days --json \; | jq -s . > ./out/branch_activity.json  
 
 # data generator
-./build_commits_histogram_data.sh --action=histogram 
-./build_commits_histogram_data.sh --action=histogram --repo=./  
+./helpers/build_commits_histogram_data.sh --action=histogram 
+./helpers/build_commits_histogram_data.sh --action=histogram --repo="$(git root)"
 
 # output sparkline
-./build_commits_histogram_data.sh --action=histogram --repo=./ --sparkline | spark
+./helpers/build_commits_histogram_data.sh --action=histogram --repo=./ --sparkline | spark
 ```
 
 ## Git repo sync
@@ -56,7 +57,7 @@ Split into two parts the first is the all up run it and update all repos that ca
 
 ```sh
 # will only merge repos that have no local edits.
-./git_refresh_all_repos.sh -p=../../../code --merge 
+./helpers/git_refresh_all_repos.sh -p="$(git root)/../" --merge 
 ```
 
 This is how it works step-by-step.
@@ -65,10 +66,10 @@ This is how it works step-by-step.
 # out folder
 mkdir -p ./out
 
-./git_sync_status.sh --path=../../../code/my-repo --status   
-./git_sync_status.sh --path=../../../code/my-repo --fetch
-./git_sync_status.sh --path=../../../code/my-repo --diff 
-./git_sync_status.sh --path=../../../code/my-repo --merge
+./helpers/git_sync_status.sh --path="$(git root)" --status   
+./helpers/git_sync_status.sh --path="$(git root)" --fetch
+./helpers/git_sync_status.sh --path="$(git root)" --diff 
+./helpers/git_sync_status.sh --path="$(git root)" --merge
 
 # get repo status (sort so we can diff)
 find ../../../code -maxdepth 1 -type d -exec ./git_sync_status.sh --path={} --status \; | jq -s '. | sort_by(.reponame)' > ./out/my_repos.json
@@ -105,3 +106,7 @@ do
     ./git_sync_status.sh --path=${rootpath} --status
 done < <(jq -c -r '.[] | select(.on_default_branch == "true" and .modified == "false" and .unfetched_changes == "false" and .commit != .origincommit) | "\(.rootpath) \(.reponame) \(.default_branch) \(.commit) \(.origincommit) \(.current_branch) \(.on_default_branch) \(.modified) \(.unfetched_changes)"' ./out/my_repos.json)
 ```
+
+## Resources
+
+* [sparklines](https://github.com/holman/spark)  

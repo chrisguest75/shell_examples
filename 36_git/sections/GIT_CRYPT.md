@@ -5,7 +5,7 @@ Demonstrate how to use `git-crypt` on a repo
 TODO:
 
 * Push to github and see encryption
-* Rotate a key. https://github.com/AGWA/git-crypt#limitations
+* Rotate a key. 
 * gpg keys
 
 ## Prereqs
@@ -31,14 +31,15 @@ git config --local --list
 git-crypt export-key ../git-crypt-key
 ```
 
-## Encrypting key
+## Encrypting key file
+
+Transparently encrypt a file inside the repo.  
 
 ```sh
 # create .gitattributes for key
 echo "api.key filter=git-crypt diff=git-crypt" > .gitattributes
 git add .gitattributes
 git commit -m "Enable encryption for api.key"
-
 
 # create a secret in the api.key file
 echo "my secret value" > api.key
@@ -66,6 +67,8 @@ git-crypt unlock ../git-crypt-key
 
 ## Rotate key git-crypt
 
+Rotate the key and encrpyt the file again.  
+
 ```sh
 # turn off git-crypt
 git-crypt lock
@@ -73,22 +76,37 @@ git-crypt lock
 # reinitialising will generate a new key 
 git-crypt init
 
+# export the new key
 git-crypt export-key ../git-crypt-key2
+
+echo "new secret value" > api.key
+cat api.key
+
+git add api.key
+git commit -m "Commit api.key"
 ```
 
 ## Unlock the repo with the wrong key
 
 ```sh
-git-crypt unlock ../git-crypt-key2
+# turn off git-crypt
+git-crypt lock
 
-## Using keys is now broken
+git-crypt unlock ../git-crypt-key
 
-# You have to force removal
+## Using keys is now broken (file will be removed)
+git status
+
+# does not work
+git-crypt lock 
+# you have to force removal
 git-crypt lock --force
 
 # Now you can reapply the correct key
-git-crypt unlock ../git-crypt-key
+git-crypt unlock ../git-crypt-key2
 
+# decryption works
+cat api.key
 ```
 
 ## Resources
@@ -96,3 +114,4 @@ git-crypt unlock ../git-crypt-key
 * How to Manage Your Secrets with git-crypt [here](https://dev.to/heroku/how-to-manage-your-secrets-with-git-crypt-56ih)
 * git-crypt - transparent file encryption in git [here](https://www.agwa.name/projects/git-crypt/)
 * git-crypt repo [here](https://github.com/AGWA/git-crypt/blob/master/INSTALL.md)
+* Limitations [here](https://github.com/AGWA/git-crypt#limitations)  
