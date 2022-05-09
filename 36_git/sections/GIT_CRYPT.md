@@ -6,6 +6,7 @@ TODO:
 
 * Push to github and see encryption
 * Rotate a key. https://github.com/AGWA/git-crypt#limitations
+* gpg keys
 
 ## Prereqs
 
@@ -27,7 +28,7 @@ git-crypt init
 git config --local --list
 
 # exporting the key (store this safe)
-git-crypt export-key ./git-crypt-key
+git-crypt export-key ../git-crypt-key
 ```
 
 ## Encrypting key
@@ -35,9 +36,14 @@ git-crypt export-key ./git-crypt-key
 ```sh
 # create .gitattributes for key
 echo "api.key filter=git-crypt diff=git-crypt" > .gitattributes
+git add .gitattributes
+git commit -m "Enable encryption for api.key"
+
 
 # create a secret in the api.key file
 echo "my secret value" > api.key
+git add api.key
+git commit -m "Commit api.key"
 
 # give the status of the repo to indicate encryption status
 git-crypt status
@@ -56,6 +62,33 @@ cat api.key
 
 # turn on git-crypt
 git-crypt unlock ../git-crypt-key
+```
+
+## Rotate key git-crypt
+
+```sh
+# turn off git-crypt
+git-crypt lock
+
+# reinitialising will generate a new key 
+git-crypt init
+
+git-crypt export-key ../git-crypt-key2
+```
+
+## Unlock the repo with the wrong key
+
+```sh
+git-crypt unlock ../git-crypt-key2
+
+## Using keys is now broken
+
+# You have to force removal
+git-crypt lock --force
+
+# Now you can reapply the correct key
+git-crypt unlock ../git-crypt-key
+
 ```
 
 ## Resources
