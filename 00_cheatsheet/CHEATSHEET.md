@@ -4,7 +4,16 @@ My personal cheatsheet for simple examples
 
 NOTE: Each script should be checked in `bash`, `zsh` and `sh`  
 
+## Man pages
+
+```sh
+export MANPAGER=cat
+man git
+```
+
 ## Loops
+
+### For Loops
 
 A `for` loop with count  
 
@@ -37,6 +46,8 @@ done
 echo "Exited loop $index"
 ```
 
+### While Loops
+
 A `while` loop
 
 ```sh
@@ -57,6 +68,34 @@ do
 done
 # index exists outside of loop
 echo "Exited loop $_count"
+```
+
+## Loop over data structures
+
+```sh
+# heredoc tempfile
+TEMPFILE=$(mktemp)
+cat <<- EOF > ${TEMPFILE}
+4922049292,us-east-1,filename1.txt
+3420302882,eu-west-1,filename2.txt
+1334423422,ap-north-1,filename3.txt
+EOF
+while IFS=, read -r value1 value2 value3
+do
+    echo "$value1 $value2 $value3"
+done < $TEMPFILE
+```
+
+```sh
+# heredoc pipe
+while IFS=, read -r value1 value2 value3
+do
+    echo "$value1 $value2 $value3"
+done << EOF
+4922049292,us-east-1,filename1.txt
+3420302882,eu-west-1,filename2.txt
+1334423422,ap-north-1,filename3.txt
+EOF
 ```
 
 ## Calculations

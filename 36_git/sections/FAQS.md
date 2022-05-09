@@ -219,7 +219,7 @@ git log .
 
 ## Origins
 
-#### Git switch origin
+### Git switch origin
 
 This is useful after syncing a repo with `https` rather than `ssh`
 

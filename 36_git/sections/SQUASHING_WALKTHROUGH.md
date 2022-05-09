@@ -1,6 +1,6 @@
-# Squashing commmits on master
+# SQUASHING
 
-Quick walkthrough of squashing some commits.
+Quick walkthrough of `squashing` commits to simplify commit history and rebases.  
 
 TODO:
 

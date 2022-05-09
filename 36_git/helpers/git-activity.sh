@@ -27,6 +27,8 @@ fi
 
 function help() {
     cat <<- EOF
+Iterate over a set of folders and print out sparklines for the commit history of each branch
+
 usage: $SCRIPT_NAME options
 
 OPTIONS:
@@ -38,8 +40,11 @@ OPTIONS:
     --hours                    aggregate as hours
 
     --ignore-errors            ignore errors from 
+
 Examples:
     $SCRIPT_NAME --help 
+
+    ./git-activity.sh --path="$(git root)/../"
 
 EOF
 }
