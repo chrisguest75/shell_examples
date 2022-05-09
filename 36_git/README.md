@@ -7,9 +7,9 @@ TODO:
 * Gitlab cli [glab](https://glab.readthedocs.io/en/latest/)  
 * [glab source](https://github.com/profclems/glab)
 * Deleting branches
-* Submodules
 * git filter-repo
 * git reset --hard origin/feature reset against a new pushed version of a branch.
+* .gitattributes https://git-scm.com/docs/gitattributes
 
 ## Files
 
