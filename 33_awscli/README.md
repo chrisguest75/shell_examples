@@ -24,6 +24,14 @@ nano ./.env
 . ./.env     
 ```
 
+```sh
+# list available profiles
+aws configure list-profiles   
+
+# quick test
+aws --profile [profile] s3 ls
+```
+
 ## Sts
 
 You can use `STS` to work out your assumed role when trying to debug why you might be getting an Access Denied style issue.  
