@@ -10,6 +10,10 @@ TODO:
 * retries
 * redirects
 
+## Cheatsheet
+
+Examples are here in [CHEATSHEET.md](./CHEATSHEET.md)
+
 ## Start
 
 ```sh
@@ -66,6 +70,11 @@ docker stop nginx
 curl -H "Content-Type: application/json" -X POST -d '{"user":"bob","pass":"123"}' http://example.com
 
 ```
+
+
+
+
+
 
 
 ## Resources
