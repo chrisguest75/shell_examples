@@ -105,7 +105,7 @@ git diff $(git merge-base $(git branch --show-current) master)..head --name-only
 
 ### Checkout a file from another branch
 
-Can be used to undo file changes in a branch.
+Use to undo single file changes in a branch.
 
 ```sh
 # Get the version of the file from origin/master
@@ -118,6 +118,18 @@ git checkout $(git merge-base $(git branch --show-current) master) -- <directory
 git restore --source brew -- FAQS.md 
 # or 
 git checkout -m <branchname> ./package-lock.json
+```
+
+### Cherry pick a commit into staged "Reverting a revert"  
+
+This might need to be done if you made a change that was reverted and you want to recall and work with it again.  
+
+```sh
+# create new branch
+git checkout -b retry-broken-code
+
+# take the commit of the original changes. 
+git cherry-pick --no-commit abcde29877733c861aad625f567b7455838 -m 1       
 ```
 
 ## Commits
