@@ -37,10 +37,14 @@ $ date -d @1282368345 --rfc-3339=date
 2010-08-21
 ```
 
-## Random
+## Random (bash & zsh)
 
 ```sh
+# random number
 echo $RANDOM
+
+# random number between 1 and 10
+echo "$(( ( RANDOM % 10 )  + 1 ))"
 ```
 
 ## /dev/random
