@@ -308,28 +308,14 @@ jq -r '.base64_normal | @base64d' ./base64.json
 jq -r '.normal | @base64' ./base64.json
 ```
 
-More complex decoding
+More complex decoding of fields and arrays  
 
 ```sh
-# iterate over an array and encode them
-jq -r '. | .config.base64_array_field | map_values(@base64)' ./base64_config.json
+# iterate over an array and encode the values
+jq -r '. | .config.array_field | map_values(@base64)' ./base64_config.json
 
-# TODO: This removes the base of the document..  Needs to merge back into full doc
-jq -r '.config + { "array_field": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field)' ./base64_config.json
-
-
-jq '(. | del(.config)), (.config + { "array_field": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field))' ./base64_config.json  
-
-
-jq '(. | del(.config)), (.config + { "array_field": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field) | { "config": (.)}) ' ./base64_config.json  
-
-# this is close 
-jq '(. | del(.config)), (.config + { "array_field": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field) | { "config": (.)})' ./base64_config.json  
-
-
-
-
-
+# decode the values in the array and reconstruct the document
+jq '[ (. | del(.config)), (.config + { "array_field": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field) | { "config": (.)}) ] | reduce .[] as $merge (null; . + $merge)' ./base64_config.json  
 ```
 
 ## Resources
