@@ -208,6 +208,16 @@ jq -s '{ "merged":{"a":.[0].has_flying_weakness, "b":.[1].has_psychic_weakness}}
 curl -s https://registry.hub.docker.com/api/content/v1/repositories/public/library/bash/tags | jq    
 ```
 
+## Terraform plans (pivot)
+
+```sh
+# group the actions into a single array, group the individual actions into seperate arrays, count entries and pivot key name "create" to become key name, then merge the results into a single object and add filename.   
+for filename in ./*.tfplan.json; 
+do
+  jq --arg filename "${filename}" -r '. | [ .resource_changes[].change.actions[] ] | group_by(.) | map({(.[0]):length}) | reduce .[] as $x (null; . + $x) | . + {file:$filename }' "$filename"
+done
+```
+
 ## More complex examples (docker scan outputs)
 
 ```sh
