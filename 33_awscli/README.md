@@ -8,6 +8,7 @@ TODO:
 
 * pulling cloud watch metrics.  
 * Sorting by columns  
+* Create a docker container with awscli testbed inside of it.
 
 ```sh
 export AWS_PAGER=   
