@@ -1,22 +1,24 @@
 # Shell Examples and Demos
 
-A repository for showing examples of shell scripts.
+[![Repository](https://skillicons.dev/icons?i=bash,aws,git,linux,vscode)](https://skillicons.dev)
+
+A repository for showing examples of shell scripts.  
 
 The aim is to use examples to demonstrate how shells behave and squash some assumptions.  
 It's also a repository used for collecting various shell related tooling.  
 
 [RELEASE_NOTES.md](./RELEASE_NOTES.md)  
 
-## Prequisites
+## 1️⃣ Prequisites
 
-1. Install [shellcheck](https://github.com/koalaman/shellcheck)
-1. Install vscode extension for shellcheck
+* Install [shellcheck](https://github.com/koalaman/shellcheck)
+* Install vscode extension for shellcheck
 
     ```sh
     code --install-extension timonwong.shellcheck
     ```
 
-## Shell Help
+## ❔Shell Help
 
 Depending on the shell you are running the help for builtins is different  
   
@@ -35,7 +37,7 @@ man zsh
 man zshbuiltins
 ```
 
-## Useful commands
+## ℹ️ Useful commands
 
 ```sh
 # list all aliases
@@ -45,258 +47,263 @@ alias
 print -l ${(ok)functions}
 ```
 
-## Example 00 - Cheatsheet
+## 00 - Cheatsheet
 
 Cheatsheets are a great way to quickly get an answer to your question.  
 Steps [README.md](./00_cheatsheet/README.md)  
 
-## Example 01 - Simple argument parsing
+## 01 - Simple argument parsing
 
 Demonstrates how to build a script with simple argument parsing.  
 Steps [README.md](./01_argument_parsing/README.md)  
 
-## Example 02 - Functions as jobs
+## 02 - Functions as jobs
 
 Demonstrates how to initiate a function as a job.  
 Steps [README.md](./02_job_functions/README.md)  
 
-## Example 03 - Pipe filters
+## 03 - Pipe filters
 
 Demonstrates how read from stdin stream and process it.  
 Steps [README.md](./03_pipe_filter_function/README.md)  
 
-## Example 04 - Trap handlers
+## 04 - Trap handlers
 
 Demonstrate trap handlers functionality  
 Steps [README.md](./04_trap/README.md)  
 
-## Example 05 - Strings
+## 05 - Strings
 
 Demonstrate some examples of string manipulation and variables  
 Steps [README.md](./05_strings_and_variables/README.md)  
 
-## Example 06 - Restricted bash shell
+## 06 - Restricted bash shell
 
 Demonstrate a restricted bash shell  
 Steps [README.md](./06_restricted_bash/README.md)  
 
-## Example 07 - OS Detection
+## 07 - OS Detection
 
 Demonstrate how to detect the OS type in script to change parameters to commands.  
 Steps [README.md](./07_os_detection/README.md)  
 
-## Example 08 - Paths
+## 08 - Paths
 
 Demonstrates ways of manipulating paths  
 Steps [README.md](./08_paths/README.md)  
 
-## Example 09 - Debian packaging
+## 09 - Debian packaging
 
 Demonstrates building a debian package repository  
 Steps [README.md](./09_deb_pkg/README.md)  
 
-## Example 10 - Functions
+## 10 - Functions
 
 Demonstrates different types of techniques for using functions  
 Steps [README.md](./10_functions/README.md)  
 
-## Example 11 - Man pages
+## 11 - Man pages
 
 Demonstrate how to create a manpage.  
 Steps [README.md](./11_manpages/README.md)  
 
-## Example 12 - CSV parsing
+## 12 - CSV parsing
 
 Demonstrate how to parse and work with CSV files.  
 Steps [README.md](./12_csv/README.md)  
 
-## Example 13 - Bats
+## 13 - Bats
 
 Demonstrate how to use bats for testing  
 Steps [README.md](./13_bats/README.md)  
 
-## Example 14 - CI Env Overrides
+## 14 - CI Env Overrides
 
 Demonstrate a way to produce ENV overrides in a CI pipeline  
 Steps [README.md](./14_ci_env_overrides/README.md)  
 
-## Example 15 - Screen Control
+## 15 - Screen Control
 
 Demonstrates how to control the termninal screen output  
 Steps [README.md](./15_screen_control/README.md)  
 
-## Example 16 - Globbing
+## 16 - Globbing
 
 Demonstrates techniques for globbing and operating on sets of files  
 Steps [README.md](./16_globbing/README.md)  
 
-## Example 17 - Logger
+## 17 - Logger
 
 Demonstrates how to implement a logger for scripts  
 Steps [README.md](./17_logger/README.md)  
 
-## Example 18 - Bats Mocking
+## 18 - Bats Mocking
 
 Demonstrates how to test using mocks with bats.  
 Steps [README.md](./18_bats_mock/README.md)  
 
-## Example 19 - Timing Operations
+## 19 - Timing Operations
 
 Demonstrate how to time operations in the shell to help with optimisation.  
 Steps [README.md](./19_timing_operations/README.md)  
 
-## Example 20 - GPG examples
+## 20 - GPG examples
 
 Demonstrate how to use GPG to encrypt and decrpyt files.  
 Steps [README.md](./20_gpg/README.md)  
 
-## Example 21 - Webserver
+## 21 - Webserver
 
 Demonstrate how to set up a webserver in bash  
 Steps [README.md](./21_webserver/README.md)  
 
-## Example 22 - SystemD Service
+## 22 - SystemD Service
 
 Demonstrate how to create a systemd service.  
 Steps [README.md](./22_systemd_service/README.md)  
 
-## Example 23 - Whiptail Selector
+## 23 - Whiptail Selector
 
 Demonstrate how to use whiptail for file selection.  
 Steps [README.md](./23_whiptail_selection/README.md)  
 
-## Example 24 - Finding files
+## 24 - Finding files
 
 A few examples on using shell to find files  
 Steps [README.md](./24_finding_files/README.md)  
 
-## Example 25 - Autocompletions
+## 25 - Autocompletions
 
 Demonstrate how to write autocomplete scripts  
 Steps [README.md](./25_autocomplete/README.md)  
 
-## Example 26 - Cron
+## 26 - Cron
 
 Demonstrate how to setup a cronjob  
 Steps [README.md](./26_cron/README.md)  
 
-## Example 27 - JournalCtl
+## 27 - JournalCtl
 
 Demonstrate how to use journalctl to discover logs  
 Steps [README.md](./27_journalctl/README.md)  
 
-## Example 28 - Old Skool Ascii Banner
+## 28 - Old Skool Ascii Banner
 
 An old skool banner printer.  
 Steps [README.md](./28_oldskool_ascii_banner/README.md)  
 
-## Example 29 - Imagemagick
+## 29 - Imagemagick
 
 Examples of using imagemagick to process images.  
 Steps [README.md](./29_imagemagick/README.md)  
 
-## Example 30 - User input
+## 30 - User input
 
 Demonstrate how to use user input in scripts  
 Steps [README.md](./30_userinput/README.md)  
 
-## Example 31 - Dependency checking
+## 31 - Dependency checking
 
 Demonstrates how to check dependencies exist before a script runs  
 Steps [README.md](./31_dependency_checking/README.md)  
 
-## Example 32 - JQ
+## 32 - JQ
 
 Demonstrates some examples of using jq to process json files  
 Steps [README.md](./32_jq/README.md)  
 
-## Example 33 - AWSCLI
+## 33 - AWSCLI
 
 Demonstrates using awscli to query resources in an AWS account.  
 Steps [README.md](./33_awscli/README.md)  
 
-## Example 35 - APT and DPKG
+## 35 - APT and DPKG
 
 Demonstrate examples of working with APT and DPKG  
 Steps [README.md](./35_apt_and_dpkg/README.md)  
 
-## Example 36 - Git Querying and Examples
+## 36 - Git Querying and Examples
 
 Demonstrates some examples of using `git` queries and tools  
 Steps [README.md](./36_git/README.md)  
 
-## Example 37 - Guid generation
+## 37 - Guid generation
 
 Demonstrates techniques for generating unique ids in scripts.  
 Steps [README.md](./37_guids/README.md)  
 
-## Example 38 - Mapping inputs to outputs
+## 38 - Mapping inputs to outputs
 
 Demonstrate how to map an input to an output
 Steps [README.md](./38_value_maps/README.md)  
 
-## Example 42 - yq and yaml
+## 42 - yq and yaml
 
 Demonstrates some examples of using `yq` to process yaml files  
 Steps [README.md](./42_yq_yaml/README.md)  
 
-## Example 43 - AWK
+## 43 - AWK
 
 Demonstrates techniques for using awk to process files.  
 Steps [README.md](./43_awk/README.md)  
 
-## Example 44 - Looping over indexed envvars
+## 44 - Looping over indexed envvars
 
 Demonstrates techniques processing environment variables.  
 Steps [README.md](./44_indexed_envvars/README.md)  
 
-## Example 46 - stdout and stderr redirection
+## 46 - stdout and stderr redirection
 
 Demonstrate and work through some stdout and stderr redirection  
 Steps [README.md](./46_stdout_stderr/README.md)  
 
-## Example 47 - FFMPEG
+## 47 - FFMPEG
 
 Demonstrate how to use ffmpeg to perform different types of encodings.  
 Steps [README.md](./47_ffmpeg/README.md)  
 
-## Example 48 - SED
+## 48 - SED
 
 Demonstrates techniques for using sed to process files.  
 Steps [README.md](./48_sed/README.md)  
 
-## Example 49 - brew
+## 49 - brew
 
 Demonstrate how to create a `brew` package.  
 Steps [README.md](./49_brew/README.md)  
 
-## Example 50 - tmux
+## 50 - tmux
 
 Demonstrate some tmux examples and common commands.  
 Steps [README.md](./50_tmux/README.md)  
 
-## Example 51 - grep and regex
+## 51 - grep and regex
 
 Demonstrates examples of how to use grep and regex.  
 Steps [README.md](./51_grep_and_regex/README.md)  
 
-## Example 52 - xml
+## 52 - xml
 
 Demonstrate how to handle Xml in shell scripts.  
 Steps [README.md](./52_xml/README.md)  
 
-## Example 53 - syncing files
+## 53 - syncing files
 
 Demonstrate some examples syncing directories  
 Steps [README.md](./53_sync_files/README.md)  
 
-## Example 54 - date handling
+## 54 - date handling
 
 Demonstrate date handling in shell.  
 Steps [README.md](./54_date_handling/README.md)  
 
-## TODO
+## 👀 Resources
 
+* Google script standards [here](https://google.github.io/styleguide/shellguide.html)
+* Understanding tabs output [here](https://unix.stackexchange.com/questions/389255/determine-how-long-tabs-t-are-on-a-line)
+
+
+📝 TODO:
   * oh-my-zsh and oh-my-bash
   * Process Substition versus command substitution < <() < $()
   * Detecting dotsourcing.
@@ -314,12 +321,9 @@ Steps [README.md](./54_date_handling/README.md)
   * printing and formatting numbers
   * zsh versus bash
   * defensive programming
-  * generating temporary files. 
-  * google script standards https://google.github.io/styleguide/shellguide.html
   * snaps
   * strace cmd 
   * debugfs
-  * understanding tabs output https://unix.stackexchange.com/questions/389255/determine-how-long-tabs-t-are-on-a-line
   * subst
   * cut
   * Add a keywords index for links through to examples.  
@@ -341,7 +345,6 @@ Steps [README.md](./54_date_handling/README.md)
     ROLE=$(curl -s https://gist.githubusercontent.com/chrisguest75/b6bf4770237e1307b3fef4ffa3d4a187/raw/0f05f1ae43ce0102fe9394b6dead9d502876be0d/get_mapped_value.sh | bash -s account1)
     echo $ROLE
     ```
-
 
 ## Shellchecking
 
