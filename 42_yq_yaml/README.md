@@ -42,6 +42,12 @@ yq '. | explode(.)' ./examples/anchors.yaml
 yq '. *= load("./examples/simple.yaml")' ./examples/anchors.yaml
 ```
 
+Show an example of `docker compose` overrides.  
+
+```sh
+yq '. *= load("./docker-compose/docker-compose.override.yaml")' ./docker-compose/docker-compose.yaml
+```
+
 ## Validation
 
 ```sh
