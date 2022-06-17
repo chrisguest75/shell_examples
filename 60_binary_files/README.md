@@ -75,8 +75,29 @@ do
     ffmpeg -i ./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav -ss $_starttime -t 00:00:10 -vcodec copy -acodec copy ./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.$index.wav
 done
 
-
+# inspect a segment 
 ffprobe -v error -show_format -show_streams -print_format json ./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0001.wav | jq .
+```
+
+## Create a HLS
+
+```sh
+mkdir -p ./output/singlehls
+ffmpeg -y -i "./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/singlehls/playlist.m3u8" -segment_format mpegts "./output/singlehls/file%d.m4a"
+```
+
+## Create a partial HLS
+
+```sh
+mkdir -p ./output/partialhls
+# create first segment
+ffmpeg -y -i "./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.m4a"
+```
+
+
+```sh
+# add next segment
+#ffmpeg -y -i "./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.m4a"
 ```
 
 ## Resources
