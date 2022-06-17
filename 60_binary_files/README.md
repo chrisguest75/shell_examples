@@ -10,6 +10,15 @@ TODO:
 * Add a chunk to the end of a HLS.
 * Host HLS
 
+TODO:
+
+* slice up whole file
+* splice it all back together again
+* build a HLS chunk by chunk
+* try with raw
+* capture from the phone
+* build a website that I can stream audio from 
+
 ## Prereqs
 
 ```sh
@@ -40,7 +49,7 @@ ffmpeg -i ./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3/english_
 ```
 
 ```sh
-cat ./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav | xxd 
+cat ./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav | xxd | more
 ```
 
 ### Stream info
@@ -56,8 +65,22 @@ ffprobe -v error -show_format -show_streams -print_format json ./output/english_
 ## Slice up
 
 ```sh
-# take a slice from 2 mins in for 1 mins
-ffmpeg -i TearsOfSteel_1920x1080p24_h264_6700_ac3.mp4 -ss 00:02:00 -t 00:03:00 -vcodec copy -acodec copy TearsOfSteel_1920x1080p24_h264_6700_ac3.slice.mp4
+mkdir -p ./output/chunked
+
+for index in $(seq -s " " -f %04g 0 10 160); 
+do
+    _starttime=$(date -d@$index -u +%H:%M:%S)
+    #
+
+    ffmpeg -i ./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav -ss $_starttime -t 00:00:10 -vcodec copy -acodec copy ./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.$index.wav
+done
+
+
+ffprobe -v error -show_format -show_streams -print_format json ./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0001.wav | jq .
 ```
 
 ## Resources
+
+https://stackoverflow.com/questions/12199631/convert-seconds-to-hours-minutes-seconds
+
+https://unix.stackexchange.com/questions/60257/how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion
