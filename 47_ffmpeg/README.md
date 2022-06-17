@@ -93,6 +93,9 @@ ffmpeg -f avfoundation -framerate 30 -video_size 640x480 -i "0:0" -flags +global
 ffmpeg -f avfoundation -framerate 30 -video_size 640x480 -i "0:0" -vcodec libx264 -preset ultrafast -tune zerolatency -pix_fmt yuv422p -f mpegts udp://0.0.0.0:12345
 ```
 
+https://trac.ffmpeg.org/wiki/Capture/ALSA
+arecord -l
+
 # host a stream (push a stream to server)
 ```sh
 # ALSO NOT WORKING (host a stream for delivery)
