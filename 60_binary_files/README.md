@@ -76,32 +76,56 @@ do
 done
 
 # inspect a segment 
-ffprobe -v error -show_format -show_streams -print_format json ./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0001.wav | jq .
+ffprobe -v error -show_format -show_streams -print_format json ./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0010.wav | jq .
 ```
 
 ## Create a HLS
 
 ```sh
+rm -rf ./output/singlehls
 mkdir -p ./output/singlehls
-ffmpeg -y -i "./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/singlehls/playlist.m3u8" -segment_format mpegts "./output/singlehls/file%d.m4a"
+ffmpeg -y -i "./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/singlehls/playlist.m3u8" -segment_format mpegts "./output/singlehls/file%d.ts"
+
+
+# inspect a segment 
+ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/file0.ts | jq .
+
 ```
 
 ## Create a partial HLS
 
 ```sh
+rm -rf ./output/partialhls
 mkdir -p ./output/partialhls
 # create first segment
-ffmpeg -y -i "./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.m4a"
+ffmpeg -y -i "./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 100 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.ts"
 ```
 
-
+NOTE: This is broken.  Discontinuities...
 ```sh
 # add next segment
-#ffmpeg -y -i "./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.m4a"
+ffmpeg -y -i "./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0010.wav" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags omit_endlist+append_list "./output/partialhls/playlist.m3u8"
 ```
+
+
+
 
 ## Resources
 
 https://stackoverflow.com/questions/12199631/convert-seconds-to-hours-minutes-seconds
 
 https://unix.stackexchange.com/questions/60257/how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion
+
+https://stackoverflow.com/questions/63592822/ffmpeg-append-segments-to-m3u8-file-without-ext-x-discontinuity-tag
+
+
+
+
+<!-- # create the playlist
+ffmpeg -y -i <chunk.flac> -hls_playlist_type event -hls_base_url http://localhost:9000/ -hls_segment_filename <segment> -hls_time 2 -hls_flags omit_endlist playlist.m3u8 
+
+# append to playlist
+ffmpeg -y -i <chunk.flac> -hls_playlist_type event -hls_base_url http://localhost:9000/ -hls_segment_filename <segment> -hls_time 2 -hls_flags omit_endlist+append_list playlist.m3u8
+
+# finish the playlist
+ffmpeg -y -i <chunk.flac> -hls_playlist_type event -hls_base_url http://localhost:9000/ -hls_segment_filename <segment> -hls_time 2 -hls_flags append_list playlist.m3u8 -->
