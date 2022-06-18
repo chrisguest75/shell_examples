@@ -5,16 +5,11 @@ Demonstrate how to work with binary files.
 TODO:
 
 * Take an mp3 decode to wav and look at binary structure
-* Cut into 5 second chucks
-* Build an audio only HLS stream
 * Add a chunk to the end of a HLS.
 * Host HLS
-
-TODO:
-
-* splice it all back together again
 * capture from the phone
 * build a website that I can stream audio from 
+* encode chunks as mp3 and then decode back to wav and concat chunks
 
 ## Prereqs
 
@@ -110,8 +105,13 @@ mkdir -p ./output/singlehls
 ffmpeg -y -i "./output/${WAVFILE}" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/singlehls/playlist.m3u8" -segment_format mpegts "./output/singlehls/file%d.ts"
 
 # inspect a segment 
-ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/file0.ts | jq .
-ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/file1.ts | jq .
+ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/file5.ts | jq .
+
+# print out start times and durations
+while IFS=, read -r _filename
+do
+    ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration}'
+done < <(ls ./output/singlehls)
 ```
 
 ## Create a partial HLS
@@ -136,9 +136,14 @@ ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0010.wav" -hls_playlist_type eve
 # add endfile
 ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0020.wav" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhls/playlist.m3u8"
 
-ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/file0.ts | jq .
-ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/file1.ts | jq .
+# inspect a segment 
 ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/file2.ts | jq .
+
+# print out start times and durations
+while IFS=, read -r _filename
+do
+    ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration}'
+done < <(ls ./output/partialhls)
 ```
 
 
