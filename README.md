@@ -297,6 +297,11 @@ Steps [README.md](./53_sync_files/README.md)
 Demonstrate date handling in shell.  
 Steps [README.md](./54_date_handling/README.md)  
 
+## 59 - monitoring folders
+
+Demonstrate how to monitor a folder for changes.  
+Steps [README.md](./59_monitor_folder/README.md)  
+
 ## 60 - creating HLS streams from segments
 
 Demonstrates building a hls from individual segments of wav files.  
