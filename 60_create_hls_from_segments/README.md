@@ -1,6 +1,6 @@
 # README
 
-Demonstrates building a hls from individual ammendments of wav files.  
+Demonstrates building a hls from individual segments of wav files.  
 
 Ref: [47_ffmpeg/README.md](../47_ffmpeg/README.md)  
 

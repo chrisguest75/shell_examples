@@ -297,6 +297,11 @@ Steps [README.md](./53_sync_files/README.md)
 Demonstrate date handling in shell.  
 Steps [README.md](./54_date_handling/README.md)  
 
+## 60 - creating HLS streams from segments
+
+Demonstrates building a hls from individual segments of wav files.  
+Steps [README.md](./60_create_hls_from_segments/README.md)  
+
 ## 👀 Resources
 
 * Google script standards [here](https://google.github.io/styleguide/shellguide.html)
