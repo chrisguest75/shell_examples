@@ -47,7 +47,7 @@ DURATION_SECONDS=267
 
 ```sh
 mkdir -p ./output
-ffmpeg -i "$MP3FILE" -ac 1 -ar 22000  "./output/$WAVFILE"
+ffmpeg -hide_banner -i "$MP3FILE" -ac 1 -ar 22050  "./output/$WAVFILE"
 ```
 
 Hexview the file  
@@ -72,9 +72,7 @@ mkdir -p ./output/chunked
 for index in $(seq -s " " -f %04g 0 10 $DURATION_SECONDS); 
 do
     _starttime=$(date -d@$index -u +%H:%M:%S)
-    #
-
-    ffmpeg -i "./output/$WAVFILE" -ss $_starttime -t 00:00:10 -vcodec copy -acodec copy ./output/chunked/${WAVFILE_NOEXT}.$index.wav
+    ffmpeg -hide_banner -i "./output/$WAVFILE" -ss $_starttime -t 00:00:10 -vcodec copy -acodec copy ./output/chunked/${WAVFILE_NOEXT}.$index.wav
 done
 
 # list chunks
@@ -95,7 +93,7 @@ do
     echo "file './chunked/$file1'"
 done < <(ls ./output/chunked) > ./output/chunked_streams.txt
 
-ffmpeg -f concat -safe 0 -i ./output/chunked_streams.txt -c copy ./output/${WAVFILE_NOEXT}.concat.wav
+ffmpeg -hide_banner -f concat -safe 0 -i ./output/chunked_streams.txt -c copy ./output/${WAVFILE_NOEXT}.concat.wav
 ```
 
 ## Create a HLS
@@ -103,7 +101,7 @@ ffmpeg -f concat -safe 0 -i ./output/chunked_streams.txt -c copy ./output/${WAVF
 ```sh
 rm -rf ./output/singlehls
 mkdir -p ./output/singlehls
-ffmpeg -y -i "./output/${WAVFILE}" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/singlehls/playlist.m3u8" -segment_format mpegts "./output/singlehls/file%d.ts"
+ffmpeg -hide_banner -y -i "./output/${WAVFILE}" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/singlehls/playlist.m3u8" -segment_format mpegts "./output/singlehls/file%d.ts"
 
 # inspect a segment 
 ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/file5.ts | jq .
@@ -123,19 +121,21 @@ NOTE: It seems to get the last segment to play it needs to have an endlist
 rm -rf ./output/partialhls
 mkdir -p ./output/partialhls
 # create first segment
-ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -segment_time 100 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.ts"
+ffmpeg -y -hide_banner -i "./output/chunked/${WAVFILE_NOEXT}.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -segment_time 100 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.ts"
 
 ## NOTE modify pts
 ffprobe -v error -show_format -show_streams -print_format json "./output/chunked/${WAVFILE_NOEXT}.0010.wav" | jq '.streams[].codec_time_base'
 
-CHUNK=0010
-ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.${CHUNK}.wav" -c:a aac -b:a 128k -muxdelay 0 -filter_complex "[0:a]asetpts=PTS+$(( 22000 * 10.100278 ))" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhls/playlist.m3u8"
-
-
 for CHUNK in $(seq -s " " -f %04g 10 10 $DURATION_SECONDS); 
 do
-    ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.${CHUNK}.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -filter_complex "[0:a]asetpts=PTS+$((22000 * ${CHUNK}))" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhls/playlist.m3u8"
-done
+    # sum current duration for new audio pts
+    CURRENT_DURATION=$(cat ./output/partialhls/playlist.m3u8 | grep EXTINF | awk -F':' '{gsub(/,/, "", $2);print $2}' | awk '{OFMT = "%9.6f";s+=$1} END {print s}')
+    echo "CURRENT_DURATION=$CURRENT_DURATION"
+    # add segment
+    ffmpeg -y -hide_banner -i "./output/chunked/${WAVFILE_NOEXT}.${CHUNK}.wav" -c:a aac -b:a 128k -muxdelay 0 -filter_complex "[0:a]asetpts=PTS+$(( 22050.0 * $CURRENT_DURATION ))" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhls/playlist.m3u8"
+    # remove discontinuity
+    cat ./output/partialhls/playlist.m3u8 | grep -v "#EXT-X-DISCONTINUITY" > ./output/partialhls/fixed_playlist.m3u8
+done > ./output.txt
 
 # inspect a segment 
 ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/file2.ts | jq .
@@ -152,15 +152,17 @@ done < <(ls ./output/partialhls)
 
 ## Resources
 
-* convert-seconds-to-hours-minutes-seconds [here](https://stackoverflow.com/questions/12199631/convert-seconds-to-hours-minutes-seconds)
-* how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion [here](https://unix.stackexchange.com/questions/60257/how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion)
-
-https://stackoverflow.com/questions/63592822/ffmpeg-append-segments-to-m3u8-file-without-ext-x-discontinuity-tag
-
+* convert-seconds-to-hours-minutes-seconds [here](https://stackoverflow.com/questions/12199631/convert-seconds-to-hours-minutes-seconds)  
+* how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion [here](https://unix.stackexchange.com/questions/60257/how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion)  
+* ffmpeg-append-segments-to-m3u8-file-without-ext-x-discontinuity-tag [here](https://stackoverflow.com/questions/63592822/ffmpeg-append-segments-to-m3u8-file-without-ext-x-discontinuity-tag)  
+* practical-ffmpeg-commands-to-manipulate-a-video [here](https://transang.me/practical-ffmpeg-commands-to-manipulate-a-video/)  
 
 
 https://gist.github.com/samson-sham/7cb3a404a7aaaff62ec0ebbe08fb84e1
 
 https://ffmpeg.org/ffmpeg-formats.html#Options-9
 
-https://transang.me/practical-ffmpeg-commands-to-manipulate-a-video/
+
+
+https://stackoverflow.com/questions/450799/shell-command-to-sum-integers-one-per-line
+https://stackoverflow.com/questions/16040567/use-awk-to-extract-substring
