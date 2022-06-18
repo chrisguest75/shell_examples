@@ -4,13 +4,17 @@ Demonstrates building a hls from individual segments of wav files.
 
 Ref: [47_ffmpeg/README.md](../47_ffmpeg/README.md)  
 
+## How it works
+
+Take an mp3 file and decode it to a wav file.  Split this file up into 10 second chunks of either wav or aac.  
+Then use ffmpeg to rebuild a HLS stream from each of the individual segments. To correctly add them use the codec time base and time in seconds of where the segment PTS should be.  Remove the DISCONTINUITY strings from the manifest and playback.  
+
 TODO:
 
 * Take an mp3 decode to wav and look at binary structure
 * Host HLS
 * capture from the phone
-* build a website that I can stream audio from 
-* encode chunks as mp3 and then decode back to wav and concat chunks
+* build a website that I can stream audio from
 
 ## Prereqs
 
@@ -85,7 +89,7 @@ ffprobe -v error -show_format -show_streams -print_format json ./output/chunked/
 
 ## Concat chunks
 
-Concats the streams back together to test output 
+Concats the streams back together to test output  
 
 ```sh
 # NOTE: Be careful of order of chunked
@@ -102,7 +106,7 @@ ffmpeg -hide_banner -f concat -safe 0 -i ./output/chunked_streams.txt -c copy ./
 ```sh
 rm -rf ./output/singlehls
 mkdir -p ./output/singlehls
-ffmpeg -hide_banner -y -i "./output/${WAVFILE}" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/singlehls/playlist.m3u8" -segment_format mpegts "./output/singlehls/file%d.ts"
+ffmpeg -hide_banner -y -i "./output/${WAVFILE}" -c:a aac -b:a 128k -muxdelay 0 -f segment -segment_time 10 -segment_list "./output/singlehls/playlist.m3u8" -segment_format mpegts "./output/singlehls/file%d.ts"
 
 # inspect a segment 
 ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/file5.ts | jq .
@@ -150,6 +154,74 @@ do
     ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration, pts: .streams[0].start_pts, time_base: .streams[0].time_base, codec_time_base: .streams[0].codec_time_base}'
 done < <(ls ./output/partialhls)
 ```
+
+## Slice up (aac)
+
+```sh
+mkdir -p ./output/chunkedaac
+
+for index in $(seq -s " " -f %04g 0 10 $DURATION_SECONDS); 
+do
+    _starttime=$(date -d@$index -u +%H:%M:%S)
+    ffmpeg -hide_banner -i "./output/$WAVFILE" -ss $_starttime -t 00:00:10 ./output/chunkedaac/${WAVFILE_NOEXT}.$index.m4a
+done
+
+# list chunks
+ll ./output/chunkedaac
+
+# inspect a segment 
+ffprobe -v error -show_format -show_streams -print_format json ./output/chunkedaac/${WAVFILE_NOEXT}.0010.m4a | jq .
+```
+
+## Concat chunks (aac)
+
+Concats the streams back together to test output  
+
+```sh
+# NOTE: Be careful of order of chunked
+while IFS=, read -r file1
+do
+    echo "file './chunkedaac/$file1'"
+done < <(ls ./output/chunkedaac) > ./output/chunkedaac_streams.txt
+
+ffmpeg -hide_banner -f concat -safe 0 -i ./output/chunkedaac_streams.txt -c copy ./output/${WAVFILE_NOEXT}.concat.m4a
+```
+
+## Create a partial HLS (aac)
+
+```sh
+rm -rf ./output/partialhlsaac
+mkdir -p ./output/partialhlsaac
+# create first segment
+ffmpeg -y -hide_banner -i "./output/chunkedaac/${WAVFILE_NOEXT}.0000.m4a" -c:a aac -b:a 128k -muxdelay 0 -f segment -segment_time 100 -segment_list "./output/partialhlsaac/playlist.m3u8" -segment_format mpegts "./output/partialhlsaac/file%d.ts"
+
+## NOTE modify pts
+ffprobe -v error -show_format -show_streams -print_format json "./output/chunkedaac/${WAVFILE_NOEXT}.0010.m4a" | jq '.streams[].codec_time_base'
+
+for CHUNK in $(seq -s " " -f %04g 10 10 $DURATION_SECONDS); 
+do
+    # sum current duration for new audio pts
+    CURRENT_DURATION=$(cat ./output/partialhlsaac/playlist.m3u8 | grep EXTINF | awk -F':' '{gsub(/,/, "", $2);print $2}' | awk '{OFMT = "%9.6f";s+=$1} END {print s}')
+    echo "CURRENT_DURATION=$CURRENT_DURATION"
+    # add segment
+    ffmpeg -y -hide_banner -i "./output/chunkedaac/${WAVFILE_NOEXT}.${CHUNK}.m4a" -c:a aac -b:a 128k -muxdelay 0 -filter_complex "[0:a]asetpts=PTS+$(( 22050.0 * $CURRENT_DURATION ))" -hls_playlist_type event -hls_segment_filename "./output/partialhlsaac/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhlsaac/playlist.m3u8"
+    # remove discontinuity
+    cat ./output/partialhlsaac/playlist.m3u8 | grep -v "#EXT-X-DISCONTINUITY" > ./output/partialhlsaac/fixed_playlist.m3u8
+done > ./outputaac.txt
+
+# inspect a segment 
+ffprobe -v error -show_format -show_streams -print_format json ./output/partialhlsaac/file2.ts | jq .
+
+# frame time codes
+ffprobe -v error -print_format json -show_frames ./output/partialhlsaac/file0.ts | jq '.frames[].pkt_pts_time'
+
+# print out start times and durations
+while IFS=, read -r _filename
+do
+    ffprobe -v error -show_format -show_streams -print_format json ./output/partialhlsaac/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration, pts: .streams[0].start_pts, time_base: .streams[0].time_base, codec_time_base: .streams[0].codec_time_base}'
+done < <(ls ./output/partialhlsaac)
+```
+
 
 ## Resources
 
