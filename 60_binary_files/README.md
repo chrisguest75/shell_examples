@@ -1,6 +1,6 @@
 # README
 
-Demonstrate how to work with binary files.
+Demonstrates building a hls from individual ammendments of wav files.  
 
 TODO:
 
@@ -89,6 +89,7 @@ ffprobe -v error -show_format -show_streams -print_format json ./output/chunked/
 Concats the streams back together to test output 
 
 ```sh
+# NOTE: Be careful of order of chunked
 while IFS=, read -r file1
 do
     echo "file './chunked/$file1'"
@@ -110,53 +111,44 @@ ffprobe -v error -show_format -show_streams -print_format json ./output/singlehl
 # print out start times and durations
 while IFS=, read -r _filename
 do
-    ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration, pts: .streams[0].start_pts, time_base: .streams[0].time_base}'
+    ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration, pts: .streams[0].start_pts, time_base: .streams[0].time_base, codec_time_base: .streams[0].codec_time_base}'
 done < <(ls ./output/singlehls)
 ```
 
 ## Create a partial HLS
 
-NOTE:
-
-* It seems to get the last segment to play it needs to have an endlist
-
-
-This is broken.  Discontinuities... 
-
+NOTE: It seems to get the last segment to play it needs to have an endlist
 
 ```sh
 rm -rf ./output/partialhls
 mkdir -p ./output/partialhls
 # create first segment
-ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 100 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.ts"
+ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -segment_time 100 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.ts"
 
 ## NOTE modify pts
-ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0010.wav" -filter_complex "[0:a]asetpts=$((90000 * 10))" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags omit_endlist+append_list "./output/partialhls/playlist.m3u8"
+ffprobe -v error -show_format -show_streams -print_format json "./output/chunked/${WAVFILE_NOEXT}.0010.wav" | jq '.streams[].codec_time_base'
 
-ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0020.wav" -filter_complex "[0:a]asetpts=$((90000 * 20))" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhls/playlist.m3u8"
+CHUNK=0010
+ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.${CHUNK}.wav" -c:a aac -b:a 128k -muxdelay 0 -filter_complex "[0:a]asetpts=PTS+$(( 22000 * 10.100278 ))" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhls/playlist.m3u8"
 
 
-
-
-# add next segment
-ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0010.wav" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags omit_endlist+append_list "./output/partialhls/playlist.m3u8"
-
-# add endfile
-ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0020.wav" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhls/playlist.m3u8"
+for CHUNK in $(seq -s " " -f %04g 10 10 $DURATION_SECONDS); 
+do
+    ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.${CHUNK}.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -filter_complex "[0:a]asetpts=PTS+$((22000 * ${CHUNK}))" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhls/playlist.m3u8"
+done
 
 # inspect a segment 
 ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/file2.ts | jq .
 
+# frame time codes
+ffprobe -v error -print_format json -show_frames ./output/partialhls/file0.ts | jq '.frames[].pkt_pts_time'
+
 # print out start times and durations
 while IFS=, read -r _filename
 do
-    ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration, pts: .streams[0].start_pts, time_base: .streams[0].time_base}'
+    ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration, pts: .streams[0].start_pts, time_base: .streams[0].time_base, codec_time_base: .streams[0].codec_time_base}'
 done < <(ls ./output/partialhls)
 ```
-
-
-
-
 
 ## Resources
 
