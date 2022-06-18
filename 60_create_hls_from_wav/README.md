@@ -5,7 +5,6 @@ Demonstrates building a hls from individual ammendments of wav files.
 TODO:
 
 * Take an mp3 decode to wav and look at binary structure
-* Add a chunk to the end of a HLS.
 * Host HLS
 * capture from the phone
 * build a website that I can stream audio from 
