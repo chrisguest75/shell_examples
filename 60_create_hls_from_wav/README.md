@@ -2,6 +2,8 @@
 
 Demonstrates building a hls from individual ammendments of wav files.  
 
+Ref: [47_ffmpeg/README.md](../47_ffmpeg/README.md)  
+
 TODO:
 
 * Take an mp3 decode to wav and look at binary structure
