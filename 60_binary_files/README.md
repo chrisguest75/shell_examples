@@ -12,10 +12,7 @@ TODO:
 
 TODO:
 
-* slice up whole file
 * splice it all back together again
-* build a HLS chunk by chunk
-* try with raw
 * capture from the phone
 * build a website that I can stream audio from 
 
@@ -39,44 +36,70 @@ curl -vvv -L -o ./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3.zi
 unzip ./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3.zip -d ./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3
 ```
 
+## Set .env
+
+```sh
+. ./.env.template
+
+# or
+MP3FILE=./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3/english_thelittlegraylamb_sullivan_csm_64kb.mp3
+WAVFILE_NOEXT=$(basename -s .mp3 $MP3FILE)_16bit-22khz
+WAVFILE=${WAVFILE_NOEXT}.wav
+DURATION_SECONDS=267
+```
+
 ## Decode to WAV
 
 ```sh
 mkdir -p ./output
-ffmpeg -i ./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3/english_coventrycarol_unknown_rg_64kb.mp3 ./output/english_coventrycarol_unknown_rg_64kb.wav
-
-ffmpeg -i ./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3/english_coventrycarol_unknown_rg_64kb.mp3 -ac 1 -ar 22000 ./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav
+ffmpeg -i "$MP3FILE" -ac 1 -ar 22000  "./output/$WAVFILE"
 ```
 
+Hexview the file  
+
 ```sh
-cat ./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav | xxd | more
+cat "./output/$WAVFILE" | xxd | more
 ```
 
 ### Stream info
 
 ```sh
-ffprobe -v error -show_format -show_streams -print_format json ./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3/english_coventrycarol_unknown_rg_64kb.mp3 | jq . 
+ffprobe -v error -show_format -show_streams -print_format json "$MP3FILE" | jq . 
 
-ffprobe -v error -show_format -show_streams -print_format json ./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav | jq . 
+ffprobe -v error -show_format -show_streams -print_format json "./output/$WAVFILE" | jq . 
 ```
-
-
 
 ## Slice up
 
 ```sh
 mkdir -p ./output/chunked
 
-for index in $(seq -s " " -f %04g 0 10 160); 
+for index in $(seq -s " " -f %04g 0 10 $DURATION_SECONDS); 
 do
     _starttime=$(date -d@$index -u +%H:%M:%S)
     #
 
-    ffmpeg -i ./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav -ss $_starttime -t 00:00:10 -vcodec copy -acodec copy ./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.$index.wav
+    ffmpeg -i "./output/$WAVFILE" -ss $_starttime -t 00:00:10 -vcodec copy -acodec copy ./output/chunked/${WAVFILE_NOEXT}.$index.wav
 done
 
+# list chunks
+ll ./output/chunked
+
 # inspect a segment 
-ffprobe -v error -show_format -show_streams -print_format json ./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0010.wav | jq .
+ffprobe -v error -show_format -show_streams -print_format json ./output/chunked/${WAVFILE_NOEXT}.0010.wav | jq .
+```
+
+## Concat chunks
+
+Concats the streams back together to test output 
+
+```sh
+while IFS=, read -r file1
+do
+    echo "file './chunked/$file1'"
+done < <(ls ./output/chunked) > ./output/chunked_streams.txt
+
+ffmpeg -f concat -safe 0 -i ./output/chunked_streams.txt -c copy ./output/${WAVFILE_NOEXT}.concat.wav
 ```
 
 ## Create a HLS
@@ -84,32 +107,38 @@ ffprobe -v error -show_format -show_streams -print_format json ./output/chunked/
 ```sh
 rm -rf ./output/singlehls
 mkdir -p ./output/singlehls
-ffmpeg -y -i "./output/english_coventrycarol_unknown_rg_64kb_16bit-22khz.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/singlehls/playlist.m3u8" -segment_format mpegts "./output/singlehls/file%d.ts"
-
+ffmpeg -y -i "./output/${WAVFILE}" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 10 -segment_list "./output/singlehls/playlist.m3u8" -segment_format mpegts "./output/singlehls/file%d.ts"
 
 # inspect a segment 
 ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/file0.ts | jq .
 ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/file1.ts | jq .
-
 ```
 
 ## Create a partial HLS
+
+NOTE:
+
+* It seems to get the last segment to play it needs to have an endlist
+
+
+This is broken.  Discontinuities... 
+
 
 ```sh
 rm -rf ./output/partialhls
 mkdir -p ./output/partialhls
 # create first segment
-ffmpeg -y -i "./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 100 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.ts"
+ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0000.wav" -c:a aac -b:a 128k -muxdelay 0 -f segment -sc_threshold 0 -segment_time 100 -segment_list "./output/partialhls/playlist.m3u8" -segment_format mpegts "./output/partialhls/file%d.ts"
 
-# NOTE: This is broken.  Discontinuities... I think it must have endlist
 # add next segment
-ffmpeg -y -i "./output/chunked/english_coventrycarol_unknown_rg_64kb_16bit-22khz.0010.wav" -hls_time 10  -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags omit_endlist+append_list "./output/partialhls/playlist.m3u8"
+ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0010.wav" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags omit_endlist+append_list "./output/partialhls/playlist.m3u8"
 
+# add endfile
+ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0020.wav" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhls/playlist.m3u8"
 
 ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/file0.ts | jq .
 ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/file1.ts | jq .
-
-
+ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/file2.ts | jq .
 ```
 
 
@@ -118,9 +147,8 @@ ffprobe -v error -show_format -show_streams -print_format json ./output/partialh
 
 ## Resources
 
-https://stackoverflow.com/questions/12199631/convert-seconds-to-hours-minutes-seconds
-
-https://unix.stackexchange.com/questions/60257/how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion
+* convert-seconds-to-hours-minutes-seconds [here](https://stackoverflow.com/questions/12199631/convert-seconds-to-hours-minutes-seconds)
+* how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion [here](https://unix.stackexchange.com/questions/60257/how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion)
 
 https://stackoverflow.com/questions/63592822/ffmpeg-append-segments-to-m3u8-file-without-ext-x-discontinuity-tag
 
@@ -130,11 +158,3 @@ https://gist.github.com/samson-sham/7cb3a404a7aaaff62ec0ebbe08fb84e1
 
 https://ffmpeg.org/ffmpeg-formats.html#Options-9
 
-<!-- # create the playlist
-ffmpeg -y -i <chunk.flac> -hls_playlist_type event -hls_base_url http://localhost:9000/ -hls_segment_filename <segment> -hls_time 2 -hls_flags omit_endlist playlist.m3u8 
-
-# append to playlist
-ffmpeg -y -i <chunk.flac> -hls_playlist_type event -hls_base_url http://localhost:9000/ -hls_segment_filename <segment> -hls_time 2 -hls_flags omit_endlist+append_list playlist.m3u8
-
-# finish the playlist
-ffmpeg -y -i <chunk.flac> -hls_playlist_type event -hls_base_url http://localhost:9000/ -hls_segment_filename <segment> -hls_time 2 -hls_flags append_list playlist.m3u8 -->
