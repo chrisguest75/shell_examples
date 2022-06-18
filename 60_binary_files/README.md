@@ -110,7 +110,7 @@ ffprobe -v error -show_format -show_streams -print_format json ./output/singlehl
 # print out start times and durations
 while IFS=, read -r _filename
 do
-    ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration}'
+    ffprobe -v error -show_format -show_streams -print_format json ./output/singlehls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration, pts: .streams[0].start_pts}'
 done < <(ls ./output/singlehls)
 ```
 
@@ -133,6 +133,11 @@ ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0000.wav" -c:a aac -b:a 128k -mu
 # add next segment
 ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0010.wav" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags omit_endlist+append_list "./output/partialhls/playlist.m3u8"
 
+## NOTE modify pts
+ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0010.wav" -filter_complex "[0:a]asetpts=120000" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags omit_endlist+append_list "./output/partialhls/playlist.m3u8"
+
+
+
 # add endfile
 ffmpeg -y -i "./output/chunked/${WAVFILE_NOEXT}.0020.wav" -hls_playlist_type event -hls_segment_filename "./output/partialhls/file%d.ts" -hls_time 100 -hls_flags append_list "./output/partialhls/playlist.m3u8"
 
@@ -142,7 +147,7 @@ ffprobe -v error -show_format -show_streams -print_format json ./output/partialh
 # print out start times and durations
 while IFS=, read -r _filename
 do
-    ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration}'
+    ffprobe -v error -show_format -show_streams -print_format json ./output/partialhls/$_filename | jq --arg filename "${_filename}" -c '{ file: $filename, start_time:.format.start_time, duration:.format.duration, pts: .streams[0].start_pts}'
 done < <(ls ./output/partialhls)
 ```
 
@@ -163,3 +168,4 @@ https://gist.github.com/samson-sham/7cb3a404a7aaaff62ec0ebbe08fb84e1
 
 https://ffmpeg.org/ffmpeg-formats.html#Options-9
 
+https://transang.me/practical-ffmpeg-commands-to-manipulate-a-video/
