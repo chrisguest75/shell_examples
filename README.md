@@ -306,6 +306,7 @@ Steps [README.md](./54_date_handling/README.md)
 📝 TODO:
   * oh-my-zsh and oh-my-bash
   * Process Substition versus command substitution < <() < $()
+    sdiff <(ffprobe -show_frames test.mp4  | grep pkt_pts_time) <(ffprobe -show_frames original.mp4 | grep pkt_pts_time)
   * Detecting dotsourcing.
         https://stackoverflow.com/questions/2683279/how-to-detect-if-a-script-is-being-sourced
         ```sh
