@@ -297,6 +297,11 @@ Steps [README.md](./53_sync_files/README.md)
 Demonstrate date handling in shell.  
 Steps [README.md](./54_date_handling/README.md)  
 
+## Example 55 - vim setup
+
+Demonstrates configuring a container for `vim`  
+Steps [README.md](./55_vim/README.md)  
+
 ## 59 - monitoring folders
 
 Demonstrate how to monitor a folder for changes.  
