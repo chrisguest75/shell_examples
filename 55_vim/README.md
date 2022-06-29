@@ -4,6 +4,11 @@ Demonstrates configuring a container for `vim`
 
 Based on `nice prompt` example [here](https://github.com/chrisguest75/docker_build_examples/tree/master/21_nice_prompt)  
 
+TODO:
+
+* Create neovim example
+* Give some examples of how to use it to develop some code
+
 ## Build
 
 ```sh
