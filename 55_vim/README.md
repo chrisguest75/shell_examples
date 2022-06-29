@@ -2,7 +2,7 @@
 
 Demonstrates configuring a container for `vim`
 
-Based on `nice prompt` example [here](https://github.com/chrisguest75/docker_build_examples/tree/master/21_nice_prompt) 
+Based on `nice prompt` example [here](https://github.com/chrisguest75/docker_build_examples/tree/master/21_nice_prompt)  
 
 ## Build
 
@@ -27,8 +27,14 @@ vim --version
 
 tmux
 
+# start
 vim 
+
+# install plugins
 :PlugInstall
+
+# quit
+:qa!
 ```
 
 ## Cleanup
@@ -43,18 +49,10 @@ docker stop vimcontainer
 * oh-my-zsh [here](https://ohmyz.sh/#install)  
 * oh-my-bash [here](https://github.com/ohmybash/oh-my-bash)  
 * locales [here](http://jaredmarkell.com/docker-and-locales/)
-
-https://github.com/chrisguest75/default_dotfiles
-https://github.com/junegunn/vim-plug
-https://github.com/junegunn/vim-plug/wiki/tutorial
-
-https://vimawesome.com/
-
-
-https://vimawesome.com/plugin/nerdtree-red
-
-https://github.com/JAremko/alpine-vim
-
-https://github.com/amix/vimrc
-
-
+* My default_dotfiles repo [here](https://github.com/chrisguest75/default_dotfiles)  
+* junegunn/vim-plug repo [here](https://github.com/junegunn/vim-plug)  
+* junegunn/vim-plug/wiki/tutorial repo [here](https://github.com/junegunn/vim-plug/wiki/tutorial)  
+* AWESOME VIM PLUGINS [here](https://vimawesome.com/)  
+* https://vimawesome.com/plugin/nerdtree-red
+* https://github.com/JAremko/alpine-vim
+* https://github.com/amix/vimrc
