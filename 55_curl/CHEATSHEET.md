@@ -1,5 +1,6 @@
-# README
+# CHEATSHEET
 
+## Examples
 
 ```sh
 # post a json file
