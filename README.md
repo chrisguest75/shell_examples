@@ -297,7 +297,7 @@ Steps [README.md](./53_sync_files/README.md)
 Demonstrate date handling in shell.  
 Steps [README.md](./54_date_handling/README.md)  
 
-## Example 55 - vim setup
+## 55 - vim setup
 
 Demonstrates configuring a container for `vim`  
 Steps [README.md](./55_vim/README.md)  
@@ -311,6 +311,11 @@ Steps [README.md](./59_monitor_folder/README.md)
 
 Demonstrates building a hls from individual segments of wav files.  
 Steps [README.md](./60_create_hls_from_segments/README.md)  
+
+## 61 - curl
+
+Demonstrate some common examples with `curl`  
+Steps [README.md](./61_curl/README.md)  
 
 ## 👀 Resources
 
