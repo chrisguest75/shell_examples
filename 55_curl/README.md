@@ -6,7 +6,7 @@ TODO:
 
 * ssl negotiation
 * redirects implement and point to another nginx server (permanent with curl?)
-* go through options - -cookie-jar,  --trace-time
+* go through options - -cookie-jar [can-you-set-up-cookies-in-nginx](https://www.digitalocean.com/community/questions/can-you-set-up-cookies-in-nginx)  
 
 For `imgcat` check that the iterm2 shell integrations are installed.  
 
@@ -119,9 +119,4 @@ curl -vvvv -L http://0.0.0.0:8080/podinfo
 * Avoiding the Top 10 NGINX Configuration Mistakes [here](https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/#analyzer)
 * Installing NGINX Open Source [here](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source)
 * nginx documentation [here](https://nginx.org/en/docs/)  
-
-
-
-https://www.digitalocean.com/community/tutorials/how-to-create-temporary-and-permanent-redirects-with-nginx
-https://www.digitalocean.com/community/questions/can-you-set-up-cookies-in-nginx
-
+* How To Create Temporary and Permanent Redirects with Nginx [here](https://www.digitalocean.com/community/tutorials/how-to-create-temporary-and-permanent-redirects-with-nginx)  
