@@ -1,0 +1,59 @@
+services:
+
+    nginx:
+        image: "nginx:1.21.6"
+        volumes:
+            - type: bind
+              source: ./default.conf
+              target: /etc/nginx/templates/default.conf.template
+            - type: bind
+              source: ./nginx.conf
+              target: /etc/nginx/nginx.conf
+            - type: bind
+              source: ./html
+              target: /usr/share/nginx/html                                
+        ports:
+            - "10000:80"
+        environment:
+            - VERSION=nginx:1.21.6
+        networks:
+            - service_bridge
+
+    nginxproxy:
+        image: mitmproxy/mitmproxy:8.1.1
+        ports:
+            - "8080:8080"
+            - "9000:8081"
+        command: [ "mitmweb", "--web-host", "0.0.0.0", "--mode", "reverse:http://nginx:80" ]                
+        networks:
+            - service_bridge
+        depends_on:
+            - podinfo
+
+    podinfo:
+        image: "stefanprodan/podinfo:6.1.6"
+        restart: on-failure
+        environment:
+            - VERSION=6.1.6   
+            - PODNAME=podinfo
+        ports:
+            - "10001:9898"
+        command: [ "./podinfo", "--level=debug" ]            
+        networks:
+            - service_bridge    
+
+    podinfoproxy:
+        image: mitmproxy/mitmproxy:8.1.1
+        ports:
+            - "8081:8080"
+            - "9001:8081"
+        command: [ "mitmweb", "--web-host", "0.0.0.0", "--mode", "reverse:http://podinfo:9898" ]                
+        networks:
+            - service_bridge
+        depends_on:
+            - podinfo
+
+networks:
+    service_bridge:
+        driver: bridge
+
