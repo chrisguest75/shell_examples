@@ -5,8 +5,7 @@ Demonstrate some common examples with `curl`
 TODO:
 
 * ssl negotiation
-* retries - podinfo failures
-* redirects implement and point to another nginx server
+* redirects implement and point to another nginx server (permanent with curl?)
 * go through options - -cookie-jar,  --trace-time
 
 For `imgcat` check that the iterm2 shell integrations are installed.  
@@ -36,11 +35,18 @@ curl -i http://0.0.0.0:8080/
 curl -i http://0.0.0.0:8080/info
 curl http://0.0.0.0:8080/downloads/nginx.png
 
+# return error
+open http://0.0.0.0:8080/error
+# redirect
+open http://0.0.0.0:8080/podinfo
+
 # podinfo
 curl -i http://0.0.0.0:8081/
 curl -i http://0.0.0.0:8081/echo 
 # error code
 curl -i http://0.0.0.0:8081/status/503 
+# show timestamps
+curl -vvvv -i --trace-time http://0.0.0.0:8081/delay/10 
 ```
 
 ## Debug
@@ -100,9 +106,22 @@ Posting
 curl -H "Content-Type: application/json" -X POST -d '{"user":"bob","pass":"123"}' http://0.0.0.0:8081/echo 
 ```
 
+Follow redirects  
+
+```sh
+# follow HTTP/1.1 302 Moved Temporarily
+curl -vvvv -L http://0.0.0.0:8080/podinfo     
+```
+
 ## Resources
 
 * stefanprodan/podinfo [repo](https://github.com/stefanprodan/podinfo)  
 * Avoiding the Top 10 NGINX Configuration Mistakes [here](https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/#analyzer)
 * Installing NGINX Open Source [here](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source)
 * nginx documentation [here](https://nginx.org/en/docs/)  
+
+
+
+https://www.digitalocean.com/community/tutorials/how-to-create-temporary-and-permanent-redirects-with-nginx
+https://www.digitalocean.com/community/questions/can-you-set-up-cookies-in-nginx
+

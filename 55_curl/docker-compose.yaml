@@ -28,7 +28,7 @@ services:
         networks:
             - service_bridge
         depends_on:
-            - podinfo
+            - nginx
 
     podinfo:
         image: "stefanprodan/podinfo:6.1.6"
