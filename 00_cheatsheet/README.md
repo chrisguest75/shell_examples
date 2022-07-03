@@ -11,7 +11,7 @@ My personal [CHEATSHEET.md](./CHEATSHEET.md)
 ```sh
 # a quick function to simplify calling cheat.sh
 function cheatsheet() {
-	curl "cheat.sh/$1" 
+    curl "cheat.sh/$1" 
 }
 ```
 
@@ -26,6 +26,15 @@ cheatsheet "python/open a file"
 
 # git rollback
 cheatsheet "git/rollback" 
+```
+
+## iTerm2
+
+Install the iTerm2 shell integrations.  
+
+```sh
+# check if imgcat is not installed
+imgcat
 ```
 
 ## Resources
