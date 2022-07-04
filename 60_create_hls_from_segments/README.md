@@ -4,6 +4,8 @@ Demonstrates building a hls from individual segments of wav files.
 
 Ref: [47_ffmpeg/README.md](../47_ffmpeg/README.md)  
 
+NOTE: If running on linux you'll need to switch the gdate and gseq or setup aliases for them.  On MacOS you'll need `coreutils` installed.  
+
 ## How it works
 
 Take an mp3 file and decode it to a wav file.  Split this file up into 10 second chunks of either wav or aac.  
@@ -74,9 +76,10 @@ ffprobe -v error -show_format -show_streams -print_format json "./output/$WAVFIL
 ```sh
 mkdir -p ./output/chunked
 
-for index in $(seq -s " " -f %04g 0 10 $DURATION_SECONDS); 
+# gseq and gdate or seq and date
+for index in $(gseq -s " " -f %04g 0 10 $DURATION_SECONDS); 
 do
-    _starttime=$(date -d@$index -u +%H:%M:%S)
+    _starttime=$(gdate -d@$index -u +%H:%M:%S)
     ffmpeg -hide_banner -i "./output/$WAVFILE" -ss $_starttime -t 00:00:10 -vcodec copy -acodec copy ./output/chunked/${WAVFILE_NOEXT}.$index.wav
 done
 
@@ -120,7 +123,9 @@ done < <(ls ./output/singlehls)
 
 ## Create a partial HLS
 
-NOTE: It seems to get the last segment to play it needs to have an endlist
+Partial HLS is where we add a sement to the end of an existing HLS.  
+
+NOTE: It seems to get the last segment to play it needs to have an endlist  
 
 ```sh
 rm -rf ./output/partialhls
@@ -131,7 +136,7 @@ ffmpeg -y -hide_banner -i "./output/chunked/${WAVFILE_NOEXT}.0000.wav" -c:a aac 
 ## NOTE modify pts
 ffprobe -v error -show_format -show_streams -print_format json "./output/chunked/${WAVFILE_NOEXT}.0010.wav" | jq '.streams[].codec_time_base'
 
-for CHUNK in $(seq -s " " -f %04g 10 10 $DURATION_SECONDS); 
+for CHUNK in $(gseq -s " " -f %04g 10 10 $DURATION_SECONDS); 
 do
     # sum current duration for new audio pts
     CURRENT_DURATION=$(cat ./output/partialhls/playlist.m3u8 | grep EXTINF | awk -F':' '{gsub(/,/, "", $2);print $2}' | awk '{OFMT = "%9.6f";s+=$1} END {print s}')
@@ -160,9 +165,9 @@ done < <(ls ./output/partialhls)
 ```sh
 mkdir -p ./output/chunkedaac
 
-for index in $(seq -s " " -f %04g 0 10 $DURATION_SECONDS); 
+for index in $(gseq -s " " -f %04g 0 10 $DURATION_SECONDS); 
 do
-    _starttime=$(date -d@$index -u +%H:%M:%S)
+    _starttime=$(gdate -d@$index -u +%H:%M:%S)
     ffmpeg -hide_banner -i "./output/$WAVFILE" -ss $_starttime -t 00:00:10 ./output/chunkedaac/${WAVFILE_NOEXT}.$index.m4a
 done
 
@@ -189,6 +194,10 @@ ffmpeg -hide_banner -f concat -safe 0 -i ./output/chunkedaac_streams.txt -c copy
 
 ## Create a partial HLS (aac)
 
+Partial HLS is where we add a segment to the end of an existing HLS.  
+
+NOTE: It seems to get the last segment to play it needs to have an endlist  
+
 ```sh
 rm -rf ./output/partialhlsaac
 mkdir -p ./output/partialhlsaac
@@ -198,7 +207,7 @@ ffmpeg -y -hide_banner -i "./output/chunkedaac/${WAVFILE_NOEXT}.0000.m4a" -c:a a
 ## NOTE modify pts
 ffprobe -v error -show_format -show_streams -print_format json "./output/chunkedaac/${WAVFILE_NOEXT}.0010.m4a" | jq '.streams[].codec_time_base'
 
-for CHUNK in $(seq -s " " -f %04g 10 10 $DURATION_SECONDS); 
+for CHUNK in $(gseq -s " " -f %04g 10 10 $DURATION_SECONDS); 
 do
     # sum current duration for new audio pts
     CURRENT_DURATION=$(cat ./output/partialhlsaac/playlist.m3u8 | grep EXTINF | awk -F':' '{gsub(/,/, "", $2);print $2}' | awk '{OFMT = "%9.6f";s+=$1} END {print s}')
