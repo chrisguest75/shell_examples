@@ -36,6 +36,10 @@ Goto https://librivox.org/ and download some audio books
 mkdir -p ./sources/audiobooks/  
 curl -vvv -L -o ./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3.zip http://www.archive.org/download/christmas_short_works_2008_0812/christmas_short_works_2008_0812_64kb_mp3.zip
 unzip ./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3.zip -d ./sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3
+
+# dracula
+curl -vvv -L -o ./sources/audiobooks/dracula_librivox_64kb_mp3.zip https://ia800705.us.archive.org/7/items/dracula_librivox/dracula_librivox_64kb_mp3.zip
+unzip ./sources/audiobooks/dracula_librivox_64kb_mp3.zip -d ./sources/audiobooks/dracula_librivox_64kb_mp3
 ```
 
 ## Set .env
