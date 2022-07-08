@@ -317,6 +317,11 @@ Steps [README.md](./60_create_hls_from_segments/README.md)
 Demonstrate some common examples with `curl`  
 Steps [README.md](./61_curl/README.md)  
 
+## 62 - binary files
+
+Working with binary files in shell.  
+Steps [README.md](./62_binary_files/README.md)  
+
 ## 👀 Resources
 
 * Google script standards [here](https://google.github.io/styleguide/shellguide.html)

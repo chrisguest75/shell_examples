@@ -235,20 +235,30 @@ do
 done < <(ls ./output/partialhlsaac)
 ```
 
+## Validating with HLS Devloper Tools (apple developer required)
+
+Goto Download link and install `dmg` [here](https://developer.apple.com/download/all/?q=HLS)
+
+```sh
+# generate json report
+mediastreamvalidator -o partialhls_validation.json ./output/partialhls/fixed_playlist.m3u8
+
+# deeper analysis in html format
+hlsreport --disc -V ./validation_data.json  
+```
 
 ## Resources
 
+* HLS options for FFMPEG [here](https://ffmpeg.org/ffmpeg-formats.html#Options-9)
+* HTTP Live Streaming RFC 8216 [here](https://datatracker.ietf.org/doc/html/rfc8216)
 * convert-seconds-to-hours-minutes-seconds [here](https://stackoverflow.com/questions/12199631/convert-seconds-to-hours-minutes-seconds)  
 * how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion [here](https://unix.stackexchange.com/questions/60257/how-to-create-a-sequence-with-leading-zeroes-using-brace-expansion)  
 * ffmpeg-append-segments-to-m3u8-file-without-ext-x-discontinuity-tag [here](https://stackoverflow.com/questions/63592822/ffmpeg-append-segments-to-m3u8-file-without-ext-x-discontinuity-tag)  
 * practical-ffmpeg-commands-to-manipulate-a-video [here](https://transang.me/practical-ffmpeg-commands-to-manipulate-a-video/)  
+* ffmpegExplained.sh [here](https://gist.github.com/samson-sham/7cb3a404a7aaaff62ec0ebbe08fb84e1)
+* Shell command to sum integers, one per line? [here](https://stackoverflow.com/questions/450799/)shell-command-to-sum-integers-one-per-line
+* Use Awk to extract substring [here](https://stackoverflow.com/questions/16040567/use-awk-to-extract-substring)
+* Apple Developer HLS Streaming tools [here](https://developer.apple.com/download/all/?q=HLS)
 
 
-https://gist.github.com/samson-sham/7cb3a404a7aaaff62ec0ebbe08fb84e1
 
-https://ffmpeg.org/ffmpeg-formats.html#Options-9
-
-
-
-https://stackoverflow.com/questions/450799/shell-command-to-sum-integers-one-per-line
-https://stackoverflow.com/questions/16040567/use-awk-to-extract-substring
