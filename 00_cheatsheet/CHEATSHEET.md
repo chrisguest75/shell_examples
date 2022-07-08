@@ -72,6 +72,8 @@ echo "Exited loop $_count"
 
 ## Loop over data structures
 
+NOTE: When using readline loops you might need to pipe in `< /dev/null` to ensure the input characters from the list are not used as input. This happens with `ffmpeg`.  
+
 ```sh
 # heredoc tempfile
 TEMPFILE=$(mktemp)
