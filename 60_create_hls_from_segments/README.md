@@ -259,6 +259,5 @@ hlsreport --disc -V ./validation_data.json
 * Shell command to sum integers, one per line? [here](https://stackoverflow.com/questions/450799/)shell-command-to-sum-integers-one-per-line
 * Use Awk to extract substring [here](https://stackoverflow.com/questions/16040567/use-awk-to-extract-substring)
 * Apple Developer HLS Streaming tools [here](https://developer.apple.com/download/all/?q=HLS)
-
-
+* HTTP Live Streaming (HLS) Authoring Specification for Apple Devices [here](https://developer.apple.com/documentation/http_live_streaming/http_live_streaming_hls_authoring_specification_for_apple_devices)  
 
