@@ -253,6 +253,13 @@ export ORIGIN=$(pwd)/lib
 jq --null-input --arg none "none" --arg leading "    leading" --arg trailing "trailing     " --arg both "   both    " 'import "trim" as lib; . + {none: $none | lib::trim(.), leading: $leading | lib::trim(.), trailing: $trailing | lib::trim(.), both: $both | lib::trim(.)}' 
 ```
 
+## Regex Capture
+
+```sh
+# extract a number and use it to sort the documents
+jq -s -c '.[] | . + { id: .file | capture("file(?<file>([[:digit:]]+))").file | tonumber}' ./hls_timecodes.json | jq -s -c '. | sort_by(.id) | .[]'
+```
+
 ## Loading fields into environment vars
 
 ```sh
@@ -330,3 +337,4 @@ jq '[ (. | del(.config)), (.config + { "array_field": .config.base64_array_field
 * Example [pokedex](https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json) json file
 * Guide to Linux jq Command for JSON Processing [here](https://www.baeldung.com/linux/jq-command-json)
 * How to add a header to CSV export in jq? [here](https://stackoverflow.com/questions/30015555/how-to-add-a-header-to-csv-export-in-jq)
+
