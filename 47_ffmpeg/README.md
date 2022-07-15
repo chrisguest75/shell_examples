@@ -94,6 +94,23 @@ for i in *.r*; do ffmpeg -i "$i" "${i%.*}.mp3"; done
 for i in *.r*; do echo "${i%.*}.mp3"; done
 ```
 
+## Record from devices (macosx)
+
+```sh
+# list available devices
+mkdir -p ./recordings
+ffmpeg -f avfoundation -list_devices true -i "" 
+
+# record video and audio
+ffmpeg -f avfoundation -framerate 30 -i "0:0" ./recordings/output.mp4
+
+# record segments
+ffmpeg -f avfoundation -framerate 30 -video_size 640x480 -i "0:0" -flags +global_header -f segment -segment_time 60 -segment_format_options movflags=+faststart -reset_timestamps 1 ./recordings/test%d.mp4
+
+# NOT WORKING (host a stream for VLC)
+ffmpeg -f avfoundation -framerate 30 -video_size 640x480 -i "0:0" -vcodec libx264 -preset ultrafast -tune zerolatency -pix_fmt yuv422p -f mpegts udp://0.0.0.0:12345
+```
+
 ## host a stream (push a stream to server)
 
 ```sh
