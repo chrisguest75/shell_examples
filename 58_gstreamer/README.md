@@ -43,14 +43,14 @@ gst-stats-1.0 --help-all
 ## Analyse
 
 ```sh
-gst-discoverer-1.0 -v --gst-debug-level=3 /assets/french_lesangesdansnoscampagnes_unknown_ezwa_64kb.mp3
+# 
+gst-discoverer-1.0 -v --gst-debug-level=3 /assets/sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3/dutch_kerstfeest_bilderdijk_ezwa_64kb.mp3
 
 
 
 gst-discoverer-1.0 -v --gst-debug-level=3 /assets/output/7jul_partialhlsaac_matchdurations_hls/file0.ts
 
-gst-discoverer-1.0 -v --gst-debug-level=3 /assets
-/sources/7jul-ios-5seconds-30min/0000001.mp4 
+gst-discoverer-1.0 -v --gst-debug-level=3 /assets/sources/7jul-ios-5seconds-30min/0000001.mp4 
 
 ```
 
