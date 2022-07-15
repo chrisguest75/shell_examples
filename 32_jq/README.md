@@ -2,12 +2,6 @@
 
 Demonstrates some examples of using jq to process json files
 
-TODO:
-
-* removing nodes in the document
-* capture - `capture(".*[[:digit:]]+)}]`
-* base64 encoding and decoding a field
-
 Github [JQ](https://github.com/stedolan/jq) repo.  
 
 ## Install
@@ -59,6 +53,8 @@ jq -r ".[][].height | split(\" \") | .[0] | tonumber" ./pokedex.json
 ```
 
 ## Document creation and modification
+
+Ref: Loading md5 values into a document [here](../63_md5_file_id/README.md)  
 
 ```sh
 # add fields to an empty document - have to have {}
