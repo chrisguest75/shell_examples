@@ -18,6 +18,13 @@ gmd5sum --version
 gmd5sum --help
 ```
 
+## Calculate hash only
+
+```sh
+file ./README.md  
+md5sum ./README.md | tr " " "\n" | head -n 1   
+```
+
 ## Create md5 values
 
 ```sh
@@ -42,3 +49,4 @@ done < <(cat ${TEMPFILE})
 
 ## Resources
 
+* Only get hash value using md5sum (without filename) [here](https://stackoverflow.com/questions/3679296/only-get-hash-value-using-md5sum-without-filename)
