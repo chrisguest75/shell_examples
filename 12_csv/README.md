@@ -24,11 +24,12 @@ cat ./test.map | ./csv2json.sh
 ## Generate CSV from CPU data
 
 ```sh
+echo "time,cpu,pid,process" > ./cpu.csv
 for index in $(seq 0 100 ); 
 do
     ps -opcpu -opid -ocomm -cax | grep -i windowserver | sort -r | sed "s/^/$(date '+%H:%M:%S') /" | sed 's/\t/ /g' | sed 's/  */ /g' | sed 's/ /,/g'
     sleep 1
-done > ./cpu.csv
+done >> ./cpu.csv
 
 sqlite3 :memory: -cmd '.mode csv' -cmd '.import cpu.csv cpu' 'SELECT time, COUNT(*), AVG(cpu) FROM cpu '
 ```
@@ -47,3 +48,6 @@ ps wwaux | grep code
 ps  -opcpu -opid -ocomm -cax | sort
 
 sed 's/\t/ /g' test.txt |sed 's/  */ /g' |sed 's/ /,/g'
+
+sudo powermetrics --samplers smc | grep -i "CPU die temperature"
+
