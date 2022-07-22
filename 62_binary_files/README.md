@@ -2,6 +2,10 @@
 
 Working with binary files in shell.
 
+TODO:
+
+* hexdump, hexfiend, fq
+
 ## VSCode
 
 ```sh
@@ -52,4 +56,21 @@ file ./emoji.txt
 xxd ./emoji.txt
 ```
 
+## fq
 
+fq is jq for media files  
+
+```sh
+# install fq
+brew install wader/tap/fq
+
+# decode
+fq d ./test.mp3
+```
+
+## Resources
+
+* The *Binary Tools Summit 2022* is an informal, technical, online event
+oriented to authors, users and enthusiasts of FLOSS programs that deal
+with binary data. [here](https://binary-tools.net/summit)  
+* fq repo [here](https://github.com/wader/fq)  
