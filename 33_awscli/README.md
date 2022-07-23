@@ -65,6 +65,10 @@ AWS Batch [BATCH.md](./BATCH.md)
 
 VPC [VPC.md](./VPC.md)  
 
+## SSM
+
+SSM [SSM.md](./SSM.md)  
+
 ## Route53
 
 Route 53 [Route53.md](./Route53.md)  
