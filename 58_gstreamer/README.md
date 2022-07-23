@@ -4,8 +4,64 @@ Demonstrate some basic `gstreamer` examples
 
 ## Prereqs (local)
 
+`gstreamer` is split into different installs of the main build and different plugin packs.  
+
 ```sh
+# install base executables
+# installs coreelements, coretracers & staticelements
 brew install gstreamer
+```
+
+After installing `brew` will echo out.  
+
+Consider also installing gst-plugins-base and gst-plugins-good.  
+
+The gst-plugins-* packages contain gstreamer-video-1.0, gstreamer-audio-1.0, and other components needed by most gstreamer applications.  
+
+gst-plugins-bad, gst-plugins-base, gst-plugins-good, gst-plugins-rs, gst-plugins-ugly  
+
+```sh
+brew install gst-plugins-base
+brew install gst-plugins-good
+```
+
+## Tools with gstreamer
+
+### gst-inspect-1.0
+
+Inspect the installed plugins  
+
+```sh
+# list installed plugins
+gst-inspect-1.0 --help 
+# inspect a specific plugin
+gst-inspect-1.0 --plugin coreelements
+# list blacklisted plugins
+gst-inspect-1.0 -b
+```
+
+### gst-typefind-1.0
+
+Identify the mime type of a file.  
+
+```sh
+gst-typefind-1.0 --help-all 
+
+gst-typefind-1.0 ./output/file.wav
+
+gst-typefind-1.0 --gst-debug-level=9 ./file.m4a
+```
+
+### Other tools
+
+```sh
+gst-stats-1.0 --help-all    
+gst-discoverer-1.0 --help 
+```
+
+
+```sh
+gst-launch-1.0 --help 
 ```
 
 ## Docker Playground
@@ -18,26 +74,8 @@ docker build -t gstreamer .
 ASSETS=$(pwd)/../../ffmpeg_examples/sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3
 # Start container
 docker run -v $ASSETS:/assets --rm -it gstreamer 
-```
 
-## Start
-
-```sh
 ls /assets/
-```
-
-## Tools with gstreamer
-
-```sh
-gst-discoverer-1.0 --help 
-
-gst-launch-1.0 --help 
-
-gst-inspect-1.0 --help 
-
-gst-typefind-1.0 --help-all 
-
-gst-stats-1.0 --help-all    
 ```
 
 ## Analyse
@@ -61,6 +99,10 @@ gst-discoverer-1.0 -v --gst-debug-level=3 /assets/sources/7jul-ios-5seconds-30mi
 SOURCE=/assets/english_christmas1873_macdonald_mtd_64kb.mp3
 OUTPUT=./english_christmas1873_macdonald_mtd_64kb.mp3
 gst-launch-1.0 filesrc location=$SOURCE ! mp3parse ! audioconvert ! lame ! filesink location=$OUTPUT
+
+# spliting audio into 1 second chunks.
+mkdir -p ./output/testtonechunks
+gst-launch-1.0 filesrc location="./output/testtone.wav" ! decodebin ! audioconvert ! splitmuxsink location=./output/testtonechunks/file_%03d.wav muxer=wavenc max-size-time=1000000000
 ```
 
 
