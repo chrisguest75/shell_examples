@@ -30,6 +30,9 @@ gdate --rfc-3339=ns
 
 # Include nanoseconds "1652169462.931413000"
 gdate +%s.%N 
+
+# Filesafe datetime
+gdate "+%Y%m%d-%H%M%S"
 ```
 
 ## MacOSX
