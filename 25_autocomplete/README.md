@@ -1,11 +1,14 @@
 # README
+
 Demonstrate how to write autocomplete scripts
  
 TODO:
+
 * register and unregister completions?
 * Do completions already exist for script?
 
 ## Install completions
+
 ```sh
 # source the completion script
 . ./example-completion.bash  
@@ -14,12 +17,14 @@ source ./example-completion.bash
 ```
 
 ## See basic options
+
 ```sh
 # print options
 ./test-script.sh <tab> <tab>
 ```
 
 ## See internals
+
 ```sh
 # look at the internal variables that can be used to determine output
 export COMPLETION_DEBUG="true"
@@ -28,6 +33,7 @@ unset COMPLETION_DEBUG
 ```
 
 ## How it works
+
 We assign a completion function and then use it to print out a list of options.  
 
 ```sh
@@ -36,6 +42,7 @@ man builtins
 ```
 
 ## Examples
+
 ```sh
 ./test_script.sh --action=ls <tab>
 ./test_script.sh --action=ls -f=-l              
@@ -60,5 +67,6 @@ source ./remove-completions.bash
 ```
 
 ## Research
-[bash-programmable-completion-tutorial](https://iridakos.com/programming/2018/03/01/bash-programmable-completion-tutorial)  
-[how-to-create-script-with-auto-complete](https://askubuntu.com/questions/68175/how-to-create-script-with-auto-complete)  
+
+* [bash-programmable-completion-tutorial](https://iridakos.com/programming/2018/03/01/bash-programmable-completion-tutorial)  
+* [how-to-create-script-with-auto-complete](https://askubuntu.com/questions/68175/how-to-create-script-with-auto-complete)  

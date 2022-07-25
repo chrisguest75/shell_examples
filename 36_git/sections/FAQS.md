@@ -103,6 +103,13 @@ git merge-base mybranch master
 git diff $(git merge-base $(git branch --show-current) master)..head --name-only
 ```
 
+### View a file from another branch
+
+```sh
+# show a file in a branch
+git show origin/branchname:path/README.md  
+```
+
 ### Checkout a file from another branch
 
 Use to undo single file changes in a branch.

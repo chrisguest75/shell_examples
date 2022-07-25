@@ -1,16 +1,20 @@
 # README
+
 Install a basic systemd service
 
 TODO:
+
 * Add an apt installer with manpage.
 
 ## Configure
+
 ```sh
 # generate config from shell variables $USER and $PWD
 cat ./chrisguest75webservice.service.template | envsubst > ./chrisguest75webservice.service 
 ```
 
 ## Install
+
 ```sh
 # install the service
 sudo ln -s $(pwd)/chrisguest75webservice.service /etc/systemd/system/chrisguest75webservice.service  
@@ -48,7 +52,6 @@ systemctl stop chrisguest75webservice
 sudo rm /etc/systemd/system/chrisguest75webservice.service  
 ```
 
+## Resources
 
-# Resources
-
-[systemd wiki](https://www.freedesktop.org/wiki/Software/systemd/)  
+* [systemd wiki](https://www.freedesktop.org/wiki/Software/systemd/)  
