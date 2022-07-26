@@ -68,9 +68,34 @@ brew install wader/tap/fq
 fq d ./test.mp3
 ```
 
+## diffing
+
+`cmp` for byte by byte diffs  
+
+```sh
+cmp -l ./file1.wav ./file2.wav
+```
+
+`diff` using xxd line diffs  
+
+```sh
+diff -u <(xxd ./file1.wav) <(xxd ./file2.wav) | head -n 25
+```
+
+`dhex` for TUI diffing.  
+
+```sh
+# install 
+brew info dhex     
+
+# requires setting up keybindings (quit is f10)
+dhex ./file1.wav ./file2.wav
+```
+
 ## Resources
 
 * The *Binary Tools Summit 2022* is an informal, technical, online event
 oriented to authors, users and enthusiasts of FLOSS programs that deal
 with binary data. [here](https://binary-tools.net/summit)  
 * fq repo [here](https://github.com/wader/fq)  
+* dhex — hex editor with a diff mode [here](https://manpages.ubuntu.com/manpages/bionic/man1/dhex.1.html)  
