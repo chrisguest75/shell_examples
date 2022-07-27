@@ -1,7 +1,9 @@
 # README
+
 Demonstrates techniques for using sed to process files.
 
-## Examples 
+## Examples
+
 This technique can be used for any platform hosting nginx in a container where a port remap to a arbitrary number is required. i.e. CloudRun, Heroku, etc.
 
 ```sh
@@ -13,7 +15,13 @@ sed -i .bak "s/listen[ ]*80;/listen $PORT;/g" ./nginx.conf
 sed -i.bak "s/listen[ ]*80;/listen $PORT;/g" ./nginx.conf  
 ```
 
-# Resources
+## Removing lines
+
+```sh
+# delete a matching line
+sed "/listen[ ]*80;/d" ./nginx.conf  
+```
+
+## Resources
+
 * `cheatsheet sed`
-
-

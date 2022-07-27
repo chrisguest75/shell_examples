@@ -92,6 +92,20 @@ brew info dhex
 dhex ./file1.wav ./file2.wav
 ```
 
+## Poke
+
+```sh
+# build the image
+docker build --no-cache --progress=plain -f Dockerfile.poke -t poke . 
+# run a command 
+docker run --rm -it -v$(realpath ./):/share --entrypoint /bin/bash poke 
+
+poke
+
+.help
+.exit
+```
+
 ## Resources
 
 * The *Binary Tools Summit 2022* is an informal, technical, online event
@@ -99,3 +113,7 @@ oriented to authors, users and enthusiasts of FLOSS programs that deal
 with binary data. [here](https://binary-tools.net/summit)  
 * fq repo [here](https://github.com/wader/fq)  
 * dhex — hex editor with a diff mode [here](https://manpages.ubuntu.com/manpages/bionic/man1/dhex.1.html)  
+* Welcome to Pokology [here](https://pokology.org/)
+* GNU poke Manual [here](http://jemarch.net/poke-2.4-manual/poke.html)
+
+
