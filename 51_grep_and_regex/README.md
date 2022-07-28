@@ -23,6 +23,9 @@ ggrep
 ```sh
 # show lines before and after match
 grep -A 10 -B 10
+
+# OR has to be escaped.
+grep "continuity\|PID"
 ```
 
 ## Perl grep expressions
