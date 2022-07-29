@@ -162,6 +162,9 @@ More information is available at [manual](https://stedolan.github.io/jq/manual/#
 export ORIGIN=$(pwd)/lib
 echo '{"a":{"c":2}, "b":2}' | jq 'import "schema" as lib; lib::schema(.)'
 
+# formatting numbers
+jq -r 'import "formatnumber" as lib; .results[] | [lib::formatnumber(.start_time), lib::formatnumber(.end_time)] | @csv ' ./number_formatting.json
+
 # load schema from global module
 cp ./lib/schema.jq ~/.jq    
 echo '{"a":{"c":2}, "b":2}' | jq 'schema(.)'

@@ -1,0 +1,1 @@
+def formatnumber($value): $value*100.0|round/100.0;
