@@ -1,10 +1,18 @@
 FROM ubuntu:22.04
 
-#        gstreamer1.0-doc \
-
 ARG DEBIAN_FRONTEND=noninteractive
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-RUN apt-get update && apt-get install \
+
+RUN apt-get update && apt-get install zsh curl git nano locales -y 
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8  
+
+RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+#        gstreamer1.0-doc \
+RUN apt-get install \
         libgstreamer1.0-dev \
         libgstreamer-plugins-base1.0-dev \
         libgstreamer-plugins-bad1.0-dev \

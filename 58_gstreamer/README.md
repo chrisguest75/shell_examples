@@ -2,6 +2,10 @@
 
 Demonstrate some basic `gstreamer` examples  
 
+TODO:
+
+* AAC to WAV (does it increase duration?)
+
 ## Prereqs (local)
 
 `gstreamer` is split into different installs of the main build and different plugin packs.  
@@ -14,13 +18,16 @@ brew install gstreamer
 
 After installing `brew` will echo out.  
 
+```txt
 Consider also installing gst-plugins-base and gst-plugins-good.  
 
 The gst-plugins-* packages contain gstreamer-video-1.0, gstreamer-audio-1.0, and other components needed by most gstreamer applications.  
 
 gst-plugins-bad, gst-plugins-base, gst-plugins-good, gst-plugins-rs, gst-plugins-ugly  
+```
 
 ```sh
+# install the other plugins
 brew install gst-plugins-base
 brew install gst-plugins-good
 ```
@@ -59,8 +66,8 @@ gst-stats-1.0 --help-all
 gst-discoverer-1.0 --help 
 ```
 
-
 ```sh
+# main pipeline tool
 gst-launch-1.0 --help 
 ```
 
@@ -71,42 +78,38 @@ gst-launch-1.0 --help
 docker build -t gstreamer . 
 
 # Run
-ASSETS=$(pwd)/../../ffmpeg_examples/sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3
+ASSETS=$(pwd)/../../ffmpeg_examples/sources
 # Start container
 docker run -v $ASSETS:/assets --rm -it gstreamer 
 
+# switch into zsh
+zsh
 ls /assets/
 ```
 
 ## Analyse
 
 ```sh
-# 
+# gives an ffprobe style output
 gst-discoverer-1.0 -v --gst-debug-level=3 /assets/sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3/dutch_kerstfeest_bilderdijk_ezwa_64kb.mp3
-
-
-
-gst-discoverer-1.0 -v --gst-debug-level=3 /assets/output/7jul_partialhlsaac_matchdurations_hls/file0.ts
-
-gst-discoverer-1.0 -v --gst-debug-level=3 /assets/sources/7jul-ios-5seconds-30min/0000001.mp4 
-
 ```
 
 ## Audio
 
 ```sh
 # NOTE: mp3parse is not working
-SOURCE=/assets/english_christmas1873_macdonald_mtd_64kb.mp3
-OUTPUT=./english_christmas1873_macdonald_mtd_64kb.mp3
+SOURCE=/assets/sources/audiobooks/christmas_short_works_2008_0812_64kb_mp3/english_achristmastree_dickens_rg_64kb.mp3
+OUTPUT=./english_achristmastree_dickens_rg_64kb.mp3
 gst-launch-1.0 filesrc location=$SOURCE ! mp3parse ! audioconvert ! lame ! filesink location=$OUTPUT
 
 # spliting audio into 1 second chunks.
 mkdir -p ./output/testtonechunks
-gst-launch-1.0 filesrc location="./output/testtone.wav" ! decodebin ! audioconvert ! splitmuxsink location=./output/testtonechunks/file_%03d.wav muxer=wavenc max-size-time=1000000000
+SOURCE=/assets/output/testtone.m4a
+gst-launch-1.0 filesrc location="$SOURCE" ! decodebin ! audioconvert ! splitmuxsink location=./output/testtonechunks/file_%03d.wav muxer=wavenc max-size-time=1000000000
+
+# they end up as  Duration: 0:00:00.975238096
+gst-discoverer-1.0 -v --gst-debug-level=3 ./output/testtonechunks/file_004.wav
 ```
-
-
-
 
 ## Resources
 
