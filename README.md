@@ -329,7 +329,7 @@ Steps [README.md](./62_binary_files/README.md)
 
 
 📝 TODO:
-  * oh-my-zsh and oh-my-bash
+  * mkfifo - https://man7.org/linux/man-pages/man3/mkfifoat.3.html
   * Process Substition versus command substitution < <() < $()
     sdiff <(ffprobe -show_frames test.mp4  | grep pkt_pts_time) <(ffprobe -show_frames original.mp4 | grep pkt_pts_time)
   * Detecting dotsourcing.
