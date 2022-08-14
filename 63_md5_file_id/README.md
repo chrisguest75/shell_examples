@@ -1,6 +1,6 @@
 # README
 
-Demonstrate how to id files using `md5sum`
+Demonstrate how to id files using `md5` and `md5sum`
 
 TODO:
 
@@ -9,6 +9,9 @@ TODO:
 ## Help
 
 ```sh
+# md5 – calculate a message-digest fingerprint (checksum) for a file
+md5
+
 # bsd version
 md5sum --version
 md5sum --help
@@ -21,8 +24,43 @@ gmd5sum --help
 ## Calculate hash only
 
 ```sh
+# file type
 file ./README.md  
+
+# generate the md5
+cat ./README.md | md5 
+
+# trim out filenames
 md5sum ./README.md | tr " " "\n" | head -n 1   
+```
+
+## Verify md5
+
+Simple little verification for a file against an md5 value.  
+
+```sh
+function verify_md5() {
+    : ${1?"${FUNCNAME[0]}(url) - missing url argument"}
+    : ${2?"${FUNCNAME[0]}(url) - missing md5 argument"}
+
+    local URL=$1
+    local MD5=$2
+    local FILENAME="./$(basename $URL)"
+    curl -s -o $FILENAME $URL 
+    local FILE_MD5=$(cat $FILENAME | md5)
+    if [[ $FILE_MD5 == $MD5 ]]; then
+        echo "SUCCESS: MD5 for $FILENAME matches $MD5"
+    else
+        >&2 echo "FAIL: MD5 for $FILENAME does not match $MD5 - actual $FILE_MD5"
+    fi 
+}
+
+MD5="d04fba2d9245e661f245de0577f48a33"
+URL=https://nchc.dl.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.gz 
+verify_md5 "$URL" "$MD5"
+
+MD5="00000000000000000000000000000000"
+verify_md5 "$URL" "$MD5"
 ```
 
 ## Create md5 values
