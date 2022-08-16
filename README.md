@@ -322,36 +322,32 @@ Steps [README.md](./61_curl/README.md)
 Working with binary files in shell.  
 Steps [README.md](./62_binary_files/README.md)  
 
+## 63 - md5
+
+Demonstrate how to id files using `md5` and `md5sum`  
+Steps [README.md](./63_md5_file_id/README.md)  
+
+## 64 - calculations
+
+Demonstrate some way of performing calculations in shell and scripts.  
+Steps [README.md](./64_calculations/README.md)  
+
 ## 👀 Resources
 
 * Google script standards [here](https://google.github.io/styleguide/shellguide.html)
 * Understanding tabs output [here](https://unix.stackexchange.com/questions/389255/determine-how-long-tabs-t-are-on-a-line)
 
-
 📝 TODO:
+
+  * -- end of options https://www.cyberciti.biz/faq/what-does-double-dash-mean-in-ssh-command 
   * mkfifo - https://man7.org/linux/man-pages/man3/mkfifoat.3.html
   * Process Substition versus command substitution < <() < $()
     sdiff <(ffprobe -show_frames test.mp4  | grep pkt_pts_time) <(ffprobe -show_frames original.mp4 | grep pkt_pts_time)
-  * Detecting dotsourcing.
-        https://stackoverflow.com/questions/2683279/how-to-detect-if-a-script-is-being-sourced
-        ```sh
-        (return 0 2>/dev/null) && SOURCED=1 || SOURCED=0
-          if [[ $SOURCED == 1 ]]; then
-            #echo "Script is being sourced"
-            return 1
-            #else
-            #echo "Script is a subshell"
-          fi
-        ```
-  * tricks and shortcuts [[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell"
-  * printing and formatting numbers
   * zsh versus bash
   * defensive programming
   * snaps
-  * strace cmd 
   * debugfs
   * subst
-  * cut
   * Add a keywords index for links through to examples.  
   * Options 
     https://unix.stackexchange.com/questions/310957/how-to-restore-the-value-of-shell-options-like-set-x
