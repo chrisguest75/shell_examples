@@ -4,7 +4,7 @@ Container Instances are the hosts tasks are the pods.
 
 TODO:
 
-* ecs-cli - ecs local
+* ecs-cli - ecs local https://docs.docker.com/cloud/ecs-integration/
 
 ## Help
 
