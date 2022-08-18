@@ -43,6 +43,7 @@ Pushing images to new repositories
 ```sh
 aws ecr create-repository --repository-name apprunner-test --region eu-west-1
 
+# registry/imagename:tag
 docker tag nginx:1.20.1 xxxxxxxxxxxx.dkr.ecr.eu-west-1.amazonaws.com/apprunner-test:nginx-1-20-1
 
 aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin "xxxxxxxxxxxx.dkr.ecr.eu-west-1.amazonaws.com"
@@ -50,4 +51,4 @@ aws ecr get-login-password --region eu-west-1 | docker login --username AWS --pa
 docker push xxxxxxxxxxxx.dkr.ecr.eu-west-1.amazonaws.com/apprunner-test:nginx-1-20-1
 ```
 
-## Resources 
+## Resources

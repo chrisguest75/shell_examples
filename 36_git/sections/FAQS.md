@@ -96,6 +96,12 @@ git rebase master
 git merge-base mybranch master
 ```
 
+### Show changes in staged
+
+```sh
+git diff --cached 
+```
+
 ### Changes to a branch since creation
 
 ```sh
