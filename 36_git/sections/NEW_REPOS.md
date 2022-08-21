@@ -11,7 +11,8 @@ Click `Add File` button in `github` portal.  Type in name as `LICENSE` and choos
 More info on [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 
 ```txt
-@chrisguest75
+*           @chrisguest75
+.github/*   @chrisguest75
 ```
 
 ## Adding pipelines

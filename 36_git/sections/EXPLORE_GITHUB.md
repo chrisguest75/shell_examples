@@ -7,44 +7,63 @@ TODO:
 * add branch protection for codeowners.
 * Check license as well.
 
+Ref: [NEW_REPOS.md](./NEW_REPOS.md)
 
-
-```sh
-gh repo ls --limit 150 --json name,isPrivate,isFork | jq . 
-gh repo ls --limit 150 --json name,isPrivate,isFork | jq -r '.[] | select(.isFork == false and .isPrivate == false) | (.name)'
-
-gh api repos/chrisguest75/shell_examples | jq -r '.default_branch'
-gh api repos/chrisguest75/github-of-life | jq -r '.default_branch'
-
-```
-
+## List repos
 
 ```sh
 export PAGER=          
-gh api repos/chrisguest75/shell_examples/codeowners/errors
-gh api repos/chrisguest75/github-of-life/codeowners/errors 
+
+# list all repos 
+gh repo ls --limit 150 --json name,isPrivate,isFork | jq . 
+
+# filter non-forks and public
+gh repo ls --limit 150 --json name,isPrivate,isFork | jq -r '.[] | select(.isFork == false and .isPrivate == false) | (.name)'
 ```
 
-https://raw.githubusercontent.com/chrsiguest75/shell-examples/master/CODEOWNERS
-https://raw.githubusercontent.com/chrsiguest75/github-of-life/main/CODEOWNERS
+```sh
+# find the default branch for this repo
+gh api repos/chrisguest75/shell_examples | jq -r '.default_branch'
+```
 
+## Codeowners
+
+```sh
+# get codeowners errors
+gh api repos/chrisguest75/shell_examples/codeowners/errors
+
+# get file from repo (public only)
+curl https://raw.githubusercontent.com/chrisguest75/github-of-life/main/CODEOWNERS
+```
+
+List if repo has a codeowners file or not  
 
 ```sh
 GITHUBUSER=chrisguest75
 while IFS='' read -r reponame 
 do
     DEFAULT_BRANCH=$(gh api repos/${GITHUBUSER}/${reponame} | jq -r '.default_branch')
-    CODEOWNERS="no errors\033[48;2;0;255;0m "
+    CODEOWNERS="✅"
     ERRORS=$(gh api repos/${GITHUBUSER}/${reponame}/codeowners/errors) 2> /dev/null
     if [[ $? -ne 0 ]]; then
-        CODEOWNERS="errors\033[48;2;255;0;0m "
+        CODEOWNERS="❌ \033[33merrors\033[0m"
     fi
-    echo "REPO ${reponame}/${DEFAULT_BRANCH} ${CODEOWNERS}"
+    echo "${reponame}/${DEFAULT_BRANCH} ${CODEOWNERS}"
 done < <(gh repo ls --limit 150 --json name,isPrivate,isFork | jq -r '.[] | select(.isFork == false and .isPrivate == false) | (.name)')
 ```
 
+## Branches and protections
+
+```sh
+gh api 'repos/chrisguest75/github-of-life/branches' | jq '.[] | .name'
+
+# branch protections
+gh api 'repos/chrisguest75/github-of-life/branches?protected=false' 
+
+gh pr --repo chrisguest75/shell_examples ls          
+```
 
 ## Resources
 
-https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
-https://docs.github.com/en/rest/repos/repos#get-a-repository
+* https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+* https://docs.github.com/en/rest/repos/repos#get-a-repository
