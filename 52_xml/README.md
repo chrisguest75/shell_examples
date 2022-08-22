@@ -78,3 +78,4 @@ xmllint --xpath '//host/status[@state="up"]/../address/@addr' ./net.xml
 * More namespacing [here](http://blog.powered-up-games.com/wordpress/archives/70)
 * Extract XML Elements Using xmllint [here](https://danielmiessler.com/blog/)extract-xml-elements-using-xmllint/
 * xmllint in Linux [here](https://www.baeldung.com/linux/xmllint)  
+* xpath cheatsheet [here](https://devhints.io/xpath)
