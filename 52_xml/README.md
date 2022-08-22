@@ -2,6 +2,13 @@
 
 Demonstrate how to handle Xml in shell scripts.
 
+## Install
+
+```sh
+# install xmllint package
+sudo apt install libxml2-utils
+```
+
 ## Troubleshooting
 
 ```sh
@@ -34,7 +41,7 @@ xmllint --debug --xpath "//*[local-name()='path']" ./danceloop_00009.svg
 xmllint --debug --xpath "string(//*[local-name()='path']/@d)" ./danceloop_00009.svg
 ```
 
-## Convert into JSON 
+## Convert into JSON
 
 Refer to the [jq examples](../32_jq/README.md)
 
@@ -58,6 +65,5 @@ jq --rawfile path ./path.txt --arg filename "${_no_extension}" --arg number "${_
 * Some example Xml tooling [here](https://stackoverflow.com/questions/15461737/how-to-execute-xpath-one-liners-from-shell/15461774)
 * Explanation of the namespacing issues [here](https://stackoverflow.com/questions/8264134/xmllint-failing-to-properly-query-with-xpath)
 * More namespacing [here](http://blog.powered-up-games.com/wordpress/archives/70)
-* https://danielmiessler.com/blog/extract-xml-elements-using-xmllint/
-
-
+* Extract XML Elements Using xmllint [here](https://danielmiessler.com/blog/)extract-xml-elements-using-xmllint/
+* xmllint in Linux [here](https://www.baeldung.com/linux/xmllint)  
