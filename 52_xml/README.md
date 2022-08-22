@@ -59,6 +59,17 @@ xmllint --debug --xpath "string(//*[local-name()='path']/@d)" ./danceloop_00009.
 jq --rawfile path ./path.txt --arg filename "${_no_extension}" --arg number "${_frame_number}" '.frames += [ {"name":$filename, "path":$path, "number":$number | tonumber }]' "./frames.json"
 ```
 
+## Process NMAP
+
+Ref: [11_nmap_scanning](https://github.com/chrisguest75/sysadmin_examples/tree/master/11_nmap_scanning)  
+
+```sh
+# scan network (save xml file)
+nmap -p 22 -oX ./net.xml -vvv 192.168.1.0/24   
+
+# show hosts that are up
+xmllint --xpath '//host/status[@state="up"]/../address/@addr' ./net.xml
+```
 
 ## Resources
 
