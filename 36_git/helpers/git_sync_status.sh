@@ -25,8 +25,8 @@ Examples:
     # Get data for repo
     $SCRIPT_NAME 
 
-    # Iterating over directories
-    find ../../ -max-depth 0 -type d -exec $SCRIPT_NAME {} \;
+    # Iterating over directories (macosx)
+    find ../../../* -maxdepth 0 -type d -exec $SCRIPT_NAME -s -p={} \;
 
 EOF
 }
@@ -48,6 +48,8 @@ function git_status() {
     reponame=$(basename $(git rev-parse --show-toplevel)) 
     modified=false
     [[ -z $(git status -s) ]] || modified=true
+    # hack to show files
+    # git status --porcelain
     # get fetch --dry-run writes everything to stderr
     unfetched_changes=false
     [[ -z $(git fetch --dry-run 2> >(awk '{print "stderr:" $0}') > >(awk '{print "stdout:" $0}')) ]] || unfetched_changes=true
