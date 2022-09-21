@@ -332,6 +332,11 @@ Steps [README.md](./63_md5_file_id/README.md)
 Demonstrate some way of performing calculations in shell and scripts.  
 Steps [README.md](./64_calculations/README.md)  
 
+## 65 - pipes
+
+Demonstrate how to work with anonymous and named pipes.  
+Steps [README.md](./65_pipes/README.md)  
+
 ## 👀 Resources
 
 * Google script standards [here](https://google.github.io/styleguide/shellguide.html)

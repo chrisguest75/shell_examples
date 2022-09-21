@@ -1,6 +1,6 @@
 # README
 
-Demonstrate how to work with pipes.  
+Demonstrate how to work with anonymous and named pipes.  
 
 REF: [46_stdin_stdout_stderr/README.md](../46_stdin_stdout_stderr/README.md)  
 
@@ -42,3 +42,5 @@ ffmpeg -i pipe:0 ./out/english_achristmastree_dickens_rg_64kb.wav < audiopipe
 * Send stdout to Multiple Commands [here](https://www.baeldung.com/linux/stdout-to-multiple-commands)
 * How to make ffmpeg write its output to a named pipe [here](https://stackoverflow.com/questions/32584220/how-to-make-ffmpeg-write-its-output-to-a-named-pipe)
 * Anonymous and Named Pipes in Linux [here](https://www.baeldung.com/linux/anonymous-named-pipes)
+* http://hints.macworld.com/article.php?story=20041025103920992
+* https://zsh.sourceforge.io/Doc/Release/Redirection.html#Multios
