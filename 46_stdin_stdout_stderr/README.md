@@ -2,6 +2,10 @@
 
 Demonstrate and work through some stdout and stderr redirection  
 
+NOTES:  
+
+* The difference between `>` and `|` is that one redirects to a file and one to a process. Examples are [here](https://zsh.sourceforge.io/Doc/Release/Redirection.html)  
+
 TODO:
 
 * find out if people use a 3rd FD for warnings and trace..  
@@ -54,3 +58,8 @@ mkdir ./out
 
 * redirection_tutorial [here](https://wiki.bash-hackers.org/howto/redirection_tutorial)  
 * redirection on bash hackers [here](https://wiki.bash-hackers.org/syntax/redirection)  
+* Input/Output Redirection in the Shell [here](https://thoughtbot.com/blog/input-output-redirection-in-the-shell)
+* Bash One-Liners Explained, Part III: All about redirections [here](https://catonmat.net/bash-one-liners-explained-part-three)
+http://hints.macworld.com/article.php?story=20041025103920992
+https://zsh.sourceforge.io/Doc/Release/Redirection.html#Multios
+

@@ -252,10 +252,10 @@ Steps [README.md](./43_awk/README.md)
 Demonstrates techniques processing environment variables.  
 Steps [README.md](./44_indexed_envvars/README.md)  
 
-## 46 - stdout and stderr redirection
+## 46 - stdin, stdout and stderr redirection
 
 Demonstrate and work through some stdout and stderr redirection  
-Steps [README.md](./46_stdout_stderr/README.md)  
+Steps [README.md](./46_stdin_stdout_stderr/README.md)  
 
 ## 47 - FFMPEG
 
@@ -332,6 +332,11 @@ Steps [README.md](./63_md5_file_id/README.md)
 Demonstrate some way of performing calculations in shell and scripts.  
 Steps [README.md](./64_calculations/README.md)  
 
+## 65 - pipes
+
+Demonstrate how to work with anonymous and named pipes.  
+Steps [README.md](./65_pipes/README.md)  
+
 ## 👀 Resources
 
 * Google script standards [here](https://google.github.io/styleguide/shellguide.html)
@@ -340,12 +345,10 @@ Steps [README.md](./64_calculations/README.md)
 📝 TODO:
 
   * -- end of options https://www.cyberciti.biz/faq/what-does-double-dash-mean-in-ssh-command 
-  * mkfifo - https://man7.org/linux/man-pages/man3/mkfifoat.3.html
   * Process Substition versus command substitution < <() < $()
     sdiff <(ffprobe -show_frames test.mp4  | grep pkt_pts_time) <(ffprobe -show_frames original.mp4 | grep pkt_pts_time)
   * zsh versus bash
   * defensive programming
-  * snaps
   * debugfs
   * subst
   * Add a keywords index for links through to examples.  
