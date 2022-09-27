@@ -60,6 +60,3 @@ mkdir ./out
 * redirection on bash hackers [here](https://wiki.bash-hackers.org/syntax/redirection)  
 * Input/Output Redirection in the Shell [here](https://thoughtbot.com/blog/input-output-redirection-in-the-shell)
 * Bash One-Liners Explained, Part III: All about redirections [here](https://catonmat.net/bash-one-liners-explained-part-three)
-http://hints.macworld.com/article.php?story=20041025103920992
-https://zsh.sourceforge.io/Doc/Release/Redirection.html#Multios
-

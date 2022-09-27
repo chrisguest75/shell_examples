@@ -30,6 +30,9 @@ find ../ -iname "*.txt"
 # created in last 3 days
 stat ../05_strings/README.md  
 find ../ -iname "*.md" -ctime +3
+
+# find all vscode workspace folders for shell_examples
+find $HOME/Library/Application\ Support/Code/User/workspaceStorage/ -name "*.json" -print -exec jq . {} \; | grep -A 10 -B 10 'shell_examples"'
 ```
 
 ## Grep
