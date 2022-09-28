@@ -337,6 +337,11 @@ Steps [README.md](./64_calculations/README.md)
 Demonstrate how to work with anonymous and named pipes.  
 Steps [README.md](./65_pipes/README.md)  
 
+## 66 - generating and renaming files
+
+Demonstrate techniques for generating and renaming files.  
+Steps [README.md](./66_generating_renaming_files/README.md)  
+
 ## 👀 Resources
 
 * Google script standards [here](https://google.github.io/styleguide/shellguide.html)
@@ -361,7 +366,6 @@ Steps [README.md](./65_pipes/README.md)
     https://en.wikipedia.org/wiki/Clobbering
     ```
   * listing state; functions, env, paths, etc  
-  * Changing file extensions `find . -name "*.js" -exec sh -c 'mv "$1" "${1%.js}.ts"' _ {} \;`
   * running commands from gists. 
 
     ```sh
