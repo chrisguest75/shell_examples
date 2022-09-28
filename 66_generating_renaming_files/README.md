@@ -17,7 +17,7 @@ outpath="./out/"
 mkdir -p ${outpath}
 for index in $(seq 0 10); 
 do
-    filepath=`printf %s%04d.%s ${outpath} ${index} ${extension}`
+    filepath=`printf %s%s%04d.%s ${outpath} ${file} ${index} ${extension}`
     echo "Creating ${filepath}"
     touch $filepath
     sleep 1
