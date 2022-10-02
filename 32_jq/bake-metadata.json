@@ -1,0 +1,20 @@
+{
+  "ffmpeg-image-distroless": {
+    "containerimage.digest": "sha256:65166b7794f04d9027d137aa4dec253bae4ea983887c9adb410b538e317320bb"
+  },
+  "ffmpeg-image-scratch": {
+    "containerimage.digest": "sha256:7c30d80cec5d096434f8d238b70fd9acd8478fe1ddccccb835f59b2553e02a11"
+  },
+  "jq-image-distroless": {
+    "containerimage.digest": "sha256:2630e09085f3592acfb19de2b7a63f5c8d80e3446b5c276040d3e1c156f2ee04"
+  },
+  "jq-image-scratch": {
+    "containerimage.digest": "sha256:5c148fb84f716654702c28be69a0e767667664c79107350a12ccb7945e0b306b"
+  },
+  "sox-image-distroless": {
+    "containerimage.digest": "sha256:443180e0ad5d8b2f594dd5f23177e5f86c68d4f3ed872117f54134e7cb8a8439"
+  },
+  "sox-image-scratch": {
+    "containerimage.digest": "sha256:e203ea673904c828eaa9981db8f9af41aeac566721e44b71fc75e5f5dc560c51"
+  }
+}

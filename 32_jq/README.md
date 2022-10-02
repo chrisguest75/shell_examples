@@ -324,6 +324,16 @@ jq -r '. | .config.array_field | map_values(@base64)' ./base64_config.json
 jq '[ (. | del(.config)), (.config + { "array_field": .config.base64_array_field | map_values(@base64d) } | del(.base64_array_field) | { "config": (.)}) ] | reduce .[] as $merge (null; . + $merge)' ./base64_config.json  
 ```
 
+## Extracting keys (docker bake)
+
+```bash
+# handle keys with .'s and -'s
+jq '."ffmpeg-image-distroless"."containerimage.digest"' ./bake-metadata.json 
+
+# extract the keys 
+jq -r '. | keys[] as $key | .[$key]."containerimage.digest"' ./bake-metadata.json 
+```
+
 ## Resources
 
 * jq 1.6 Manual [here](https://stedolan.github.io/jq/manual/v1.6/)
