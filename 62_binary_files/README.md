@@ -115,5 +115,3 @@ with binary data. [here](https://binary-tools.net/summit)
 * dhex — hex editor with a diff mode [here](https://manpages.ubuntu.com/manpages/bionic/man1/dhex.1.html)  
 * Welcome to Pokology [here](https://pokology.org/)
 * GNU poke Manual [here](http://jemarch.net/poke-2.4-manual/poke.html)
-
-
