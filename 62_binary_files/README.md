@@ -2,6 +2,8 @@
 
 Working with binary files in shell.
 
+[HEXEDITORS.md](./HEXEDITORS.md) for some examples of GUI based hex editors.  
+
 TODO:
 
 * hexdump, hexfiend, fq
