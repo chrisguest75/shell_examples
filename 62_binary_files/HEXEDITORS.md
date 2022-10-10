@@ -29,7 +29,11 @@ r2 $(which ps)
 
 ## imhex
 
-NOTE: I was having issues installing on Ubuntu - Installed v1.18.2, GLIBCXX_3.4.29 missing
+NOTES:
+
+* Supports Yara Rules for malware identification. [Yara Rules](https://github.com/Yara-Rules/rules)
+* It is possible to load patterns to parse and highlight files.  
+* I was having issues installing on Ubuntu - Installed v1.18.2, GLIBCXX_3.4.29 missing.  
 
 ```sh
 # debian
