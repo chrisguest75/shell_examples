@@ -119,5 +119,18 @@ do
 done
 ```
 
+## Compound Conditions
+
+```sh
+TEST1=true
+TEST2=true
+
+if [ $TEST1 == true ] && [ $TEST2 == true ]; then
+  echo "Condition is true"
+else
+  echo "Condition is false"
+fi
+```
+
 ## Resources
 
