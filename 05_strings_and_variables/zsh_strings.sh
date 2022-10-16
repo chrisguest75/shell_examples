@@ -91,7 +91,7 @@ echo ""
 
 echo "** Replace in string **"
 _imagename="alpine:3.15"
-echo "$_imagename becomes ${_imagename//:/}"
+echo "$_imagename becomes ${_imagename//alpine/nginx}"
 echo ""
 
 # **********************************************
