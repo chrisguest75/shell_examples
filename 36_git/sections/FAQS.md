@@ -36,6 +36,8 @@ gh pr merge <id>
 
 ## Clean
 
+To restore a repo to a fresh clone.  
+
 ```sh
 # -x Don’t use the standard ignore rules
 # -d Specify -d to have it recurse into such directories
