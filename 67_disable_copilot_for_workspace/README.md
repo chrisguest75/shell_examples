@@ -11,6 +11,7 @@ TODO:
 * Seems to be a problem with vscode caching.
 * Get it to load a set of extensions to install and disable from a config file
 * Write it in golang
+* Get a list of all installed extensions and run against a whitelist.  
 
 ## Examples
 
