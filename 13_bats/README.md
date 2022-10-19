@@ -12,6 +12,9 @@ brew info bats-core
 
 # install it
 brew install bats-core
+
+# install vscode extension
+code --install-extension jetmartin.bats  
 ```
 
 Add some supporting libraries  
@@ -22,6 +25,7 @@ cd ./13_bats
 # Add some proper asserts to tests
 git clone https://github.com/bats-core/bats-support test/test_helper/bats-support
 git clone https://github.com/bats-core/bats-assert test/test_helper/bats-assert  
+git clone https://github.com/bats-core/bats-file test/test_helper/bats-file 
 ```
 
 ## Investigating code for bats

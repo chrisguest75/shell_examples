@@ -31,6 +31,9 @@ git clone https://github.com/bats-core/bats-assert test/test_helper/bats-assert
 git clone https://github.com/grayhemp/bats-mock test/test_helper/bats-mock
 ```
 
+NOTE: There is a new version of this - https://github.com/buildkite-plugins/bats-mock
+
+
 ## Walkthrough
 
 ```bash
