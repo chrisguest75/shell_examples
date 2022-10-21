@@ -32,8 +32,8 @@ aws --profile $AWS_PROFILE --region $AWS_REGION ecs list-container-instances --c
 aws --profile $AWS_PROFILE --region $AWS_REGION ecs list-tasks --cluster "$cluster"
 
 # provide details on a task
-aws --profile $AWS_PROFILE --region $AWS_REGION ecs describe-tasks --tasks "arn:aws:ecs:region:account:task/id"
-
+aws --profile $AWS_PROFILE --region $AWS_REGION ecs describe-tasks 
+--cluster "$cluster" --tasks "arn:aws:ecs:region:account:task/id"
 ```
 
 ## Resources  
