@@ -10,6 +10,8 @@ TODO:
 * git filter-repo
 * git reset --hard origin/feature reset against a new pushed version of a branch.
 * .gitattributes https://git-scm.com/docs/gitattributes
+* git update-index --assume-unchanged sites/default/settings.php
+* git check-ignore vscode/list_extensions.sh  
 
 ## Files
 
