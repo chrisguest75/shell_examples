@@ -34,6 +34,19 @@ gh pr commit <id>
 gh pr merge <id>
 ```
 
+Use the gitlab cli command.  
+
+```sh
+# list mr
+glab mr list
+
+# create an mr
+glab mr create
+
+# view gitlab in browser 
+glab repo view --web
+```
+
 ## Clean
 
 To restore a repo to a fresh clone.  

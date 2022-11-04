@@ -2,6 +2,14 @@
 
 Demonstrate some examples of searching for commits.  
 
+## Authors
+
+```sh
+git authors --list | sort
+```
+
+## Find commits
+
 ```sh
 # search for author
 git log --author "Chris Guest" 
