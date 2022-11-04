@@ -2,6 +2,10 @@
 
 Demonstrate and work through some stdout and stderr redirection  
 
+## Reasons
+
+In the shell it's necessary to watch the output from both pipes. Some tools are quite good with seperating `stderr` from `stdout` whereas others just pipe all error messages to `stdout`.  
+
 NOTES:  
 
 * The difference between `>` and `|` is that one redirects to a file and one to a process. Examples are [here](https://zsh.sourceforge.io/Doc/Release/Redirection.html)  
@@ -17,6 +21,17 @@ TODO:
 ```sh
 # show what tty my stdin, stdout and stderr are connected to.
 lsof +f g -ap $$ -d 0,1,2     
+```
+
+## Quick helper
+
+It can be good to try different tools with a variety of paramaters to understand how the tool behaves regarding error logging.  
+
+```sh
+# filter stdoout to show only error stream
+cat ./no-file 1> /dev/null     
+# filter stderr to show only out stream 
+cat ./no-file 2> /dev/null     
 ```
 
 ## Redirecting to files
