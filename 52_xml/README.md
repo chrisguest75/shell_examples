@@ -71,6 +71,21 @@ nmap -p 22 -oX ./net.xml -vvv 192.168.1.0/24
 xmllint --xpath '//host/status[@state="up"]/../address/@addr' ./net.xml
 ```
 
+## RSS Feed
+
+```sh
+mkdir -p ./out
+
+# get rss feed
+curl -s -o ./out/rss.xml https://latenightlinux.com/feed/mp3
+
+# get first url
+FEED_URL=$(xmllint --xpath 'string(//rss/channel/item[1]/enclosure/@url)' --format --pretty 2 ./out/rss.xml)
+
+# get the file
+curl -s -L -o ./out/$(basename $FEED_URL) $FEED_URL
+```
+
 ## Resources
 
 * Some example Xml tooling [here](https://stackoverflow.com/questions/15461737/how-to-execute-xpath-one-liners-from-shell/15461774)
@@ -79,3 +94,4 @@ xmllint --xpath '//host/status[@state="up"]/../address/@addr' ./net.xml
 * Extract XML Elements Using xmllint [here](https://danielmiessler.com/blog/)extract-xml-elements-using-xmllint/
 * xmllint in Linux [here](https://www.baeldung.com/linux/xmllint)  
 * xpath cheatsheet [here](https://devhints.io/xpath)
+* What is RSS? [here](https://validator.w3.org/feed/docs/rss2.html)
