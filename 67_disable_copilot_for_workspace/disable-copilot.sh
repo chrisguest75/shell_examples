@@ -38,10 +38,28 @@ OPTIONS:
     --disable                  disable extension
     --status                   current extension status
     --start                    start workspace
+    --backup                   backup workspace db
 
 Examples:
     $SCRIPT_NAME --help 
 
+    list all the workspaces
+    $SCRIPT_NAME --list
+
+    list a set of workspaces
+    $SCRIPT_NAME --list --workspace=\/shell_examples
+
+    status of copilot for workspace
+    $SCRIPT_NAME --status --workspace=shell_examples
+
+    disable copilot for workspace
+    $SCRIPT_NAME --disable --workspace=shell_examples
+
+    enable copilot for workspace
+    $SCRIPT_NAME --enable --workspace=shell_examples
+
+    start vscode in folder
+    $SCRIPT_NAME --start --workspace=shell_examples
 EOF
 }
 
@@ -74,6 +92,9 @@ case $i in
     --start)
         START=true
     ;;     
+    --backup)
+        BACKUP=true
+    ;;     
     -w=*|--workspace=*)
         WORKSPACE="${i#*=}"
         shift # past argument=value
@@ -94,6 +115,7 @@ _supported=false
 case "${OSTYPE}" in
     MAC)    
         _supported=true
+        WORKSPACE_BASE_PATH="$HOME/Library/Application Support/Code/User/workspaceStorage"
     ;;
     LINUX)     
     ;;
@@ -113,15 +135,14 @@ fi
 check_prerequisites sqlite3 jq
 
 if [[ $LIST == true ]]; then
-    PROJECT=
-    find $HOME/Library/Application\ Support/Code/User/workspaceStorage -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s '.' | jq --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s .
+    PROJECT="${WORKSPACE}$"
+    find "${WORKSPACE_BASE_PATH}" -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s '.' | jq --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s .
 else
 
-    if [ $ENABLE == false ] && [ $DISABLE == false ] && [ $STATUS == false ] && [ $START == false ]; then
+    if [ $ENABLE == false ] && [ $DISABLE == false ] && [ $STATUS == false ] && [ $START == false ] && [ $BACKUP == false ]; then
         help
         exit 0
     else
-
         if [[ -z ${WORKSPACE} ]]; then 
             >&2 echo "--workspace is not set"
             exit 1
@@ -135,7 +156,7 @@ else
             echo "Searching..."
             OUTFILE=$(mktemp)
             echo "PROJECT='${PROJECT}'"
-            DBPATH=$(dirname "$(find $HOME/Library/Application\ Support/Code/User/workspaceStorage -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s '.' | jq --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s -r '.[].filename' | tail -n 1)")
+            DBPATH=$(dirname "$(find "${WORKSPACE_BASE_PATH}" -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s '.' | jq --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s -r '.[].filename' | head -n 1)")
             DBFILE="${DBPATH}/state.vscdb"
         
             echo "DBPATH='${DBPATH}'"
@@ -155,7 +176,7 @@ else
             echo "Searching..."
             OUTFILE=$(mktemp)
             echo "PROJECT='${PROJECT}'"
-            DBPATH=$(dirname "$(find $HOME/Library/Application\ Support/Code/User/workspaceStorage -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s '.' | jq --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s -r '.[].filename' | tail -n 1)")
+            DBPATH=$(dirname "$(find "${WORKSPACE_BASE_PATH}" -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s '.' | jq --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s -r '.[].filename' | head -n 1)")
             DBFILE="${DBPATH}/state.vscdb"
 
             echo "DBPATH='${DBPATH}'"
@@ -175,7 +196,7 @@ else
         if [[ $STATUS == true ]]; then
             echo "Searching..."
             echo "PROJECT='${PROJECT}'"
-            DBPATH=$(dirname "$(find $HOME/Library/Application\ Support/Code/User/workspaceStorage -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s '.' | jq --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s -r '.[].filename' | tail -n 1)")
+            DBPATH=$(dirname "$(find "${WORKSPACE_BASE_PATH}" -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s '.' | jq --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s -r '.[].filename' | head -n 1)")
             DBFILE="${DBPATH}/state.vscdb"
 
             echo "DBPATH='${DBPATH}'"
@@ -188,13 +209,35 @@ else
         if [[ $START == true ]]; then
             echo "Searching..."
             echo "PROJECT='${PROJECT}'"
-            WORKSPACEPATH=$(find $HOME/Library/Application\ Support/Code/User/workspaceStorage -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s '.' | jq --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s -r '.[].folder' | tail -n 1)
+            WORKSPACEPATH=$(find "${WORKSPACE_BASE_PATH}" -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s '.' | jq --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s -r '.[].folder' | head -n 1)
 
             echo "WORKSPACEPATH='${WORKSPACEPATH}'"
             REALWORKSPACEPATH="${WORKSPACEPATH//file:\/\//}" 
             echo "REALWORKSPACEPATH='${REALWORKSPACEPATH}'"
 
             code "${REALWORKSPACEPATH}"
+        fi
+
+        if [[ $BACKUP == true ]]; then
+            # TODO: Compare backup db to one with extension disabled. 
+            echo "Searching..."
+            echo "PROJECT='${PROJECT}'"
+            # use @tsv but then awk has to process tabs
+            WORKSPACEPATHS=$(find "${WORKSPACE_BASE_PATH}" -iname "workspace.json" -exec jq --arg filename {} -c '. | {"folder": .folder, "filename": $filename}' {} \; | jq -s -c '.' | jq -c --arg project "${PROJECT}" '.[] | select(.folder != null) | select(.folder | test(".*\( $project )"))' | jq -s -r -c '.[0] | [.filename, .folder] | @csv')
+            echo "WORKSPACEPATHS=${WORKSPACEPATHS}"
+            WORKSPACEJSON=$(echo ${WORKSPACEPATHS} | awk -F "," '{print $1}')
+            WORKSPACEFOLDER=$(echo ${WORKSPACEPATHS} | awk -F "," '{print $2}')
+
+            DBFILE=$(dirname "$WORKSPACEJSON")/state.vscdb
+            WORKSPACENAME=$(basename $WORKSPACEFOLDER)
+        
+            echo "DBFILE=${DBFILE}"
+            echo "WORKSPACEFOLDER=${WORKSPACEFOLDER}"
+            echo "WORKSPACENAME=${WORKSPACENAME}"
+
+            #echo "${DBFILE} ./backups/db"
+            #mkdir -p ./backups/db
+            #cp "${DBFILE}" ./backups/db 
         fi
 
     fi
