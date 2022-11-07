@@ -52,6 +52,9 @@ echo 'scale = 16; 5 / 3' | bc
 ## awk
 
 ```sh
+# rounding down
+echo 2.6 | awk '{print int($1+0.5)}'
+
 # sum and format numbers using awk
 awk '{OFMT = "%9.6f";s+=$1} END {print s}' << EOF
 4922049292.888
