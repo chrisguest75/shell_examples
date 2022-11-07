@@ -39,8 +39,11 @@ NOTES:
 # debian
 sudo dpkg -i ~/Downloads/imhex-1.19.3.deb
 
-# macosx
+# macosx (this is an app on mac)
 brew install imhex
+
+# run on macox
+/Applications/imhex.app/Contents/MacOS/imhex 
 ```
 
 ## Resources
