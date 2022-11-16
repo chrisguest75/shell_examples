@@ -11,7 +11,15 @@ TODO:
 * Create a docker container with awscli testbed inside of it.
 
 ```sh
+# turn off the pager
 export AWS_PAGER=   
+
+# helpful gui for finding parameters
+export AWS_CLI_AUTO_PROMPT=on-partial
+# then use aws
+aws 
+# or 
+aws --cli-auto-prompt           
 ```
 
 ## Environment
