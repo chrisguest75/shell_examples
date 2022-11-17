@@ -1,27 +1,32 @@
 # README
-Demonstrate how to create a brew package. 
+
+Demonstrate how to create a `brew` package.  
 
 TODO:
+
 * Build a homebrew package.
 * Show some examples of updating and outdated
 * Do a linuxbrew and homebrew example.  
 
 Questions:
+
 * Local packages/taps?
 
 ## How it works
+
 * To create an official formula you'll need to create a PR on the brew repository [here](https://github.com/Homebrew/homebrew-core)
 * Taps are third party packages [Taps](https://docs.brew.sh/Taps)
 * Formulas are the scripts that install the software [Formula Cookbook](https://docs.brew.sh/Formula-Cookbook)
 
-
 ### Directories
+
 ```sh
 # installation directory
 ls /usr/local/Homebrew  
 
 # list formulas installed
 ls /usr/local/Cellar     
+
 # casks are macnative apps
 ls /usr/local/Caskroom
 
@@ -33,6 +38,7 @@ ls -la /usr/local/bin
 ```
 
 ## Basic commands
+
 ```sh
 # useful for debugging.
 brew config   
@@ -49,6 +55,7 @@ brew list
 brew list --cask
 
 # list packages installed from taps
+brew tap 
 brew tap-info --installed   
 ```
 
@@ -63,7 +70,9 @@ brew developer on
 brew --repo homebrew/core        
 code $(brew --repo homebrew/core)    
 ```
+
 ## Install example
+
 ```sh
 # !!! probably soft link instead of copy 
 cp ./git-activity.rb $(brew --repo homebrew/core)/Formula/git-activity.rb    
@@ -89,15 +98,16 @@ brew remove git-activity
 ```
 
 ## Creation
+
 ```sh
 export HOMEBREW_EDITOR=code
 brew create --set-name git-activity https://github.com/chrisguest75/shell_examples/releases/download/0.0.1-f43376d/git-activity-release.tar.gz 
-``` 
+```
 
-# Resources 
+## Resources
+
 * Creating homebrew package blog [here](https://medium.com/ballerina-techblog/how-to-create-your-own-homebrew-package-or-formula-8dfbf8e001d3)
 * Brew API [here](https://rubydoc.brew.sh/Formula)
 * Formula cookbook [here](https://docs.brew.sh/Formula-Cookbook)
 * Maintaining Taps [here](https://docs.brew.sh/How-to-Create-and-Maintain-a-Tap)
 * Ruby asseertions [here](https://rubydoc.brew.sh/Homebrew/Assertions.html)
-

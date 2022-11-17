@@ -1,0 +1,6 @@
+	linux-vdso.so.1 (0x00007fff1b5f9000)
+	libjq.so.1 => /nix/store/hnnp7jar4zmk84bp7ary246npzfbdsxv-jq-1.6-lib/lib/libjq.so.1 (0x00007fbe289f6000)
+	libm.so.6 => /nix/store/scd5n7xsn0hh0lvhhnycr9gx0h8xfzsl-glibc-2.34-210/lib/libm.so.6 (0x00007fbe2891d000)
+	libonig.so.5 => /nix/store/fyzvck2f9bp6pqq58b36j0zbp5rk0vb2-onig-6.9.7.1/lib/libonig.so.5 (0x00007fbe28889000)
+	libc.so.6 => /nix/store/scd5n7xsn0hh0lvhhnycr9gx0h8xfzsl-glibc-2.34-210/lib/libc.so.6 (0x00007fbe2868b000)
+	/nix/store/scd5n7xsn0hh0lvhhnycr9gx0h8xfzsl-glibc-2.34-210/lib/ld-linux-x86-64.so.2 => /nix/store/scd5n7xsn0hh0lvhhnycr9gx0h8xfzsl-glibc-2.34-210/lib64/ld-linux-x86-64.so.2 (0x00007fbe28a48000)

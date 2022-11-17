@@ -22,6 +22,15 @@ trim ""
 
 while IFS=, read -r rev1 rev2 version
 do
-    echo "$(trim $version) is between $(trim $rev1) and $(trim $rev2)"
+    if [ -z "${version}" ]; then
+       version="-"
+    fi
+    if [ -z "${rev1}" ]; then
+       rev1="-"
+    fi
+    if [ -z "${rev2}" ]; then
+       rev2="-"
+    fi
+    echo "$(trim ${version}) is between $(trim ${rev1}) and $(trim ${rev2})"
 done < ranges.csv
 

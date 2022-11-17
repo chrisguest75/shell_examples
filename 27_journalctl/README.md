@@ -1,8 +1,13 @@
 # README
+
 Demonstrate how to use journalctl to discover logs
 
 ## Existing logs
+
 ```sh
+# lastlog - reports the most recent login of all users or of a given user
+lastlog
+
 # syslog 
 cat /var/log/syslog
 # kernel log
@@ -15,7 +20,9 @@ dmesg
 # remove the logs 
 sudo dmesg --clear
 ```
+
 ## Configuration and space
+
 ```sh
 # look at the diskspace the logs are taking.
 journalctl --disk-usage  
@@ -24,7 +31,9 @@ cat /etc/systemd/journald.conf
 ```
 
 ## Loglevels -p <level>
+
 From the syslog protocol [RFC 5424](https://tools.ietf.org/html/rfc5424)
+
 ```sh
   # RFC 5424
   #
@@ -42,6 +51,7 @@ From the syslog protocol [RFC 5424](https://tools.ietf.org/html/rfc5424)
 ```
 
 ## Logs for boots
+
 ```sh
 # view errors since last boot
 journalctl -b 0 -p 3 --no-pager
@@ -54,6 +64,7 @@ journalctl -b 0
 ```
 
 ## Logs for services
+
 ```sh
 # find a service and get the logs for it.
 systemctl list-unit-files "*.service" 
@@ -66,6 +77,7 @@ journalctl -u [servicename].service --no-pager --output=json
 ```
 
 ## Logs for kernel (including ufw)
+
 ```sh
 journalctl -b 0 -k -p 4 
 ```
@@ -76,12 +88,14 @@ sudo journalctl _TRANSPORT=audit
 ```
 
 ## Why are logs for apt and dpkg not in journald?
+
 I'm not sure why dpkg does not use systemd and journald logging/
 
 ```sh
 # dpkg logs
 cat /var/log/dpkg.log   
 ```
+
 ## Maintenance
 
 ```sh
@@ -92,6 +106,7 @@ journalctl --verify
 sudo journalctl --vacuum-size=10M
 ```
 
-## Resources 
+## Resources
+
 * Journalctl usage [here](https://www.debugpoint.com/2020/12/systemd-journalctl/)  
 * Cleaning up logs [here](https://www.debugpoint.com/2021/01/systemd-journald-clean/)

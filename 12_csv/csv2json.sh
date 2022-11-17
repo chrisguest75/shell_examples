@@ -29,6 +29,7 @@ case $i in
 esac
 done    
 
+# slurp the documents 1 by 1.
 while IFS=, read -r name account role
 do
     if [[ -z "$name" ]]; then

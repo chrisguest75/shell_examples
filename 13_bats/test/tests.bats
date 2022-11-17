@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 load 'test_helper/bats-support/load'
 load 'test_helper/bats-assert/load'
+load 'test_helper/bats-file/load'
 
 load "${BATS_TEST_DIRNAME}/../functions.sh"  
 
@@ -70,6 +71,14 @@ teardown() {
 #   run echo $'have-0\nhave-1\nhave-2'
 #   assert_line --index 1 'want-1'
 # }
+
+#*******************************************************************
+#* add_trailing_slash
+#*******************************************************************
+
+@test "check ./README.md file exists " {
+    assert_file_exists ./README.md
+}
 
 #*******************************************************************
 #* add_trailing_slash

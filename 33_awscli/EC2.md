@@ -1,12 +1,14 @@
-# EC2 
+# EC2
 
 ## Describe Instances
+
 ```sh
 # filter out terminated instances
 aws ec2 describe-instances --query "Reservations[*].Instances[*].{name: Tags[?Key=='Name'] | [0].Value, instance_id: InstanceId, ip_address: PrivateIpAddress, state: State.Name, imageid: ImageId}" --filters "Name=instance-state-name,Values=pending,running,shutting-down,stopping,stopped" --output table
 ```
 
 ## Multiple compound filters
+
 ```sh
 # multiple filters need to be seperated by a space and not grouped with quotes
 aws ec2 describe-instances --query "Reservations[*].Instances[*].{name: Tags[?Key=='Name'] | [0].Value, instance_id: InstanceId, ip_address: PrivateIpAddress, state: State.Name, imageid: ImageId, launch: LaunchTime}" --filters Name=tag:Name,Values=k8s-eu-worker Name=instance-state-name,Values=pending,running,shutting-down,stopping,stopped --output table 
@@ -29,14 +31,17 @@ aws ec2 describe-instances --query 'Reservations[].Instances[?LaunchTime>=`2020-
 aws ec2 describe-instances | jq -r "[[.Reservations[].Instances[]|{ state: .State.Name, type: .InstanceType }]|group_by(.state)|.[]|{state: .[0].state, types: [.[].type]|[group_by(.)|.[]|{type: .[0], count: ([.[]]|length)}] }]"
 ```
 
-## Terminate 
+## Terminate
+
 ```sh
 aws ec2 terminate-instances --instance-ids [id]
 ```
 
 
-# Auto Scaling Groups 
+# Auto Scaling Groups
+
 ## Describe ASG
+
 ```sh
 # find the auto scaling groups
 aws autoscaling describe-auto-scaling-groups --query "AutoScalingGroups[*].{name: AutoScalingGroupName, minsize: MinSize, maxsize: MaxSize, desired: DesiredCapacity,launch_config: LaunchConfigurationName}" --output table 
@@ -47,14 +52,17 @@ aws autoscaling describe-auto-scaling-groups --query "AutoScalingGroups[*].{name
 aws autoscaling describe-auto-scaling-groups --query "AutoScalingGroups[*].{name: AutoScalingGroupName, minsize: MinSize, maxsize: MaxSize, desired: DesiredCapacity,launch_config: LaunchConfigurationName}" --output json | jq "(.[] | select(.name | contains(\"k8s-eu-workers\")) | {name, launch_config, desired})" 
 ```
 
-## Increase ASG desired 
+## Increase ASG desired
+
 ```sh
 # Add an extra node to the ASG
 aws autoscaling update-auto-scaling-group --auto-scaling-group-name k8s-eu-worker-20210212093419459600000001 --desired-capacity=12
 ```
 
 # Launch Configurations
-## Describe Launch Configurations 
+
+## Describe Launch Configurations
+
 ```sh
 # describe launch configurations
 aws autoscaling describe-launch-configurations --query "LaunchConfigurations[*].{name: LaunchConfigurationName, imageid: ImageId, created: CreatedTime}" --output table 

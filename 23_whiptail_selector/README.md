@@ -1,4 +1,5 @@
 # README
+
 Demonstrate how to use whiptail for file selection.
 
 ## Configure
@@ -12,6 +13,7 @@ brew install newt
 ```
 
 ## Create test files
+
 ```sh
 # create temporary files
 mkdir ./files
@@ -24,5 +26,6 @@ touch ./files/selection_file{1..4}.txt
 ./file_selector.sh
 ```
 
-Example:
-[Filebrowse](https://github.com/pageauc/FileBrowser/blob/master/filebrowse.sh)
+## Resources
+
+* Example Filebrowse [here](https://github.com/pageauc/FileBrowser/blob/master/filebrowse.sh)

@@ -1,10 +1,23 @@
-# README 
+# README
+
 Demonstrate how to time operations in the shell to help with optimisation.
 
-Example usage can be found [here](https://github.com/chrisguest75/docker_build_examples/tree/volume_images/36_layers_speed)
+## Reasons
+
+Always a good idea to understand about the performance of scripts. Understanding if it meets expectations.  
+
+Example usage can be found [here](https://github.com/chrisguest75/docker_examples/blob/master/36_layers_speed/README.md)
+
+TODO:
+
+* hyperfine - https://github.com/sharkdp/hyperfine
+* https://cr.yp.to/libtai/tai64.html
+* https://www.reddit.com/r/commandline/comments/yle738/peculiar_shell_performance_differences_in/iuywce7
 
 ## Use EPOCHREALTIME
+
 Simple example of measuring sleep 10 command
+
 ```sh
 # microsecond 1 millionth of second
 start=${EPOCHREALTIME}
@@ -15,7 +28,9 @@ echo "${runtime} seconds"
 ```
 
 ## Use time
+
 Simple example of measuring sleep 10 command
+
 ```sh
 time sleep 10     
 ```
@@ -33,6 +48,7 @@ function under_test() {
     echo "sleep $sleeptime"
     sleep $sleeptime
 }
+
 # pass function to test, number of iterations and parameters to pass into the function (sleeptime of 2 in this case)
 . ./time-it.sh under_test 10 2  
 ```

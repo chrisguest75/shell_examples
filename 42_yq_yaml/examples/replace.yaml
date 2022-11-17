@@ -1,0 +1,12 @@
+images: 
+    - "ubuntu:20.04"
+    - "ubuntu:22.04"
+    - "alpine:3.15"
+
+service:
+    - "${APIKEY}"
+    - "${ANOTHER}"
+
+replacethis: "${APIKEY}"
+embedded: "This value is ${APIKEY} embedded"
+

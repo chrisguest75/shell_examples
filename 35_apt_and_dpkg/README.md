@@ -1,12 +1,15 @@
 # README
+
 Demonstrate examples of working with APT and DPKG
 
 Debian package repository example [README.md](../09_deb_pkg/README.md)  
 
 TODO:
+
 * apt-utils
 
 ## APT
+
 Aptitude management
 
 ```sh
@@ -33,6 +36,7 @@ apt upgrade
 ```
 
 ### List sources
+
 ```sh
 # show the sources
 cat /etc/apt/sources.list
@@ -46,12 +50,15 @@ apt policy imagemagick
 ```
 
 ### List keys
+
 ```sh
 apt-key list
 ```
 
 ### Add and remove a source
+
 A lot of examples to add sources use the main sources file.  
+
 ```sh
 # edit the /etc/apt/sources.list
 sudo apt edit-sources
@@ -61,6 +68,7 @@ echo "deb https://deb.etcher.io stable etcher" | sudo tee /etc/apt/sources.list.
 ```
 
 ### List contents of a apt package.
+
 ```sh
 # install apt file 
 apt install apt-file
@@ -83,9 +91,10 @@ dpkg -L bpfcc-tools
 ```
 
 ## HTTPS Sources
+
 We can trust the Release file because it was signed by Ubuntu. We can trust the Packages file because it has the correct size and checksum found in the Release file. We can trust the package we just downloaded because it is referenced in the Packages file, which is referenced in the Release file, which is signed by Ubuntu. [From](https://www.reddit.com/r/linux/comments/aidxwa/why_does_apt_not_use_https/)
 
-But people can still spy on what packges and versions you are installing.   
+But people can still spy on what packges and versions you are installing.  
 
 ```sh
 # see the https protocol
@@ -100,8 +109,6 @@ sudo apt edit-sources
 # THIS FAILS WITH A TLS ERROR
 sudo apt update
 ```
-
-
 
 ## Resources
 

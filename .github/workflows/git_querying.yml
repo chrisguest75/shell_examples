@@ -1,9 +1,9 @@
 name: git_querying
 on:
   push:
-    branches: [ master, homebrewexample ]
+    branches: [ master ]
   pull_request:
-    branches: [ homebrewexample ]
+    branches: [ '*' ]
 jobs:
   build:
     strategy:
@@ -24,9 +24,9 @@ jobs:
         if: matrix.platform == 'macos-latest'
         run: |
           mkdir -p ./release/git-activity 
-          cp ./36_git_querying/build_commits_histogram_data.sh ./release/git-activity  
-          cp ./36_git_querying/build_commits.sh ./release/git-activity  
-          cp ./36_git_querying/git-activity.sh ./release/git-activity  
+          cp ./36_git/helpers/build_commits_histogram_data.sh ./release/git-activity  
+          cp ./36_git/helpers/build_commits.sh ./release/git-activity  
+          cp ./36_git/helpers/git-activity.sh ./release/git-activity  
           tar -czvf ./git-activity-release.tar.gz ./release
           ls -la ./release
 
