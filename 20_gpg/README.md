@@ -78,6 +78,9 @@ cat >key-settings <<EOF
 EOF
 
 gpg --batch --generate-key key-settings
+
+# show outputs
+ls /root/.gnupg
 ```
 
 ```sh
