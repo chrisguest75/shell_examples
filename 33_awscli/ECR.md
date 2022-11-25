@@ -23,7 +23,10 @@ A `registry` contains `repositiories` and `repositories` contain images.
 export PAGER=
 
 # describe any parameters on the registry
-aws ecr describe-registry --profile my-profile 
+aws ecr describe-registry --profile my-profile
+
+# list repositories
+aws --profile my-profile ecr describe-repositories --region eu-west-1    
 ```
 
 ```sh
