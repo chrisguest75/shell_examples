@@ -1,8 +1,15 @@
 # README
-Demonstrate trap handlers functionality 
+
+Demonstrate `bash` trap handlers functionality  
+
+TODO:
+
+* This does not work if we use sleep 10000.  Have to work out how to find the sleep subprocess and send it a signal.  
 
 ## Examples
-List the possible trap signals 
+
+List the possible trap signals  
+
 ```sh
 # in bash
 bash 
@@ -24,28 +31,46 @@ man 7 signal
 ```
 
 ## On ERR
+
 ```sh
 # trap handler on an error
 ./trap_err_example.sh   
 ```
 
 ## On EXIT
+
 ```sh
 # trap handler on exit
 ./trap_exit_example.sh   
 ```
 
 ## On DEBUG
+
 ```sh
 # debug tracing with a handler
 ./trap_debug_example.sh   
 ```
 
 ## SIGINT
+
 ```sh
 # handler on ctrl+c
 ./trap_ctrlc_example.sh   
 ```
 
-# Resources
+## Sending signals to other processes
+
+```sh
+# list signals that can be sent
+kill -l   
+
+# terminal 1 (take note of pid)
+./trap_common.sh
+
+# terminal 2 (use pid)
+kill -SIGTERM 19371
+```
+
+## Resources
+
 * Traps docs [here](https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_12_02.html)  
