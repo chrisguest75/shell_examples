@@ -16,6 +16,13 @@ docker build --no-cache --progress=plain -t awscli .
 docker run --rm -it -v$(realpath ~/.aws):/root/.aws -e AWS_PROFILE=$AWS_PROFILE -e AWS_REGION=$AWS_REGION awscli s3 ls
 ```
 
+## Troubleshooting
+
+```sh
+# enter the container 
+docker run --rm -it -v$(realpath ~/.aws):/root/.aws --entrypoint /bin/bash -e AWS_PROFILE=$AWS_PROFILE -e AWS_REGION=$AWS_REGION awscli
+```
+
 ## Resources
 
 * AWS CLI Command Reference [here](https://docs.aws.amazon.com/cli/latest/index.html)
