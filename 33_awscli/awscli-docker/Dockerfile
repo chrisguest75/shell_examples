@@ -13,9 +13,9 @@ RUN apt-get update \
 
 RUN locale-gen en_US.UTF-8 
 
-RUN curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
-RUN unzip -q awscliv2.zip
-RUN aws/install
-RUN /usr/local/bin/aws --version
+RUN curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip \
+    && unzip -q awscliv2.zip \ 
+    && aws/install \
+    && /usr/local/bin/aws --version
 
 ENTRYPOINT ["/usr/local/bin/aws"]
