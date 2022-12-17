@@ -1,22 +1,29 @@
-# README 
-TODO: 
+# README
+
+TODO:
+
 * Find code for my envelope encryption for mysql.
 * Do a version with shared storage that does not require manual intervention
 
-## Pass a file securely between two containers. 
+## Pass a file securely between two containers.
 
-1) Why revocation key? 
+1) Why revocation key?
 
-## Alice 
+## Alice
+
 Build and run the container
+
 ```sh
 # Build 
-docker build -t alice -f Dockerfile.alice .      
-docker run -it --entrypoint /bin/sh alice         
+docker build -t alice -f Dockerfile.alice .
+
+# run alice
+docker run -it --entrypoint /bin/sh alice
 ```
 
 ```sh
 # Batch it instead of `gpg --full-generate-key`
+# NOTE: passphrase
 cat >key-settings <<EOF
      %echo Generating a basic OpenPGP key
      Key-Type: DSA
@@ -31,6 +38,7 @@ cat >key-settings <<EOF
      %commit
      %echo done
 EOF
+
 gpg --batch --generate-key key-settings
 ```
 
@@ -40,15 +48,20 @@ gpg --export --armor alice@alice.com
 ```
 
 ## Bob
+
 Build and run the container
+
 ```sh
 # Build 
-docker build -t bob -f Dockerfile.bob .      
-docker run -it --entrypoint /bin/sh bob                 
+docker build -t bob -f Dockerfile.bob .
+
+# run bob
+docker run -it --entrypoint /bin/sh bob
 ```
 
 ```sh
 # Batch it instead of `gpg --full-generate-key`
+# NOTE: passphrase
 cat >key-settings <<EOF
      %echo Generating a basic OpenPGP key
      Key-Type: DSA
@@ -63,7 +76,11 @@ cat >key-settings <<EOF
      %commit
      %echo done
 EOF
+
 gpg --batch --generate-key key-settings
+
+# show outputs
+ls /root/.gnupg
 ```
 
 ```sh
@@ -71,9 +88,10 @@ gpg --batch --generate-key key-settings
 gpg --export --armor bob@bob.com
 ```
 
-## Exchange keys 
+## Exchange keys
 
 On alice machine
+
 ```sh
 # copy the key from bob machine into nano
 nano ./bob.armor.gpg 
@@ -87,6 +105,7 @@ gpg --import ./bob.armor.gpg
 curl -s -o ./source.txt http://metaphorpsum.com/paragraphs/2  
 
 # need trust model always to prevent question
+# use alice passsphrase
 gpg -se -r bob@bob.com --trust-model always ./source.txt 
 
 # base64 it so we can copy it in terminal
@@ -94,6 +113,7 @@ cat source.txt.gpg | base64
 ```
 
 On bob machine
+
 ```sh
 # copy the base64 data from alice terminal
 nano source.txt.gpg.b64
@@ -104,5 +124,3 @@ cat source.txt.gpg.b64 | base64 -d > source.txt.gpg
 # decrypt (requires bob password for key)
 gpg --decrypt source.txt.gpg
 ```
-
-

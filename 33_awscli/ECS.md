@@ -34,6 +34,11 @@ aws --profile $AWS_PROFILE --region $AWS_REGION ecs list-tasks --cluster "$clust
 # provide details on a task
 aws --profile $AWS_PROFILE --region $AWS_REGION ecs describe-tasks 
 --cluster "$cluster" --tasks "arn:aws:ecs:region:account:task/id"
+
+# stop a task (will take 30 seconds without a init-process)
+aws --profile $AWS_PROFILE --region $AWS_REGION ecs stop-task 
+--cluster "$cluster" --task "arn:aws:ecs:region:account:task/id"
+
 ```
 
 ## Resources  

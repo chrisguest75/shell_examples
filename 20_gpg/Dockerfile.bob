@@ -1,8 +1,5 @@
 FROM alpine:3.12.3
 
-RUN apk update
-RUN apk add gnupg nano curl
-
-RUN mkdir /work
+RUN apk update && apk add --no-cache mandoc man-pages gnupg nano curl 
 
 WORKDIR /work
