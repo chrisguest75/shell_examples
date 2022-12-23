@@ -2,6 +2,33 @@
 
 Demonstrates some examples of using jq to process json files
 
+- [README](#readme)
+  - [Install](#install)
+  - [Tricks](#tricks)
+  - [Transforming and Processing files](#transforming-and-processing-files)
+  - [Document creation and modification](#document-creation-and-modification)
+  - [Selecting and Filtering](#selecting-and-filtering)
+  - [Conditional checks](#conditional-checks)
+  - [Sorting](#sorting)
+  - [Aggregations](#aggregations)
+  - [Functions](#functions)
+  - [Modules](#modules)
+  - [Joining datasets (multiple streams)](#joining-datasets-multiple-streams)
+  - [Merging fragments into files](#merging-fragments-into-files)
+  - [Field manipulation](#field-manipulation)
+  - [APIs](#apis)
+  - [Terraform plans (pivot)](#terraform-plans-pivot)
+  - [More complex examples (docker scan outputs)](#more-complex-examples-docker-scan-outputs)
+  - [Trim whitespace](#trim-whitespace)
+  - [Regex Capture](#regex-capture)
+  - [Loading fields into environment vars](#loading-fields-into-environment-vars)
+  - [Loading files into fields (--rawfile)](#loading-files-into-fields---rawfile)
+  - [Propgating errors](#propgating-errors)
+  - [base64 handling](#base64-handling)
+  - [Extracting keys (docker bake)](#extracting-keys-docker-bake)
+  - [Extract Docker Environment Variable](#extract-docker-environment-variable)
+  - [Resources](#resources)
+
 Github [JQ](https://github.com/stedolan/jq) repo.  
 
 ## Install
@@ -332,6 +359,12 @@ jq '."ffmpeg-image-distroless"."containerimage.digest"' ./bake-metadata.json
 
 # extract the keys 
 jq -r '. | keys[] as $key | .[$key]."containerimage.digest"' ./bake-metadata.json 
+```
+
+## Extract Docker Environment Variable
+
+```sh
+docker inspect b3360585a | jq -r '.[0].Config.Env[] | select(. |  capture("DEVCONTAINER_TYPE.*")) | sub("DEVCONTAINER_TYPE=";"")'
 ```
 
 ## Resources
