@@ -6,6 +6,16 @@ TODO:
 
 * Use prune in find to exclude folders
 
+- [README](#readme)
+  - [ls](#ls)
+  - [Find](#find)
+  - [Grep](#grep)
+  - [Locate (debian)](#locate-debian)
+  - [exa](#exa)
+  - [fd](#fd)
+  - [ripgrep](#ripgrep)
+  - [Resources](#resources)
+
 ## ls
 
 ls - list directory contents
@@ -66,3 +76,40 @@ locate --statistics
 locate updatedb
 locate  "/etc/*.conf"
 ```
+
+## exa
+
+```sh
+brew install exa
+
+# find all markdown files
+exa -laTR --icons --git | grep ".*\.md"
+```
+
+## fd
+
+```sh
+brew install fd
+
+# find all files
+fd
+
+# find extension md
+fd -e md
+```
+
+## ripgrep
+
+```sh
+brew install ripgrep
+
+# find all files containing README
+rg README
+```
+
+
+## Resources
+
+* ogham/exa repo [here](https://github.com/ogham/exa)  
+* sharkdp/fd repo [here](https://github.com/sharkdp/fd)  
+* BurntSushi/ripgrep [here](https://github.com/BurntSushi/ripgrep)  

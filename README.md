@@ -62,6 +62,7 @@ It's also a repository used for collecting various shell related tooling.
   - [53 - syncing files](#53---syncing-files)
   - [54 - date handling](#54---date-handling)
   - [55 - vim setup](#55---vim-setup)
+  - [56 - options handling](#56---options-handling)
   - [59 - monitoring folders](#59---monitoring-folders)
   - [60 - creating HLS streams from segments](#60---creating-hls-streams-from-segments)
   - [61 - curl](#61---curl)
@@ -370,6 +371,11 @@ Steps [README.md](./54_date_handling/README.md)
 Demonstrates configuring a container for `vim`  
 Steps [README.md](./55_vim/README.md)  
 
+## 56 - options handling
+
+Demonstrate how to use options in shell.  
+Steps [README.md](./56_options_handling/README.md)  
+
 ## 59 - monitoring folders
 
 Demonstrate how to monitor a folder for changes.  
@@ -424,15 +430,8 @@ Steps [README.md](./66_generating_renaming_files/README.md)
   * defensive programming
   * debugfs
   * subst
+  * ShayMoi https://www.chezmoi.io/
   * Add a keywords index for links through to examples.  
-  * Options 
-    https://unix.stackexchange.com/questions/310957/how-to-restore-the-value-of-shell-options-like-set-x
-    ```sh
-    set +o noclobber
-    set -o 
-    set -o noclobber
-    https://en.wikipedia.org/wiki/Clobbering
-    ```
   * listing state; functions, env, paths, etc  
   * running commands from gists. 
 
