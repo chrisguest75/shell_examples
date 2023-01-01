@@ -8,6 +8,19 @@ RUN apt-get update \
     && apt-get clean 
 
 WORKDIR /scratch
+COPY --chmod=755 <<EOF /scratch/triggered.sh
+#!/usr/bin/env bash
+echo "Triggering..."
+echo "$@"
+env 
+while IFS=, read line; do
+    echo "$line"
+    # do something with the file
+done
+echo "Exiting..."
+EOF
+
+
 COPY --chmod=755 <<EOF /scratch/watch.sh
 #!/usr/bin/env bash
 echo "/proc/sys/fs/inotify/max_user_instances impacts how many different root dirs you can watch."
@@ -18,8 +31,7 @@ echo "max_user_watches: $(cat /proc/sys/fs/inotify/max_user_watches)"
 echo "max_queued_events: $(cat /proc/sys/fs/inotify/max_queued_events)"
 watchman --version 
 #watchman --log-level 2 --persistent --statefile=/scratch/watcher.state --logfile=/scratch/watcher.log watch "\$1"
-watchman --log-level 2 --persistent --statefile=/scratch/watcher.state --logfile=/scratch/watcher.log watch "\$1"
-
+watchman --log-level 2 --persistent --statefile=/scratch/watcher.state --logfile=/scratch/watcher.log -- trigger /share sharefolder '*.txt' -- /scratch/triggered.sh
 #watchman-wait watch "\$1"
 #watchman -- trigger "\$1" all -- /bin/true
 #ps -a

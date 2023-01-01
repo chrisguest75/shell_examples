@@ -25,14 +25,14 @@ docker run --rm -it -v$(realpath ./test):/share --name watchman watchman
 # second window
 docker exec -it watchman /bin/bash  
 
-
-watchman --log-level 2 --persistent --statefile=/scratch/watcher.state --logfile=/scratch/watcher.log watch /share
-
+# show current watchers 
 watchman watch-list
 watchman trigger-list /share
 
-watchman --log-level 2 --statefile=/scratch/watcher.state --logfile=/scratch/watcher.log -- trigger /share sharefolder '*.txt' -- ls -l
+# show what it is filtering 
+watchman find /share '*.txt'
 
+# if you copy a file you'll see it triggers the script.
 cat /scratch/watcher.log 
 ```
 
