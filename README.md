@@ -378,7 +378,7 @@ Steps [README.md](./56_options_handling/README.md)
 
 ## 59 - monitoring folders
 
-Demonstrate how to monitor a folder for changes.  
+Demonstrate how to monitor a folder for changes using `inotify` or `watchman`.  
 Steps [README.md](./59_monitor_folder/README.md)  
 
 ## 60 - creating HLS streams from segments

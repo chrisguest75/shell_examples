@@ -8,7 +8,9 @@ It's a common requirement that a process needs to monitor the output of another 
 
 ## Examples
 
-Demonstrate how to monitor a folder for changes using `inotify` [here]
+* Demonstrate how to monitor a folder for changes using `inotify` [here]
 (./inotify/README.md)  
-Demonstrate how to monitor a folder for changes using `watchman` [here]
+* Demonstrate how to monitor a folder for changes using `watchman` [here]
 (./watchman/README.md)  
+
+## Resources
