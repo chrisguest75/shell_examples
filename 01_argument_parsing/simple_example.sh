@@ -19,6 +19,12 @@ Examples:
 EOF
 }
 
+# if no variables are passed
+if [ -z "$@" ]; then
+    help
+    exit 0
+fi 
+
 for i in "$@"
 do
 case $i in

@@ -111,6 +111,12 @@ function main() {
     return ${EXITCODE}
 }
 
+# if no variables are passed
+if [ -z "$@" ]; then
+    help
+    exit 0
+fi 
+
 #echo "Start"
 main "$@"
 exit $?
