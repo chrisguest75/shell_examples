@@ -2,6 +2,10 @@
 
 Quick walkthrough of `squashing` commits to simplify commit history and rebases.  
 
+## Reason
+
+If you have a stack of 20-30 commits in your local branch you might find it easier to squash before attempting a rebase.  The chance of multiple stacked conflicts will increase.  
+
 TODO:
 
 * Continue to edit default branch and then rebase.
@@ -71,13 +75,18 @@ git diff head~1..head
 
 ### Squashing using git-extras
 
+NOTE: Be careful if you have files that are not commited. It's probably best to stash them first otherwise they may become part of the commit.  
+
 ```sh
-# squash top two commmits
+# squash top two commmits (stash before)
 git squash --squash-msg head~2                         
 
-# squash to common ancestor 
+# squash to common ancestor (stash before)
 git squash --squash-msg $(git merge-base newfeature main)
 
 # show files in top branch commit
 git show --name-only head
+
+# before pushing pop the commit and review whilst readding.  
+git reset head~1 
 ```
