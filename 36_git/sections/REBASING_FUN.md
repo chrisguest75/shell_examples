@@ -40,9 +40,9 @@ git log --oneline
 git checkout -b feature1
 
 # repeat this a few times altering the range
-echo "testing $(date '+%s')" >> ./example{2..5}.txt
+echo "testing feature $(date '+%s')" >> ./example{2..5}.txt
 git add .
-git commit -m "example changes $(date '+%s')"
+git commit -m "example feature changes $(date '+%s')"
 git log --oneline
 
 # get a common ancestor commitid
@@ -58,7 +58,7 @@ git checkout -b pipeline1
 
 # repeat this a few times altering the range
 mkdir -p .pipeline
-echo "pipeline $(date '+%s')" >> ./pipeline.yaml
+echo "pipeline $(date '+%s')" >> ./.pipeline/pipeline.yaml
 git add .
 git commit -m "example pipeline changes $(date '+%s')"
 git log --oneline
@@ -81,7 +81,7 @@ git merge-base feature1 main
 
 ### Rebase pipeline back to main
 
-NOTE: You can create a new temporary branch just for this test.  It's probably easier if the brances have lots of commits to remove afterwards.  
+NOTE: You can create a new temporary branch just for this test.  It's probably easier if the branches have lots of commits to remove afterwards.  
 
 Create new branch for the rebasing.  
 
@@ -105,6 +105,32 @@ git log --oneline
 
 # restoring by dropping the rebased branch
 git rebase -i $(git merge-base pipeline1 main)
+git log --oneline
+```
+
+## Merging into main and maintaining other branches
+
+```sh
+git switch main
+
+# simulate work in main
+# repeat this a few times altering the range
+echo "merged into main $(date '+%s')" >> ./1.txt
+git add .
+git commit -m "merged into main $(date '+%s')"
+git log --oneline
+
+# using git-extras see differences between branches
+git switch features
+git-missing main feature1
+# rebase feature1 branch with merges into main
+git rebase main
+git-missing main feature1
+
+# rebase the branches off main
+git switch feature1_pipeline1
+git log --oneline
+git rebase feature1
 git log --oneline
 ```
 
