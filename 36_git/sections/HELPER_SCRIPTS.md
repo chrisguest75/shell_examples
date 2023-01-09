@@ -40,7 +40,7 @@ brew install spark
 # iterate over repositories
 find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --ignore-errors --days \;
 
-find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days --json \;                                                
+find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days --json \;
 find ../../../code -maxdepth 1 -type d -exec ./build_commits.sh --path={} --days --json \; | jq -s . > ./out/branch_activity.json  
 
 # data generator
