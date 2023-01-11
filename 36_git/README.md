@@ -18,7 +18,7 @@ TODO:
 * FAQS - [FAQS.md](./sections/FAQS.md)  
 * Rebasing fun - [REBASING_FUN.md](./sections/REBASING_FUN.md)  
 * Squashing Walkthrough - [SQUASHING_WALKTHROUGH.md](./sections/SQUASHING_WALKTHROUGH.md)  
-* Reverting Walkthrough - [REVERTING_WALKTHROUGH.md](./sections/REVERTING_WALKTHROUGH.md)  
+* Reverting and Rollback Walkthrough - [ROLLBACK_WALKTHROUGH.md](./sections/ROLLBACK_WALKTHROUGH.md)  
 * Creating new repos - [NEW_REPOS.md](./sections/NEW_REPOS.md)  
 * Patching - [PATCHING.md](./sections/PATCHING.md)  
 * Hooks - [HOOKS.md](./sections/HOOKS.md)  

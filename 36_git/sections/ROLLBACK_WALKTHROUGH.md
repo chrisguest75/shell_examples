@@ -1,6 +1,10 @@
-# REVERTING
+# ROLLBACK/REVERTING
 
 Quick walkthrough of `reverting` different types of commits.  
+
+NOTES:
+
+* It's possible to rollback and cherry pick from the reflog.
 
 ## Create repo
 
@@ -70,7 +74,7 @@ git revert head~3
 
 ## Rollback the last commit
 
-Rollback in the current local branch  
+Rollback in the current local branch.  Recently used this to rollback a merge from master into my working feature branch.  Rollback the merge and reapply the changes after the merge.  
 
 ```sh
 # pop the last commit off and move the changed files into staging
