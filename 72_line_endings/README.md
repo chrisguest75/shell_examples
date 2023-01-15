@@ -2,6 +2,10 @@
 
 Demonstrate some examples of working with line-endings differences.  
 
+NOTES:
+
+* It seems if VSCode detects line endings it continues to use that style.  
+
 ## Tools 
 
 ```sh

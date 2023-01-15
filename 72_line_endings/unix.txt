@@ -2,6 +2,6 @@ The
 line 
 endings 
 are 
-dos 
-CRLF
+unix 
+LF
 
