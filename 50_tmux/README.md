@@ -1,17 +1,25 @@
 # README
-Demonstrate some tmux examples and common commands 
+
+Demonstrate some `tmux` examples and common commands.  
 
 TODO:
+
 * tmux in iterm
 
 ## Configuration
+
 Example in my dotfiles [here](https://github.com/chrisguest75/default_dotfiles/blob/master/tmux/.tmux.conf)
 
 ```sh
 cat ~/.tmux.conf
 ```
+
 ## Sessions
+
 ```sh
+# version of tmux
+tmux -V
+
 # Start new session with directory name
 tmux new -s $(basename $(pwd))	
 
@@ -27,6 +35,7 @@ tmux kill-session -t <name>
 ```
 
 ## Keys
+
 ```sh
 ctrl+b                  tmux prefix - signal to the tmux process
 
@@ -54,6 +63,7 @@ ctrl+b + ,              Rename windows
 ```
 
 ## iterm2
+
 You can kill iterm window and then reopen using tmux attach 
 
 ## tmuxinator
@@ -75,7 +85,27 @@ ctrl+b + d
 tmux kill-session -t shell_examples
 ```
 
-# Resources 
+## plugins
+
+```sh
+# clone tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# copy over settings
+cp ./.tmux.conf ~/.tmux.conf
+
+# reload config
+tmux source-file ~/.tmux.conf
+
+# load the plugins
+Press ctrl+b+I
+
+# show downloaded plugin folders
+ls ~/.tmux/plugins
+```
+
+## Resources 
+
 * `cheatsheet tmux`
 * `man tmux`
 * tmux key bindings example [here](https://zserge.com/posts/tmux/)
@@ -83,6 +113,6 @@ tmux kill-session -t shell_examples
 * getting started with tmux [here](https://linuxize.com/post/getting-started-with-tmux/)
 * tmuxcheatsheet [here](https://tmuxcheatsheet.com/)
 * Copying layout to tmuxinator [here](https://fabianfranke.de/use-tmuxinator-to-recreate-tmux-panes-and-windowstmuxinator-save-tmux-pane-and-window-layouts/)
-
-
-
+* Everything you need to know about tmux – Plugins Manager [here](https://arcolinux.com/everything-you-need-to-know-about-tmux-plugins-manager/)
+* jasonmorganson/dotfiles tmux plugins [here](https://github.com/jasonmorganson/dotfiles/blob/master/dot_tmux-plugins)
+* tmux plugins list [here](https://github.com/tmux-plugins/list)  
