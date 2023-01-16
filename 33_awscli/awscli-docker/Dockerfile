@@ -8,7 +8,7 @@ ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8  
 
 RUN apt-get update \
-    && apt-get install -fy -qq --no-install-recommends ca-certificates curl jq unzip locales \
+    && apt-get install -fy -qq --no-install-recommends ca-certificates nano bash curl jq unzip locales \
     && apt-get clean 
 
 RUN locale-gen en_US.UTF-8 
