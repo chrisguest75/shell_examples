@@ -71,6 +71,11 @@ It's also a repository used for collecting various shell related tooling.
   - [64 - calculations](#64---calculations)
   - [65 - pipes](#65---pipes)
   - [66 - generating and renaming files](#66---generating-and-renaming-files)
+  - [68 - difftools](#68---difftools)
+  - [69 - dotsourcing](#69---dotsourcing)
+  - [70 - xargs](#70---xargs)
+  - [71 - disk usage](#71---disk-usage)
+  - [72 - line endings](#72---line-endings)
   - [👀 Resources](#-resources)
   - [Shellchecking](#shellchecking)
   - [Pre-commit hook (shellcheck)](#pre-commit-hook-shellcheck)
@@ -415,6 +420,31 @@ Steps [README.md](./65_pipes/README.md)
 
 Demonstrate techniques for generating and renaming files.  
 Steps [README.md](./66_generating_renaming_files/README.md)  
+
+## 68 - difftools
+
+Example textual diffing tools.  
+Steps [README.md](./68_difftools/README.md)  
+
+## 69 - dotsourcing
+
+Demonstrate how to use dot-sourcing.  
+Steps [README.md](./69_dotsourcing/README.md)  
+
+## 70 - xargs
+
+Demonstrate basic behaviour with `xargs`.  
+Steps [README.md](./70_xargs/README.md)  
+
+## 71 - disk usage
+
+Demonstrate some examples of calculating disk usage.  
+Steps [README.md](./71_disk_usage/README.md)  
+
+## 72 - line endings
+
+Demonstrate some examples of working with line-endings differences.  
+Steps [README.md](./72_line_endings/README.md)  
 
 ## 👀 Resources
 

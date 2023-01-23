@@ -1,6 +1,6 @@
 # DISK USAGE
 
-Demonstrate some examples of calculating disk usage.
+Demonstrate some examples of calculating disk usage.  
 
 ## Examples
 
