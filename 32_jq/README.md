@@ -68,6 +68,8 @@ jq -c ".[][] | (.name, .id)" ./pokedex.json
 
 # transform and output as fields (single line sing string interpolation)   
 jq -c -r '.[][] | "\(.name) \(.id)"' ./pokedex.json
+# align output 
+jq -c -r '.[][] | "\(.name | (. + " " * (20 - length))) \(.id)"' ./pokedex.json
 
 # transform and output as csv (with a header)    
 jq -cr '["Name","Id"], (.[][] | [.name, .id]) | @csv' ./pokedex.json     
