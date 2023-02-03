@@ -2,6 +2,22 @@
 
 Demonstrate some example commands for managing AWS Lambda services
 
+Amazon API Gateway is a fully managed service that makes it easy for developers to create, publish, and manage APIs (Application Programming Interfaces) for their applications. API Gateway handles all of the tasks involved in accepting and processing API requests, including traffic management, authorization and access control, monitoring, and API version management.  
+
+Amazon API Gateway v2 is the latest version of the service, which provides additional features and enhancements over the previous version (API Gateway).  
+
+The main differences between API Gateway and API Gateway v2 are:  
+
+1) Protocols: API Gateway v2 supports both REST and WebSocket protocols, while API Gateway only supports REST.
+
+2) Integration Types: API Gateway v2 supports a wider range of integration types, including Lambda, HTTP, AWS App Mesh, and others, while API Gateway only supports a limited set of integration types.
+
+3) Routing: API Gateway v2 provides more flexible and sophisticated routing capabilities, including support for custom domain names and automatic generation of client SDKs, while API Gateway only provides basic routing features.
+
+4) Security: API Gateway v2 provides improved security features, including support for OAuth 2.0 and JWT authorization, while API Gateway only provides basic security features.
+
+Overall, API Gateway v2 provides more advanced and flexible features compared to API Gateway, but also requires a deeper understanding of the service to effectively utilize its capabilities.
+
 ## Get the apigateway details
 
 ```sh
@@ -56,6 +72,19 @@ profile1,eu-west-1
 profile3,us-east-1
 profile3,eu-west-1
 EOF
+```
+
+## Custom domains
+
+When you associate a custom domain with an Amazon API Gateway, it creates a new Amazon CloudFront distribution. This is because CloudFront is used to provide the custom domain mapping and SSL/TLS encryption for your API Gateway deployment.
+
+Each CloudFront distribution is essentially a separate edge location network, so adding a custom domain creates a new "front door" for your API Gateway deployment. This allows you to serve your API traffic from multiple locations and enables you to customize the behavior and performance of your API deployment independently from other deployments.
+
+For example, you could associate different custom domains with different stages of your API deployment, such as "prod.api.example.com" and "dev.api.example.com", and apply different caching and security settings to each domain. This helps you to manage your API deployment more effectively and provides better scalability, security, and reliability for your API consumers.
+
+```sh
+# get a list of custom domains
+aws --profile "${AWS_PROFILE}" --region "${AWS_REGION}" apigateway get-domain-names | jq .
 ```
 
 ## Resources

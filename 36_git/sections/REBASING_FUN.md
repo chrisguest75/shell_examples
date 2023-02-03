@@ -6,6 +6,20 @@ Quick walkthrough of switching `bases` on a branch.
 
 To test a pipeline change with multiple different sources.  You may want to switch the base from master/main to features.  
 
+### Why rebasing?
+
+You might consider using Git rebase in the following situations:
+
+Cleaner Commit History: Rebasing can be used to clean up your branch history by aggregating related changes into fewer commits and removing unneeded commits. This makes it easier to understand the evolution of your code and reduces clutter in your branch history.
+
+Avoiding Merge Commits: Rebasing can be used to avoid the creation of unnecessary merge commits in your branch history. Instead of merging, you can reapply your branch changes on top of the target branch, resulting in a cleaner, linear history.
+
+Keeping Your Branch Up-to-Date: Rebasing can be used to keep your branch up-to-date with the target branch by reapplying your branch changes on top of the latest changes in the target branch. This makes it easier to merge your branch later on, as there are fewer conflicts to resolve.
+
+Isolation of Changes: Rebasing can be used to isolate your branch changes from the target branch, making it easier to identify and test your changes independently from other changes in the target branch.
+
+Note that rebasing can be a complex operation, and it can also result in conflicts if the target branch has changed since your branch was created. Therefore, it is important to understand the implications of rebasing and to use it with caution, especially in collaboration with other developers. It's a good idea to back up your branch before rebasing, and to communicate with your team before and after the rebase to minimize potential conflicts.
+
 ## Create repo
 
 ```sh
