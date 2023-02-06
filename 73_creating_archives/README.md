@@ -26,10 +26,13 @@ Zip can compress multiple files and even entire directory hierarchies. gzip, on 
 ```sh
 # create a zip with a base path
 mkdir -p ./out
-zip -b ../73_creating_archives ./out/test.zip *
+zip -b ../73_creating_archives -r ./out/test.zip ./in/*
 
 # look at zip without decompressing
 unzip -l ./out/test.zip
+
+# unzip into a folder
+unzip -d ./out/unzipped ./out/test.zip
 ```
 
 ## TAR
