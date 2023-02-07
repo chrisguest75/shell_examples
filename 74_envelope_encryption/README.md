@@ -2,8 +2,25 @@
 
 Demonstrate how to perform envelope encryption.  
 
+## Reason
+
+We create a simple symmetric key that we use to encrypt a large file.  The key is encrypted using a public and put into a tarball with the data.  On reciept of the file we use the private key to decrypt the symmetric key and then decrypt the large file.  
+
 ## Generate a private/public key pair
 
+```sh
+KEYSPATH="./keys/"
+mkdir -p "${KEYSPATH}"
+
+# generate private key
+openssl genrsa -out ${KEYSPATH}private.pem 4096
+# show private key
+openssl rsa -in ${KEYSPATH}private.pem -noout -text
+# extract public key
+openssl rsa -in ${KEYSPATH}private.pem -pubout > ${KEYSPATH}public.pem
+# show public key
+openssl rsa -in ${KEYSPATH}public.pem -pubin -text -noout
+```
 
 ## Encrypt the file using symmetric key (the envelope)
 
@@ -32,7 +49,7 @@ cat "${ENCRYPTPATH}${BACKUPFILE}.dec.tar" | openssl enc -aes-256-cbc -salt -out 
 
 ```sh
 # encrypt key (THIS IS WHERE WE SHOULD ENCRYPT USING AWS KEY)
-cp ${ENCRYPTPATH}${BACKUPFILE}.key "${ENCRYPTPATH}${BACKUPFILE}.key.enc"
+openssl rsautl -encrypt -inkey ${KEYSPATH}public.pem -pubin -in ${ENCRYPTPATH}${BACKUPFILE}.key -out "${ENCRYPTPATH}${BACKUPFILE}.key.enc"
 
 # put the key in second envelope
 tar -C "${ENCRYPTPATH}" -cz -f "${ENCRYPTPATH}${BACKUPFILE}.final.tar" "${BACKUPFILE}.tar.enc" "${BACKUPFILE}.key.enc" 
@@ -51,7 +68,7 @@ cp "${ENCRYPTPATH}${BACKUPFILE}.final.tar" "${DECRYPTPATH}${BACKUPFILE}.final.ta
 tar -C "${DECRYPTPATH}" -xvf "${DECRYPTPATH}${BACKUPFILE}.final.tar" 
 
 # encrypt key (THIS IS WHERE WE SHOULD DECRYPT USING AWS KEY)
-cp "${DECRYPTPATH}${BACKUPFILE}.key.enc" "${DECRYPTPATH}${BACKUPFILE}.key.dec"
+openssl rsautl -decrypt -inkey ${KEYSPATH}private.pem -in "${DECRYPTPATH}${BACKUPFILE}.key.enc" > "${DECRYPTPATH}${BACKUPFILE}.key.dec"
 
 openssl enc -d -aes-256-cbc -in "${DECRYPTPATH}${BACKUPFILE}.tar.enc" -pass "file:${DECRYPTPATH}${BACKUPFILE}.key.dec" -md sha256 > "${DECRYPTPATH}${BACKUPFILE}.dec.tar"
 
