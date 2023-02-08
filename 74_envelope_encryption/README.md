@@ -2,9 +2,13 @@
 
 Demonstrate how to perform envelope encryption.  
 
+Envelope encryption is a method of encrypting data where the data is encrypted with a data key, and the data key is then encrypted with a separate key (typically a key-encryption key or KEK) before being stored along with the encrypted data. This way, the KEK can be used to encrypt and decrypt the data key, while the data key is used to encrypt and decrypt the actual data. The advantage of this approach is that it allows different keys to be used for different purposes, such as protecting data keys from unauthorized access or allowing data keys to be rotated without affecting the encrypted data.  
+
 ## Reason
 
 We create a simple symmetric key that we use to encrypt a large file.  The key is encrypted using a public and put into a tarball with the data.  On reciept of the file we use the private key to decrypt the symmetric key and then decrypt the large file.  
+
+We also use envelope encryption as the maximum size of the data that you can encrypt varies with the type of KMS key and the encryption algorithm that you choose.  All are very small number of bytes.  (Max asymmetric ~450bytes)  
 
 ## Generate a private/public key pair
 
