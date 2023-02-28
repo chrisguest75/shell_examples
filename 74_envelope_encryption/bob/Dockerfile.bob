@@ -20,12 +20,14 @@ RUN nix develop --install
 
 ## create backup
 COPY --chmod=755 <<EOF /work/restore-backup.sh
-DECRYPTPATH="./output/"
+BACKUPFILE=\$1
+KEYSPATH="/share/keys/"
+DECRYPTPATH="/share/output/"
 echo "Create output folder \${DECRYPTPATH}"
 mkdir -p "\${DECRYPTPATH}"
 
 # get encrypted file
-cp "\${ENCRYPTPATH}\${BACKUPFILE}.final.tar" "\${DECRYPTPATH}\${BACKUPFILE}.final.tar"
+cp "/share/backup/\${BACKUPFILE}.final.tar" "\${DECRYPTPATH}\${BACKUPFILE}.final.tar"
 
 tar -C "\${DECRYPTPATH}" -xvf "\${DECRYPTPATH}\${BACKUPFILE}.final.tar" 
 

@@ -49,18 +49,23 @@ curl -s -o "\${ENCRYPTPATH}/source1.txt" http://metaphorpsum.com/paragraphs/2
 curl -s -o "\${ENCRYPTPATH}/source2.txt" http://metaphorpsum.com/paragraphs/5  
 
 # create key
+echo "Creating key '\${ENCRYPTPATH}\${BACKUPFILE}.key'"
 openssl rand 256 > "\${ENCRYPTPATH}\${BACKUPFILE}.key"
 
 # create tar file
+echo "Creating tarball"
 tar  -C "\${ENCRYPTPATH}" -f "\${ENCRYPTPATH}\${BACKUPFILE}.dec.tar" -cz "source1.txt" "source2.txt"  
 
 # create encrypted file
+echo "Encrypt tarball"
 cat "\${ENCRYPTPATH}\${BACKUPFILE}.dec.tar" | openssl enc -aes-256-cbc -salt -out "\${ENCRYPTPATH}\${BACKUPFILE}.tar.enc" -pass "file:\${ENCRYPTPATH}\${BACKUPFILE}.key" -md sha256  
 
 # encrypt key (THIS IS WHERE WE SHOULD ENCRYPT USING AWS KEY)
+echo "Encrypt key"
 openssl rsautl -encrypt -inkey \${KEYSPATH}public.pem -pubin -in \${ENCRYPTPATH}\${BACKUPFILE}.key -out "\${ENCRYPTPATH}\${BACKUPFILE}.key.enc"
 
 # put the key in second envelope
+echo "Create final tarball"
 tar -C "\${ENCRYPTPATH}" -cz -f "\${ENCRYPTPATH}\${BACKUPFILE}.final.tar" "\${BACKUPFILE}.tar.enc" "\${BACKUPFILE}.key.enc" 
 EOF
 
