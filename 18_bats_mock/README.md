@@ -64,6 +64,14 @@ bats -t ./test/tests.bats
 bats -t ./test/tests.bats --formatter junit -T
 ```
 
+## Selective
+
+Filtering tests is possible using a regex  
+
+```sh
+./test/tests.bats -f "script_to_test"
+```
+
 ## Debugging
 
 ```sh

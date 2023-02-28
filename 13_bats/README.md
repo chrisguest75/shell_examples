@@ -44,6 +44,9 @@ cat /usr/local/Cellar/bats-core/1.6.0/README.md
 ## Running tests (in shell)
 
 ```sh
+# show help
+test/tests.bats --help
+
 # Pretty printed tests
 bats test/tests.bats 
 test/tests.bats 
@@ -55,6 +58,16 @@ bats -t ./test/tests.bats --formatter junit -T
 export DEBUG_BATS=true  
 bats -t test/tests.bats 
 unset DEBUG_BATS
+```
+
+## Selective
+
+Filtering tests is possible using a regex  
+
+```sh
+./test/tests.bats -f "add_trailing_slash - No parameter"
+./test/tests.bats -f "add_trailing_slash"
+./test/tests.bats -f "trim"
 ```
 
 ## Running tests (in docker)

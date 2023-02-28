@@ -84,7 +84,7 @@ teardown() {
 #* add_trailing_slash
 #*******************************************************************
 
-@test "add_trailing_slash - No parameter " {
+@test "add_trailing_slash - No parameter" {
     run add_trailing_slash 
     assert_output --regexp 'add_trailing_slash\(path\) - missing path argument'
     assert_failure
@@ -109,7 +109,7 @@ teardown() {
 # #* trim§
 # #*******************************************************************
 
-@test "trim - No parameter " {
+@test "trim - No parameter" {
     run trim 
     assert_output --regexp 'trim\(string\) - missing string argument'
     assert_failure
