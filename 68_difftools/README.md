@@ -7,19 +7,26 @@ REF: Binary Diffing Examples [here](../68_difftools/README.md)
 ## VSCode
 
 ```sh
-code --diff file1.txt file2.txt
+code --diff file1.txt file1_changed.txt
 ```
 
 ## Beyond Compare
 
 ```sh
-bcompare file1.txt file2.txt
+bcompare file1.txt file1_changed.txt
 ```
 
 ## diff
 
 ```sh
-diff file1.txt file2.txt
+# changed (detects diff)
+diff file1.txt file1_changed.txt
+
+# extended test (detects diff)
+diff file1.txt file1_extended.txt
+
+# truncated test (detects diff)
+diff file1.txt file1_truncated.txt
 ```
 
 ## Resources
