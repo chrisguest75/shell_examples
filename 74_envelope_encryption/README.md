@@ -10,6 +10,39 @@ We create a simple symmetric key that we use to encrypt a large file.  The key i
 
 We also use envelope encryption as the maximum size of the data that you can encrypt varies with the type of KMS key and the encryption algorithm that you choose.  All are very small number of bytes.  (Max asymmetric ~450bytes)  
 
+## Docker example
+
+```sh
+# terminal 1
+cd ./alice
+# build nix
+docker build -f Dockerfile.alice -t alice .
+
+# debugging and host repo in build folder
+docker run -v "$(pwd):/share" --rm -it --entrypoint /root/.nix-profile/bin/bash alice 
+
+nix develop --impure
+openssl version
+
+./generate-keys.sh 
+./create-backup.sh
+
+
+# terminal 2
+cd ./bob
+# build nix
+docker build -f Dockerfile.bob -t bob .
+
+# debugging and host repo in build folder
+docker run -v "$(pwd):/share" --rm -it --entrypoint /root/.nix-profile/bin/bash bob 
+```
+
+> bash-5.2# ./create-backup.sh
+> Create output folder /share/backup/
+> *** WARNING : deprecated key derivation used.
+> Using -iter or -pbkdf2 would be better.
+> The command rsautl was deprecated in version 3.0. Use 'pkeyutl' instead.
+
 ## Generate a private/public key pair
 
 ```sh
@@ -86,3 +119,11 @@ tar -C "${DECRYPTPATH}" -xvf "${DECRYPTPATH}${BACKUPFILE}.dec.tar"
 ## Resources
 
 * Encrypting and decrypting files with OpenSSL [here](https://opensource.com/article/21/4/encryption-decryption-openssl)  
+* Search more than 80 000 packages [here](https://search.nixos.org/)
+
+
+nix command broken: massive slowdown, requires flakes-specific experimental flags on non-flakes systems #5637 https://github.com/NixOS/nix/issues/5637
+
+https://github.com/numtide/flake-utils
+
+https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-develop.html
