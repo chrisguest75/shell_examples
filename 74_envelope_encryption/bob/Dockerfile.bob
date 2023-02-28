@@ -1,0 +1,45 @@
+# syntax=docker/dockerfile:1.4
+# FROM nixos/nix:latest
+FROM nixos/nix:2.13.2
+#FROM ubuntu:20.04
+
+WORKDIR /work
+
+COPY --chmod=755 <<EOF /work/enable-flakes.sh
+#!/usr/bin/env bash
+echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
+EOF
+RUN "/work/enable-flakes.sh"
+
+COPY flake.lock flake.nix ./
+
+RUN nix develop --install
+# generate keys
+# RUN nix build --impure
+# RUN nix develop --impure
+
+## create backup
+COPY --chmod=755 <<EOF /work/restore-backup.sh
+DECRYPTPATH="./output/"
+echo "Create output folder \${DECRYPTPATH}"
+mkdir -p "\${DECRYPTPATH}"
+
+# get encrypted file
+cp "\${ENCRYPTPATH}\${BACKUPFILE}.final.tar" "\${DECRYPTPATH}\${BACKUPFILE}.final.tar"
+
+tar -C "\${DECRYPTPATH}" -xvf "\${DECRYPTPATH}\${BACKUPFILE}.final.tar" 
+
+# encrypt key (THIS IS WHERE WE SHOULD DECRYPT USING AWS KEY)
+openssl rsautl -decrypt -inkey ${KEYSPATH}private.pem -in "\${DECRYPTPATH}\${BACKUPFILE}.key.enc" > "\${DECRYPTPATH}\${BACKUPFILE}.key.dec"
+
+openssl enc -d -aes-256-cbc -in "\${DECRYPTPATH}\${BACKUPFILE}.tar.enc" -pass "file:\${DECRYPTPATH}\${BACKUPFILE}.key.dec" -md sha256 > "\${DECRYPTPATH}\${BACKUPFILE}.dec.tar"
+
+rm -f "\${DECRYPTPATH}\${BACKUPFILE}.tar.enc"
+rm -f "\${DECRYPTPATH}\${BACKUPFILE}.key.dec"
+rm -f "\${DECRYPTPATH}\${BACKUPFILE}.key.enc"
+
+tar -C "\${DECRYPTPATH}" -xvf "\${DECRYPTPATH}\${BACKUPFILE}.dec.tar"
+EOF
+
+ENTRYPOINT [ "/root/.nix-profile/bin/bash" ]
+
