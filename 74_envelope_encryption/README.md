@@ -35,6 +35,9 @@ docker build -f Dockerfile.bob -t bob .
 
 # debugging and host repo in build folder
 docker run -v "$(pwd):/share" --rm -it --entrypoint /root/.nix-profile/bin/bash bob 
+
+nix develop --impure
+./restore-backup.sh file_20230228_224826_Z
 ```
 
 > bash-5.2# ./create-backup.sh
