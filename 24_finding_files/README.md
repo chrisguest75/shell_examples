@@ -105,6 +105,9 @@ brew install ripgrep
 
 # find all files containing README
 rg README
+
+# searching in node_modules (including .gitignore) 
+rg --no-ignore --hidden "items to be sent"
 ```
 
 
