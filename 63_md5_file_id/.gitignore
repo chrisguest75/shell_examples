@@ -1,3 +1,5 @@
 *.gz
 md5s.json
 out_md5s.json
+*.bin
+*.bin.md5

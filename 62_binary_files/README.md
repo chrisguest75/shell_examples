@@ -19,7 +19,11 @@ code --install-extension ms-vscode.hexeditor
 
 ```sh
 file ./file.bin
+# with zeros
 sudo dd if=/dev/zero of=file.bin bs=1M count=1
+# or with random data
+sudo dd if=/dev/urandom of=random.bin bs=1024 count=1
+
 xxd ./file.bin
 ```
 

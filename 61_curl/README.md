@@ -4,11 +4,16 @@ Demonstrate some common examples with `curl`
 
 TODO:
 
+* add wget equivalents
 * ssl negotiation
 * redirects implement and point to another nginx server (permanent with curl?)
 * go through options - -cookie-jar [can-you-set-up-cookies-in-nginx](https://www.digitalocean.com/community/questions/can-you-set-up-cookies-in-nginx)  
 
 For `imgcat` check that the iterm2 shell integrations are installed.  
+
+For ref:
+
+* Using --fail to return exit codes [docker_examples/77_healthchecks](https://github.com/chrisguest75/docker_examples/tree/master/77_healthchecks)
 
 ## Cheatsheet
 

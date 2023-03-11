@@ -36,6 +36,20 @@ md5sum ./README.md | tr " " "\n" | head -n 1
 
 ## Verify md5
 
+```sh
+# generate random numbers
+dd if=/dev/urandom of=random.bin bs=1024 count=10
+md5sum ./random.bin > ./random.bin.md5
+md5sum --check ./random.bin.md5 
+
+# regenerate
+dd if=/dev/urandom of=random.bin bs=1024 count=10
+# check again
+md5sum --check ./random.bin.md5 
+```
+
+## Verify md5 (without .md5 file)
+
 Simple little verification for a file against an md5 value.  
 
 ```sh
