@@ -10,6 +10,10 @@ We create a simple symmetric key that we use to encrypt a large file.  The key i
 
 We also use envelope encryption as the maximum size of the data that you can encrypt varies with the type of KMS key and the encryption algorithm that you choose.  All are very small number of bytes.  (Max asymmetric ~450bytes)  
 
+## TODO
+
+* Fix ` *** WARNING : deprecated key derivation used.  Using -iter or -pbkdf2 would be better.`
+
 ## Docker example
 
 ### Alice
@@ -38,6 +42,7 @@ openssl version
 # terminal 2
 cd ./bob
 
+rm -f ./backup/*
 cp ../alice/backup/*.tar ./backup
 cp ../alice/keys/private.pem ./keys
 
@@ -50,17 +55,13 @@ docker run -v "$(pwd):/share" --rm -it --entrypoint /root/.nix-profile/bin/bash 
 nix develop --impure
 ls /share/backup/
 
-# NOTE: This is not working
-./restore-backup.sh file_20230311_142250_Z
+# decrypt the backup
+./restore-backup.sh file_20230311_155352_Z
 ```
 
-> bash-5.2# ./create-backup.sh
-> Create output folder /share/backup/
-> *** WARNING : deprecated key derivation used.
-> Using -iter or -pbkdf2 would be better.
-> The command rsautl was deprecated in version 3.0. Use 'pkeyutl' instead.
+## Manual
 
-## Generate a private/public key pair
+### Generate a private/public key pair
 
 ```sh
 KEYSPATH="./keys/"
@@ -76,7 +77,7 @@ openssl rsa -in ${KEYSPATH}private.pem -pubout > ${KEYSPATH}public.pem
 openssl rsa -in ${KEYSPATH}public.pem -pubin -text -noout
 ```
 
-## Encrypt the file using symmetric key (the envelope)
+### Encrypt the file using symmetric key (the envelope)
 
 ```sh
 BACKUPDATE=$(date -u +"%Y%m%d_%H%M%S_Z")
@@ -99,7 +100,7 @@ tar  -C "${ENCRYPTPATH}" -f "${ENCRYPTPATH}${BACKUPFILE}.dec.tar" -cz "source1.t
 cat "${ENCRYPTPATH}${BACKUPFILE}.dec.tar" | openssl enc -aes-256-cbc -salt -out "${ENCRYPTPATH}${BACKUPFILE}.tar.enc" -pass "file:${ENCRYPTPATH}${BACKUPFILE}.key" -md sha256  
 ```
 
-## Encrypt the key using asymmetric key
+### Encrypt the key using asymmetric key
 
 ```sh
 # encrypt key (THIS IS WHERE WE SHOULD ENCRYPT USING AWS KEY)
@@ -109,7 +110,7 @@ openssl rsautl -encrypt -inkey ${KEYSPATH}public.pem -pubin -in ${ENCRYPTPATH}${
 tar -C "${ENCRYPTPATH}" -cz -f "${ENCRYPTPATH}${BACKUPFILE}.final.tar" "${BACKUPFILE}.tar.enc" "${BACKUPFILE}.key.enc" 
 ```
 
-## Decrypt
+### Decrypt
 
 ```sh
 DECRYPTPATH="./output/"

@@ -62,7 +62,7 @@ cat "\${ENCRYPTPATH}\${BACKUPFILE}.dec.tar" | openssl enc -aes-256-cbc -salt -ou
 
 # encrypt key (THIS IS WHERE WE SHOULD ENCRYPT USING AWS KEY)
 echo "Encrypt key"
-openssl rsautl -encrypt -inkey \${KEYSPATH}public.pem -pubin -in \${ENCRYPTPATH}\${BACKUPFILE}.key -out "\${ENCRYPTPATH}\${BACKUPFILE}.key.enc"
+openssl pkeyutl -encrypt -inkey \${KEYSPATH}public.pem -pubin -in \${ENCRYPTPATH}\${BACKUPFILE}.key -out "\${ENCRYPTPATH}\${BACKUPFILE}.key.enc"
 
 # put the key in second envelope
 echo "Create final tarball"
