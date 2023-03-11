@@ -1,0 +1,80 @@
+# syntax=docker/dockerfile:1.4
+# FROM nixos/nix:latest
+FROM nixos/nix:2.13.2
+#FROM ubuntu:20.04
+
+WORKDIR /work
+
+COPY --chmod=755 <<EOF /work/enable-flakes.sh
+#!/usr/bin/env bash
+echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
+EOF
+RUN "/work/enable-flakes.sh"
+
+COPY flake.lock flake.nix ./
+
+RUN nix develop --install
+# generate keys
+# RUN nix build --impure
+# RUN nix develop --impure
+
+## generate keys
+COPY --chmod=755 <<EOF /work/generate-keys.sh
+#!/usr/bin/env bash
+KEYSPATH="/share/keys/"
+mkdir -p "\${KEYSPATH}"
+
+# generate private key
+openssl genrsa -out \${KEYSPATH}private.pem 4096
+# show private key
+openssl rsa -in \${KEYSPATH}private.pem -noout -text
+# extract public key
+openssl rsa -in \${KEYSPATH}private.pem -pubout > \${KEYSPATH}public.pem
+# show public key
+openssl rsa -in \${KEYSPATH}public.pem -pubin -text -noout
+EOF
+
+## create backup
+COPY --chmod=755 <<EOF /work/create-backup.sh
+#!/usr/bin/env bash
+KEYSPATH="/share/keys/"
+BACKUPDATE=$(date -u +"%Y%m%d_%H%M%S_Z")
+ENCRYPTPATH="/share/backup/"
+echo "Create output folder \${ENCRYPTPATH}"
+mkdir -p "\${ENCRYPTPATH}"
+BACKUPFILE=file_\${BACKUPDATE}
+
+# create content
+curl -s -o "\${ENCRYPTPATH}/source1.txt" http://metaphorpsum.com/paragraphs/2  
+curl -s -o "\${ENCRYPTPATH}/source2.txt" http://metaphorpsum.com/paragraphs/5  
+
+# create key
+echo "Creating key '\${ENCRYPTPATH}\${BACKUPFILE}.key'"
+openssl rand 256 > "\${ENCRYPTPATH}\${BACKUPFILE}.key"
+
+# create tar file
+echo "Creating tarball"
+tar  -C "\${ENCRYPTPATH}" -f "\${ENCRYPTPATH}\${BACKUPFILE}.dec.tar" -cz "source1.txt" "source2.txt"  
+
+# create encrypted file
+echo "Encrypt tarball"
+cat "\${ENCRYPTPATH}\${BACKUPFILE}.dec.tar" | openssl enc -aes-256-cbc -salt -out "\${ENCRYPTPATH}\${BACKUPFILE}.tar.enc" -pass "file:\${ENCRYPTPATH}\${BACKUPFILE}.key" -md sha256  
+
+# encrypt key (THIS IS WHERE WE SHOULD ENCRYPT USING AWS KEY)
+echo "Encrypt key"
+openssl pkeyutl -encrypt -inkey \${KEYSPATH}public.pem -pubin -in \${ENCRYPTPATH}\${BACKUPFILE}.key -out "\${ENCRYPTPATH}\${BACKUPFILE}.key.enc"
+
+# put the key in second envelope
+echo "Create final tarball"
+tar -C "\${ENCRYPTPATH}" -cz -f "\${ENCRYPTPATH}\${BACKUPFILE}.final.tar" "\${BACKUPFILE}.tar.enc" "\${BACKUPFILE}.key.enc" 
+
+# cleanup
+echo "Cleanup"
+rm "\${ENCRYPTPATH}\${BACKUPFILE}.dec.tar"
+rm "\${ENCRYPTPATH}\${BACKUPFILE}.tar.enc"
+rm "\${ENCRYPTPATH}\${BACKUPFILE}.key.enc"
+rm "\${ENCRYPTPATH}\${BACKUPFILE}.key"
+EOF
+
+ENTRYPOINT [ "/root/.nix-profile/bin/bash" ]
+
