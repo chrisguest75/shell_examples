@@ -67,6 +67,13 @@ openssl rsautl -encrypt -inkey \${KEYSPATH}public.pem -pubin -in \${ENCRYPTPATH}
 # put the key in second envelope
 echo "Create final tarball"
 tar -C "\${ENCRYPTPATH}" -cz -f "\${ENCRYPTPATH}\${BACKUPFILE}.final.tar" "\${BACKUPFILE}.tar.enc" "\${BACKUPFILE}.key.enc" 
+
+# cleanup
+echo "Cleanup"
+rm "\${ENCRYPTPATH}\${BACKUPFILE}.dec.tar"
+rm "\${ENCRYPTPATH}\${BACKUPFILE}.tar.enc"
+rm "\${ENCRYPTPATH}\${BACKUPFILE}.key.enc"
+rm "\${ENCRYPTPATH}\${BACKUPFILE}.key"
 EOF
 
 ENTRYPOINT [ "/root/.nix-profile/bin/bash" ]

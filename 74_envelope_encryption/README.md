@@ -12,6 +12,8 @@ We also use envelope encryption as the maximum size of the data that you can enc
 
 ## Docker example
 
+### Alice
+
 ```sh
 # terminal 1
 cd ./alice
@@ -24,12 +26,21 @@ docker run -v "$(pwd):/share" --rm -it --entrypoint /root/.nix-profile/bin/bash 
 nix develop --impure
 openssl version
 
+# create keys in keys folder
 ./generate-keys.sh 
+
 ./create-backup.sh
+```
 
+### Bob
 
+```sh
 # terminal 2
 cd ./bob
+
+cp ../alice/backup/*.tar ./backup
+cp ../alice/keys/private.pem ./keys
+
 # build nix
 docker build -f Dockerfile.bob -t bob .
 
@@ -37,7 +48,10 @@ docker build -f Dockerfile.bob -t bob .
 docker run -v "$(pwd):/share" --rm -it --entrypoint /root/.nix-profile/bin/bash bob 
 
 nix develop --impure
-./restore-backup.sh file_20230228_224826_Z
+ls /share/backup/
+
+# NOTE: This is not working
+./restore-backup.sh file_20230311_142250_Z
 ```
 
 > bash-5.2# ./create-backup.sh
@@ -123,10 +137,6 @@ tar -C "${DECRYPTPATH}" -xvf "${DECRYPTPATH}${BACKUPFILE}.dec.tar"
 
 * Encrypting and decrypting files with OpenSSL [here](https://opensource.com/article/21/4/encryption-decryption-openssl)  
 * Search more than 80 000 packages [here](https://search.nixos.org/)
-
-
-nix command broken: massive slowdown, requires flakes-specific experimental flags on non-flakes systems #5637 https://github.com/NixOS/nix/issues/5637
-
-https://github.com/numtide/flake-utils
-
-https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-develop.html
+* nix command broken: massive slowdown, requires flakes-specific experimental flags on non-flakes systems #5637 [here](https://github.com/NixOS/nix/issues/5637)
+* numtide/flake-utils repo [here](https://github.com/numtide/flake-utils)
+* Nix Reference Manual [here](https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-develop.html)  
