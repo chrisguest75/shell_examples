@@ -33,6 +33,9 @@ just --help
 just -f ./example.justfile
 
 just -f ./example.justfile silentecho  
+
+# show envvars
+just -f ./example.justfile echovars           
 ```
 
 ### Docker
