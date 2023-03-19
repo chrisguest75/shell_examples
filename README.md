@@ -7,6 +7,8 @@ A repository for showing examples of shell scripts.
 The aim is to use examples to demonstrate how shells behave and squash some assumptions.  
 It's also a repository used for collecting various shell related tooling.  
 
+A list of things still to try and investigate [TODO.md](./TODO.md)  
+
 - [Shell Examples and Demos](#shell-examples-and-demos)
   - [1️⃣ Prequisites](#1️⃣-prequisites)
   - [❔Shell Help](#shell-help)
@@ -76,6 +78,9 @@ It's also a repository used for collecting various shell related tooling.
   - [70 - xargs](#70---xargs)
   - [71 - disk usage](#71---disk-usage)
   - [72 - line endings](#72---line-endings)
+  - [73 - creating archives](#73---creating-archives)
+  - [74 - envelope encryption](#74---envelope-encryption)
+  - [75 - just](#75---just)
   - [👀 Resources](#-resources)
   - [Shellchecking](#shellchecking)
   - [Pre-commit hook (shellcheck)](#pre-commit-hook-shellcheck)
@@ -446,31 +451,25 @@ Steps [README.md](./71_disk_usage/README.md)
 Demonstrate some examples of working with line-endings differences.  
 Steps [README.md](./72_line_endings/README.md)  
 
+## 73 - creating archives
+
+Demonstrate how to create archive files.  
+Steps [README.md](./73_creating_archives/README.md)  
+
+## 74 - envelope encryption
+
+Demonstrate how to perform envelope encryption.  
+Steps [README.md](./74_envelope_encryption/README.md)  
+
+## 75 - just
+
+Demonstrate how `just` can be used like package.json scripts.  
+Steps [README.md](./75_just/README.md)  
+
 ## 👀 Resources
 
 - Google script standards [here](https://google.github.io/styleguide/shellguide.html)
 - Understanding tabs output [here](https://unix.stackexchange.com/questions/389255/determine-how-long-tabs-t-are-on-a-line)
-
-📝 TODO:
-
-  * -- end of options https://www.cyberciti.biz/faq/what-does-double-dash-mean-in-ssh-command 
-  * Process Substition versus command substitution < <() < $()
-    sdiff <(ffprobe -show_frames test.mp4  | grep pkt_pts_time) <(ffprobe -show_frames original.mp4 | grep pkt_pts_time)
-  * zsh versus bash
-  * defensive programming
-  * debugfs
-  * subst
-  * ShayMoi https://www.chezmoi.io/
-  * Add a keywords index for links through to examples.  
-  * listing state; functions, env, paths, etc  
-  * running commands from gists. 
-
-    ```sh
-    ## Run with curl from gist
-    export MAP_FILE=$(pwd)/test.map
-    ROLE=$(curl -s https://gist.githubusercontent.com/chrisguest75/b6bf4770237e1307b3fef4ffa3d4a187/raw/0f05f1ae43ce0102fe9394b6dead9d502876be0d/get_mapped_value.sh | bash -s account1)
-    echo $ROLE
-    ```
 
 ## Shellchecking
 
