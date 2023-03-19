@@ -27,6 +27,13 @@ just --help
 
 ## Examples
 
+### Shebang
+
+```sh
+# the shebang works
+./justfile echovars
+```
+
 ### Simple
 
 ```sh
