@@ -5,10 +5,11 @@ Demonstrate some commands for dealing with accounts.
 ## List
 
 ```sh
+# might need to ensure default account has permissions.
 aws organizations list-accounts | jq . 
 
 # find id of an account
-NAME=account-name
+NAME=[account-name]
 aws organizations list-accounts | jq -r -e --arg name "$NAME" '.Accounts[] | select(.Name == $name).Id'
 
 # get the accountid if you don't have permission to list-accounts

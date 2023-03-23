@@ -89,7 +89,6 @@ aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue batc
 
 * AWS Batch service quotas [here](https://docs.aws.amazon.com/batch/latest/userguide/service_limits.html)
 * Boto3 Docs 1.20.26 documentation - Batch [here](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/batch.html)
-
-
-
+* AWS Batch Runtime Monitoring Dashboards Solution [here](https://github.com/aws-samples/aws-batch-runtime-monitoring)  
+* Optimizing your AWS Batch architecture for scale with observability dashboards [here](https://aws.amazon.com/blogs/hpc/optimizing-aws-batch-with-observability-dashboards/)
 

@@ -1,0 +1,20 @@
+{
+    "Or": [
+      {
+        "Tags": {
+          "Key": "ServiceGroup",
+          "Values": [
+            "myservice"
+          ]
+        }
+      },
+      {
+        "Tags": {
+          "Key": "ServiceGroup",
+          "Values": [
+            "my-service"
+          ]
+        }
+      }
+    ]
+  }

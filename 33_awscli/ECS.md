@@ -5,6 +5,7 @@ Container Instances are the hosts tasks are the pods.
 TODO:
 
 * ecs-cli - ecs local https://docs.docker.com/cloud/ecs-integration/
+* https://nathanpeck.com/diving-into-amazon-ecs-task-history-with-container-insights/
 
 ## Help
 

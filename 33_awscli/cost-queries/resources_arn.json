@@ -1,0 +1,8 @@
+{
+  "Dimensions": {
+    "Key": "RESOURCE_ID",
+    "Values": [
+      "arn:aws:ecs:us-east-1:00000000000:task/00000000000000/*"
+    ]
+  }
+}
