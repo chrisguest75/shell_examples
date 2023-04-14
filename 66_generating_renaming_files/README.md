@@ -34,6 +34,9 @@ fd -e txt . './out'
 
 # renaming extensions  
 fd -e txt . './out' -x mv {} {.}.text
+
+# removing extension
+fd -e m4a . './out' -x mv {} {.}  
 ```
 
 ## Resources
