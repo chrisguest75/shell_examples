@@ -1,0 +1,6 @@
+{
+  "python.formatting.provider": "black",
+  // format on save
+  "editor.formatOnSave": true,
+  "git.openRepositoryInParentFolders": "always"
+}

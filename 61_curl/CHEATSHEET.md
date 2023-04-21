@@ -9,6 +9,12 @@
 curl -H 'Content-Type: application/json' -X POST http://localhost:3000/dev/hello -d @./src/functions/hello/mock.json
 ```
 
+### POSTing Binary
+
+```sh
+curl -v --request POST --data-binary "@./out/random.bin" $SIGNEDURL1
+```
+
 ### Forcing Protocols
 
 ```sh
