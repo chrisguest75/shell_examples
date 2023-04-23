@@ -25,7 +25,7 @@ def str2bool(v):
     return v.lower() in ("yes", "true", "t", "1")
 
 
-def signedupload(bucket_name: str, s3_key: str, expires: int):
+def signed_upload_put(bucket_name: str, s3_key: str, expires: int):
     logger = logging.getLogger()
 
     # Replace the following with your own values
@@ -49,6 +49,41 @@ def signedupload(bucket_name: str, s3_key: str, expires: int):
 
     logger.info({ "message": "presigned", "url": f"{presigned_url}"})
 
+def signed_upload_post(bucket_name: str, s3_key: str, expires: int):
+    logger = logging.getLogger()
+
+    # Replace the following with your own values
+    profile_name = os.environ['AWS_PROFILE']
+
+    # Create a session with the specified profile
+    session = Session(profile_name=profile_name)
+
+    # Create an S3 client using the session
+    s3 = session.client('s3')
+
+    presigned_url = s3.generate_presigned_post(
+        Bucket=bucket_name,
+        Key=s3_key,
+        Fields= {
+        },
+        Conditions=[
+            #["starts-with", '$content-type', ""],
+            #['content-length-range', 10000, 150000],
+            #["starts-with", '$x-amz-checksum-sha256', ""],
+        ],
+        ExpiresIn=expires,
+    )
+
+    logger.info({ "message": "presigned", "url": f"{presigned_url}"})
+
+    presigned_url['fields']['file'] = '@{key}'.format(key=s3_key)
+
+    form_values = "\n    ".join(["-F {key}={value} \\".format(key=key, value=value)
+                        for key, value in presigned_url['fields'].items()])
+    
+    curl = 'curl -v {form_values} \n    {url}'.format(form_values=form_values, url=presigned_url['url'])
+    logger.info({ "message": "presigned", "curl": f"{curl}"})
+    print(curl)
 
 def main():
     with io.open(
@@ -63,6 +98,8 @@ def main():
 
     parser = argparse.ArgumentParser(description="AWS BOTO")
     parser.add_argument("--signed", dest="signed", action="store_true")
+    parser.add_argument("--put", dest="put", action="store_true")
+    parser.add_argument("--post", dest="post", action="store_true")
     parser.add_argument("--bucket", dest="bucket", type=str)
     parser.add_argument("--prefix", dest="prefix", type=str)
     parser.add_argument("--expires", dest="expires", type=int, default=3600)
@@ -70,7 +107,12 @@ def main():
 
     if args.signed:
         logger.info(f"Upload s3://{args.bucket}/{args.prefix}")
-        signedupload(args.bucket, args.prefix, args.expires)
+        if args.put:
+            signed_upload_put(args.bucket, args.prefix, args.expires)
+        elif args.post:
+            signed_upload_post(args.bucket, args.prefix, args.expires)
+        else:
+            print("Need to specify --put or --post")
     else:
         parser.print_help()
 
