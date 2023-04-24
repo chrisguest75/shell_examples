@@ -80,7 +80,7 @@ aws --profile $AWS_PROFILE --region $AWS_REGION logs get-log-events --log-group-
 ## Filters
 
 ```sh
-aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue com-trint-prod-speechmatics-normal --filters "name=JOB_NAME,values=5c4734c69a8608bfaa3ca94c*"
+aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue jobqueue --filters "name=JOB_NAME,values=5c4734c69a8608bfaa3ca94c*"
 
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue batch-queue --job-status FAILED --filters "name=BEFORE_CREATED_AT,values=1640124949"
 ```
