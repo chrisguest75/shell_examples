@@ -11,7 +11,7 @@ TODO:
 * Create a docker container with awscli testbed inside of it.
 
 ```sh
-# turn off the pager
+# turn off the pager (NOTE: if you need help to work then it needs to be unset as this errors awscli)
 export AWS_PAGER=   
 
 # helpful gui for finding parameters
