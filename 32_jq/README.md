@@ -27,6 +27,7 @@ Demonstrates some examples of using jq to process json files
   - [base64 handling](#base64-handling)
   - [Extracting keys (docker bake)](#extracting-keys-docker-bake)
   - [Extract Docker Environment Variable](#extract-docker-environment-variable)
+  - [Decoding a JWT](#decoding-a-jwt)
   - [Resources](#resources)
 
 Github [JQ](https://github.com/stedolan/jq) repo.  
@@ -367,6 +368,12 @@ jq -r '. | keys[] as $key | .[$key]."containerimage.digest"' ./bake-metadata.jso
 
 ```sh
 docker inspect b3360585a | jq -r '.[0].Config.Env[] | select(. |  capture("DEVCONTAINER_TYPE.*")) | sub("DEVCONTAINER_TYPE=";"")'
+```
+
+## Decoding a JWT
+
+```sh
+jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "$MYTOKEN"
 ```
 
 ## Resources
