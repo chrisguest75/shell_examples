@@ -74,8 +74,9 @@ echo "Exited loop $_count"
 
 NOTE: When using readline loops you might need to pipe in `< /dev/null` to ensure the input characters from the list are not used as input. This happens with `ffmpeg`.  
 
+### heredoc tempfile
+
 ```sh
-# heredoc tempfile
 TEMPFILE=$(mktemp)
 cat <<- EOF > ${TEMPFILE}
 4922049292,us-east-1,filename1.txt
@@ -88,8 +89,9 @@ do
 done < $TEMPFILE
 ```
 
+### heredoc pipe
+
 ```sh
-# heredoc pipe
 while IFS=, read -r value1 value2 value3
 do
     echo "$value1 $value2 $value3"
@@ -98,6 +100,15 @@ done << EOF
 3420302882,eu-west-1,filename2.txt
 1334423422,ap-north-1,filename3.txt
 EOF
+```
+
+### process redirection pipe
+
+```sh
+while IFS=, read -r value1 
+do
+    echo "FILE $value1"
+done < <(ls -l)
 ```
 
 ## Calculations

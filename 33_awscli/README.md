@@ -41,6 +41,13 @@ aws configure list-profiles
 aws --profile [profile] s3 ls
 ```
 
+## Troubleshooting
+
+```sh
+# add --debug flag
+aws --profile [profile] --debug s3 ls
+```
+
 ## Sts
 
 You can use `STS` to work out your assumed role when trying to debug why you might be getting an Access Denied style issue.  
@@ -97,4 +104,5 @@ Cloud Formation [CLOUD_FORMATION.md](./CLOUD_FORMATION.md)
 
 * AWS CLI with jq and Bash [here](https://medium.com/circuitpeople/aws-cli-with-jq-and-bash-9d54e2eabaf1)  
 * AWS-cli [here](https://docs.aws.amazon.com/cli/latest/userguide/aws-cli.pdf)  
-* Filtering AWS CLI output [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html)
+* Filtering AWS CLI output [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html)  
+* Troubleshooting AWS CLI errors [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html)  
