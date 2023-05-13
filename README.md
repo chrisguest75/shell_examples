@@ -81,6 +81,7 @@ A list of things still to try and investigate [TODO.md](./TODO.md)
   - [73 - creating archives](#73---creating-archives)
   - [74 - envelope encryption](#74---envelope-encryption)
   - [75 - just](#75---just)
+  - [76 - links](#76---links)
   - [👀 Resources](#-resources)
   - [Shellchecking](#shellchecking)
   - [Pre-commit hook (shellcheck)](#pre-commit-hook-shellcheck)
@@ -465,6 +466,11 @@ Steps [README.md](./74_envelope_encryption/README.md)
 
 Demonstrate how `just` can be used like package.json scripts.  
 Steps [README.md](./75_just/README.md)  
+
+## 76 - links
+
+Demonstrate symbolic and hard links.  
+Steps [README.md](./76_links/README.md)  
 
 ## 👀 Resources
 
