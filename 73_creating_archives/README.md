@@ -12,6 +12,7 @@ TODO:
 - [ARCHIVES](#archives)
   - [Reason](#reason)
   - [ZIP](#zip)
+  - [GZIP](#gzip)
   - [TAR](#tar)
   - [Resources](#resources)
 
@@ -21,7 +22,7 @@ It's useful to be able to quickly create and restore archives.
 
 ## ZIP
 
-Zip can compress multiple files and even entire directory hierarchies. gzip, on the other hand, compresses only a single file. That's why we typically use it with tar, which packages multiple files/directories into a single archive file
+Zip can compress multiple files and even entire directory hierarchies. gzip, on the other hand, compresses only a single file. That's why we typically use it with tar, which packages multiple files/directories into a single archive file.  
 
 ```sh
 # create a zip with a base path
@@ -35,7 +36,21 @@ unzip -l ./out/test.zip
 unzip -d ./out/unzipped ./out/test.zip
 ```
 
+## GZIP
+
+gzip is designed to compress single files. If you want to compress multiple files or directories, you usually need to first combine them into a single file (often using tar on Unix-like systems), and then compress that file with gzip.  
+
+```sh
+# compress
+gzip -S .gzip file
+
+# decompress
+gunzip -S .gzip ./file.gzip  
+```
+
 ## TAR
+
+A tar file is not a compressed file; it's a collection or concatenation of files within a single file without any compression. It simply appends each file end-to-end without any additional metadata except for file names and file sizes.  
 
 ```sh
 man tar 
