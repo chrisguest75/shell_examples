@@ -4,10 +4,9 @@ Demonstrate how to create archive files.
 
 TODO:
 
-* zip
-* tar
-* gzip
 * zlib
+* zstd
+* xz
 
 - [ARCHIVES](#archives)
   - [Reason](#reason)
@@ -78,6 +77,7 @@ tar xf ./out/test.tar --directory=./out/out/test/test
 
 ## Resources
 
+* List of archive formats [here](https://en.wikipedia.org/wiki/List_of_archive_formats)  
 * Using gzip and gunzip in Linux [here](https://www.baeldung.com/linux/gzip-and-gunzip)
 * How to do zip and unzip file in Ubuntu Linux? [here](https://www.mysoftkey.com/linux/how-to-do-zip-and-unzip-file-in-ubuntu-linux/)
 * Gzip vs Zip: difference between the most popular compressing file formats [here](https://nixcp.com/gzip-vs-zip-differences/)
