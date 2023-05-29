@@ -12,6 +12,7 @@ TODO:
 * .gitattributes https://git-scm.com/docs/gitattributes
 * git update-index --assume-unchanged sites/default/settings.php
 * git check-ignore vscode/list_extensions.sh  
+* git bisect example
 
 ## Files
 
