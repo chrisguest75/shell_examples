@@ -78,6 +78,9 @@ git diff head~1..head
 NOTE: Be careful if you have files that are not commited. It's probably best to stash them first otherwise they may become part of the commit.  
 
 ```sh
+# copy branch so it can be recovered
+git checkout -b save_disaster_branch
+
 # squash top two commmits (stash before)
 git squash --squash-msg head~2                         
 
