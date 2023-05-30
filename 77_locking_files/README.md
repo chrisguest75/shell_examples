@@ -83,6 +83,19 @@ https://github.com/chrisguest75/cpp_examples/blob/main/01_helloworld_cmake/READM
 ```
 
 
+## Create environments
+
+```sh
+# build
+docker build --progress=plain -f Dockerfile -t locks .
+
+# run (pops straight into a shell)
+docker run --rm -it -v ./:/scratch locks
+
+
+lslocks
+```
+
 
 ## Resources
 
