@@ -1,11 +1,9 @@
 # LOCKING FILES
 
-Demonstrate locking and detection of locked files.
+Demonstrate locking and detection of locked files.  
 
 TODO:
 
-* look at the locks that are taken on writing out a stream
-* lsof
 * /proc
 
 ## Install
@@ -53,17 +51,7 @@ locksTool [README.md](./locksTool/README.md)
 # terminal 1
 ./justfile run_open
 
-# terminal 2 (will fail)
-./justfile run_open
-```
-
-### Mixed
-
-```sh
-# terminal 1
-./justfile run_lock
-
-# terminal 2 (will fail)
+# terminal 2
 ./justfile run_open
 ```
 
@@ -77,23 +65,46 @@ locksTool [README.md](./locksTool/README.md)
 ./justfile run_lock
 ```
 
+### Mixed
+
+```sh
+# terminal 1
+./justfile run_lock
+
+# terminal 2
+./justfile run_open
+```
+
 ## Create linux environment
 
 ```sh
 # build
 docker build --progress=plain -f Dockerfile -t locks .
-
-# run (pops straight into a shell)
-docker run --rm -it -v ./:/scratch locks
-
-
-lslocks
 ```
 
+### Terminal 1
+
+```sh
+# run (pops straight into a shell)
+docker run --rm --name locks -it locks
+
+./locksTool/build/locks test=lock
+```
+
+### Terminal 2
+
+```sh
+docker exec locks -it /bin/bash
+
+# will show file is locked
+lslocks
+
+./locksTool/build/locks test=open
+```
 
 ## Process (single file input)
 
-https://github.com/chrisguest75/hls_examples/blob/master/05_stdin_to_hls/README.md
+Based on [hls_examples/05_stdin_to_hls/README.md](https://github.com/chrisguest75/hls_examples/blob/master/05_stdin_to_hls/README.md)  
 
 ```bash
 # terminal 1 & 2
@@ -127,12 +138,8 @@ lsof -p 1024
 
 ```
 
-
 ## Resources
 
 * Flock repo [here](https://github.com/discoteq/flock)  
-
-* https://www.oreilly.com/library/view/python-cookbook/0596001673/ch04s25.html
-
-
-
+* flock - manage locks from shell scripts [here](https://manpages.ubuntu.com/manpages/xenial/man1/flock.1.html)  
+* File Locking Using a Cross-Platform API [here](https://www.oreilly.com/library/view/python-cookbook/0596001673/ch04s25.html)  
