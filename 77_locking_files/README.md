@@ -1,6 +1,6 @@
 # LOCKING FILES
 
-Demonstrate locking and detection of locked files
+Demonstrate locking and detection of locked files.
 
 TODO:
 
@@ -15,6 +15,55 @@ brew install flock
 
 man flock
 ```
+
+## Show open files with locks
+
+```bash
+# get pid of shell
+echo $$
+
+# list open files in shell
+lsof -p $$
+
+# list file locks (repeat)
+sudo lsof -p $$ -r 5  
+
+./flock_a_file.sh -x
+
+# show locks from pid in another terminal
+pgrep bash    
+lsof -p 17682 
+
+# cannot lock the file twice (exits early)
+./flock_a_file.sh -x
+
+# shared locks (allow two locks)
+./flock_a_file.sh -s
+# terminal 2
+./flock_a_file.sh -s
+```
+
+## Filesystem Locks
+
+locksTool [README.md](./locksTool/README.md)  
+
+```sh
+```
+
+
+## Create linux environment
+
+```sh
+# build
+docker build --progress=plain -f Dockerfile -t locks .
+
+# run (pops straight into a shell)
+docker run --rm -it -v ./:/scratch locks
+
+
+lslocks
+```
+
 
 ## Process (single file input)
 
@@ -46,54 +95,10 @@ exec 7>&-
 rm ${PIPENAME}
  
 vlc "${OUT_FOLDER}/playlist.m3u8"
-```
 
-
-```bash
 ps aux | grep ffmpeg 
 lsof -p 1024 
-echo $$   
 
-# list open files in shell
-lsof -p $$
-
-# list file locks
-sudo lsof -p 1024 -r 5  
-
-./flock_a_file.sh -x
-
-pgrep bash    
-lsof -p 17682 
-
-# cannot lock the file twice
-./flock_a_file.sh -x
-
-# shared locks
-./flock_a_file.sh -s
-./flock_a_file.sh -s
-```
-
-## Filesystem Locks
-
-https://github.com/chrisguest75/cpp_examples/blob/main/01_helloworld_cmake/README.md
-
-
-```sh
-
-```
-
-
-## Create environments
-
-```sh
-# build
-docker build --progress=plain -f Dockerfile -t locks .
-
-# run (pops straight into a shell)
-docker run --rm -it -v ./:/scratch locks
-
-
-lslocks
 ```
 
 

@@ -2,25 +2,50 @@
 
 Demonstrates how to build and single step debug a CPP program using `cmake`  
 
+Based on cpp_examples/01_helloworld_cmake [here](https://github.com/chrisguest75/cpp_examples/blob/main/01_helloworld_cmake/README.md)  
+
 `vscode` extensions [README.md](../README.md)  
 
 ## Build and Run
 
-Select the Terminal > Run Build Task command.
+Select the Terminal > Run Build Task command.  
 
 ```sh
 brew install cmake
-
-# make from terminal
-
-mkdir -p build
-cd build
-cmake ..
-
-cmake --build .
-
-./locks
 ```
+
+## Justfile
+
+```sh
+# show options 
+./justfile 
+
+# build the code
+./justfile build
+
+# run 
+./justfile run_lock
+./justfile run_open
+```
+
+## Manual
+
+```sh
+# create make
+cmake -S . -B ./build
+
+# build target
+cmake --build ./build
+
+# run 
+./build/locks test=lock
+./build/locks test=open
+
+# cleanup
+cmake --build ./build --target clean  
+```
+
+
 
 ## Debugging
 
