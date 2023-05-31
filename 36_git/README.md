@@ -24,7 +24,7 @@ TODO:
 * Patching - [PATCHING.md](./sections/PATCHING.md)  
 * Hooks - [HOOKS.md](./sections/HOOKS.md)  
 * Worktrees - [WORKTREES.md](./sections/WORKTREES.md)  
-* Stashing - [STASH.md](./sections/stash.md)  
+* Stashing - [STASH.md](./sections/STASH.md)  
 * Searching - [SEARCHING.md](./sections/SEARCHING.md)  
 * Git Crypt - [GIT_CRYPT.md](./sections/GIT_CRYPT.md)  
 * Helper Scripts - [HELPER_SCRIPTS.md](./sections/HELPER_SCRIPTS.md)  
