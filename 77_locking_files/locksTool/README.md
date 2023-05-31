@@ -45,8 +45,6 @@ cmake --build ./build
 cmake --build ./build --target clean  
 ```
 
-
-
 ## Debugging
 
 Use the debugger in `vscode`  

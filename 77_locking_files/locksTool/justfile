@@ -8,6 +8,10 @@ set dotenv-load := true
 default:
   @just -f ./justfile --list
 
+delete:
+  @echo 'Delete'
+  rm -rf ./myFile.txt
+
 # build the code
 build:
   @echo 'Build'
@@ -22,4 +26,4 @@ run_lock:
 # run the code with open
 run_open:
   @echo 'Run'
-  ./build/locks test=lock
+  ./build/locks test=open

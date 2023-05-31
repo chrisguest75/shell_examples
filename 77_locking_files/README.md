@@ -47,9 +47,35 @@ lsof -p 17682
 
 locksTool [README.md](./locksTool/README.md)  
 
+### No Locks
+
 ```sh
+# terminal 1
+./justfile run_open
+
+# terminal 2 (will fail)
+./justfile run_open
 ```
 
+### Mixed
+
+```sh
+# terminal 1
+./justfile run_lock
+
+# terminal 2 (will fail)
+./justfile run_open
+```
+
+### Exclusive Locks
+
+```sh
+# terminal 1
+./justfile run_lock
+
+# terminal 2 (will fail)
+./justfile run_lock
+```
 
 ## Create linux environment
 

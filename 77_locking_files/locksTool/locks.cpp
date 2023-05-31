@@ -33,14 +33,12 @@ bool fileExists(const std::string& filename)
     return ifile.is_open();
 }
 
-int lockFile(std::string filename) {
+int lockFile(std::string filename, std::string textToWrite) {
     std::string type = "lockFile";
 
-    std::cout << type << ":" << filename << std::endl;    
+    std::cout << type << ":" << filename << std::endl;
 
-    std::string textToWrite = "Hello, World!";
-
-    int fd = open(filename.c_str(), O_WRONLY | O_CREAT, 0666);
+    int fd = open(filename.c_str(), O_WRONLY | O_CREAT | O_APPEND, 0666);
     if (fd == -1) {
         std::cerr << "Unable to open " << filename << std::endl;
         return 1;
@@ -71,7 +69,7 @@ int lockFile(std::string filename) {
         std::tm* now_tm = std::localtime(&t);
 
         std::stringstream ss;
-        ss << getpid() << " " << std::put_time(now_tm, "%Y-%m-%d %H:%M:%S") << " - " << textToWrite << std::endl;
+        ss << getpid() << " " << type << " " << std::put_time(now_tm, "%Y-%m-%d %H:%M:%S") << " - " << textToWrite << std::endl;
         std::string strSS = ss.str();  // convert stringstream to string
 
         write(fd, strSS.c_str(), strSS.size());
@@ -84,12 +82,10 @@ int lockFile(std::string filename) {
     return 0;
 }
 
-int openFile(std::string filename) {
+int openFile(std::string filename, std::string textToWrite) {
     std::string type = "openFile";
 
     std::cout << type << ":" << filename << std::endl;
-
-    std::string textToWrite = "Hello, World!";
     
     if (fileExists(filename)) {
         std::cout << "Error: File already exists!" << std::endl;
@@ -109,7 +105,7 @@ int openFile(std::string filename) {
             // Convert to tm struct
             std::tm* now_tm = std::localtime(&t);
 
-            myfile << getpid() << " " << std::put_time(now_tm, "%Y-%m-%d %H:%M:%S") << " - " << textToWrite << std::endl;
+            myfile << getpid() << " " << type << " " << std::put_time(now_tm, "%Y-%m-%d %H:%M:%S") << " - " << textToWrite << std::endl;
             myfile.flush();
             std::cout << "Count:" << counter++ << std::endl;
             std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -126,6 +122,7 @@ int openFile(std::string filename) {
 int main(int argc, char* argv[]) {
     std::cout << "The process ID is " << getpid() << std::endl;
     std::string filename = "myFile.txt";
+    std::string textToWrite = "Hello, World!";
 
     auto args = parseArgs(argc, argv);
 
@@ -135,11 +132,11 @@ int main(int argc, char* argv[]) {
 
         if (pair.first == "test") {
             if (pair.second == "lock") {
-                lockFile(filename);
+                lockFile(filename, textToWrite);
                 showHelp = false;
             }
             else if (pair.second == "open") {
-                openFile(filename);
+                openFile(filename, textToWrite);
                 showHelp = false;
             }
         }
