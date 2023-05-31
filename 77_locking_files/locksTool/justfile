@@ -1,0 +1,29 @@
+#!/usr/bin/env just --justfile
+# ^ A shebang isn't required, but allows a justfile to be executed
+#   like a script, with `./justfile test`, for example.
+
+set dotenv-load := true
+
+# default lists actions
+default:
+  @just -f ./justfile --list
+
+delete:
+  @echo 'Delete'
+  rm -rf ./myFile.txt
+
+# build the code
+build:
+  @echo 'Build'
+  cmake -S . -B ./build
+  cmake --build ./build
+
+# run the code with locks
+run_lock:
+  @echo 'Run'
+  ./build/locks test=lock
+
+# run the code with open
+run_open:
+  @echo 'Run'
+  ./build/locks test=open
