@@ -2,7 +2,11 @@
 
 TODO:
 
-* Can I do a query in cost explorer and export it to json?
+* Can I do a query in cost explorer console and export it to json for use on cmdline?
+
+## NOTES
+
+* Use `fx` tool to help quickly parse the results. [antonmedv/fx](https://github.com/antonmedv/fx)  
 
 ## Accounts and Dimensions
 
@@ -12,14 +16,16 @@ aws organizations list-accounts | jq .
 export AWS_REGION=us-east-1
 export AWS_PROFILE=myprofile
 
-export DATE_RANGE=Start=2023-02-01,End=2023-03-01
+export DATE_RANGE=Start=2023-05-01,End=2023-06-01
 
+# list active tags
+aws ce list-cost-allocation-tags | jq '.CostAllocationTags[] | select(.Status == "Active")'
 # list tags
-aws ce list-cost-allocation-tags
 aws ce get-tags --time-period "${DATE_RANGE}"
 
-# get account details
+# get linked account details from the account we're querying
 aws ce get-dimension-values --time-period "${DATE_RANGE}" --dimension LINKED_ACCOUNT
+
 # lists all usage types 
 aws ce get-dimension-values --time-period "${DATE_RANGE}" --dimension USAGE_TYPE
 
@@ -35,8 +41,8 @@ aws ce get-cost-and-usage --time-period "${DATE_RANGE}" --granularity DAILY --me
 # monthly cost for account
 aws ce get-cost-and-usage --output json --time-period "${DATE_RANGE}" --granularity MONTHLY --metrics UnblendedCost --query 'ResultsByTime[*].Total.[UnblendedCost]' | jq '.[][0].Amount | tonumber*100 | round/100'
 
-# breakdown per aws service
-aws ce get-cost-and-usage --time-period "${DATE_RANGE}" --granularity=MONTHLY --metrics BlendedCost --group-by Type=DIMENSION,Key=SERVICE
+# breakdown per aws service (parse with fx)
+aws ce get-cost-and-usage --time-period "${DATE_RANGE}" --granularity=MONTHLY --metrics BlendedCost --group-by Type=DIMENSION,Key=SERVICE | fx
 ```
 
 Using file based queries.  
