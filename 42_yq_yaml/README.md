@@ -1,6 +1,6 @@
 # README
 
-Demonstrates some examples of using `yq` to process yaml files
+Demonstrates some examples of using `yq` to process yaml files  
 
 ## Preeqs
 
@@ -8,8 +8,9 @@ Demonstrates some examples of using `yq` to process yaml files
 brew info yq
 
 brew install yq
+brew upgrade yq
 
-# using version 4.25.1 at time of writing
+# using version 4.34.1 at time of writing
 yq --version 
 ```
 
@@ -65,6 +66,12 @@ yq e '(.embedded) |= sub("\${APIKEY}", "theapikey")' ./examples/replace.yaml
 
 # replace a value in an array
 yq e '(.service[]) |= sub("\${APIKEY}", "theapikey")' ./examples/replace.yaml
+
+# replace a value in a map
+yq e '(.datasources.jsonData[]) |= sub("\${AWS_ROLE_ARN}", "arn:aws:iam::0000000000000:role/myrole")' ./examples/replace.yaml
+
+# replace a value in a map for a specific key
+yq e '(.datasources.jsonData["assumeRoleArn"]) |= "arn:aws:iam::0000000000000:role/myrole"' ./examples/replace.yaml
 ```
 
 ## Looping overs arrays in bash
@@ -73,7 +80,7 @@ Take an array defined in yaml and loop over it in bash.
 
 ```sh
 # run the example script
-./loop_array.sh             
+./loop_array.sh
 ```
 
 ## Resources

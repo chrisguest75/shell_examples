@@ -10,3 +10,9 @@ service:
 replacethis: "${APIKEY}"
 embedded: "This value is ${APIKEY} embedded"
 
+datasources:
+    jsonData:
+        assumeRoleArn: '${AWS_ROLE_ARN}'
+        authType: 'credentials'
+        defaultRegion: 'us-east-1'
+        profile: ''
