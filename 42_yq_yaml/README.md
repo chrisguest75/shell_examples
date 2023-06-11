@@ -33,7 +33,7 @@ yq eval .image ./examples/simple.yaml
 # show internal representation of yaml
 yq eval ./examples/anchors.yaml
 
-# playing with anchors
+# playing with anchors (THIS NO LONGER WORKS)
 yq '. | explode(.)' ./examples/anchors.yaml  
 ```
 
@@ -81,6 +81,13 @@ Take an array defined in yaml and loop over it in bash.
 ```sh
 # run the example script
 ./loop_array.sh
+```
+
+## Conversion
+
+```sh
+# read in json and output yaml
+yq e --output-format=yaml ./json/images.json   
 ```
 
 ## Resources
