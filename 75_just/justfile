@@ -8,13 +8,13 @@ set dotenv-load := true
 default:
   @just -f example.justfile --list
 
-# another comment
-echo:
-  echo 'This echoes'
+# echo with default parameters 
+echo param1="defaultvalue1" param2="defaultvalue2":
+  echo "This echoes $0, {{ param1 }}, {{ param2 }}"
 
 # this is a comment
 silentecho:
-  @echo 'Silect echoes'
+  @echo 'Silent echoes'
 
 # show dotenv-load
 echovars:

@@ -20,6 +20,7 @@ brew info just
 
 # install
 brew install just
+brew upgrade just
 
 just --version  
 just --help    
@@ -32,25 +33,42 @@ just --help
 ```sh
 # the shebang works
 ./justfile echovars
+
+# run echo with defaults
+./justfile echo
+
+# run echo with parameters
+./justfile echo parameter1 parameter2
 ```
 
 ### Simple
 
+Simple example to demonstrate a few concepts.  
+
 ```sh
+# list recipes
 just -f ./example.justfile
 
-just -f ./example.justfile silentecho  
+# run silentecho  
+just -f ./example.justfile echo parameter1 parameter2
+
+# run silentecho  
+just -f ./example.justfile silentecho
 
 # show envvars
-just -f ./example.justfile echovars           
+just -f ./example.justfile echovars
 ```
 
-### Docker
+### Docker Example
 
 ```sh
+# list recipes
 just -f ./docker.justfile
 
+# run list-images
 just -f ./docker.justfile list-images
+
+# run build
 just -f ./docker.justfile build
 ```
 
