@@ -37,6 +37,9 @@ aws ecr describe-repositories --region eu-west-1
 ```sh
 # image name without registry name
 aws ecr describe-images --repository-name imagename --region eu-west-1
+
+# get a table of image tags and their sha1 id to compare
+AWS_PROFILE=myprofile aws ecr describe-images --repository-name myimagename --region us-east-1 | jq -r '.imageDetails[] | [.imageDigest, (.imageTags // [])[]] | @tsv'
 ```
 
 ## Pushing
