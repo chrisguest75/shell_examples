@@ -40,6 +40,9 @@ aws ecr describe-images --repository-name imagename --region eu-west-1
 
 # get a table of image tags and their sha1 id to compare
 AWS_PROFILE=myprofile aws ecr describe-images --repository-name myimagename --region us-east-1 | jq -r '.imageDetails[] | [.imageDigest, (.imageTags // [])[]] | @tsv'
+
+# get details on a specific image
+AWS_PROFILE=myprofile aws ecr describe-images --repository-name myimagename --output table --query 'imageDetails[]' --image-ids imageTag=mytag
 ```
 
 ## Pushing
