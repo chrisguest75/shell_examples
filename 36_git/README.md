@@ -82,12 +82,6 @@ git effort -- --since='yesterday'
 git effort -- --since='1 month ago'
 ```
 
-### Check tag format
-
-```sh
-git check-ref-format "tags/0.0.1-a39f8a821fc9" 
-```
-
 ## Resources
 
 * [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.  
