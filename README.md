@@ -82,6 +82,7 @@ A list of things still to try and investigate [TODO.md](./TODO.md)
   - [74 - envelope encryption](#74---envelope-encryption)
   - [75 - just](#75---just)
   - [76 - links](#76---links)
+  - [78 - dns](#78---dns)
   - [👀 Resources](#-resources)
   - [Shellchecking](#shellchecking)
   - [Pre-commit hook (shellcheck)](#pre-commit-hook-shellcheck)
@@ -471,6 +472,11 @@ Steps [README.md](./75_just/README.md)
 
 Demonstrate symbolic and hard links.  
 Steps [README.md](./76_links/README.md)  
+
+## 78 - dns
+
+Examples for working with DNS.  
+Steps [README.md](./78_dns/README.md)  
 
 ## 👀 Resources
 
