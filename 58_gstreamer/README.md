@@ -172,7 +172,7 @@ gst-launch-1.0 -v -e videotestsrc ! x264enc ! mp4mux name=mux ! filesink locatio
 
 ## Resources
 
-* GStreamer Website [here](https://gstreamer.freedesktop.org/_
+* GStreamer Website [here](https://gstreamer.freedesktop.org/)
 * gst-launch-1.0 docs [here](https://gstreamer.freedesktop.org/documentation/tools/gst-launch.html?gi-language=c)
 * Gstreamer Repo [here](https://gitlab.freedesktop.org/gstreamer/gstreamer)  
 * GStreamer Pipeline Samples [here](https://gist.github.com/hum4n0id/cda96fb07a34300cdb2c0e314c14df0a)
