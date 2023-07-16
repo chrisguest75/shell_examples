@@ -4,12 +4,17 @@ Demonstrate some basic `gstreamer` examples
 
 TODO:
 
+* Get a list of all the plugins that should be installed
 * AAC to WAV (does it increase duration?)
 * Piping - https://stackoverflow.com/questions/23353007/piping-stdout-to-gstreamer
 
 ## Prereqs (local)
 
-`gstreamer` is split into different installs of the main build and different plugin packs.  
+`gstreamer` from version 1.22 now includes all the plugins.  
+
+Prior to this you would require `gst-plugins-base`, `gst-plugins-good`, `gst-plugins-bad`, `gst-plugins-ugly`.  
+
+To upgrade from previous versions you'll need to uninstall all of them.  
 
 ```sh
 # install base executables
@@ -17,23 +22,10 @@ TODO:
 brew install gstreamer
 ```
 
-After installing `brew` will echo out.  
-
-```txt
-Consider also installing gst-plugins-base and gst-plugins-good.  
-
-The gst-plugins-* packages contain gstreamer-video-1.0, gstreamer-audio-1.0, and other components needed by most gstreamer applications.  
-
-gst-plugins-bad, gst-plugins-base, gst-plugins-good, gst-plugins-rs, gst-plugins-ugly  
-```
+## Upgrades
 
 ```sh
-# install the other plugins
-brew install gst-plugins-base
-brew install gst-plugins-good
-brew install gst-plugins-bad
-brew install gst-plugins-ugly
-```
+brew info gstreamer
 
 ## Tools with gstreamer
 
@@ -44,8 +36,13 @@ Inspect the installed plugins
 ```sh
 # list installed plugins
 gst-inspect-1.0 --help 
+
+# list all the plugins
+gst-inspect-1.0   
+
 # inspect a specific plugin
 gst-inspect-1.0 --plugin coreelements
+
 # list blacklisted plugins
 gst-inspect-1.0 -b
 ```
@@ -78,7 +75,7 @@ gst-launch-1.0 --help
 
 ```sh
 # Build
-docker build -t gstreamer . 
+docker build -t gstreamer -f Dockerfile . 
 
 # Run
 ASSETS=$(pwd)/../../ffmpeg_examples/sources
