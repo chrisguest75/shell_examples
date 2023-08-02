@@ -57,7 +57,7 @@ man tar
 mkdir -p ./in ./out
 
 # dereference is following symbolic links
-tar -cvf ./out/test.tar  --dereference 
+tar -cvf ./out/test.tar  --dereference .
 
 cat >./in/files.txt <<EOF
 README.md
