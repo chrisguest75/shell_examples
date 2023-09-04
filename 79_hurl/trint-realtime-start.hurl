@@ -4,10 +4,10 @@ Accept: application/json
 Content-Type: application/json
 api-key: {{ apikey }}
 {
-  "language": "en",
-  "streamUrl": "https://nhkwlive-xjp.akamaized.net/hls/live/2003458/nhkwlive-xjp-en/index_1M.m3u8",
+  "language": "{{ language }}",
+  "streamUrl": "{{ streamUrl }}",
   "transcriptDelay":"5",
-  "title": "hurl test"
+  "title": "{{ title }}"
 }
 
 HTTP 200
