@@ -6,6 +6,7 @@ TODO:
 
 * Is there a way to introduce delays in chained requests?  
 * Exporting captured values to environment variables
+* Binary upload is failing for me.
 
 ## Install
 
