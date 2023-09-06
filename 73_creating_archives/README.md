@@ -5,6 +5,9 @@ Demonstrate how to create archive files.
 TODO:
 
 * zlib
+* provide timings and performance on large fake data generated files
+* xz --long-help
+* checksums for recovery?
 
 - [ARCHIVES](#archives)
   - [Reason](#reason)

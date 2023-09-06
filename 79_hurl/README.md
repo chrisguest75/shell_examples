@@ -22,15 +22,15 @@ First you'll need to create the `hurl.vars` file from the template.
 
 ```sh
 # Start a realtime.   
-hurl --very-verbose --test trint-realtime.hurl --variables-file ./hurl.vars
-
+export HURL_VARS_FILE=./vars/hurl.vars
+hurl --very-verbose --test trint-realtime.hurl --variables-file $HURL_VARS_FILE
 
 # start 
-hurl --very-verbose --test trint-realtime-start.hurl --variables-file ./hurl.vars
+hurl --very-verbose --test trint-realtime-start.hurl --variables-file $HURL_VARS_FILE
 # find the trintid in the above output
-hurl --very-verbose --test trint-realtime-status.hurl --variables-file ./hurl.vars --variable trintid=AIn0AosISr2G3u0gY-eP6Q 
+hurl --very-verbose --test trint-realtime-status.hurl --variables-file $HURL_VARS_FILE --variable trintid=SwwPSV7NQS6IHtB7PHGxNQ
 # now stop it
-hurl --very-verbose --test trint-realtime-stop.hurl --variables-file ./hurl.vars --variable trintid=AIn0AosISr2G3u0gY-eP6Q 
+hurl --very-verbose --test trint-realtime-stop.hurl --variables-file $HURL_VARS_FILE --variable trintid=SwwPSV7NQS6IHtB7PHGxNQ
 ```
 
 ## Resources
