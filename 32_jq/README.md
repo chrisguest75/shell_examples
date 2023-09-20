@@ -23,11 +23,12 @@ Demonstrates some examples of using jq to process json files
   - [Regex Capture](#regex-capture)
   - [Loading fields into environment vars](#loading-fields-into-environment-vars)
   - [Loading files into fields (--rawfile)](#loading-files-into-fields---rawfile)
-  - [Propgating errors](#propgating-errors)
+  - [Propagating errors](#propagating-errors)
   - [base64 handling](#base64-handling)
   - [Extracting keys (docker bake)](#extracting-keys-docker-bake)
   - [Extract Docker Environment Variable](#extract-docker-environment-variable)
   - [Decoding a JWT](#decoding-a-jwt)
+  - [Array or not](#array-or-not)
   - [Resources](#resources)
 
 Github [JQ](https://github.com/stedolan/jq) repo.  
@@ -317,7 +318,7 @@ _frame_number=$(echo ${_no_extension} | grep --color=never -o -E '[0-9]+')
 jq --rawfile path ./README.md --arg filename "${_no_extension}" --arg number "${_frame_number}" '.frames += [ {"name":$filename, "path":$path, "number":$number | tonumber }]' "./frames.json"
 ```
 
-## Propgating errors
+## Propagating errors
 
 Using `-e` to use the exitcode for detection of errors.  
 
@@ -374,6 +375,13 @@ docker inspect b3360585a | jq -r '.[0].Config.Env[] | select(. |  capture("DEVCO
 
 ```sh
 jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "$MYTOKEN"
+```
+
+## Array or not
+
+```sh
+# docker compose ps sometimes returns an object in an array but sometimes returns the object
+jq  '. | if type == "array" then .[0] else . end' 
 ```
 
 ## Resources
