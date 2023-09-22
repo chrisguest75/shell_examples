@@ -39,7 +39,6 @@ aws --profile $AWS_PROFILE --region $AWS_REGION ecs describe-tasks
 # stop a task (will take 30 seconds without a init-process)
 aws --profile $AWS_PROFILE --region $AWS_REGION ecs stop-task 
 --cluster "$cluster" --task "arn:aws:ecs:region:account:task/id"
-
 ```
 
 ## Resources  
