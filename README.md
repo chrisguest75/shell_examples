@@ -166,7 +166,7 @@ Steps [README.md](./06_restricted_bash/README.md)
 ## 07 - OS Detection
 
 Demonstrate how to detect the OS type in script to change parameters to commands.  
-Steps [README.md](./07_os_detection/README.md)  
+Steps [README.md](./07_detect_os/README.md)  
 
 ## 08 - Paths
 

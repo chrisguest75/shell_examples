@@ -53,4 +53,5 @@ aws logs describe-queries --log-group-name /aws/ecs/containerinsights/$CLUSTERNA
 ## Resources
 
 * CloudWatch Logs Insights query syntax [here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)  
+* Supported logs and discovered fields [here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html)
 * Diving into Amazon ECS task history with Container Insights [here](https://nathanpeck.com/diving-into-amazon-ecs-task-history-with-container-insights/)  

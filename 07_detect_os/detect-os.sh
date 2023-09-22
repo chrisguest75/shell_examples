@@ -20,9 +20,11 @@ echo "SCRIPT_NAME: ${SCRIPT_NAME}"
 echo "SCRIPT_PATH: ${SCRIPT_PATH}"
 echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 echo "OS Type is ${OSTYPE}"
+
 case "${OSTYPE}" in
     LINUX)     
         lsb_release -a 
+        cat /etc/os-release
         echo "Hostname: $(hostname)"
     ;;
     MAC)    
