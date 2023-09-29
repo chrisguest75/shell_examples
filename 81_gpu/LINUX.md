@@ -119,17 +119,8 @@ EOF
 
 * ffmpeg HWAccelIntro [here](https://trac.ffmpeg.org/wiki/HWAccelIntro)  
 * How to Install CUDA on Ubuntu 20.04 LTS [here](https://linuxhint.com/install-cuda-ubuntu-2004/)
-
-https://linuxconfig.org/how-to-install-cuda-on-ubuntu-20-04-focal-fossa-linux
-
-* https://www.cyberciti.biz/hardware/nvtop-command-in-linux-to-monitor-nvidia-amd-intel-gpus/
-* https://github.com/Syllo/nvtop
-
-https://saturncloud.io/blog/how-to-use-gpu-acceleration-for-video-processing-with-ffmpeg/
-
-
-
-
-
-
-https://medium.com/hashicorp-engineering/all-things-gpu-part-2-4ac1c30a20ed
+* How to install CUDA on Ubuntu 20.04 Focal Fossa Linux [here](https://linuxconfig.org/how-to-install-cuda-on-ubuntu-20-04-focal-fossa-linux)
+* nvtop – Awesome Linux task monitor for NVIDIA, AMD & Intel GPUs [here](https://www.cyberciti.biz/hardware/nvtop-command-in-linux-to-monitor-nvidia-amd-intel-gpus/)
+* Syllo/nvtop repo [here](https://github.com/Syllo/nvtop)
+* How to Use GPU Acceleration for Video Processing with FFmpeg [here](https://saturncloud.io/blog/how-to-use-gpu-acceleration-for-video-processing-with-ffmpeg/)
+* All Things GPU: Part 2 [here](https://medium.com/hashicorp-engineering/all-things-gpu-part-2-4ac1c30a20ed)
