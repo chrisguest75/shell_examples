@@ -6,6 +6,7 @@ TODO:
 
 * Is a link hard or symlinks?
 * Permissions on links.
+* When adding a soft link to a pathed folder the tab completion on zsh doesn't pick it up immediately.  Why? If you reopen the shell or open a subshell it works.  
 
 ## Notes
 
