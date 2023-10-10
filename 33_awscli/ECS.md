@@ -15,12 +15,16 @@ aws --profile $AWS_PROFILE --region $AWS_REGION ecs help
 
 ## List clusters  
 
+Finding the ECS clusters.  
+
 ```sh
 # list the clusters in the region
 aws --profile $AWS_PROFILE --region $AWS_REGION ecs list-clusters
 ```
 
 ## Cluster tasks
+
+Discovering tasks and interrogating them.  
 
 ```sh
 # give information on the cluster
@@ -40,6 +44,17 @@ aws --profile $AWS_PROFILE --region $AWS_REGION ecs describe-tasks
 aws --profile $AWS_PROFILE --region $AWS_REGION ecs stop-task 
 --cluster "$cluster" --task "arn:aws:ecs:region:account:task/id"
 ```
+
+## Task Definitions
+
+Finding out configuration foe task via the task definitions.  
+
+```sh
+# get the active task definition
+ aws --no-cli-pager --profile "$AWS_PROFILE" --region "$AWS_REGION" ecs list-task-definitions --family-prefix "mytask" --status ACTIVE --sort DESC --max-items 1 --query 'taskDefinitionArns[0]' --output text
+
+# now display it
+aws --no-cli-pager --profile "$AWS_PROFILE" --region "$AWS_REGION" ecs describe-task-definition --task-definition arn:aws:ecs:us-east-1:0000000000000:task-definition/mytask:version```
 
 ## Resources  
 
