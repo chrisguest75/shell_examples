@@ -43,7 +43,7 @@ sudo dpkg -i ~/Downloads/imhex-1.19.3.deb
 brew install imhex
 
 # run on macox
-/Applications/imhex.app/Contents/MacOS/imhex 
+/Applications/imhex.app/Contents/MacOS/imhex --open file.bin
 ```
 
 ## Resources

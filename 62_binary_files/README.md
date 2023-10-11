@@ -42,6 +42,8 @@ gstat --printf="%s"  ./output/chunked/dracula_27_stoker_64kb_16bit-22khz.0030.wa
 
 ## XXD (hex)
 
+xxd - make a hexdump or do the reverse  
+
 ```sh
 # print out header of wav file
 cat ./output/chunked/dracula_27_stoker_64kb_16bit-22khz.0030.wav | xxd | head
@@ -49,12 +51,16 @@ cat ./output/chunked/dracula_27_stoker_64kb_16bit-22khz.0030.wav | xxd | head
 
 ## OD (macosx)
 
+od – octal, decimal, hex, ASCII dump  
+
 ```sh
 # od – octal, decimal, hex, ASCII dump
 cat ./file.bin | od -t x1  
 ```
 
 ## Truncate
+
+truncate - shrink or extend the size of a file to the specified size  
 
 ```sh
 # use truncate to the chop a file
@@ -107,6 +113,8 @@ dhex ./file1.wav ./file2.wav
 
 ## Poke
 
+The main purpose of GNU poke is to manipulate structured binary data in terms of abstractions provided by the user.  
+
 ```sh
 # build the image
 docker build --no-cache --progress=plain -f Dockerfile.poke -t poke . 
@@ -119,6 +127,21 @@ poke
 .exit
 ```
 
+## SFK (Swiss Files Knife)
+
+Swiss File Knife - A Command Line Tools Collection  
+
+```sh
+brew install sfk
+
+sfk
+# find a binary string in a file
+sfk hexfind -binary /2119/ -dir ./ -file file.m4a
+
+# copy partial files
+sfk partcopy first.dat -allfrom 0x8000 second.dat
+```
+
 ## Resources
 
 * The *Binary Tools Summit 2022* is an informal, technical, online event
@@ -128,3 +151,4 @@ with binary data. [here](https://binary-tools.net/summit)
 * dhex — hex editor with a diff mode [here](https://manpages.ubuntu.com/manpages/bionic/man1/dhex.1.html)  
 * Welcome to Pokology [here](https://pokology.org/)
 * GNU poke Manual [here](http://jemarch.net/poke-2.4-manual/poke.html)
+* Swiss File Knife - A Command Line Tools Collection [here](http://stahlworks.com/swiss-file-knife.html)  
