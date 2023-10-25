@@ -4,6 +4,10 @@ Demonstrates building a .deb packages repository
 
 For help with installing Debian packages [README.md](../35_apt_and_dpkg/README.md)  
 
+TODO:
+
+* Look at adequate - https://manpages.debian.org/testing/adequate/adequate.1.en.html
+
 ## Build .deb Examples
 
 Build the image to build the packages and index  

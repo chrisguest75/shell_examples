@@ -22,19 +22,22 @@ Questions:
 
 ```sh
 # installation directory
-ls /usr/local/Homebrew  
+ls /usr/local/Homebrew
 
 # list formulas installed
-ls /usr/local/Cellar     
+ls /usr/local/Cellar
 
 # casks are macnative apps
 ls /usr/local/Caskroom
 
 # view the download cache
-ls -la $(brew --cache)     
+ls -la $(brew --cache)
 
 # view softlinks to installed packages
-ls -la /usr/local/bin    
+ls -la /usr/local/bin
+
+# show the prefix
+echo $(brew --prefix)
 ```
 
 ## Basic commands

@@ -8,13 +8,17 @@ readonly SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
 function help() {
     cat <<- EOF
-usage: $SCRIPT_NAME options
+NAME
+    $SCRIPT_NAME - Example of argument parsing
 
-OPTIONS:
-    -h --help -?               show this help
+SYNOPSIS 
+    $SCRIPT_NAME [options]
 
-Examples:
-    $SCRIPT_NAME --help 
+OPTIONS
+    -h --help                show this help
+
+EXAMPLES
+    $SCRIPT_NAME --action=ps 
 
 EOF
 }

@@ -2,7 +2,11 @@
 
 Demonstrate how to parse and work with CSV files
 
-TODO: Fix the empty string handling
+TODO:
+
+* Fix the empty string handling
+* Validate data being piped
+* tidy viewer - https://github.com/alexhallam/tv
 
 ## Example
 
@@ -39,6 +43,11 @@ sqlite3 :memory: -cmd '.mode csv' -cmd '.import cpu.csv cpu' 'SELECT time, COUNT
 * My jq examples [here](../jq/README.md)
 
 https://til.simonwillison.net/sqlite/one-line-csv-operations
+
+
+https://news.ycombinator.com/item?id=28670252
+https://github.com/alexhallam/tv
+
 
 
 iostat

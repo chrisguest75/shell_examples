@@ -21,14 +21,18 @@ function help() {
     local EXITCODE=0
 
     cat <<- EOF
-usage: $SCRIPT_NAME options
+NAME
+    $SCRIPT_NAME - Example of argument parsing
 
-OPTIONS:
+SYNOPSIS 
+    $SCRIPT_NAME [options]
+
+OPTIONS
     -a --action              [ps|jobs|ls]
     --debug                  
     -h --help                show this help
 
-Examples:
+EXAMPLES
     $SCRIPT_NAME --action=ps 
 
 EOF

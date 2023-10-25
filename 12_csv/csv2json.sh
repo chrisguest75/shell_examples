@@ -8,13 +8,17 @@ readonly SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
 function help() {
     cat <<- EOF
-usage: $SCRIPT_NAME options
+NAME
+    $SCRIPT_NAME - Script reads a three column csv file and converts it to json
 
-OPTIONS:
-    -h --help -?               show this help
+SYNOPSIS 
+    $SCRIPT_NAME [options]
 
-Examples:
-    $SCRIPT_NAME --help 
+OPTIONS
+    -h --help                show this help
+
+EXAMPLES
+    cat file.csv | $SCRIPT_NAME 
 
 EOF
 }
