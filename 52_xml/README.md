@@ -118,3 +118,4 @@ yq -oy '.ListBucketResult.Contents[].Key' ./s3listing.xml
 * xmllint in Linux [here](https://www.baeldung.com/linux/xmllint)  
 * xpath cheatsheet [here](https://devhints.io/xpath)
 * What is RSS? [here](https://validator.w3.org/feed/docs/rss2.html)
+* YQ: Working with XML [here](https://mikefarah.gitbook.io/yq/usage/xml)  

@@ -2,6 +2,8 @@
 
 Demonstrates some examples of using `yq` to process yaml files  
 
+It also can process xml [here](../52_xml/README.md)  
+
 ## Preeqs
 
 ```sh
