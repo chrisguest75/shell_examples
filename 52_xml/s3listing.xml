@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <Name>mybucket</Name>
+  <Prefix>myprefix</Prefix>
+  <Marker/>
+  <MaxKeys>4</MaxKeys>
+  <IsTruncated>true</IsTruncated>
+  <Contents>
+    <Key>myprefix/</Key>
+    <LastModified>2022-06-16T16:25:07.000Z</LastModified>
+    <ETag>"11111111111111111111111111111111"</ETag>
+    <Size>12621</Size>
+    <StorageClass>STANDARD</StorageClass>
+  </Contents>
+  <Contents>
+    <Key>myprefix/test1.txt</Key>
+    <LastModified>2022-06-17T13:26:51.000Z</LastModified>
+    <ETag>"2222222222222222222222222222222"</ETag>
+    <Size>267</Size>
+    <StorageClass>STANDARD</StorageClass>
+  </Contents>
+  <Contents>
+    <Key>myprefix/test2.txt</Key>
+    <LastModified>2022-06-17T13:28:38.000Z</LastModified>
+    <ETag>"3333333333333333333333333333333"</ETag>
+    <Size>267</Size>
+    <StorageClass>STANDARD</StorageClass>
+  </Contents>
+  <Contents>
+    <Key>myprefix/test3.txt</Key>
+    <LastModified>2022-06-17T13:54:00.000Z</LastModified>
+    <ETag>"4444444444444444444444444444444"</ETag>
+    <Size>509</Size>
+    <StorageClass>STANDARD</StorageClass>
+  </Contents>
+</ListBucketResult>

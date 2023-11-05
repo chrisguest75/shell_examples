@@ -34,7 +34,7 @@ xmllint --shell ./danceloop_00009.svg
 # this fails because svg is namespaced
 xmllint --xpath '//svg/g/path/@d' ./52_xml/danceloop_00009.svg
 
-# loosens the path selection
+# loosens the path selection to avoid having to specify namespace everywhere.  
 xmllint --debug --xpath "//*[local-name()='path']" ./danceloop_00009.svg
 
 # extract the attribute
@@ -84,6 +84,29 @@ FEED_URL=$(xmllint --xpath 'string(//rss/channel/item[1]/enclosure/@url)' --form
 
 # get the file
 curl -s -L -o ./out/$(basename $FEED_URL) $FEED_URL
+```
+
+## S3 bucket listing
+
+Process S3 bucket listing.  
+
+```sh
+# acquire the bucket listing
+curl -s "https://mybucket.s3.eu-west-1.amazonaws.com/?prefix=myprefix&max-keys=3&marker=key/path/file" | xmllint --format -
+
+# process manually in xmllint shell
+xmllint --shell ./s3listing.xml  
+setns x=http://s3.amazonaws.com/doc/2006-03-01/
+xpath /x:ListBucketResult/x:Contents/x:Key/text()
+
+# xmllint
+xmllint --xpath '//*[local-name()="ListBucketResult"]/*[local-name()="Contents"]/*[local-name()="Key"]/text()' --format ./s3listing.xml   
+
+# easier to write it in python.
+./extract_xml.py ./s3listing.xml   
+
+# using yq that ignores namespaces
+yq -oy '.ListBucketResult.Contents[].Key' ./s3listing.xml
 ```
 
 ## Resources
