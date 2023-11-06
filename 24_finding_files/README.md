@@ -79,6 +79,8 @@ locate  "/etc/*.conf"
 
 ## exa
 
+exa is a modern replacement for the venerable file-listing command-line program ls that ships with Unix and Linux operating systems, giving it more features and better defaults.  
+
 ```sh
 brew install exa
 
@@ -87,6 +89,8 @@ exa -laTR --icons --git | grep ".*\.md"
 ```
 
 ## fd
+
+fd is a program to find entries in your filesystem. It is a simple, fast and user-friendly alternative to find.  
 
 ```sh
 brew install fd
@@ -100,16 +104,17 @@ fd -e md
 
 ## ripgrep
 
+ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern.  
+
 ```sh
 brew install ripgrep
 
 # find all files containing README
-rg README
+rg --ignore-case README
 
 # searching in node_modules (including .gitignore) 
 rg --no-ignore --hidden "items to be sent"
 ```
-
 
 ## Resources
 

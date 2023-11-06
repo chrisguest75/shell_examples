@@ -2,7 +2,10 @@
 
 Demonstrates examples of how to use grep and regex.  
 
+REF: ripgrep in [24_finding_files/README.md](../24_finding_files/README.md)  
+
 ```sh
+# MacOS grep (BSD grep, GNU compatible) 2.6.0-FreeBSD
 grep --version    
 ```
 
@@ -16,6 +19,9 @@ brew install grep
 
 # can now use ggrep
 ggrep
+
+# ggrep (GNU grep) 3.7
+ggrep --version
 ```
 
 ## Common uses
