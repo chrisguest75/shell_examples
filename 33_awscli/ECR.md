@@ -1,5 +1,16 @@
 # Elastic Container Registry
 
+Demonstrate how to use the `awscli` with ECR  
+
+## Table of contents
+
+- [Elastic Container Registry](#elastic-container-registry)
+  - [Table of contents](#table-of-contents)
+  - [Login](#login)
+  - [Listing](#listing)
+  - [Pushing](#pushing)
+  - [Resources](#resources)
+
 TODO:
 
 * Calculate number of images.  

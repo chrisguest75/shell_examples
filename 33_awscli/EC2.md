@@ -1,5 +1,23 @@
 # EC2
 
+Demonstrate how to use the `awscli` with EC2  
+
+## Table of contents
+
+- [EC2](#ec2)
+  - [Table of contents](#table-of-contents)
+  - [Describe Instances](#describe-instances)
+  - [Multiple compound filters](#multiple-compound-filters)
+  - [Machine launched after a date](#machine-launched-after-a-date)
+  - [Grouping instances by type](#grouping-instances-by-type)
+  - [Terminate](#terminate)
+- [Auto Scaling Groups](#auto-scaling-groups)
+  - [Describe ASG](#describe-asg)
+  - [Increase ASG desired](#increase-asg-desired)
+- [Launch Configurations](#launch-configurations)
+  - [Describe Launch Configurations](#describe-launch-configurations)
+- [Images](#images)
+
 ## Describe Instances
 
 ```sh
