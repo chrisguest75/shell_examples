@@ -11,6 +11,7 @@ TODO:
 
 - [ARCHIVES](#archives)
   - [Reason](#reason)
+  - [Tricks](#tricks)
   - [ZIP](#zip)
   - [GZIP](#gzip)
   - [ZSTD](#zstd)
@@ -21,6 +22,20 @@ TODO:
 ## Reason
 
 It's useful to be able to quickly create and restore archives.  
+
+## Tricks
+
+```sh
+# use file to identify the types of compression
+file ./file.zip
+> Zip archive data, at least v2.0 to extract, compression method=deflate
+
+file ./file.gz
+> gzip compressed data, from Unix, original size modulo 2^32 231151
+
+file ./file.tar
+> ./file.tar: POSIX tar archive
+```
 
 ## ZIP
 
