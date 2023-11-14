@@ -1,5 +1,6 @@
 # 📝 TODO
 
+* use numfmt to process numbers
 * -- end of options https://www.cyberciti.biz/faq/what-does-double-dash-mean-in-ssh-command 
 * Process Substition versus command substitution < <() < $()
 sdiff <(ffprobe -show_frames test.mp4  | grep pkt_pts_time) <(ffprobe -show_frames original.mp4 | grep pkt_pts_time)

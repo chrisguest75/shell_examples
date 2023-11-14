@@ -2,6 +2,18 @@
 
 Demonstrate some common examples with `curl`  
 
+- [README](#readme)
+  - [Cheatsheet](#cheatsheet)
+  - [Start](#start)
+  - [Debug](#debug)
+  - [Stop](#stop)
+  - [Examples](#examples)
+    - [Download files](#download-files)
+    - [Retries](#retries)
+    - [Posting](#posting)
+    - [Follow redirects](#follow-redirects)
+  - [Resources](#resources)
+
 TODO:
 
 * add wget equivalents
@@ -75,7 +87,11 @@ docker compose down
 
 ## Examples
 
-Download files
+Simple examples using `curl` features.  
+
+### Download files
+
+Render an image to the terminal.  
 
 ```sh
 # this only works in iterm2
@@ -91,9 +107,12 @@ curl -s http://deb.debian.org/debian/pool/main/j/jq/jq_1.6.orig.tar.gz -o ./out/
 ```sh
 # headers only
 curl -I http://0.0.0.0:8080
+
+# just get the file size (headers only)
+curl -sI http://0.0.0.0:8080/downloads/nginx.png | grep content-length
 ```
 
-Retries  
+### Retries  
 
 ```sh
 # retries - watch them in the mitmproxy
@@ -104,14 +123,14 @@ curl -vvvv --retry-all-errors --connect-timeout 5 --max-time 20 --retry 5 --retr
 curl -vvvv --retry-all-errors --connect-timeout 5 --max-time 20 --retry 5 --retry-delay 0 --retry-max-time 40 -s http://0.0.0.0:8081/status/404
 ```
 
-Posting  
+### Posting  
 
 ```sh
 # echo back a post from podinfo
 curl -H "Content-Type: application/json" -X POST -d '{"user":"bob","pass":"123"}' http://0.0.0.0:8081/echo 
 ```
 
-Follow redirects  
+### Follow redirects  
 
 ```sh
 # follow HTTP/1.1 302 Moved Temporarily
