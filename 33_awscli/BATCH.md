@@ -95,7 +95,7 @@ aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status RUN
 
 # find jobs names starting with a prefix (also show jobtime, totaltime and queuetime)  
 # NOTE: Use filters below for performance
-aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status SUCCEEDED --job-queue batch-queue-name  | jq -r -c '.jobSummaryList[] | select(.jobName | startswith("jobprefix")) | [.jobName, (((.stoppedAt - .startedAt)/1000) | "\(.) seconds"), (((.startedAt - .createdAt)/1000) | "\(.) seconds"), (((.stoppedAt - .createdAt)/1000) | "\(.) seconds"), .jobId]'
+aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status SUCCEEDED --job-queue batch-queue-name | jq -r -c '[ .jobSummaryList[] | select(.jobName | startswith("'$USERID'")) | {created: .createdAt, jobName: .jobName, processingTime: (((.stoppedAt - .startedAt)/1000) | "\(.) seconds"), queueTime: (((.startedAt - .createdAt)/1000) | "\(.) seconds"), totalTime: (((.stoppedAt - .createdAt)/1000) | "\(.) seconds"), jobId: .jobId} ]  | sort_by(.created)' | jq -c '.[]'
 
 # get date and time of failed jobs. 
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue batch-queue-name --job-status FAILED | jq "(.jobSummaryList[].startedAt/1000 | floor)" | xargs -I {} gdate --date=@{}
@@ -140,7 +140,7 @@ Use filters for performance with large queues.
 
 ```sh
 # this will also filter by prefix 
-aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue jobqueue --filters "name=JOB_NAME,values=5c4734c69a8608bfaa3ca94c*"  | jq -r -c '.jobSummaryList[] | select(.jobName | startswith("jobprefix")) | [.jobName, (((.stoppedAt - .startedAt)/1000) | "\(.) seconds"), (((.startedAt - .createdAt)/1000) | "\(.) seconds"), (((.stoppedAt - .createdAt)/1000) | "\(.) seconds"), .jobId]'
+aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue jobqueue --filters "name=JOB_NAME,values=5c4734c69a8608bfaa3ca94c*" | jq -r -c '[ .jobSummaryList[] | select(.jobName | startswith("'$USERID'")) | {created: .createdAt, jobName: .jobName, processingTime: (((.stoppedAt - .startedAt)/1000) | "\(.) seconds"), queueTime: (((.startedAt - .createdAt)/1000) | "\(.) seconds"), totalTime: (((.stoppedAt - .createdAt)/1000) | "\(.) seconds"), jobId: .jobId} ]  | sort_by(.created)' | jq -c '.[]'
 
 # or before a specific date
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue batch-queue --job-status FAILED --filters "name=BEFORE_CREATED_AT,values=1640124949"
