@@ -1,22 +1,54 @@
 # Batch
 
-Demonstrate some example commands for managing AWS Batch services
+Demonstrate some example commands for managing AWS Batch services  
 
-NOTES ON BATCH:
+TODO:
+
+* Work out if container insights is installed.
+* Work out logs can be despatched.
+* How do I know they are on fargate?  
+
+## Background
+
+AWS Batch is a service provided by Amazon Web Services (AWS) designed to efficiently run batch computing jobs in the cloud. It simplifies the process of running these jobs, which typically involve executing a series of tasks or a workload that can be processed in parallel without user interaction. Here's an overview of how AWS Batch works:  
+
+* Job Definition: This is the first step in using AWS Batch. A job definition specifies how jobs are to be run. It includes details like which Docker container image to use, memory and CPU requirements, and environment variables.  
+
+* Job Queue: After defining a job, you submit it to a job queue. The job queue stores jobs until they can be scheduled to run on compute resources. You can have multiple job queues for different priority levels or types of jobs.  
+
+* Compute Environments: AWS Batch runs jobs in a compute environment. This is a set of EC2 instances or AWS Fargate resources that you define based on your specific requirements. You can have different compute environments for different types of jobs or workloads.  
+
+* Scheduling and Execution: AWS Batch has a scheduler that evaluates the job queues and dispatches jobs to available compute resources based on their priority and resource requirements. The scheduler attempts to efficiently use resources to reduce costs and maximize throughput.  
+
+* Scaling: AWS Batch can automatically scale your compute resources up or down based on the workload. This is done by integrating with AWS's Auto Scaling groups. This means if there are a lot of jobs in the queue, AWS Batch can add more EC2 instances to your compute environment, and it can scale down when the job queue is empty.  
+
+* Monitoring and Logging: AWS Batch integrates with other AWS services like CloudWatch for monitoring and logging. This allows you to track the status of your jobs, view logs, and get alerts based on specific metrics or events.  
+
+* Integration with Other AWS Services: AWS Batch can be integrated with other AWS services like AWS Lambda, Amazon S3, Amazon RDS, and Amazon DynamoDB. This allows for a more comprehensive and interconnected cloud solution.  
+
+AWS Batch is especially useful for workloads that are not time-sensitive and can be processed asynchronously, such as data processing, image processing, financial modeling, and scientific simulations. It handles the provisioning, management, and scaling of the compute infrastructure, which simplifies running batch jobs at scale.  
+
+NOTES:
 
 * A queue only has 10000 entries
+* You can attach multiple compute environments to queues.  
 
 ## Compute Environments
 
+List the compute environments.  
+
 ```sh
+export AWS_PROFILE=
+export AWS_REGION=
+
 aws --profile $AWS_PROFILE --region $AWS_REGION batch describe-compute-environments | jq
 ```
 
 ## Get the Queues
 
-```sh
-export AWS_PROFILE=
+Queues are attached to compute environments.  
 
+```sh
 # get the job queues 
 aws --profile $AWS_PROFILE --region $AWS_REGION batch describe-job-queues | jq
 
@@ -30,8 +62,10 @@ List jobs by status in queues
 Status - SUBMITTED | PENDING | RUNNABLE | STARTING | RUNNING | SUCCEEDED | FAILED  
 
 ```sh
+# get failed
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status FAILED --job-queue batch-queue-name
 
+# get succeeded
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status SUCCEEDED --job-queue batch-queue-name
 
 # get the jobid only
@@ -91,4 +125,3 @@ aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue batc
 * Boto3 Docs 1.20.26 documentation - Batch [here](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/batch.html)
 * AWS Batch Runtime Monitoring Dashboards Solution [here](https://github.com/aws-samples/aws-batch-runtime-monitoring)  
 * Optimizing your AWS Batch architecture for scale with observability dashboards [here](https://aws.amazon.com/blogs/hpc/optimizing-aws-batch-with-observability-dashboards/)
-

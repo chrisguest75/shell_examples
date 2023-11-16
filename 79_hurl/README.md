@@ -7,6 +7,10 @@ TODO:
 * Is there a way to introduce delays in chained requests?  
 * Exporting captured values to environment variables
 
+NOTES:
+
+* support variable when sourcing payload from file [BUG 1731](https://github.com/Orange-OpenSource/hurl/issues/1731)
+
 ## Install
 
 ```sh
