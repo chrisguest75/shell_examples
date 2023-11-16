@@ -2,6 +2,17 @@
 
 Demonstrate some example commands for managing AWS Batch services  
 
+- [Batch](#batch)
+  - [Background](#background)
+  - [Compute Environments](#compute-environments)
+  - [Get the Queues](#get-the-queues)
+  - [List jobs](#list-jobs)
+  - [Investigate jobs](#investigate-jobs)
+  - [Logs](#logs)
+  - [Log Events](#log-events)
+  - [Filters](#filters)
+  - [Resources](#resources)
+
 TODO:
 
 * Work out if container insights is installed.
@@ -58,21 +69,33 @@ aws --profile $AWS_PROFILE --region $AWS_REGION batch describe-job-queues | jq -
 
 ## List jobs
 
+* Job Scheduling: After a job is submitted, it first enters the SUBMITTED state and then moves to the PENDING state. In the PENDING state, AWS Batch is preparing to schedule the job based on the compute resources availability and other scheduling constraints.
+
+* Transition to RUNNABLE: Once the job is ready to be scheduled, it moves to the RUNNABLE state. Here, it waits for the necessary compute resources (like a vCPU and memory) to become available in one of the compute environments associated with the job's queue.
+
+* Resource Allocation: When resources are available, AWS Batch allocates these resources to the job. At this point, the job is still in the RUNNABLE state.
+
+* Container Image Pulling: Before the job moves to the STARTING or RUNNING state, AWS Batch needs to pull the container image specified in the job definition. This image pull time is included in the queue time. If the image is not already present on the chosen compute resource, this step can take a significant amount of time, especially for larger images or in cases where network bandwidth is limited.
+
+* Job Execution: After the image is pulled and the container is set up, the job transitions to the STARTING and then to the RUNNING state, where it begins executing the workload.
+
 List jobs by status in queues  
+
 Status - SUBMITTED | PENDING | RUNNABLE | STARTING | RUNNING | SUCCEEDED | FAILED  
 
 ```sh
 # get failed
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status FAILED --job-queue batch-queue-name
 
-# get succeeded
-aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status SUCCEEDED --job-queue batch-queue-name
-
 # get the jobid only
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status FAILED --job-queue batch-queue-name | jq '.jobSummaryList[].jobId'
 
 # get number of RUNNING jobs in queue
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status RUNNING --job-queue batch-queue-name | jq -r ".jobSummaryList | length"
+
+# find jobs names starting with a prefix (also show jobtime, totaltime and queuetime)  
+# NOTE: Use filters below for performance
+aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-status SUCCEEDED --job-queue batch-queue-name  | jq -r -c '.jobSummaryList[] | select(.jobName | startswith("jobprefix")) | [.jobName, (((.stoppedAt - .startedAt)/1000) | "\(.) seconds"), (((.startedAt - .createdAt)/1000) | "\(.) seconds"), (((.stoppedAt - .createdAt)/1000) | "\(.) seconds"), .jobId]'
 
 # get date and time of failed jobs. 
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue batch-queue-name --job-status FAILED | jq "(.jobSummaryList[].startedAt/1000 | floor)" | xargs -I {} gdate --date=@{}
@@ -81,7 +104,7 @@ aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue batc
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue cbatch-queue-name --job-status FAILED | jq ".jobSummaryList[] | { startedAt: (.startedAt/1000 | floor), status:.status, jobname:.jobName, jobid: .jobId, reason: .container.reason}"
 ```
 
-## Look at jobs
+## Investigate jobs
 
 ```sh
 # use id from listed job
@@ -113,9 +136,13 @@ aws --profile $AWS_PROFILE --region $AWS_REGION logs get-log-events --log-group-
 
 ## Filters
 
-```sh
-aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue jobqueue --filters "name=JOB_NAME,values=5c4734c69a8608bfaa3ca94c*"
+Use filters for performance with large queues.  
 
+```sh
+# this will also filter by prefix 
+aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue jobqueue --filters "name=JOB_NAME,values=5c4734c69a8608bfaa3ca94c*"  | jq -r -c '.jobSummaryList[] | select(.jobName | startswith("jobprefix")) | [.jobName, (((.stoppedAt - .startedAt)/1000) | "\(.) seconds"), (((.startedAt - .createdAt)/1000) | "\(.) seconds"), (((.stoppedAt - .createdAt)/1000) | "\(.) seconds"), .jobId]'
+
+# or before a specific date
 aws --profile $AWS_PROFILE --region $AWS_REGION batch list-jobs --job-queue batch-queue --job-status FAILED --filters "name=BEFORE_CREATED_AT,values=1640124949"
 ```
 
