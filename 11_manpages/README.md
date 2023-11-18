@@ -1,19 +1,25 @@
-# README
-Demonstrate how to create a manpage. 
+# MANPAGES
 
-## Prequisites 
-1. Install vscode extension for manpage troff syntax highlighting
-    ```sh
-    code --install-extension ban.troff
-    ```
+Demonstrate how to create a manpage.  
+
+## Prequisites
+
+Install vscode extension for manpage troff syntax highlighting
+
+```sh
+code --install-extension ban.troff
+```
 
 ## Example
+
 Open the page in man pages.
+
 ```sh
 man ./example-script.troff  
 ```
 
 ## Install the man page
+
 ```sh
 # create manpage folder
 sudo mkdir -p /usr/local/man/man1  
@@ -28,3 +34,6 @@ gzip /usr/local/man/man1/example-script.1
 man example-script
 ```
 
+## Resources
+
+* The GNU Troff Manual [here](https://www.gnu.org/software/groff/manual/groff.html)  
