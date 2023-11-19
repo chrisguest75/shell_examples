@@ -58,7 +58,7 @@ A list of things still to try and investigate [TODO.md](./TODO.md)
   - [47 - FFMPEG](#47---ffmpeg)
   - [48 - SED](#48---sed)
   - [49 - brew](#49---brew)
-  - [50 - tmux](#50---tmux)
+  - [50 - tmux and screen](#50---tmux-and-screen)
   - [51 - grep and regex](#51---grep-and-regex)
   - [52 - xml](#52---xml)
   - [53 - syncing files](#53---syncing-files)
@@ -353,10 +353,10 @@ Steps [README.md](./48_sed/README.md)
 Demonstrate how to create a `brew` package.  
 Steps [README.md](./49_brew/README.md)  
 
-## 50 - tmux
+## 50 - tmux and screen
 
-Demonstrate some tmux examples and common commands.  
-Steps [README.md](./50_tmux/README.md)  
+Demonstrate some terminal multiplexors like `tmux` and `screen`  
+Steps [README.md](./50_tmux_and_screen/README.md)  
 
 ## 51 - grep and regex
 
