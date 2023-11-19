@@ -1,0 +1,33 @@
+# Turn off the startup message
+startup_message off
+
+# Set scrollback buffer to 10000 lines
+defscrollback 10000
+
+# Use hardstatus as a window list at the bottom of the screen
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
+
+# Enable color in the hardstatus
+termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# Default windows
+screen -t shell 0
+#screen -t editor 1 vim
+#screen -t server 2
+
+# Bind F2 to create a new window
+bindkey -k F2 screen
+
+# Bind F3 and F4 to switch between windows
+bindkey -k F3 prev
+bindkey -k F4 next
+
+# Enable mouse scrolling and mouse click support (for terminals that support it)
+termcapinfo xterm* ti@:te@
+
+# Automatically detach on hangup
+autodetach on
+
+# Set default terminal to xterm-256color
+term xterm-256color

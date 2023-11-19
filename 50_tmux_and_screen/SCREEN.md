@@ -31,6 +31,16 @@ The screen tool on Linux is a powerful utility that allows users to manage multi
 | `ctrl+d`   | Kill a session |
 | `ctrl+a d` | Detach from a session |
 
+## Configuration
+
+```sh
+# show config
+cat ~/.screenrc
+
+# override
+cp .screenrc ~/.screenrc
+```
+
 ## Example
 
 ```sh
