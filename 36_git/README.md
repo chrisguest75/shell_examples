@@ -29,6 +29,16 @@ TODO:
 * Git Crypt - [GIT_CRYPT.md](./sections/GIT_CRYPT.md)  
 * Helper Scripts - [HELPER_SCRIPTS.md](./sections/HELPER_SCRIPTS.md)  
 
+## Installing a new machine
+
+Goto [chrisguest75/sysadmin_examples08_ssh/README.md](https://github.com/chrisguest75/sysadmin_examples/blob/master/08_ssh/README.md#generate-keys) to show how to generate keys.  
+
+```sh
+git config --local user.email "chrisguest75@users.noreply.github.com"
+git config --local user.name "Chris Guest"
+```
+
+
 ## Upgrade
 
 ```sh
