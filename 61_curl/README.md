@@ -137,6 +137,15 @@ curl -H "Content-Type: application/json" -X POST -d '{"user":"bob","pass":"123"}
 curl -vvvv -L http://0.0.0.0:8080/podinfo     
 ```
 
+### Range Requests
+
+NOTE: `content-length` will be the full length of the binary.  
+
+```sh
+# request a stream of bytes. 
+curl -s -H "Range: bytes=32-195" "http://mysite.com/random.bin" | xxd
+```
+
 ## Resources
 
 * stefanprodan/podinfo [repo](https://github.com/stefanprodan/podinfo)  
@@ -144,3 +153,4 @@ curl -vvvv -L http://0.0.0.0:8080/podinfo
 * Installing NGINX Open Source [here](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source)
 * nginx documentation [here](https://nginx.org/en/docs/)  
 * How To Create Temporary and Permanent Redirects with Nginx [here](https://www.digitalocean.com/community/tutorials/how-to-create-temporary-and-permanent-redirects-with-nginx)  
+* HTTP range requests [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests)  

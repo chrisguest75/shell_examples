@@ -69,6 +69,24 @@ aws --no-cli-pager cloudfront list-distributions | jq '.DistributionList.Items[]
 aws --no-cli-pager cloudfront list-distributions | jq '.DistributionList.Items[2].Origins.Items[]'
 ```
 
+## Range Requests
+
+NOTE: `content-length` will be the full length of the binary.  
+
+```sh
+# 1mb file
+dd if=/dev/urandom of=random.bin bs=1024 count=1024
+# upload to bucket
+aws s3 cp ./random.bin s3://mybucket/random.bin
+# pull a range of data
+curl -s -H "Range: bytes=32-195" http://mybucket.s3-website-eu-west-1.am
+azonaws.com/random.bin | xxd
+# find distribution
+aws --no-cli-pager cloudfront list-distributions | jq '.DistributionList.Items[] | [.DomainName, .Origins.Items[].DomainName ]'
+# pull a range through cloudfront
+curl -s -H "Range: bytes=32-195" http://mydistribution.cloudfront.net/random.bin | xxd
+```
+
 ## Resources
 
 * Force CloudFront distribution/file update [here](https://stackoverflow.com/questions/1268158/force-cloudfront-distribution-file-update)

@@ -7,6 +7,7 @@ Working with binary files in shell.
 TODO:
 
 * hexdump, hexfiend, fq
+* how can I create a file of little endian incrementing 16bit words? 
 
 ## VSCode
 
