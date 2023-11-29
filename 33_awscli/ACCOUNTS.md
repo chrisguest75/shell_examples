@@ -6,6 +6,7 @@ Demonstrate some commands for dealing with accounts.
 
 ```sh
 # might need to ensure default account has permissions.
+# if the default account has permissions unset AWS_PROFILE
 aws organizations list-accounts | jq . 
 
 # find id of an account
