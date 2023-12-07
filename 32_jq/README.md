@@ -1,10 +1,11 @@
 # README
 
-Demonstrates some examples of using jq to process json files
+Demonstrates some examples of using `jq` to process json files
 
 - [README](#readme)
   - [Install](#install)
   - [Tricks](#tricks)
+    - [jqp](#jqp)
   - [Transforming and Processing files](#transforming-and-processing-files)
   - [Document creation and modification](#document-creation-and-modification)
   - [Selecting and Filtering](#selecting-and-filtering)
@@ -50,6 +51,14 @@ pbpaste | jq '.'
 
 # Take an array defined in json and loop over it in bash.
 ./loop_array.sh
+```
+
+### jqp
+
+You can use `jqp` interactively to help design `jq` queries.  
+
+```sh
+brew install jqp
 ```
 
 ## Transforming and Processing files
