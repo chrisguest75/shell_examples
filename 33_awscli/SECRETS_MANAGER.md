@@ -71,7 +71,7 @@ aws --no-cli-pager secretsmanager get-secret-value --secret-id "ecr-pullthroughc
 # modify secret
 aws --no-cli-pager secretsmanager put-secret-value --secret-id ecr-pullthroughcache/dockerpullsecret-test --secret-string '{"username":"newuser","accessToken":"newpass"}'
 
-
+# get the secret values
 aws --no-cli-pager secretsmanager get-secret-value --secret-id "ecr-pullthroughcache/dockerpullsecret-test" | jq .
 ```
 
