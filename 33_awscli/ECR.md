@@ -35,7 +35,8 @@ These features make ECR a powerful and versatile tool for managing Docker contai
 ## Useful content
 
 * OCI Registry-as-Storage (ORAS) [here](https://github.com/chrisguest75/docker_examples/tree/master/81_oras)  
-* Secrets Manager [here](SECRETS_MANAGER.md)
+* Secrets Manager [here](SECRETS_MANAGER.md)  
+* Label Metadata Example [here](https://github.com/chrisguest75/docker_examples/blob/master/33_label_metadata/README.md)
 
 ## Table of contents
 
@@ -47,7 +48,8 @@ These features make ECR a powerful and versatile tool for managing Docker contai
   - [Listing](#listing)
   - [Pushing](#pushing)
   - [Pull through cache](#pull-through-cache)
-    - [Create](#create)
+    - [Create Cache (dockerhub)](#create-cache-dockerhub)
+    - [Immutability](#immutability)
   - [Resources](#resources)
 
 TODO:
@@ -78,7 +80,6 @@ aws ecr describe-registry --profile my-profile
 # list repositories
 aws --no-cli-pager ecr describe-repositories  | jq .
 ```
-
 
 ```sh
 # image name without registry name
@@ -132,7 +133,7 @@ sequenceDiagram
     end
 ```
 
-### Create
+### Create Cache (dockerhub)
 
 You'll need a pull secret in `Secrets Manager` and dockerhub needs to be called `docker.io` with official images coming from `/docker.io/library/`.  
 
@@ -173,9 +174,41 @@ oras repository ls 000000000000.dkr.ecr.us-east-1.amazonaws.com
 oras repository show-tags 000000000000.dkr.ecr.us-east-1.amazonaws.com/docker.io/library/redis
 ```
 
+### Immutability
+
+Follow the Label Metadata Example [here](https://github.com/chrisguest75/docker_examples/blob/master/33_label_metadata/README.md) to create a container with labels that have timestamps.  
+Push it to a private dockerhub registry you have access to that the pullthrough cache has access to as well.  
+
+"When a cached image is pulled through the Amazon ECR private registry URI, Amazon ECR checks the remote repository up to once per 24 hours to verify whether the cached image is the latest version. This timer is based off the last pull of the cached image." [here](https://github.com/awsdocs/amazon-ecr-user-guide/blob/main/doc_source/pull-through-cache.md)  
+
+```sh
+# after building
+docker inspect -f "{{ .Config.Labels }}" labels 
+
+# retag and push
+docker tag labels privaterepo/labels:latest
+docker push privaterepo/labels:latest  
+
+# pullthrough cache
+docker pull 00000000000.dkr.ecr.us-east-1.amazonaws.com/docker.io/privaterepo/labels 
+
+# check labels of cached image
+docker inspect -f "{{ .Config.Labels }}" 00000000000.dkr.ecr.us-east-1.amazonaws.com/docker.io/privaterepo/labels
+
+# get labels from source
+oras manifest fetch-config registry-1.docker.io/privaterepo/labels:latest | jq .
+oras manifest fetch registry-1.docker.io/privaterepo/labels:latest | jq .
+
+# get labels in cache
+oras manifest fetch-config 00000000000.dkr.ecr.us-east-1.amazonaws.com/docker.io/privaterepo/labels:latest | jq .
+oras manifest fetch  00000000000.dkr.ecr.us-east-1.amazonaws.com/docker.io/privaterepo/labels:latest | jq .
+```
+
 ## Resources
 
 * AWS CLI ECR [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ecr/index.html)  
 * Using pull through cache rules [here](https://docs.amazonaws.cn/en_us/AmazonECR/latest/userguide/pull-through-cache.html)
 * Troubleshooting pull through cache issues [here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/error-pullthroughcache.html)
 * Creating a pull through cache rule [here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache-creating-rule.html)
+* Image tag mutability [here](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html)
+* Using pull through cache rules [here](https://github.com/awsdocs/amazon-ecr-user-guide/blob/main/doc_source/pull-through-cache.md)  
