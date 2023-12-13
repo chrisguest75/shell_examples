@@ -44,5 +44,13 @@ echo "add_trailing_slash(\"this/is/my/path\") returns \"$(add_trailing_slash "th
 echo "add_trailing_slash(\"this/is/my/path/\") returns \"$(add_trailing_slash "this/is/my/path/")\""
 echo "add_trailing_slash(\"\") returns \"$(add_trailing_slash "")\""
 
+# if you run this from root it will remove the 08_paths prefix
+while IFS=, read -r filepath 
+do
+    new_path="${filepath#./08_paths}"
+    echo "file '$new_path'"
+done < <(find ./ -iname "*") 
+
+
 echo "End of script"
 
