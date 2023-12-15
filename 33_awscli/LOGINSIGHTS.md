@@ -18,8 +18,11 @@ aws logs describe-log-groups | jq -r '.[][] | .logGroupName'
 
 LOGGROUP=myloggroup
 
-# over two weeks
+# over two weeks (end time is required)
 QUERYID=$(aws logs start-query --log-group-name ${LOGGROUP} --start-time $(date -v-14d '+%s') --end-time $(date '+%s') --query-string "fields @timestamp, @message, @logStream, @log | filter @message like /EAI_AGAIN/ | sort @timestamp desc" | jq -r .queryId)
+
+# start from a specfic date and time
+QUERYID=$(aws logs start-query --log-group-name ${LOGGROUP} --start-time $(date -d "2023-12-14 12:00:00" +"%s") --end-time $(date '+%s') --query-string "fields @timestamp, @message, @logStream, @log | filter @message like /EAI_AGAIN/ | sort @timestamp desc" | jq -r .queryId)
 
 # use id to get logs 
 aws logs get-query-results --query-id $QUERYID | jq .
