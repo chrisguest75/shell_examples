@@ -30,6 +30,7 @@ Demonstrates some examples of using `jq` to process json files
   - [Extract Docker Environment Variable](#extract-docker-environment-variable)
   - [Decoding a JWT](#decoding-a-jwt)
   - [Array or not](#array-or-not)
+  - [Histograms](#histograms)
   - [Resources](#resources)
 
 Github [JQ](https://github.com/stedolan/jq) repo.  
@@ -180,6 +181,9 @@ jq '.pokemon | group_by(.candy) | map({"candy":.[0].candy, "count":length})' ./p
 
 # group names by candy type (map reduce)
 jq '[ .pokemon[] | {"key":.candy, "value":.name} ] | map([.] | from_entries) | reduce .[] as $o ({}; reduce ($o|keys)[] as $key (.; .[$key] += [$o[$key]] ))' ./pokedex.json
+
+# sum durations
+jq -s '[.[].duration0] | add' durations.json 
 ```
 
 ## Functions
@@ -388,9 +392,36 @@ jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "$MYTOKEN"
 
 ## Array or not
 
+Check if the input is an array or not.  
+
 ```sh
 # docker compose ps sometimes returns an object in an array but sometimes returns the object
 jq  '. | if type == "array" then .[0] else . end' 
+```
+
+## Histograms
+
+Create a count of objects between ranges.  
+
+```sh
+jq -s '
+def bucket_ranges: [
+  {min: 0, max: 1, label: "000-001 secs"},
+  {min: 1, max: 2, label: "001-002 secs"},
+  {min: 2, max: 5, label: "002-005 secs"},
+  {min: 5, max: 10, label: "005-010 secs"},
+  {min: 10, max: 20, label: "010-020 secs"},
+  {min: 20, max: 60, label: "020-060 secs"},
+  {min: 60, max: 600, label: "060-600 secs"},
+  {min: 600, max: 10000, label: "600-10000 secs"}
+];
+
+def bucketize($val):
+  bucket_ranges[] | select($val >= .min and $val < .max) | .label;
+
+# Apply bucketize to each objects duration0 field
+map(.duration0 | bucketize(.)) | group_by(.) | map({bucket: .[0], count: length})
+' durations.json | jq -c '.[]'
 ```
 
 ## Resources

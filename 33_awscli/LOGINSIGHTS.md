@@ -2,6 +2,15 @@
 
 Demonstrate how to use `loginsights` from the cli.  
 
+NOTES:
+
+* Limits on loginsights queries are limited to 10000 rows, but the limit has to be specified on the query. "| LIMIT 10000"  
+
+TODO:
+
+* Demonstrate an hourly chunked query.
+* https://github.com/gogama/incite
+
 ## Configure
 
 ```sh
@@ -23,7 +32,7 @@ STARTTIME=$(date -v-14d '+%s')
 # start from a specfic date and time
 STARTTIME=$(date -d "2023-12-14 12:00:00" +"%s")
 
-QUERYID=$(aws logs start-query --log-group-name ${LOGGROUP} --start-time $STARTTIME --end-time $(date '+%s') --query-string "fields @timestamp, @message, @logStream, @log | filter @message like /EAI_AGAIN/ | sort @timestamp desc" | jq -r .queryId)
+QUERYID=$(aws logs start-query --log-group-name ${LOGGROUP} --start-time $STARTTIME --end-time $(date '+%s') --query-string "fields @timestamp, @message, @logStream, @log | filter @message like /EAI_AGAIN/ | sort @timestamp desc | limit 10000" | jq -r .queryId)
 
 # use id to get logs 
 aws logs get-query-results --query-id $QUERYID | jq .
@@ -59,3 +68,4 @@ aws logs describe-queries --log-group-name /aws/ecs/containerinsights/$CLUSTERNA
 * CloudWatch Logs Insights query syntax [here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)  
 * Supported logs and discovered fields [here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html)
 * Diving into Amazon ECS task history with Container Insights [here](https://nathanpeck.com/diving-into-amazon-ecs-task-history-with-container-insights/)  
+* StartQuery API [here](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html#API_StartQuery_RequestSyntax)
