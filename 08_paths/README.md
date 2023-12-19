@@ -17,3 +17,7 @@ cd /
 $(pbpaste)
 popd
 ```
+
+## Resources
+
+* Bash Parameter Expansion [here](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html)  

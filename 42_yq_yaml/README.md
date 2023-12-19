@@ -69,6 +69,9 @@ yq e '(.embedded) |= sub("\${APIKEY}", "theapikey")' ./examples/replace.yaml
 # replace a value in an array
 yq e '(.service[]) |= sub("\${APIKEY}", "theapikey")' ./examples/replace.yaml
 
+# add a key value to an array
+yq e '.extraEnvVars += [{"name": "VERDACCIO_PORT", "value": "4873"}]' ./examples/replace.yaml
+
 # replace a value in a map
 yq e '(.datasources.jsonData[]) |= sub("\${AWS_ROLE_ARN}", "arn:aws:iam::0000000000000:role/myrole")' ./examples/replace.yaml
 
