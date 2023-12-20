@@ -16,3 +16,6 @@ datasources:
         authType: 'credentials'
         defaultRegion: 'us-east-1'
         profile: ''
+
+image:
+  repository: verdaccio/verdaccio

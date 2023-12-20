@@ -63,6 +63,9 @@ yq -P ./examples/broken.yaml
 # replace a simple value
 yq e '(.replacethis) |= "REPLACED"' ./examples/replace.yaml
 
+# replace multiple object values
+yq e '(.image) += {"repository": "docker.io/library/verdaccio.prometheus", "tag": "latest"}' ./examples/replace.yaml
+
 # replace a substring
 yq e '(.embedded) |= sub("\${APIKEY}", "theapikey")' ./examples/replace.yaml
 
