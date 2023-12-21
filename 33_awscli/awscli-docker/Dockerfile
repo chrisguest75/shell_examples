@@ -17,6 +17,7 @@ RUN curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv
     && unzip -q awscliv2.zip \ 
     && rm -f awscliv2.zip \
     && aws/install \
+    && rm -rf ./aws \
     && /usr/local/bin/aws --version
 
-ENTRYPOINT ["/usr/local/bin/aws"]
+ENTRYPOINT ["/usr/local/bin/aws", "--version"]

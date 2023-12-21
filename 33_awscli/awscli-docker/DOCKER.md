@@ -2,6 +2,16 @@
 
 Create a container containing AWS CLI and share credentials into it.  
 
+## Contents
+
+- [README](#readme)
+  - [Contents](#contents)
+  - [Build](#build)
+  - [Run (host profile)](#run-host-profile)
+  - [Run (configure internal profile)](#run-configure-internal-profile)
+  - [Troubleshooting](#troubleshooting)
+  - [Resources](#resources)
+
 ## Build
 
 ```sh
@@ -13,6 +23,8 @@ docker build --no-cache --progress=plain -t awscli .
 
 ```sh
 # run a command 
+export AWS_PROFILE=myprofile
+export AWS_REGION=us-east-1
 docker run --rm -it -v$(realpath ~/.aws):/root/.aws -e AWS_PROFILE=$AWS_PROFILE -e AWS_REGION=$AWS_REGION awscli s3 ls
 ```
 
@@ -35,8 +47,11 @@ aws s3 ls
 ## Troubleshooting
 
 ```sh
-# enter the container 
+# enter the container to investigate issues
 docker run --rm -it -v$(realpath ~/.aws):/root/.aws --entrypoint /bin/bash -e AWS_PROFILE=$AWS_PROFILE -e AWS_REGION=$AWS_REGION awscli
+
+# look at layer sizes and files.
+dive awscli
 ```
 
 ## Resources
