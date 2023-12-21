@@ -2,6 +2,21 @@
 
 Demonstrate how to use the `awscli` with ECR  
 
+## Table of contents
+
+- [Elastic Container Registry](#elastic-container-registry)
+  - [Table of contents](#table-of-contents)
+  - [Background](#background)
+  - [Useful content](#useful-content)
+  - [Login](#login)
+  - [Listing](#listing)
+  - [Pushing](#pushing)
+  - [Pull through cache](#pull-through-cache)
+    - [Create Cache (dockerhub)](#create-cache-dockerhub)
+    - [Immutability](#immutability)
+  - [Policies](#policies)
+  - [Resources](#resources)
+
 ## Background
 
 ECR, or Elastic Container Registry, is a service provided by Amazon Web Services (AWS) and has several notable features:
@@ -38,25 +53,10 @@ These features make ECR a powerful and versatile tool for managing Docker contai
 * Secrets Manager [here](SECRETS_MANAGER.md)  
 * Label Metadata Example [here](https://github.com/chrisguest75/docker_examples/blob/master/33_label_metadata/README.md)
 
-## Table of contents
-
-- [Elastic Container Registry](#elastic-container-registry)
-  - [Background](#background)
-  - [Useful content](#useful-content)
-  - [Table of contents](#table-of-contents)
-  - [Login](#login)
-  - [Listing](#listing)
-  - [Pushing](#pushing)
-  - [Pull through cache](#pull-through-cache)
-    - [Create Cache (dockerhub)](#create-cache-dockerhub)
-    - [Immutability](#immutability)
-  - [Resources](#resources)
-
 TODO:
 
-* Calculate number of images.  
 * Get tags
-* Get policies etc.
+* Creating policies etc.
 
 ## Login
 
@@ -202,6 +202,23 @@ oras manifest fetch registry-1.docker.io/privaterepo/labels:latest | jq .
 # get labels in cache
 oras manifest fetch-config 00000000000.dkr.ecr.us-east-1.amazonaws.com/docker.io/privaterepo/labels:latest | jq .
 oras manifest fetch  00000000000.dkr.ecr.us-east-1.amazonaws.com/docker.io/privaterepo/labels:latest | jq .
+```
+
+## Policies
+
+Using lifecycle policies we can remove old images. The policies can contain multiple rules that can be applied with a priority.  
+
+```sh
+export AWS_PROFILE=myprofile
+export AWS_REGION=eu-west-1
+export ACCOUNT_ID=$(aws --no-cli-pager ecr describe-registry | jq -r .registryId)
+aws ecr get-login-password | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+
+REPOSITORY=myimagename
+# unpack the escaped json rules document
+aws ecr get-lifecycle-policy --repository-name ${REPOSITORY} | jq -r .lifecyclePolicyText | jq .
+# see the number of active tags
+oras repository show-tags ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPOSITORY} | sort
 ```
 
 ## Resources
