@@ -7,6 +7,21 @@ Debian package repository example [README.md](../09_deb_pkg/README.md)
 TODO:
 
 * apt-utils
+* adequate oct linux https://manpages.org/adequate
+* Add docker examples - look at awscli 33_awscli/awscli-docker/Dockerfile.  
+
+## Contents
+
+- [README](#readme)
+  - [Contents](#contents)
+  - [APT](#apt)
+    - [List sources](#list-sources)
+    - [List keys](#list-keys)
+    - [Add and remove a source](#add-and-remove-a-source)
+    - [List contents of a apt package](#list-contents-of-a-apt-package)
+  - [DPKG](#dpkg)
+  - [HTTPS Sources](#https-sources)
+  - [Resources](#resources)
 
 ## APT
 
@@ -67,7 +82,7 @@ sudo apt edit-sources
 echo "deb https://deb.etcher.io stable etcher" | sudo tee /etc/apt/sources.list.d/balena-etcher.list
 ```
 
-### List contents of a apt package.
+### List contents of a apt package
 
 ```sh
 # install apt file 
