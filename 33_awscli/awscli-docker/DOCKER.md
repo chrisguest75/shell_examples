@@ -57,3 +57,4 @@ dive awscli
 ## Resources
 
 * AWS CLI Command Reference [here](https://docs.aws.amazon.com/cli/latest/index.html)
+* Install or update the latest version of the AWS CLI [here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
