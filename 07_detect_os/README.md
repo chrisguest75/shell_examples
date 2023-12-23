@@ -42,6 +42,9 @@ cat /proc/version
 # distro versions  
 cat /etc/os-release
 
+# show kernel compile options
+zcat /proc/config.gz
+
 # package versions
 apt list
 apt update

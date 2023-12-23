@@ -5,6 +5,7 @@ Demonstrate how `just` can be used like package.json scripts.
 NOTES:
 
 * It seems very fast at executing.  
+* It's a good alternative to using `package.json`
 
 TODO:
 
@@ -29,6 +30,8 @@ just --help
 ## Examples
 
 ### Shebang
+
+You can cheat putting a shebang at the top of the justfile to make it executable.  
 
 ```sh
 # the shebang works
@@ -61,6 +64,8 @@ just -f ./example.justfile echovars
 
 ### Docker Example
 
+Use just to script building and running containers.  
+
 ```sh
 # list recipes
 just -f ./docker.justfile
@@ -68,8 +73,11 @@ just -f ./docker.justfile
 # run list-images
 just -f ./docker.justfile list-images
 
-# run build
+# build container
 just -f ./docker.justfile build
+
+# run container
+just -f ./docker.justfile run
 ```
 
 ## Resources

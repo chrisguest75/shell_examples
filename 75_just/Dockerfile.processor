@@ -7,6 +7,7 @@ WORKDIR /scratch
 COPY --chmod=755 <<EOF /bin/show_architecture.sh
 #!/usr/bin/env bash
 cat /proc/version
+zcat /proc/config.gz
 lscpu
 uname -a    
 EOF
