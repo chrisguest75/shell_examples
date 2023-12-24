@@ -2,6 +2,13 @@
 
 Demonstrate how to use the `awscli` with CloudFront  
 
+TODO:
+
+* Creating invalidations for files.  
+* query parameter caching.  
+* Origin Access Identity (OAI)
+* Origin Access Control (OAC)
+  
 ## Table of contents
 
 - [CLOUDFRONT](#cloudfront)
@@ -9,6 +16,9 @@ Demonstrate how to use the `awscli` with CloudFront
   - [Reason](#reason)
   - [Listing](#listing)
   - [Iteration](#iteration)
+  - [Range Requests](#range-requests)
+  - [Detecting directory listing permissions](#detecting-directory-listing-permissions)
+    - [Using curl](#using-curl)
   - [Resources](#resources)
 
 ## Reason
@@ -31,11 +41,6 @@ Key features of Amazon CloudFront include:
 
 CloudFront is used by many businesses to accelerate content delivery, ensure high availability, protect against web attacks, and to deliver a better user experience. The service can serve a wide range of web content, including HTML pages, JavaScript files, stylesheets, images, and video.  
 
-TODO:
-
-* Creating invalidations for files.  
-* query parameter caching.  
-
 NOTES:
 
 * To get directory listing on an S3 bucket through CloudFront you have to enable query parameters to be passed through. Otherwise only the root page is enabled.  
@@ -43,6 +48,9 @@ NOTES:
 ## Listing
 
 ```sh
+# list distribution ids 
+aws --no-cli-pager cloudfront list-distributions | jq '.DistributionList.Items[] | .Id'
+
 # find a particular distribution
 aws --no-cli-pager cloudfront list-distributions | jq '.DistributionList.Items[] | select(.Id == "XXXXXXXXXXXX")'
 
@@ -76,15 +84,65 @@ NOTE: `content-length` will be the full length of the binary.
 ```sh
 # 1mb file
 dd if=/dev/urandom of=random.bin bs=1024 count=1024
+
 # upload to bucket
 aws s3 cp ./random.bin s3://mybucket/random.bin
+
 # pull a range of data
-curl -s -H "Range: bytes=32-195" http://mybucket.s3-website-eu-west-1.am
-azonaws.com/random.bin | xxd
+curl -s -H "Range: bytes=32-195" http://mybucket.s3-website-eu-west-1.amazonaws.com/random.bin | xxd
+
 # find distribution
 aws --no-cli-pager cloudfront list-distributions | jq '.DistributionList.Items[] | [.DomainName, .Origins.Items[].DomainName ]'
+
 # pull a range through cloudfront
 curl -s -H "Range: bytes=32-195" http://mydistribution.cloudfront.net/random.bin | xxd
+```
+
+## Detecting directory listing permissions
+
+NOTES:
+
+* Only under exceptional circumstances should you allow public list permissions.  
+* When using OAI (Origin Access Identity) the request will be impresonated as the owner - if the owner has list permissions and no `index.html` exists it will list files.  
+* If the origin is used as a website, then directory listing is not possible even with quert forwarding. Therefore, to test directory listing through Cloudfront the origin should be the bucket not the web url.  
+
+TODO:
+
+* Setting up OAI.
+
+REF: [S3.md#listing-permissions](S3.md#listing-permissions)  
+
+```sh
+export BUCKET_NAME=mybucket
+aws --no-cli-pager cloudfront list-distributions | jq '.DistributionList.Items[] | select(.Origins.Items[0].Id | capture("'${BUCKET_NAME}'")) | [.DomainName, .Origins.Items[].DomainName ]' 
+
+export BASE_URL=https://xxxxxxxxxxxxx.cloudfront.net
+curl -sL -vvv "${BASE_URL}/random.bin" | xxd
+
+export MAXKEYS=3
+curl -sL -vvv "${BASE_URL}/?max-keys=$MAXKEYS"
+```
+
+### Using curl
+
+You can use curl to iterate a public bucket.  
+
+```sh
+# iterating directory 
+export MARKER=
+export PREFIX=/
+export MAXKEYS=3
+# for cloudfront to work you need query parameter forwarding enabled.
+# loop here (repeat next three lines)
+curl -s "$BASE_URL/?max-keys=$MAXKEYS" | xmllint --format - 
+
+curl -s "$BASE_URL/?prefix=$PREFIX&max-keys=$MAXKEYS&marker=$MARKER" | xmllint --format - > ./out/listing.xml
+curl -s "$BASE_URL/?max-keys=$MAXKEYS" | xmllint --format - > ./out/listing.xml
+yq e -oy '.ListBucketResult.Contents[].Key' ./out/listing.xml
+MARKER=$(yq e -oy '.ListBucketResult.Contents[-1].Key' ./out/listing.xml)
+
+# download a file to invoke logs
+curl -s "$BASE_URL/$MARKER" | file -  
 ```
 
 ## Resources
@@ -92,3 +150,5 @@ curl -s -H "Range: bytes=32-195" http://mydistribution.cloudfront.net/random.bin
 * Force CloudFront distribution/file update [here](https://stackoverflow.com/questions/1268158/force-cloudfront-distribution-file-update)
 * Caching content based on query string parameters [here](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html)
 * Slashing CloudFront change propagation times in 2020 – recent changes and looking forward [here](https://aws.amazon.com/blogs/networking-and-content-delivery/slashing-cloudfront-change-propagation-times-in-2020-recent-changes-and-looking-forward/)  
+* Restricting access to an Amazon S3 origin [here](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
+* I’m using an S3 REST API endpoint as the origin of my CloudFront distribution. Why am I getting 403 Access Denied errors? [here](https://repost.aws/knowledge-center/s3-rest-api-cloudfront-error-403)
