@@ -2,8 +2,8 @@
 
 Examples for working with DNS.  
 
-AWS Route 53 querying examples can be found [here](../33_awscli/ROUTE_53.md)  
-An example CoreDNS setup for testing [here](https://github.com/chrisguest75/sysadmin_examples/blob/master/07_coredns_tcpdump/README.md)  
+* AWS Route 53 querying examples can be found [here](../33_awscli/ROUTE_53.md)  
+* An example CoreDNS setup for testing [here](https://github.com/chrisguest75/sysadmin_examples/blob/master/07_coredns_tcpdump/README.md)  
 
 ## Tools
 
@@ -63,6 +63,13 @@ NXDOMAIN stands for "Non-Existent Domain." It is a DNS response code that the do
 
 * If missing an answer section when using `dig`.  Check if the DNS server is public or private? Then connect to the VPN if private. 😊  
 
+## DNS Server
+
+```sh
+# macos get my current dns server
+scutil --dns
+```
+
 ## Dig
 
 ```sh
@@ -88,6 +95,12 @@ open https://ipv6.google.com/
 # look for AAAA records
 dig ipv6.google.com
 dig www.google.com AAAA
+```
+
+## nslookup
+
+```sh
+nslookup google.com
 ```
 
 ## Resources
