@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="4" errors="0" failures="2">
+    <testcase id="./tests/hurl/listing_specified_path.hurl" name="./tests/hurl/listing_specified_path.hurl" time="0.051"/>
+    <testcase id="./tests/hurl/md5_default.hurl" name="./tests/hurl/md5_default.hurl" time="0.005">
+      <failure>Assert status code
+  --&gt; ./tests/hurl/md5_default.hurl:10:6
+   |
+10 | HTTP 200
+   |      ^^^ actual value is &lt;400&gt;
+   |</failure>
+    </testcase>
+    <testcase id="./tests/hurl/md5_specified_path.hurl" name="./tests/hurl/md5_specified_path.hurl" time="0.004">
+      <failure>Assert status code
+  --&gt; ./tests/hurl/md5_specified_path.hurl:14:6
+   |
+14 | HTTP 200
+   |      ^^^ actual value is &lt;400&gt;
+   |</failure>
+    </testcase>
+    <testcase id="tests/hurl/listing_default.hurl" name="tests/hurl/listing_default.hurl" time="0.002"/>
+  </testsuite>
+  <testsuite tests="4" errors="0" failures="2">
+    <testcase id="./tests/hurl/listing_specified_path.hurl" name="./tests/hurl/listing_specified_path.hurl" time="0.052"/>
+    <testcase id="./tests/hurl/md5_default.hurl" name="./tests/hurl/md5_default.hurl" time="0.004">
+      <failure>Assert status code
+  --&gt; ./tests/hurl/md5_default.hurl:10:6
+   |
+10 | HTTP 200
+   |      ^^^ actual value is &lt;400&gt;
+   |</failure>
+    </testcase>
+    <testcase id="./tests/hurl/md5_specified_path.hurl" name="./tests/hurl/md5_specified_path.hurl" time="0.005">
+      <failure>Assert status code
+  --&gt; ./tests/hurl/md5_specified_path.hurl:14:6
+   |
+14 | HTTP 200
+   |      ^^^ actual value is &lt;400&gt;
+   |</failure>
+    </testcase>
+    <testcase id="tests/hurl/listing_default.hurl" name="tests/hurl/listing_default.hurl" time="0.005"/>
+  </testsuite>
+</testsuites>
