@@ -2,6 +2,10 @@
 
 Demonstrate how `just` can be used like package.json scripts.  
 
+## Background
+
+`npm` has the concept of scripts that developers use to provide common tasks such as "build" and "run".  But when you're not in that ecosystem such as with `terraform` or `docker` then you find having to provide readme with quite complicated build commands or custom scripts. `just` allows a simple DSL to provide this functionality.  
+
 NOTES:
 
 * It seems very fast at executing.  

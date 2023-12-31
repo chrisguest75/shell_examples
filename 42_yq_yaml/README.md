@@ -4,6 +4,22 @@ Demonstrates some examples of using `yq` to process yaml files
 
 It also can process xml [here](../52_xml/README.md)  
 
+## Contents
+
+- [README](#readme)
+  - [Contents](#contents)
+  - [Preeqs](#preeqs)
+  - [Simple](#simple)
+  - [Anchors](#anchors)
+  - [Merging](#merging)
+  - [Validation](#validation)
+  - [Replace values](#replace-values)
+  - [Looping overs arrays in bash](#looping-overs-arrays-in-bash)
+  - [Conversion](#conversion)
+    - [JSON](#json)
+  - [XML](#xml)
+  - [Resources](#resources)
+
 ## Preeqs
 
 ```sh
@@ -93,9 +109,24 @@ Take an array defined in yaml and loop over it in bash.
 
 ## Conversion
 
+### JSON
+
 ```sh
 # read in json and output yaml
 yq e --output-format=yaml ./json/images.json   
+```
+
+## XML
+
+When converting to xml we're flattening attributes into the node heirarchy.  
+
+```sh
+# xml to json (prettify the xml)
+cat ./xml/results.hurl.xml | xmllint --format - | sponge ./xml/results.hurl.xml
+yq e --output-format=json ./xml/results.hurl.xml
+
+# get most recent stats from test results (TODO: replace the jq bit with yq)
+yq e --output-format=json ./xml/results.hurl.xml | jq -c '.testsuites.testsuite[-1] | {"total":."+@tests", "errors": ."+@errors","failures":."+@failures"}'
 ```
 
 ## Resources
