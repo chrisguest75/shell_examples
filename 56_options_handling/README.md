@@ -1,6 +1,6 @@
 # README
 
-Demonstrate how to use options in shell scripts.  
+Demonstrate how to use shell options in shell scripts.  
 
 - [README](#readme)
   - [Bash](#bash)

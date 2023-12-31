@@ -65,6 +65,7 @@ A list of things still to try and investigate [TODO.md](./TODO.md)
   - [54 - date handling](#54---date-handling)
   - [55 - vim setup](#55---vim-setup)
   - [56 - options handling](#56---options-handling)
+  - [58 - gstreamer](#58---gstreamer)
   - [59 - monitoring folders](#59---monitoring-folders)
   - [60 - creating HLS streams from segments](#60---creating-hls-streams-from-segments)
   - [61 - curl](#61---curl)
@@ -83,6 +84,7 @@ A list of things still to try and investigate [TODO.md](./TODO.md)
   - [75 - just](#75---just)
   - [76 - links](#76---links)
   - [78 - dns](#78---dns)
+  - [79 - hurl](#79---hurl)
   - [👀 Resources](#-resources)
   - [Shellchecking](#shellchecking)
   - [Pre-commit hook (shellcheck)](#pre-commit-hook-shellcheck)
@@ -385,8 +387,13 @@ Steps [README.md](./55_vim/README.md)
 
 ## 56 - options handling
 
-Demonstrate how to use options in shell.  
+Demonstrate how to use shell options in shell scripts.  
 Steps [README.md](./56_options_handling/README.md)  
+
+## 58 - gstreamer
+
+Demonstrate some basic `gstreamer` examples  
+Steps [README.md](./58_gstreamer/README.md)  
 
 ## 59 - monitoring folders
 
@@ -477,6 +484,11 @@ Steps [README.md](./76_links/README.md)
 
 Examples for working with DNS.  
 Steps [README.md](./78_dns/README.md)  
+
+## 79 - hurl
+
+Use hurl to test an API.  
+Steps [README.md](./79_hurl/README.md)  
 
 ## 👀 Resources
 
