@@ -2,6 +2,21 @@
 
 Demonstrate how to use journalctl to discover logs
 
+## Contents
+
+- [README](#readme)
+  - [Contents](#contents)
+  - [Existing logs](#existing-logs)
+  - [Configuration and space](#configuration-and-space)
+  - [Loglevels -p ](#loglevels--p-)
+  - [Logs for boots](#logs-for-boots)
+  - [Logs for services](#logs-for-services)
+  - [Logs for kernel (including ufw)](#logs-for-kernel-including-ufw)
+  - [Logs for audit (apparmor)](#logs-for-audit-apparmor)
+  - [Why are logs for apt and dpkg not in journald?](#why-are-logs-for-apt-and-dpkg-not-in-journald)
+  - [Maintenance](#maintenance)
+  - [Resources](#resources)
+
 ## Existing logs
 
 ```sh
@@ -83,6 +98,7 @@ journalctl -b 0 -k -p 4
 ```
 
 ## Logs for audit (apparmor)
+
 ```sh
 sudo journalctl _TRANSPORT=audit
 ```
