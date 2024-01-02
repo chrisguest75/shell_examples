@@ -89,6 +89,11 @@ journalctl -b -u [servicename].service --no-pager
 
 # output the logs as json
 journalctl -u [servicename].service --no-pager --output=json
+
+# times
+journalctl --since today -u [servicename].service --no-pager --output=json
+journalctl --since "1 hour ago" --no-pager --output=json 
+journalctl --since "2023-12-01 00:00:00" --until "2023-12-02 00:00:00" --no-pager --output=json 
 ```
 
 ## Logs for kernel (including ufw)
