@@ -38,7 +38,6 @@ git config --local user.email "chrisguest75@users.noreply.github.com"
 git config --local user.name "Chris Guest"
 ```
 
-
 ## Upgrade
 
 ```sh
@@ -87,6 +86,9 @@ code $(git root)
 ## Examining repos
 
 ```sh
+# count number of commits
+git rev-list HEAD --count
+
 # Files changed since yesterday on current branch.
 git effort -- --since='yesterday'
 git effort -- --since='1 month ago'
