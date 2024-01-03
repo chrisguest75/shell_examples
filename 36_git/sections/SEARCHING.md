@@ -2,6 +2,17 @@
 
 Demonstrate some examples of searching for commits.  
 
+## Contents
+
+- [SEARCHING](#searching)
+  - [Contents](#contents)
+  - [Authors](#authors)
+  - [Finding strings](#finding-strings)
+  - [Find commits](#find-commits)
+  - [Dates](#dates)
+  - [Finding files](#finding-files)
+  - [Iterate revision history](#iterate-revision-history)
+
 ## Authors
 
 ```sh

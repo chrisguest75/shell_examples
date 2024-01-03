@@ -2,6 +2,21 @@
 
 Quick walkthrough of switching `bases` on a branch.  
 
+## Contents
+
+- [REBASING](#rebasing)
+  - [Contents](#contents)
+  - [Reason](#reason)
+    - [Why rebasing?](#why-rebasing)
+  - [Create repo](#create-repo)
+    - [Add files to default branch](#add-files-to-default-branch)
+    - [Create feature branch](#create-feature-branch)
+    - [Create pipeline branch](#create-pipeline-branch)
+    - [Rebase pipeline to the feature](#rebase-pipeline-to-the-feature)
+    - [Rebase pipeline back to main](#rebase-pipeline-back-to-main)
+  - [Merging into main and maintaining other branches](#merging-into-main-and-maintaining-other-branches)
+  - [Resources](#resources)
+
 ## Reason
 
 To test a pipeline change with multiple different sources.  You may want to switch the base from master/main to features.  

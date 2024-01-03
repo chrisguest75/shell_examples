@@ -2,6 +2,17 @@
 
 Demonstrate how to use `git-crypt` on a repo
 
+## Contents
+
+- [GIT-CRYPT](#git-crypt)
+  - [Contents](#contents)
+  - [Prereqs](#prereqs)
+  - [Enable](#enable)
+  - [Encrypting key file](#encrypting-key-file)
+  - [Rotate key git-crypt](#rotate-key-git-crypt)
+  - [Unlock the repo with the wrong key](#unlock-the-repo-with-the-wrong-key)
+  - [Resources](#resources)
+
 TODO:
 
 * Push to github and see encryption

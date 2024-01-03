@@ -2,19 +2,31 @@
 
 Demonstrates some examples of using `git` queries and tools  
 
+## Contents
+
+- [README](#readme)
+  - [Contents](#contents)
+  - [Sections](#sections)
+  - [Installing a new machine](#installing-a-new-machine)
+  - [Upgrade](#upgrade)
+  - [Git Extras](#git-extras)
+  - [Open repo in code](#open-repo-in-code)
+  - [Examining repos](#examining-repos)
+  - [Clean](#clean)
+  - [Resources](#resources)
+
 TODO:
 
-* Gitlab cli [glab](https://glab.readthedocs.io/en/latest/)  
-* [glab source](https://github.com/profclems/glab)
 * Deleting branches
-* git filter-repo
+* git filter-repo - https://github.com/newren/git-filter-repo
 * git reset --hard origin/feature reset against a new pushed version of a branch.
 * .gitattributes https://git-scm.com/docs/gitattributes
 * git update-index --assume-unchanged sites/default/settings.php
 * git check-ignore vscode/list_extensions.sh  
 * git bisect example
+* https://git-scm.com/docs/git-notes
 
-## Files
+## Sections
 
 * FAQS - [FAQS.md](./sections/FAQS.md)  
 * Rebasing fun - [REBASING_FUN.md](./sections/REBASING_FUN.md)  
@@ -94,9 +106,23 @@ git effort -- --since='yesterday'
 git effort -- --since='1 month ago'
 ```
 
+## Clean
+
+To restore a repo to a fresh clone.  
+
+```sh
+# -x Don’t use the standard ignore rules
+# -d Specify -d to have it recurse into such directories
+# -f Force
+git clean -xfd
+```
+
 ## Resources
 
+* Git --fast-version-control [here](https://git-scm.com/)
 * [git-extras](https://github.com/tj/git-extras/blob/master/Commands.md) are a really good set of useful supplementary commands.  
 * [github cli](https://github.com/cli/cli) tool that supports creating PRs directly from the shell  
 * Git Release Notes [here](https://github.com/git/git/tree/master/Documentation/RelNotes)  
 * Git blog from github [here](https://github.blog/tag/git/)  
+* Git Rev News [here](https://git.github.io/rev_news/)
+* Learn Git Branching [here](https://learngitbranching.js.org/)
