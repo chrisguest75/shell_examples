@@ -9,9 +9,23 @@ It's also a repository used for collecting various shell related tooling.
 
 A list of things still to try and investigate [TODO.md](./TODO.md)  
 
-NOTE: This repo has switched to [conventional commits](https://www.conventionalcommits.org/en/v1.0.0). It requires `pre-commit` and `commitzen` to help with controlling this.  
+## Conventional Commits
+
+NOTE: This repo has switched to [conventional commits](https://www.conventionalcommits.org/en/v1.0.0). It requires `pre-commit` and `commitizen` to help with controlling this.  
+
+```sh
+# install pre-commmit (prerequisite for commitizen)
+brew install pre-commit
+brew install commitizen
+# conventional commits extension
+code --install-extension vivaxy.vscode-conventional-commits
+```
+
+## Contents
 
 - [Shell Examples and Demos](#shell-examples-and-demos)
+  - [Conventional Commits](#conventional-commits)
+  - [Contents](#contents)
   - [1️⃣ Prequisites](#1️⃣-prequisites)
   - [❔Shell Help](#shell-help)
   - [ℹ️ Useful commands](#ℹ️-useful-commands)
