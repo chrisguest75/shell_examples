@@ -19,6 +19,11 @@
 git show head --name-only
 git show master~4 --name-only
 git show master^1 --name-only
+
+# try this in a local git init repo vs a cloned repo.  
+# it fails in a cloned repo.
+git log origin/HEAD..HEAD -n 1 
+
 ```
 
 ## How do I know what changes were in a commit?

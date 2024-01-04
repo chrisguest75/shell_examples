@@ -25,6 +25,7 @@ TODO:
 * git check-ignore vscode/list_extensions.sh  
 * git bisect example
 * https://git-scm.com/docs/git-notes
+* Do some tests on HEAD.  git log HEAD -n 1, git log origin/HEAD -n 1. Fixing `git log origin/HEAD..HEAD -n 1` missing `git remote set-head origin -a` https://learnku.com/articles/71493
 
 ## Sections
 

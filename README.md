@@ -9,6 +9,8 @@ It's also a repository used for collecting various shell related tooling.
 
 A list of things still to try and investigate [TODO.md](./TODO.md)  
 
+NOTE: This repo has switched to [conventional commits](https://www.conventionalcommits.org/en/v1.0.0). It requires `pre-commit` and `commitzen` to help with controlling this.  
+
 - [Shell Examples and Demos](#shell-examples-and-demos)
   - [1️⃣ Prequisites](#1️⃣-prequisites)
   - [❔Shell Help](#shell-help)
