@@ -12,18 +12,20 @@ contents based on the pointer file, and a "clean" filter to create a new version
 
 NOTES:
 
-* It was enabled by default on gitlab.  
-* It seems quite seamless and transparent.  
-* Gitlab shows a little icon LFS next to the filename.  
+* When creating you have ot use `lfs install`
+* LFS support was enabled by default on gitlab.  
+* Usage seems seamless and transparent.  
+* Gitlab shows an `LFS` icon next to the filename.  
+* Cloning an LFS eanbled repo with plain git will leave pointer files.  
 
 TODO:
 
-* Tests; 
+* Tests
   * where are the files stored?
   * switching branches with changes.
 * Do they get backed up?
 * How do I get versions?
-* Where are the cached files stored?
+* Where are the files locally cached stored?
 
 ## Prereqs
 
@@ -50,8 +52,8 @@ git lfs ls-files
 
 git add .
 git commit -m "testing lfs"
-
 git push 
+
 git lfs env   
 
 git lfs logs last
@@ -59,6 +61,51 @@ git lfs status
 
 # get info about a particular file. 
 git lfs pointer --file ./assets2/scrolling_24fps_audiomux.mp4
+```
+
+## Docker
+
+REF: [github.com/chrisguest75/docker_examples/57_ssh_build_with_sshagent](https://github.com/chrisguest75/docker_examples/tree/master/57_ssh_build_with_sshagent)  
+
+### Repos
+
+```sh
+# http
+REPO=https://github.com/chrisguest75/shell_examples.git
+DOMAIN=github.com
+# public ssh
+REPO=git@github.com:chrisguest75/shell_examples.git
+DOMAIN=github.com
+# private ssh
+REPO=git@github.com:chrisguest75/private_repo.git
+DOMAIN=github.com
+REPO=git@gitlab.private.io:Trint/private.com/rnd/private_repo.git
+DOMAIN=gitlab.private.io
+```
+
+### Git
+
+```sh
+# clone using mounted key
+docker build --no-cache --ssh default --progress=plain -t dockergit --build-arg REPO=${REPO} --build-arg DOMAIN=${DOMAIN} -f ./docker/Dockerfile.git ./docker
+
+# repo will be cloned
+docker run -it --entrypoint /bin/bash dockergit
+```
+
+### Git LFS
+
+```sh
+# clone using mounted key
+docker build --no-cache --ssh default --progress=plain -t dockerlfs --build-arg REPO=${REPO} --build-arg DOMAIN=${DOMAIN} -f ./docker/Dockerfile.lfs ./docker
+
+# repo will be cloned
+docker run -it --entrypoint /bin/bash dockerlfs
+
+# using key shared in 
+docker run -v ~/.ssh:/root/.ssh -it --entrypoint /bin/bash dockerlfs
+eval "$(ssh-agent -s)"
+git clone ${REPO}
 ```
 
 ## Resources
@@ -69,3 +116,4 @@ git lfs pointer --file ./assets2/scrolling_24fps_audiomux.mp4
 * An open source Git extension for versioning large files [here](https://git-lfs.github.com/)
 * GitHub limits the size of files allowed in repositories. To track files beyond this limit, you can use Git Large File Storage.[here](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage)
 * Where are git-lfs files stored? [here](https://stackoverflow.com/questions/34181356/where-are-git-lfs-files-stored)
+* Getting started with Git LFS [here](https://about.gitlab.com/blog/2017/01/30/getting-started-with-git-lfs-tutorial/)

@@ -1,0 +1,26 @@
+# syntax=docker/dockerfile:1.4
+FROM ubuntu:23.04 AS builder
+
+ARG REPO=https://github.com/chrisguest75/shell_examples.git
+ARG DOMAIN=github.com
+
+ARG DEBIAN_FRONTEND=noninteractive
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
+RUN apt-get update && apt-get install zsh curl git git-lfs openssh-client nano locales -y 
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8  
+
+ENV REPO=$REPO
+ENV DOMAIN=$DOMAIN
+WORKDIR /scratch
+
+RUN --mount=type=ssh ssh-add -L
+
+# add to known hosts 
+RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan ${DOMAIN} >> ~/.ssh/known_hosts
+RUN cat ~/.ssh/known_hosts
+
+RUN --mount=type=ssh git clone $REPO
