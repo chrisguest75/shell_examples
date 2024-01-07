@@ -79,7 +79,7 @@ DOMAIN=github.com
 # private ssh
 REPO=git@github.com:chrisguest75/private_repo.git
 DOMAIN=github.com
-REPO=git@gitlab.private.io:Trint/private.com/rnd/private_repo.git
+REPO=git@gitlab.private.io:private/private.com/org/private_repo.git
 DOMAIN=gitlab.private.io
 ```
 
