@@ -37,7 +37,7 @@ code --install-extension vivaxy.vscode-conventional-commits
   - [05 - Strings](#05---strings)
   - [06 - Restricted bash shell](#06---restricted-bash-shell)
   - [07 - OS Detection](#07---os-detection)
-  - [08 - Paths](#08---paths)
+  - [08 - Paths Testing](#08---paths-testing)
   - [09 - Debian packaging](#09---debian-packaging)
   - [10 - Functions](#10---functions)
   - [11 - Man pages](#11---man-pages)
@@ -186,10 +186,10 @@ Steps [README.md](./06_restricted_bash/README.md)
 Demonstrate how to detect the OS type in script to change parameters to commands.  
 Steps [README.md](./07_detect_os/README.md)  
 
-## 08 - Paths
+## 08 - Paths Testing
 
 Demonstrates ways of manipulating paths  
-Steps [README.md](./08_paths/README.md)  
+Steps [README.md](./08_paths_testing/README.md)  
 
 ## 09 - Debian packaging
 

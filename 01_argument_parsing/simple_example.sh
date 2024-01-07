@@ -11,14 +11,15 @@ function help() {
 NAME
     $SCRIPT_NAME - Example of argument parsing
 
-SYNOPSIS 
+SYNOPSIS
     $SCRIPT_NAME [options]
 
 OPTIONS
     -h --help                show this help
+    -a --action              [anything]
 
 EXAMPLES
-    $SCRIPT_NAME --action=ps 
+    $SCRIPT_NAME --action=ps
 
 EOF
 }
@@ -27,18 +28,28 @@ EOF
 if [ -z "$@" ]; then
     help
     exit 0
-fi 
+fi
 
+ACTION=""
 for i in "$@"
 do
 case $i in
     -h|--help)
         help
         exit 0
-    ;; 
+    ;;
+    -a=*|--action=*)
+      ACTION="${i#*=}"
+      shift # past argument=value
+    ;;
 esac
-done    
+done
 
-# do work here
-ps -a
+if [[ -z ${ACTION} ]]; then
+    echo "Action is empty" && exit 1
+else
+  echo "Action is ${ACTION}"
+  # do work here
+  ps -a
+fi
 
