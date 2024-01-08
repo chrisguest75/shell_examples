@@ -73,8 +73,20 @@ for file in ./frames/headlooktest_*.jpg; do
 done
 ```
 
+## Image Difference
+
+Compare two images for differences.  
+
+```sh
+# highlight mask of where differences are
+compare ./out/image1.png ./out/image2.png -compose src diff.png
+
+# subtract the differences
+magick composite ./out/image1.png ./out/image2.png -compose difference diff_magick.png
+```
+
 ## Resources
 
 * A lot of example scripts [here](http://www.fmwconcepts.com/imagemagick/magicwand/index.php)  
 * An example set of edge detections [here](https://blog.jiayu.co/2019/05/edge-detection-with-imagemagick/)
-
+* Image comparison [here](https://imagemagick.org/Usage/compare/)

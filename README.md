@@ -101,6 +101,9 @@ code --install-extension vivaxy.vscode-conventional-commits
   - [76 - links](#76---links)
   - [78 - dns](#78---dns)
   - [79 - hurl](#79---hurl)
+  - [80 - parallel](#80---parallel)
+  - [81 - gpu](#81---gpu)
+  - [82 - clipboard](#82---clipboard)
   - [👀 Resources](#-resources)
   - [Shellchecking](#shellchecking)
   - [Pre-commit hook (shellcheck)](#pre-commit-hook-shellcheck)
@@ -505,6 +508,21 @@ Steps [README.md](./78_dns/README.md)
 
 Use hurl to test an API.  
 Steps [README.md](./79_hurl/README.md)  
+
+## 80 - parallel
+
+Demonstrate how to use `parallel`  
+Steps [README.md](./80_parallel/README.md)  
+
+## 81 - gpu
+
+Demonstrate how to interrogate and use GPU on OS platforms.  
+Steps [README.md](./81_gpu/README.md)  
+
+## 82 - clipboard
+
+Examples of using clipboard in the shell  
+Steps [README.md](./82_clipboard/README.md)  
 
 ## 👀 Resources
 

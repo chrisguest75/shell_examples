@@ -1,5 +1,7 @@
 # GPU
 
+Demonstrate how to interrogate and use GPU on OS platforms.  
+
 ## Terminology
 
 - CUDA - Compute Unified Device Architecture
