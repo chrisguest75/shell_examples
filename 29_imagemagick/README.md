@@ -85,6 +85,24 @@ compare ./out/image1.png ./out/image2.png -compose src diff.png
 magick composite ./out/image1.png ./out/image2.png -compose difference diff_magick.png
 ```
 
+## Split and combine channels
+
+```sh
+mkdir ./out
+
+# show colorspaces 
+convert -list colorspace   
+convert -list channel   
+
+# split channels
+convert source_image.jpg -colorspace YUV -sampling-factor 4:2:2 -separate ./out/YUV.png
+
+# combine channels
+convert ./out/YUV-0.png ./out/YUV-1.png ./out/YUV-2.png -channel RGB -combine ./out/combined.png
+
+convert ./out/YUV-0.png -channel Y ./out/YUV-1.png -channel Lightness ./out/YUV-2.png -channel Luminance -combine ./out/combined.png
+```
+
 ## Resources
 
 * A lot of example scripts [here](http://www.fmwconcepts.com/imagemagick/magicwand/index.php)  
