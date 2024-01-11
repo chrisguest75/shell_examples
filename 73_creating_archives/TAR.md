@@ -2,6 +2,8 @@
 
 A tar file is not a compressed file; it's a collection or concatenation of files within a single file without any compression. It simply appends each file end-to-end without any additional metadata except for file names and file sizes.  
 
+## Archive
+
 ```sh
 man tar 
 
@@ -17,9 +19,20 @@ EOF
 
 # create a tar from a list of files
 tar -cvf ./out/test.tar -T ./in/files.txt
+```
 
+## List
+
+```sh
+tar -tf ././out/test.tar
+```
+
+## Unarchive
+
+```sh
 mkdir -p ./out/test/test
 
+# strip 
 tar --strip-components=1 --directory=./out/ -xzvf ./out/test.tar
 
 # change directory

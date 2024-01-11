@@ -6,7 +6,13 @@ gzip is designed to compress single files. If you want to compress multiple file
 # compress
 gzip -S .gzip file
 
-# decompress
+# list contents
+gzip -l file.tar.gz
+
+# unpack a .tar.gz to a tar. 
+gzip -d file.tar.gz
+
+# decompress (on mac)
 gunzip -S .gzip ./file.gzip  
 ```
 
