@@ -96,11 +96,15 @@ convert -list channel
 
 # split channels
 convert source_image.jpg -colorspace YUV -sampling-factor 4:2:2 -separate ./out/YUV.png
+convert source_image.jpg -colorspace RGB -sampling-factor 4:4:4 -separate ./out/RGB.png
 
 # combine channels
 convert ./out/YUV-0.png ./out/YUV-1.png ./out/YUV-2.png -channel RGB -combine ./out/combined.png
 
-convert ./out/YUV-0.png -channel Y ./out/YUV-1.png -channel Lightness ./out/YUV-2.png -channel Luminance -combine ./out/combined.png
+convert ./out/YUV-0.png -channel Luminance ./out/YUV-1.png -channel Lightness ./out/YUV-2.png -channel Luminance -combine ./out/combined.png
+
+convert ./out/RGB-0.png -channel R ./out/RGB-1.png -channel G ./out/RGB-2.png -channel B -combine ./out/combined-rgb.png
+
 ```
 
 ## Resources
