@@ -85,30 +85,21 @@ compare ./out/image1.png ./out/image2.png -compose src diff.png
 magick composite ./out/image1.png ./out/image2.png -compose difference diff_magick.png
 ```
 
-## Split and combine channels
+## Zoom
 
 ```sh
-mkdir ./out
-
-# show colorspaces 
-convert -list colorspace   
-convert -list channel   
-
-# split channels
-convert source_image.jpg -colorspace YUV -sampling-factor 4:2:2 -separate ./out/YUV.png
-convert source_image.jpg -colorspace RGB -sampling-factor 4:4:4 -separate ./out/RGB.png
-
-# combine channels
-convert ./out/YUV-0.png ./out/YUV-1.png ./out/YUV-2.png -channel RGB -combine ./out/combined.png
-
-convert ./out/YUV-0.png -channel Luminance ./out/YUV-1.png -channel Lightness ./out/YUV-2.png -channel Luminance -combine ./out/combined.png
-
-convert ./out/RGB-0.png -channel R ./out/RGB-1.png -channel G ./out/RGB-2.png -channel B -combine ./out/combined-rgb.png
-
+# zoom and morph
+convert ./second_image.jpg ./source_image.jpg -morph 30 \
+        -duplicate 1,-2-1 -coalesce \
+        -gravity center -extent 640x480 \
+        -set delay '%[fx:(t>0&&t<n-1)?10:60]' \
+        -loop 0 ./out/zoom.gif
 ```
+
 
 ## Resources
 
 * A lot of example scripts [here](http://www.fmwconcepts.com/imagemagick/magicwand/index.php)  
 * An example set of edge detections [here](https://blog.jiayu.co/2019/05/edge-detection-with-imagemagick/)
 * Image comparison [here](https://imagemagick.org/Usage/compare/)
+* ImageMagick/ImageMagic [repo](https://github.com/ImageMagick/ImageMagick)  
