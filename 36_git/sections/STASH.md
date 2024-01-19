@@ -4,6 +4,16 @@ Demonstrate how to use `stash`
 
 ## Common uses
 
+### Stash a single file
+
+```sh
+# stash
+git stash push -m stash-my-file ./my-file.txt
+
+# unstash 
+git restore --source=stash@{0} -- ./my-file.txt
+```
+
 ### View stashes
 
 ```sh
