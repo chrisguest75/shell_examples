@@ -13,9 +13,14 @@ echo $functionname
 
 # list functions with runtimes
 aws --profile "${AWS_PROFILE}" --region "${AWS_REGION}" lambda list-functions | jq -r -c '.Functions[] | [.FunctionName, .Runtime]' | sort | jq -c .
+
+# list functions with a name
+aws --profile $AWS_PROFILE --region $AWS_REGION lambda list-functions | jq '.Functions[] | select(.FunctionName | capture(".*watcher.*"))'
 ```
 
 ## Invoke
+
+If there isn't an API gateway attached you'll have to invoke directly.  
 
 ```sh
 aws --profile $AWS_PROFILE --region $AWS_REGION lambda invoke --function-name ${functionname} --payload '{"text":"Hello"}' response.txt --cli-binary-format raw-in-base64-out 
