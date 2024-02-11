@@ -60,3 +60,4 @@ XZ examples [XZ.md](./XZ.md)
 ## Resources
 
 * List of archive formats [here](https://en.wikipedia.org/wiki/List_of_archive_formats)  
+* Silesia compression corpus [here](https://sun.aei.polsl.pl/~sdeor/index.php?page=silesia)

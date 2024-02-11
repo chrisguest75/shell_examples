@@ -16,7 +16,6 @@ xz --compress ./README.md
 xz --decompress ./README.md.xz
 ```
 
-
 ## Resources
 
 * Using xz Compression in Linux [here](https://www.baeldung.com/linux/xz-compression)  
