@@ -44,13 +44,13 @@ cp .screenrc ~/.screenrc
 ## Example
 
 ```sh
-# start sssh
+# start ssh
 ssh user@ip
 
 # list sessions
 screen -ls
 
-# start a named sesssion
+# start a named session
 screen -S mytest
 
 # on another machine attach (rd restore and detach others)
