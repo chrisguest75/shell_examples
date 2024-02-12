@@ -48,7 +48,7 @@ tar -tf ././out/test.tar
 ```sh
 mkdir -p ./out/test/test
 
-# strip 
+# strip first directory level 
 tar --strip-components=1 --directory=./out/ -xzvf ./out/test.tar
 
 # change directory
