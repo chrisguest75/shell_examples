@@ -18,6 +18,7 @@ It also can process xml [here](../52_xml/README.md)
   - [Conversion](#conversion)
     - [JSON](#json)
   - [XML](#xml)
+  - [CSV](#csv)
   - [Resources](#resources)
 
 ## Preeqs
@@ -104,7 +105,7 @@ Take an array defined in yaml and loop over it in bash.
 
 ```sh
 # run the example script
-./loop_array.sh
+./read_into_bash_array.sh
 ```
 
 ## Conversion
@@ -127,6 +128,17 @@ yq e --output-format=json ./xml/results.hurl.xml
 
 # get most recent stats from test results (TODO: replace the jq bit with yq)
 yq e --output-format=json ./xml/results.hurl.xml | jq -c '.testsuites.testsuite[-1] | {"total":."+@tests", "errors": ."+@errors","failures":."+@failures"}'
+```
+
+## CSV
+
+```sh
+# simple conversion of csv file to json
+yq -o=json ./csv/simple.csv 
+
+# it seems to be broken at converting strings with : in them even if they are quoted.  
+yq -o=json ./csv/broken.csv 
+yq -o=json ./csv/bug.csv 
 ```
 
 ## Resources
