@@ -32,6 +32,9 @@ grep -A 10 -B 10
 
 # OR has to be escaped.
 grep "continuity\|PID"
+
+# inverting match
+grep -v "lines not containing this string"
 ```
 
 ## Perl grep expressions
