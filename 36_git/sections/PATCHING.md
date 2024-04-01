@@ -2,10 +2,21 @@
 
 Quick walkthrough of how to use git patching.  
 
+REF: [85_patches/README.md](../../85_patches/README.md)  
+
 TODO:
 
 * Be careful with binary files
 * Patching single files or a selection of files
+
+## Contents
+
+- [README](#readme)
+  - [Contents](#contents)
+  - [Creating a patch from diff](#creating-a-patch-from-diff)
+  - [Creating a patch with unstaged changes](#creating-a-patch-with-unstaged-changes)
+  - [Applying patches](#applying-patches)
+  - [Resources](#resources)
 
 ## Creating a patch from diff
 
