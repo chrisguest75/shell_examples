@@ -33,6 +33,5 @@ ffmpeg -f avfoundation -framerate 30 -video_size 640x480 -i "0:0" -vcodec libx26
 
 ## Resources
 
-https://trac.ffmpeg.org/wiki/Capture/PulseAudio
-
-https://unix.stackexchange.com/questions/1670/how-can-i-use-ffmpeg-to-split-mpeg-video-into-10-minute-chunks
+* https://trac.ffmpeg.org/wiki/Capture/PulseAudio
+* https://unix.stackexchange.com/questions/1670/how-can-i-use-ffmpeg-to-split-mpeg-video-into-10-minute-chunks
