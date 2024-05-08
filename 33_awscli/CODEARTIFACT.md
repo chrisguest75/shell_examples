@@ -2,6 +2,10 @@
 
 Demonstrate some commands with CodeArtifact.  
 
+TODO:
+
+* Create a domain and repository
+
 ## Prepare
 
 ```sh
@@ -52,6 +56,7 @@ my_library = {version="1.2.3", index="privatecodeartifact"}
 
 ## Resoures
 
+* AWS CodeArtifact concepts [here](https://docs.aws.amazon.com/codeartifact/latest/ug/codeartifact-concepts.html)
 * codeartifact awscli [here](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/codeartifact/index.html)
 * How to Import Private Python Packages with pipenv and Gitlab [here](https://medium.com/@matt_tich/how-to-use-private-python-packages-with-pipenv-and-gitlab-8d35f73e5329)
 * Using CodeArtifact as Pypi mirror for Pipenv [gist](https://gist.github.com/smparekh/a2bf43e514f65b920c8ca8fb55aaefbb)
