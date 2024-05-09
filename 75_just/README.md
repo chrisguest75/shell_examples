@@ -64,6 +64,10 @@ just -f ./example.justfile silentecho
 
 # show envvars
 just -f ./example.justfile echovars
+
+# checks and confirmation
+just -f ./example.justfile folders
+
 ```
 
 ### Docker Example
