@@ -54,6 +54,22 @@ name = "privatecodeartifact"
 my_library = {version="1.2.3", index="privatecodeartifact"}
 ```
 
+## Interrogate
+
+```sh
+# describe repository metadata
+aws codeartifact describe-repository --domain $CODEARTIFACT_DOMAIN --domain-owner $CODEARTIFACT_DOMAIN_OWNER --repository ${CODEARTIFACT_REPOSITORY}
+
+# list packages in a repository
+aws codeartifact list-packages --domain $CODEARTIFACT_DOMAIN --domain-owner $CODEARTIFACT_DOMAIN_OWNER --repository ${CODEARTIFACT_REPOSITORY}
+
+# get versions of a package
+aws codeartifact list-package-versions --domain $CODEARTIFACT_DOMAIN --domain-owner $CODEARTIFACT_DOMAIN_OWNER --repository ${CODEARTIFACT_REPOSITORY} --package codeartifact_test_package --format pypi
+
+# get dependencies
+aws codeartifact list-package-version-dependencies --domain $CODEARTIFACT_DOMAIN --domain-owner $CODEARTIFACT_DOMAIN_OWNER --repository ${CODEARTIFACT_REPOSITORY} --package codeartifact_test_package --format pypi --package-version 0.0.2
+```
+
 ## Resoures
 
 * AWS CodeArtifact concepts [here](https://docs.aws.amazon.com/codeartifact/latest/ug/codeartifact-concepts.html)
