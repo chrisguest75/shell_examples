@@ -6,6 +6,22 @@ TODO:
 
 * Create a domain and repository
 
+NOTES:
+
+- CodeArtifact supports NPM, pypi and generic artifacts.  
+- Downloading a generic artifact still requires `awscli`.  
+
+## Contents
+
+- [CODEARTIFACT](#codeartifact)
+  - [Contents](#contents)
+  - [Prepare](#prepare)
+  - [Login](#login)
+  - [Pipenv](#pipenv)
+  - [Interrogate](#interrogate)
+  - [Generic Packages](#generic-packages)
+  - [Resoures](#resoures)
+
 ## Prepare
 
 ```sh
@@ -19,6 +35,8 @@ export PAGER=
 ```sh
 # get name, domainname and domainowner for login
 aws codeartifact list-repositories
+
+aws codeartifact list-repositories | jq '.repositories[] | select(.name == "codeartifact-test")'
 
 export CODEARTIFACT_DOMAIN=mydomain
 export CODEARTIFACT_DOMAIN_OWNER=000000000000
@@ -70,6 +88,29 @@ aws codeartifact list-package-versions --domain $CODEARTIFACT_DOMAIN --domain-ow
 aws codeartifact list-package-version-dependencies --domain $CODEARTIFACT_DOMAIN --domain-owner $CODEARTIFACT_DOMAIN_OWNER --repository ${CODEARTIFACT_REPOSITORY} --package codeartifact_test_package --format pypi --package-version 0.0.2
 ```
 
+## Generic Packages
+
+```sh
+mkdir -p ./generic-package/in ./generic-package/out
+
+cat >./generic-package/in/files.txt <<EOF
+CODEARTIFACT.md
+BATCH.md
+EOF
+
+# create a tar from a list of files
+tar -a -cvf ./generic-package/out/test.tar.gz -T ./generic-package/in/files.txt
+
+export ASSET_SHA256=$(sha256sum ./generic-package/out/test.tar.gz | awk '{print $1;}')
+echo $ASSET_SHA256
+
+# publish package
+aws codeartifact publish-package-version --domain $CODEARTIFACT_DOMAIN --repository $CODEARTIFACT_REPOSITORY --format generic --namespace my-ns --package test-generic-package --package-version 1.0.0  --asset-content ./generic-package/out/test.tar.gz --asset-name test.tar.gz --asset-sha256 $ASSET_SHA256
+
+# download package
+aws codeartifact get-package-version-asset --domain $CODEARTIFACT_DOMAIN --repository $CODEARTIFACT_REPOSITORY --format generic --namespace my-ns --package test-generic-package --package-version 1.0.0 --asset test.tar.gz ./generic-package/out/downloaded-test.tar.gz
+```
+
 ## Resoures
 
 * AWS CodeArtifact concepts [here](https://docs.aws.amazon.com/codeartifact/latest/ug/codeartifact-concepts.html)
@@ -77,3 +118,4 @@ aws codeartifact list-package-version-dependencies --domain $CODEARTIFACT_DOMAIN
 * How to Import Private Python Packages with pipenv and Gitlab [here](https://medium.com/@matt_tich/how-to-use-private-python-packages-with-pipenv-and-gitlab-8d35f73e5329)
 * Using CodeArtifact as Pypi mirror for Pipenv [gist](https://gist.github.com/smparekh/a2bf43e514f65b920c8ca8fb55aaefbb)
 * Injecting credentials into Pipfile via environment variables [here](https://pipenv.pypa.io/en/latest/credentials.html)
+* Generic packages overview [here](https://docs.aws.amazon.com/codeartifact/latest/ug/generic-packages-overview.html)  

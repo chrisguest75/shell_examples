@@ -34,6 +34,10 @@ EOF
 
 # create a tar from a list of files
 tar -cvf ./out/test.tar -T ./in/files.txt
+# auto compress with extension tgz (creates tar.gz)
+tar -a -cvf ./out/test.tgz -T ./in/files.txt
+# works as well
+tar -a -cvf ./out/test.tar.gz -T ./in/files.txt
 ```
 
 ## List
