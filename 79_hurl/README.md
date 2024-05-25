@@ -14,6 +14,7 @@ NOTES:
 ## Install
 
 ```sh
+# using 4.3.0
 brew install hurl
 
 hurl --help
@@ -22,6 +23,13 @@ hurl --help
 ## Examples
 
 First you'll need to create the `hurl.vars` file from the template.  
+
+### Google
+
+```sh
+mkdir -p ./out
+hurl --very-verbose --test google.hurl 
+```
 
 ### Upload
 
