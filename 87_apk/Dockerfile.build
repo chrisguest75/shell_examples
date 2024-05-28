@@ -1,0 +1,27 @@
+FROM alpine:3.20.0 AS build
+
+RUN apk update && apk add --no-cache mandoc man-pages abuild curl doas alpine-sdk
+
+ENV USERNAME="builder"
+ENV GROUP="builder"
+
+# Create a non-admin user and group
+RUN addgroup -S $USERNAME && adduser -S $USERNAME -G $GROUP
+RUN echo "$USERNAME:$USERNAME" | chpasswd
+RUN echo "$USERNAME     ALL=(ALL) ALL" > /etc/sudoers
+RUN echo 'GROUP="$GROUP"' > /etc/abuild.conf
+
+WORKDIR /package
+
+# Copy files from the local machine to the container
+COPY ./hello-world /package
+
+# Change the ownership of the working directory to the non-admin user
+RUN chown -R builder:builder /package
+
+# Switch to the non-admin user
+USER builder
+
+WORKDIR /package
+
+#abuild-keygen -a -i
