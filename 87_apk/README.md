@@ -24,3 +24,4 @@ docker run -it --entrypoint /bin/sh apkbuilder
 - https://github.com/alpinelinux/apk-tools/blob/master/doc/apk.8.scd
 - https://github.com/gr0und-s3ct0r/apkbuild
 https://codeberg.org/chimo/apkbuilds
+- https://wiki.alpinelinux.org/wiki/Abuild_and_Helpers
