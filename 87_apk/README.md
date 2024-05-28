@@ -2,7 +2,8 @@
 
 TODO:
 
--
+- Create packages
+- Host packages in a repository (s3)
 
 ## Build
 
