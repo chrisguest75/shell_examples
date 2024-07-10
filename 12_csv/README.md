@@ -8,6 +8,10 @@ TODO:
 * Validate data being piped
 * tidy viewer - https://github.com/alexhallam/tv
 
+NOTES:
+
+* Use `mechatroner.rainbow-csv` in vscode. You can also use it to align fields.  
+
 ## Example
 
 Show how to read a csv file and loop over it row by row.  
@@ -16,13 +20,23 @@ Show how to read a csv file and loop over it row by row.
 ./parse_csv.sh
 ```
 
-## CSV 2 JSON
+## Conversion
+
+### CSV 2 JSON
 
 An example script to take a csv data piped in and convert it into a json document.  
 
 ```sh
 # simple example using jq to create a json doc
 cat ./test.map | ./csv2json.sh       
+```
+
+### TSV 2 CSV
+
+Convert a TSV to CSV  
+
+```sh
+tr '\t' ',' < ./file.tsv > ./file.csv
 ```
 
 ## Generate CSV from CPU data
@@ -41,22 +55,5 @@ sqlite3 :memory: -cmd '.mode csv' -cmd '.import cpu.csv cpu' 'SELECT time, COUNT
 ## Resources
 
 * My jq examples [here](../jq/README.md)
-
-https://til.simonwillison.net/sqlite/one-line-csv-operations
-
-
-https://news.ycombinator.com/item?id=28670252
-https://github.com/alexhallam/tv
-
-
-
-iostat
-vm_stat
-ps wwaux | grep code 
-
-ps  -opcpu -opid -ocomm -cax | sort
-
-sed 's/\t/ /g' test.txt |sed 's/  */ /g' |sed 's/ /,/g'
-
-sudo powermetrics --samplers smc | grep -i "CPU die temperature"
-
+* https://til.simonwillison.net/sqlite/one-line-csv-operations
+* TidyViewer [here](https://github.com/alexhallam/tv)
