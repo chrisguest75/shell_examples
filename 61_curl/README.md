@@ -1,6 +1,6 @@
 # README
 
-Demonstrate some common examples with `curl`  
+Demonstrate some common examples with `curl` using a container
 
 - [README](#readme)
   - [Cheatsheet](#cheatsheet)
@@ -12,6 +12,7 @@ Demonstrate some common examples with `curl`
     - [Retries](#retries)
     - [Posting](#posting)
     - [Follow redirects](#follow-redirects)
+    - [Range Requests](#range-requests)
   - [Resources](#resources)
 
 TODO:
