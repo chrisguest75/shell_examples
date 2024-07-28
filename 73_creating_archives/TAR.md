@@ -57,6 +57,9 @@ tar --strip-components=1 --directory=./out/ -xzvf ./out/test.tar
 
 # change directory
 tar xf ./out/test.tar --directory=./out/out/test/test
+
+# extract tgz.
+tar -xvzf ./out/test.tgz
 ```
 
 ## Extract direct to S3
