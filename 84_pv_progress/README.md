@@ -7,6 +7,7 @@ pv - monitor the progress of data through a pipe
 - [PV](#pv)
   - [Contents](#contents)
   - [Install](#install)
+  - [Docker](#docker)
   - [Examples](#examples)
     - [Measure the time taken to read a large file](#measure-the-time-taken-to-read-a-large-file)
     - [Measure the time taken to compress a large file to GZIP](#measure-the-time-taken-to-compress-a-large-file-to-gzip)
@@ -21,9 +22,22 @@ brew info pv
 brew install pv
 ```
 
+## Docker
+
+```sh
+# build the image
+docker build --no-cache --progress=plain -f Dockerfile -t pv . 
+# run a command 
+docker run --rm -it --entrypoint /bin/bash pv 
+```
+
 ## Examples
 
 ```sh
+# generate 1GB file
+dd if=/dev/urandom of=random.bin bs=1G count=1 
+
+FILEPATH=./random.bin
 FILEPATH=./cv-corpus-16.1-2023-12-06-fr.tar
 ```
 
