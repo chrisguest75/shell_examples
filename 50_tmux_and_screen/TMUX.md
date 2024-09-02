@@ -58,31 +58,26 @@ tmux kill-session -t <name>
 
 ## Keys
 
-Keys                 | Description
-----                 | ----
-`ctrl+b`             | tmux prefix - signal to the tmux process
-|
-`ctrl+b + ?`         | Brings up help
-|
-`ctrl+b + \"`        | Split screen horizontally
-`ctrl+b + %`         | Split screen vertically
-|
-`ctrl+b + d`         | Detach from a session
-`ctrl+b + s`         | List sessions and preview
-`ctrl+b + $`         | Rename a session
-|
-`ctrl+b + arrow key` | Switch to a pane
-`ctrl+b + x`         | Kill a pane with confirmation
-`ctrl+d`             | Kill a pane instantly
-|
-`ctrl+b + z`         | Zoom into a window.
-`ctrl+b + c`         | Create new window
-`ctrl+b + p`         | Previous window
-`ctrl+b + n`         | Next Window
-`ctrl+b + &`         | Kill Window
-`ctrl+b + ,`         | Rename a window
-`ctrl+b + w`         | List windows
-`ctrl+b + ,`         | Rename windows
+Keys                 | Description |
+----                 | ---- |
+`ctrl+b`             | tmux prefix - signal to the tmux process |
+`ctrl+b + ?`         | Brings up help |
+`ctrl+b + \"`        | Split screen horizontally | 
+`ctrl+b + %`         | Split screen vertically | 
+`ctrl+b + d`         | Detach from a session | 
+`ctrl+b + s`         | List sessions and preview | 
+`ctrl+b + $`         | Rename a session |
+`ctrl+b + arrow key` | Switch to a pane | 
+`ctrl+b + x`         | Kill a pane with confirmation |
+`ctrl+d`             | Kill a pane instantly | 
+`ctrl+b + z`         | Zoom into a window. |
+`ctrl+b + c`         | Create new window |
+`ctrl+b + p`         | Previous window |
+`ctrl+b + n`         | Next Window |
+`ctrl+b + &`         | Kill Window |
+`ctrl+b + ,`         | Rename a window |
+`ctrl+b + w`         | List windows | 
+`ctrl+b + ,`         | Rename windows |
 
 ## iterm2
 
