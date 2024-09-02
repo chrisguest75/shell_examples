@@ -27,6 +27,7 @@ tmux, short for "terminal multiplexer", is a powerful command-line tool used in 
 TODO:
 
 * tmux in iterm
+* Do a few examples of tmuxinator entering pipenv and also selecting nvm.  
 
 ## Configuration
 
