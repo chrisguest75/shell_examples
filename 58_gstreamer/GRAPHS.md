@@ -30,4 +30,4 @@ done < <(ls ./out/graphs)
 
 ## Resources
 
-* GStreamer Graphs [here]https://embeddedartistry.com/blog/2018/02/22/generating-gstreamer-pipeline-graphs/)  
+* GStreamer Graphs [here](https://embeddedartistry.com/blog/2018/02/22/generating-gstreamer-pipeline-graphs/)  
