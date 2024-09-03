@@ -58,5 +58,3 @@ windows:
           - docker run --name detect-os detect-os
         - logs:
           - lnav docker://detect-os
-  - server: bundle exec rails s
-  - logs: tail -f log/development.log
