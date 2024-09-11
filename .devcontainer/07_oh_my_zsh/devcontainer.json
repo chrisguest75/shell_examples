@@ -30,7 +30,7 @@
     },
     "ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2": {
       "version": "latest",
-      "shallowClone": true
+      "shallowClone": false
     }
   },
   // Configure tool-specific properties.
