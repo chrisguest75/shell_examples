@@ -2,6 +2,8 @@
 
 Demonstrate how to interrogate and use GPU on OS platforms.  
 
+Ref: [docker_examples/A2_gpu](https://github.com/chrisguest75/docker_examples/tree/master/A2_gpu)  
+
 ## Terminology
 
 - CUDA - Compute Unified Device Architecture
