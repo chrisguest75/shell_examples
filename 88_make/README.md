@@ -1,5 +1,7 @@
 # MAKEFILES
 
+GNU make utility to maintain groups of programs
+
 NOTES:
 
 * Tabs not spaces (use vscode spaces status bar to set tabs)
@@ -26,6 +28,19 @@ make
 
 # process a specific target 
 make target1
+```
+
+## Basics
+
+```sh
+cd ./basics
+
+# will process first target
+make 
+
+make clean
+# process a specific target 
+make VARIABLE1=this_is_an_override
 ```
 
 ## Resources
