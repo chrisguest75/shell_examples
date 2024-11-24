@@ -52,12 +52,16 @@ printargs *args:
   pwd
   echo "ARGUMENTS={{ args }}"
 
-ansi:
+clear:
+  #!/usr/bin/env bash
+  set -eufo pipefail
   just --version
   # version 1.37 requied
   echo "{{ CLEAR }}"
 
-clear:
+ansi:
+  #!/usr/bin/env bash
+  set -eufo pipefail
   just --version
   # version 1.37 requied
   echo "{{ style("error") }}OH NO{{ NORMAL }}"

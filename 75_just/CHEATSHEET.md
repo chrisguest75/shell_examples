@@ -5,11 +5,7 @@ Tips:
 * Put a comment above each task as a description  
 * `just` always executes in folder of `justfile`
 * There are functions available to perform string manipulation.
-
-TODO:
-
-* timestamp
-* just fmt
+* With 1.37 we now have macros for ansi output.  
 
 ## Variables
 
