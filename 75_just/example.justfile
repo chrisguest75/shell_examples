@@ -39,4 +39,25 @@ folders: checks
   echo "AWS_REGION=${AWS_REGION}"
   #export
 
+# show overriding variables
+printworld:
+  #!/usr/bin/env bash
+  pwd
+  echo "WORLD=${WORLD}"
 
+# show overriding variables
+printargs *args:
+  #!/usr/bin/env bash
+  set -eufo pipefail
+  pwd
+  echo "ARGUMENTS={{ args }}"
+
+ansi:
+  just --version
+  # version 1.37 requied
+  echo "{{ CLEAR }}"
+
+clear:
+  just --version
+  # version 1.37 requied
+  echo "{{ style("error") }}OH NO{{ NORMAL }}"

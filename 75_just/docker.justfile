@@ -7,11 +7,11 @@ list-images:
   docker images
 
 # build dockerfile.processor
-build:
-  @echo 'Build container'
-  docker buildx build --progress=plain -f Dockerfile.processor -t processor .
+build imagename="processor":
+  @echo 'Build container {{ imagename }}'
+  docker buildx build --progress=plain -f Dockerfile.processor -t {{ imagename }} .
 
 # run processor
-run:
+run imagename="processor": (build imagename)
   @echo 'Run container'
-  docker run --rm -it processor
+  docker run --rm -it {{ imagename }}

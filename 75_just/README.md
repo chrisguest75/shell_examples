@@ -10,13 +10,7 @@ NOTES:
 
 * It seems very fast at executing.  
 * It's a good alternative to using `package.json`
-
-TODO:
-
-* Variables
-* Functions
-* Logic
-* Choose
+* `just` always runs in the directory of the just file.  
 
 ## Install
 
@@ -72,7 +66,7 @@ just -f ./example.justfile folders
 
 ### Docker Example
 
-Use just to script building and running containers.  
+Use `just` to script building and running containers.  
 
 ```sh
 # list recipes
@@ -81,11 +75,11 @@ just -f ./docker.justfile
 # run list-images
 just -f ./docker.justfile list-images
 
-# build container
-just -f ./docker.justfile build
+# build container (imagename=mytestimage)
+just -f ./docker.justfile build mytestimage
 
-# run container
-just -f ./docker.justfile run
+# run container (imagename=mytestimage)
+just --timestamp -f ./docker.justfile run mytestimage
 ```
 
 ## Resources

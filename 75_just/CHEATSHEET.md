@@ -1,5 +1,18 @@
 # JUST CHEATSHEET
 
+Tips:
+
+* Put a comment above each task as a description  
+* `just` always executes in folder of `justfile`
+* There are functions available to perform string manipulation.
+
+TODO:
+
+* timestamp
+* just fmt
+
+## Variables
+
 ```sh
 # show internal variables
 just -f example.justfile --variables
@@ -8,7 +21,17 @@ just -f example.justfile --variables
 just -f example.justfile --evaluate
 
 # override defaults
-just DOCKER_BUILD_ARGUMENTS="--no-cache" REQUIREMENTS_CATEGORY="dev-packages" start_image slim
+just -f example.justfile WORLD="helloworld" printworld
+```
+
+## Arguments
+
+```sh
+# pass the remaining arguemnts to the script
+just -f example.justfile WORLD="helloworld" printargs --verbose --file=./file.txt
 ```
 
 ## Resources
+
+* casey/just repo [here](https://github.com/casey/just)  
+* casey/just repo example [here](https://github.com/casey/just/blob/master/justfile)  
