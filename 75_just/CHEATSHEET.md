@@ -22,6 +22,8 @@ just -f example.justfile WORLD="helloworld" printworld
 
 ## Arguments
 
+You can use `*args` to pass arguments.  
+
 ```sh
 # pass the remaining arguemnts to the script
 just -f example.justfile WORLD="helloworld" printargs --verbose --file=./file.txt
