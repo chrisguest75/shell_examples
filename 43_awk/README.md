@@ -15,11 +15,25 @@ cat example1.txt | awk '{print $1,$2,$3}'
 cat example1.txt | awk '{if(!$3) {print $1,$2} else {print $1,$3;print $1,$2}}'
 ```
 
+## CSV
+
+```sh
+awk -F "," '{print $1}'
+```
+
 ## Prepending text
 
 ```sh
 # prepending text to output
 cat example1.txt | awk '{print "stdout:" $0;}'
+```
+
+## Trimming
+
+```sh
+# white space
+
+# replace a character
 ```
 
 ## Processing LDD output
