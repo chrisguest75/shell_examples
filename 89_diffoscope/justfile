@@ -1,0 +1,41 @@
+set dotenv-load := true
+
+export CLEANED_IMAGE_NAME:="cleaned"
+export UNCLEAN_IMAGE_NAME:="unclean"
+
+# default lists actions
+default:
+  @just -f justfile --list
+
+build:
+  #!/usr/bin/env bash
+  pushd ./docker
+  docker build --progress=plain -f Dockerfile.cleaned -t $CLEANED_IMAGE_NAME .
+  docker build --progress=plain -f Dockerfile.unclean -t $UNCLEAN_IMAGE_NAME .
+
+dive imagename='$CLEANED_IMAGE_NAME': (build)
+  @echo "{{ imagename }}:latest"
+  dive {{ imagename }}:latest
+
+details imagename='$CLEANED_IMAGE_NAME': (build)
+  @echo "******************************"
+  @echo "** Labels"
+  @echo "******************************"
+  docker inspect -f '{{{{.Config.Labels}}}}' {{ imagename }}
+  @echo "******************************"
+  @echo "** Dive CI"
+  @echo "******************************"
+  dive {{ imagename }} --ci || true
+  @echo "******************************"
+  @echo "** Size"
+  @echo "******************************"
+  container-diff analyze --json docker://{{ imagename }}:latest | jq .
+
+diffoci: (build)
+  diffoci diff --semantic docker://$UNCLEAN_IMAGE_NAME:latest docker://$CLEANED_IMAGE_NAME:latest
+
+diffoscope: (build)
+  mkdir -p ./output
+  docker save -o ./output/$UNCLEAN_IMAGE_NAME.tar $UNCLEAN_IMAGE_NAME:latest
+  docker save -o ./output/$CLEANED_IMAGE_NAME.tar $CLEANED_IMAGE_NAME:latest
+  diffoscope --markdown ./output/diff.md ./output/$UNCLEAN_IMAGE_NAME.tar ./output/$CLEANED_IMAGE_NAME.tar 
