@@ -17,6 +17,7 @@ TODO:
   - [ZSTD](#zstd)
   - [TAR](#tar)
   - [XZ](#xz)
+  - [RAR](#rar)
   - [Resources](#resources)
 
 ## Reason
@@ -56,6 +57,10 @@ TAR examples [TAR.md](./TAR.md)
 ## XZ
 
 XZ examples [XZ.md](./XZ.md)  
+
+## RAR
+
+RAR examples [RAR.md](./RAR.md)  
 
 ## Resources
 
