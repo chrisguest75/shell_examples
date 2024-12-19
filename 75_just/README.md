@@ -80,6 +80,9 @@ just -f ./docker.justfile build mytestimage
 
 # run container (imagename=mytestimage)
 just --timestamp -f ./docker.justfile run mytestimage
+
+# testing internal functions 
+just --timestamp -f functions.justfile functions
 ```
 
 ## Resources
