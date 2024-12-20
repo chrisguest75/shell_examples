@@ -1,0 +1,6 @@
+{
+  // format on save
+  "editor.formatOnSave": true,
+  "git.openRepositoryInParentFolders": "always",
+  "conventionalCommits.autoCommit": false,
+}
