@@ -1,6 +1,6 @@
 # lists recipes
 default:
-  @just -f docker.justfile --list
+  @just -f {{ source_file() }} --list
 
 # list docker images
 list-images:

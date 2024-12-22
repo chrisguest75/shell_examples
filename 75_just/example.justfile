@@ -4,7 +4,7 @@ export WORLD := "world"
 
 # default lists actions
 default:
-  @just -f example.justfile --list
+  @just -f {{ source_file() }} --list
 
 # echo with default parameters
 echo param1="defaultvalue1" param2="defaultvalue2":

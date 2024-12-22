@@ -2,7 +2,7 @@ set dotenv-load := true
 
 # default lists actions
 default:
-  @just -f example.justfile --list
+  @just -f {{ source_file() }} --list
 
 functions:
   #!/usr/bin/env bash
