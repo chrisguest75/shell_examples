@@ -96,6 +96,13 @@ convert ./second_image.jpg ./source_image.jpg -morph 30 \
         -loop 0 ./out/zoom.gif
 ```
 
+## Checkerboard
+
+Create a basic checkerboard.  
+
+```sh
+magick -size 1920x1080 pattern:checkerboard -auto-level +level-colors red,blue ./out/checkerboard.png
+```
 
 ## Resources
 
@@ -103,3 +110,4 @@ convert ./second_image.jpg ./source_image.jpg -morph 30 \
 * An example set of edge detections [here](https://blog.jiayu.co/2019/05/edge-detection-with-imagemagick/)
 * Image comparison [here](https://imagemagick.org/Usage/compare/)
 * ImageMagick/ImageMagic [repo](https://github.com/ImageMagick/ImageMagick)  
+* Modifying Built-in IM Patterns/Tiles [here](https://usage.imagemagick.org/canvas/#pattern)

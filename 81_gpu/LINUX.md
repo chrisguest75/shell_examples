@@ -1,5 +1,14 @@
 # Linux GPU
 
+Working with GPU on linux.  
+
+## List Devices
+
+```sh
+# list the attached devices
+sudo lshw -C display
+```
+
 ## FFMPEG
 
 ```sh
@@ -124,3 +133,4 @@ EOF
 * Syllo/nvtop repo [here](https://github.com/Syllo/nvtop)
 * How to Use GPU Acceleration for Video Processing with FFmpeg [here](https://saturncloud.io/blog/how-to-use-gpu-acceleration-for-video-processing-with-ffmpeg/)
 * All Things GPU: Part 2 [here](https://medium.com/hashicorp-engineering/all-things-gpu-part-2-4ac1c30a20ed)
+* The Mesa 3D Graphics Library - Open source implementations of OpenGL, OpenGL ES, Vulkan, OpenCL, and more! [here](https://docs.mesa3d.org/index.html)
