@@ -1,5 +1,6 @@
 # 📝 TODO
 
+* Watchexec https://github.com/watchexec/watchexec/tree/main/crates/cli#features
 * code=${PIPESTATUS[0]} -- getting pipestatus codes.
 * -- end of options https://www.cyberciti.biz/faq/what-does-double-dash-mean-in-ssh-command  
 * fold command - wrap line lengths.

@@ -89,9 +89,14 @@ just --timestamp -f functions.justfile functions
 
 Try to show some timing on tasks.  
 
+REF: [19_timing_operations/README.md](../19_timing_operations/README.md)  
+
 ```sh
 # testing internal functions 
 just --timestamp -f timing.justfile mytask
+
+# you can wrap the whole operation in time.   
+time just --timestamp -f timing.justfile mytask
 ```
 
 ## Resources
