@@ -1,0 +1,11 @@
+name: Monitor GPU
+root: .
+
+windows:
+  - main:
+      layout: even-vertical
+      panes:
+        - command3: echo "** CPU **" && nix-shell -p htop --command htop
+        - command2: echo "** NVIDIA GPU **" && NIXPKGS_ALLOW_UNFREE=1 nix-shell -p nvtopPackages.nvidia --command nvtop
+        - command1: echo "** INTEL GPU **" && nix-shell -p nvtopPackages.intel --command nvtop
+

@@ -81,26 +81,7 @@ Keys                 | Description |
 
 ## iterm2
 
-You can kill iterm window and then reopen using tmux attach 
-
-## tmuxinator
-
-```sh
-# install
-brew install tmuxinator   
-
-# create session (below for link to copy layout from existing session)
-export EDITOR=nano 
-tmuxinator new --local shell_examples      
-
-# start a tmuxinator session
-tmuxinator local
-
-# detach from a session
-ctrl+b + d             
-
-tmux kill-session -t shell_examples
-```
+You can kill iterm window and then reopen using tmux attach  
 
 ## plugins
 
@@ -129,7 +110,6 @@ ls ~/.tmux/plugins
 * tmux config blog [here](https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/)
 * getting started with tmux [here](https://linuxize.com/post/getting-started-with-tmux/)
 * tmuxcheatsheet [here](https://tmuxcheatsheet.com/)
-* Copying layout to tmuxinator [here](https://fabianfranke.de/use-tmuxinator-to-recreate-tmux-panes-and-windowstmuxinator-save-tmux-pane-and-window-layouts/)
 * Everything you need to know about tmux – Plugins Manager [here](https://arcolinux.com/everything-you-need-to-know-about-tmux-plugins-manager/)
 * jasonmorganson/dotfiles tmux plugins [here](https://github.com/jasonmorganson/dotfiles/blob/master/dot_tmux-plugins)
 * tmux plugins list [here](https://github.com/tmux-plugins/list)  
