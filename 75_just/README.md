@@ -85,6 +85,15 @@ just --timestamp -f ./docker.justfile run mytestimage
 just --timestamp -f functions.justfile functions
 ```
 
+## Timing
+
+Try to show some timing on tasks.  
+
+```sh
+# testing internal functions 
+just --timestamp -f timing.justfile mytask
+```
+
 ## Resources
 
 * casey/just repo [here](https://github.com/casey/just)  
