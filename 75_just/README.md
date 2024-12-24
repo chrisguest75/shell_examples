@@ -10,7 +10,7 @@ NOTES:
 
 * It seems very fast at executing.  
 * It's a good alternative to using `package.json`
-* `just` always runs in the directory of the just file.  
+* `just` always runs in the directory of the just file.
 
 ## Install
 
@@ -73,13 +73,13 @@ Use `just` to script building and running containers.
 just -f ./docker.justfile
 
 # run list-images
-just -f ./docker.justfile list-images
+just -f ./docker.justfile docker-images
 
-# build container (imagename=mytestimage)
-just -f ./docker.justfile build mytestimage
+# build container
+just -f ./docker.justfile docker-build processor
 
-# run container (imagename=mytestimage)
-just --timestamp -f ./docker.justfile run mytestimage
+# run container
+just --timestamp -f ./docker.justfile docker-run processor
 
 # testing internal functions 
 just --timestamp -f functions.justfile functions
