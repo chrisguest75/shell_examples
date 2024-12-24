@@ -99,6 +99,20 @@ just --timestamp -f timing.justfile mytask
 time just --timestamp -f timing.justfile mytask
 ```
 
+## Multiline
+
+```sh
+just -f ./multiline.justfile multiline1
+
+just -f ./multiline.justfile multiline2
+```
+
+## Importing
+
+```sh
+just -f ./import.justfile docker-build
+```
+
 ## Resources
 
 * casey/just repo [here](https://github.com/casey/just)  

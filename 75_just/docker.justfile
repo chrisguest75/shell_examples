@@ -1,4 +1,4 @@
-set dotenv-load := true
+#set dotenv-load := true
 
 export DEFAULT_APPLICATION:="processor"
 
