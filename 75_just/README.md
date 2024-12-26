@@ -117,6 +117,8 @@ just -f ./import.justfile docker-build
 
 ```sh
 just -f loops.justfile counter
+
+just -f loops.justfile directory-listing
 ```
 
 ## Resources

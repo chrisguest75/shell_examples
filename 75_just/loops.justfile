@@ -13,3 +13,11 @@ counter:
     echo "$file -> ${counter}"
     counter=$((counter + 1))  
   done
+
+directory-listing:
+  #!/usr/bin/env bash
+  mkdir -p ./out || true
+  set -euo pipefail
+  for file in ./*; do
+    echo "file '${file}'"
+  done > ./out/out.txt
