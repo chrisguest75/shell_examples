@@ -113,6 +113,12 @@ just -f ./multiline.justfile multiline2
 just -f ./import.justfile docker-build
 ```
 
+## Loops
+
+```sh
+just -f loops.justfile counter
+```
+
 ## Resources
 
 * casey/just repo [here](https://github.com/casey/just)  
