@@ -4,10 +4,27 @@ Demonstrates techniques for globbing and operating on sets of files
 
 TODO:
 
-1. Use globbing from shell
-1. Using globbing in scripts
 1. shopts and controlling behaviour
-1. path expansion
+2. path expansion
+
+## Looping
+
+```sh
+# enter shell
+bash 
+
+# enable globbing
+set +f 
+
+# loop
+counter=1
+for file in *; do
+    echo "$file -> ${counter}"
+    counter=$((counter + 1))  
+done
+```
+
+## Oneliners
 
 ```bash
 # For each directory name create an empty file in the out directory with the filename the same as the directory 
@@ -25,9 +42,13 @@ find .. -name "[0-9][0-9]_*" -exec echo {} \;
 grep -R "/usr/bin/env" --include="*.sh" ../* 
 ```
 
+## Zsh
+
 ```zsh
 # zsh
 setopt extendedglob
 ls ^d*.txt
 unsetopt extendedglob
 ```
+
+## Resources
