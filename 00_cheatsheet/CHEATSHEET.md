@@ -11,6 +11,18 @@ export MANPAGER=cat
 man git
 ```
 
+## Arrays
+
+Dealing with arrays
+
+```sh
+my_array=('hello', 'world')
+echo "size:${#my_array[@]}"
+
+my_array+=("again")
+echo "size:${#my_array[@]}"
+```
+
 ## Loops
 
 ### For Loops
@@ -44,6 +56,17 @@ do
 done
 # index exists outside of loop
 echo "Exited loop $index"
+```
+
+```sh
+files=(
+  '../../output/fx/blending_difference.mp4'
+  '../../output/fx/blending_mask_difference.mp4'
+  '../../output/fx/blending_grainmerge.mp4' 
+)
+for file in "${files[@]}"; do
+  echo "$file"
+done
 ```
 
 ### While Loops
