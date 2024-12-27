@@ -4,6 +4,7 @@
         "ms-azuretools.vscode-docker",
         "vivaxy.vscode-conventional-commits",
         "davidanson.vscode-markdownlint",
-        "nefrob.vscode-just-syntax"
+        "nefrob.vscode-just-syntax",
+        "ctcuff.font-preview"
     ]
 }

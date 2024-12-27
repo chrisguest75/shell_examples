@@ -6,6 +6,14 @@ TODO:
 
 - Font installation on nix, wsl and mac.  
 
+## Viewing
+
+Use the extension for viewing the font in vscode.  
+
+```sh
+code --install-extension ctcuff.font-preview
+```
+
 ## Tools
 
 - fc-cat - read font information cache files
