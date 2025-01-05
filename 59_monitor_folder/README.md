@@ -2,10 +2,6 @@
 
 Demonstrate how to monitor a folder for changes using `inotify` or `watchman`.  
 
-TODO:
-
-* add watchexec example
-
 ## Reason
 
 It's a common requirement that a process needs to monitor the output of another process via the filesystem.  File notification systems are generally OS specific.  
@@ -16,6 +12,7 @@ It's a common requirement that a process needs to monitor the output of another 
 (./inotify/README.md)  
 * Demonstrate how to monitor a folder for changes using `watchman` [here]
 (./watchman/README.md)  
+* Demonstrate how to use [watchexec](./watchexec/README.md)
 
 ## Resources
 

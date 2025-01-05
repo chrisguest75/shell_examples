@@ -1,0 +1,15 @@
+#!/usr/bin/env just --justfile
+# ^ A shebang isn't required, but allows a justfile to be executed
+#   like a script, with `./justfile test`, for example.
+
+set dotenv-load := true
+
+# default lists actions
+default:
+  @just -f {{ source_file() }} --list
+
+nix:
+  @nix-shell -p watchexec --command zsh
+
+cat:
+  @watchexec --exts md cat README.md
