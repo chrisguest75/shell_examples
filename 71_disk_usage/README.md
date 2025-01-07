@@ -2,6 +2,16 @@
 
 Demonstrate some examples of calculating disk usage.  
 
+## gdu
+
+Uses SSD parallel reads to rapidly summarise folder sizes.
+
+```sh
+nix-shell -p gdu --command zsh
+
+gdu
+```
+
 ## Space
 
 ```sh
@@ -21,3 +31,5 @@ df -i
 ```
 
 ## Resources
+
+* Pretty fast disk usage analyzer written in Go. [here](https://github.com/dundee/gdu)
