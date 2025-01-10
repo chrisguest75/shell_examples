@@ -41,6 +41,9 @@ find ../ -iname "*.txt"
 stat ../05_strings/README.md  
 find ../ -iname "*.md" -ctime +3
 
+# above 10mb
+find ../ -type f -size +10M
+
 # find all vscode workspace folders for shell_examples
 find $HOME/Library/Application\ Support/Code/User/workspaceStorage/ -name "*.json" -print -exec jq . {} \; | grep -A 10 -B 10 'shell_examples"'
 
@@ -118,6 +121,8 @@ rg --ignore-case README
 
 # searching in node_modules (including .gitignore) 
 rg --no-ignore --hidden "items to be sent"
+
+
 ```
 
 ## Resources
