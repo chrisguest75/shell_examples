@@ -5,7 +5,7 @@ Demonstrates techniques for generating unique ids in scripts.
 TODO:
 
 * crypto hash
-* nanoid
+* nanoid https://github.com/ai/nanoid
 
 ## UUIDGEN
 
