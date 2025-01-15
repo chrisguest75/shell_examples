@@ -29,4 +29,14 @@ tmux kill-session -t docker_test
 
 ```sh
 tmuxinator new --local docker_test
+
+# use just
+just start-tmux
+```
+
+## Kill window
+
+`ctrl+b + &` Kill Window
+
+
 ```

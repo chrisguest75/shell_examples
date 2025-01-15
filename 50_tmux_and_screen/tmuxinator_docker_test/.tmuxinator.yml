@@ -57,4 +57,4 @@ windows:
           - docker rm detect-os
           - docker run --name detect-os detect-os
         - logs:
-          - lnav docker://detect-os
+          - nix-shell -p lnav --run "sleep 2 && lnav docker://detect-os"
