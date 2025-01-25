@@ -8,6 +8,7 @@ TODO:
 * provide timings and performance on large fake data generated files
 * xz --long-help
 * checksums for recovery?
+* 7zip (handles isos)
 
 - [ARCHIVES](#archives)
   - [Reason](#reason)
