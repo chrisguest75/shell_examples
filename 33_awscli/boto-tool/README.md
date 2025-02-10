@@ -1,18 +1,21 @@
 # BOTO TOOL
 
-Used for performing actions that are not available in the AWS CLI.  
+Used for performing actions that are not available in the AWS CLI.
 
-REF: [python_examples/07_aws_boto](https://github.com/chrisguest75/python_examples/blob/main/07_aws_boto/README.md)  
+REF: [python_examples/07_aws_boto](https://github.com/chrisguest75/python_examples/blob/main/07_aws_boto/README.md)
 
 Demonstrates:
 
-* signed PUT urls
+- signed PUT urls
 
 ## Start
 
 ```sh
+export PIPENV_IGNORE_VIRTUALENVS=1
+export PIPENV_VENV_IN_PROJECT=1
+
 # install
-pyenv install
+pipenv install
 
 pipenv run lint
 pipenv run test
@@ -26,7 +29,7 @@ pipenv run start
 
 ```sh
 BUCKET_NAME=mybucket
-# generate signed put urls 
+# generate signed put urls
 SIGNEDURL1=$(pipenv run start --signed --bucket ${BUCKET_NAME} --prefix random5.bin | jq -r -s '.[].url' | grep https --color=no)
 echo $SIGNEDURL1
 
@@ -38,4 +41,3 @@ AWS_PROFILE=myprofile aws s3 ls ${BUCKET_NAME}
 ```
 
 ## Resources
-
