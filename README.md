@@ -172,7 +172,7 @@ Steps [README.md](./02_job_functions/README.md)
 ## 03 - Pipe filters
 
 Demonstrates how read from stdin stream and process it.  
-Steps [README.md](./03_pipe_filter_function/README.md)  
+Steps [README.md](./03_pipe_filter_functions/README.md)  
 
 ## 04 - Trap handlers
 

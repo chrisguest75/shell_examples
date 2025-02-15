@@ -51,6 +51,8 @@ echo "$(( ( RANDOM % 10 )  + 1 ))"
 
 ```sh
 LC_CTYPE=C tr -dc A-Za-z0-9 < /dev/random | head -c 60 | xargs
+# or
+head /dev/urandom | tr -dc a-f0-9 | head -c 40
 ```
 
 ## cksum
@@ -60,6 +62,12 @@ This technique can be used for consistent hashing
 ```sh
 # take a string and cksum it.
 echo $(echo "hashingstring" | cksum | cut -f 1 -d \ )
+```
+
+## 
+
+```sh
+head /dev/urandom | tr -dc a-f0-9 | head -c 40
 ```
 
 ## Resources
