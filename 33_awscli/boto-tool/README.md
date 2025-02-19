@@ -8,6 +8,8 @@ Demonstrates:
 
 - signed PUT urls
 
+NOTE: Be careful to use the same headers listed at creation on request. Otherwise you will see 403 Forbidden.
+
 ## Start
 
 ```sh
