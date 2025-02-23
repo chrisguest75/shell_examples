@@ -11,6 +11,7 @@ NOTES:
 * It seems very fast at executing.  
 * It's a good alternative to using `package.json`
 * `just` always runs in the directory of the just file.
+* There seems to be some problems with where variables are evaluated.  
 
 ## Install
 
@@ -119,6 +120,18 @@ just -f ./import.justfile docker-build
 just -f loops.justfile counter
 
 just -f loops.justfile directory-listing
+```
+
+## Paths
+
+Path handling in just.  
+
+```sh
+# NOTE: default values cause problems
+just -f paths.justfile paths-inbuilt
+
+# Seems to work fine when you pass them in.  
+just -f paths.justfile paths-inbuilt ../52_xml/README.md
 ```
 
 ## Resources

@@ -25,7 +25,9 @@ paths-bash filepath="${SOURCE_FILE}":
   #!/usr/bin/env bash
   set -eufo pipefail
   echo "default: ${SOURCE_FILE}"
-
+  echo "****************"
+  echo "Test - paths-bash"
+  echo "****************"
   export WORKING_PATH=$(pwd)
   export HOME_DIR=~
   export SCRIPT_PATH=$0
@@ -54,6 +56,9 @@ paths-bash filepath="${SOURCE_FILE}":
 paths-inbuilt filepath="${SOURCE_FILE}":
   #!/usr/bin/env bash
   set -eufo pipefail
+  echo "****************"
+  echo "Test - paths-inbuilt"
+  echo "****************"
   echo "default: ${SOURCE_FILE}"
   echo "filepath: {{ filepath }}"
   echo ""
@@ -69,7 +74,7 @@ paths-test filepath="${SOURCE_FILE}":
   #!/usr/bin/env bash
   set -eufo pipefail
   echo "****************"
-  echo "Test"
+  echo "Test - paths-test"
   echo "****************"
   echo "default: ${SOURCE_FILE}"
   export INPUT_FILEPATH="{{ filepath }}"
