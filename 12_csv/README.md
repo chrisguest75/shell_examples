@@ -39,19 +39,6 @@ Convert a TSV to CSV
 tr '\t' ',' < ./file.tsv > ./file.csv
 ```
 
-## Generate CSV from CPU data
-
-```sh
-echo "time,cpu,pid,process" > ./cpu.csv
-for index in $(seq 0 100 );
-do
-    ps -opcpu -opid -ocomm -cax | grep -i windowserver | sort -r | sed "s/^/$(date '+%H:%M:%S') /" | sed 's/\t/ /g' | sed 's/  */ /g' | sed 's/ /,/g'
-    sleep 1
-done >> ./cpu.csv
-
-sqlite3 :memory: -cmd '.mode csv' -cmd '.import cpu.csv cpu' 'SELECT time, COUNT(*), AVG(cpu) FROM cpu '
-```
-
 ## Remove Columns
 
 ```sh
@@ -61,5 +48,4 @@ cut -d',' -f4- ./out/mydata.csv > ./out/mydata_3_less_columns.csv
 ## Resources
 
 - My jq examples [here](../jq/README.md)
-- https://til.simonwillison.net/sqlite/one-line-csv-operations
 - TidyViewer [here](https://github.com/alexhallam/tv)
