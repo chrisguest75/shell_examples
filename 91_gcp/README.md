@@ -1,5 +1,13 @@
 # GCP Shell Examples
 
+## Help
+
+```sh
+# turn off pagination
+export PAGER=cat
+gcloud help
+```
+
 ## List Projects
 
 ```sh
