@@ -1,0 +1,16 @@
+version: '3'
+
+vars:
+  NAME: "Chris"
+
+tasks:
+  hello:
+    desc: 'Print a greeting using NAME'
+    preconditions:
+      - sh: '[[ "{{.NAME}}" =~ ^[A-Za-z]+$ ]]'
+        msg: 'NAME must contain letters only'
+    vars:
+      MESSAGE: 'Hello {{.NAME | default "World"}}!'
+    cmds:
+      - 'echo {{.MESSAGE}}'
+  

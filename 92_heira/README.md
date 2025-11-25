@@ -23,8 +23,15 @@ task docker-run
 
 ```sh
 eyaml --version
+
+# encrypt
+task heira-encryptintojson EXAMPLE_SECRET="helloworld"
+
+# decrypt
+task heira-decryptfromjson  
 ```
 
 ## Resources
 
 * https://accenture.github.io/blog/2018/11/13/introducing_hiera_aws_sm.html
+* https://taskfile.dev/
