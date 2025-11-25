@@ -1,0 +1,69 @@
+version: '3'
+
+vars:
+  EXAMPLE_SECRET: "heira_example_value"
+
+tasks:
+  docker-build:
+    desc: Build the docker image
+    cmds:
+      - docker build -t heira_example .
+
+  docker-run:
+    desc: Run the docker image
+    deps:
+      - docker-build
+    cmds:
+      - docker run -it --volume "$(pwd):/work" heira_example
+
+  heira-createkeys:
+    desc: Create heira encryption keys
+    cmds:
+      - eyaml createkeys --pkcs7-private-key=keys/private_key.pkcs7.pem --pkcs7-public-key=keys/public_key.pkcs7.pem
+    preconditions:
+      - sh: command -v eyaml >/dev/null
+        msg: "heira must be installed"
+
+
+  heira-encryptsecret:
+    desc: Encrypt a secret using heira
+    cmds:
+      - eyaml encrypt -s '$EXAMPLE_SECRET' --pkcs7-public-key=keys/public_key.pkcs7.pem --pkcs7-private-key=keys/private_key.pkcs7.pem
+
+  heira-decryptsecret:
+    desc: Decrypt a secret using heira
+    cmds:
+      - eyaml decrypt -s '$EXAMPLE_SECRET' --pkcs7-public-key=keys/public_key.pkcs7.pem --pkcs7-private-key=keys/private_key.pkcs7.pem
+
+
+  heira-encryptintojson:
+    desc: Encrypt a secret using heira into json format
+    vars:
+      EXAMPLE_SECRET: '{{.EXAMPLE_SECRET | default "example-secret"}}'
+    cmds:
+      - |
+        set -euo pipefail
+        mkdir -p ./data
+        echo '{}' > ./data/secrets.json
+        ENC=$(eyaml encrypt -o string -s '{{ .EXAMPLE_SECRET }}' --pkcs7-public-key=keys/public_key.pkcs7.pem --pkcs7-private-key=keys/private_key.pkcs7.pem)
+        echo "$ENC"
+        jq --arg enc "$ENC" '.password = $enc' ./data/secrets.json > ./data/secrets.tmp
+        mv ./data/secrets.tmp ./data/secrets.json
+        cat ./data/secrets.json
+
+    preconditions:
+      - sh: command -v eyaml >/dev/null
+        msg: "heira must be installed"
+
+  heira-decryptfromjson:
+    desc: Decrypt the password stored in ./data/secrets.json
+    cmds:
+      - |
+        set -euo pipefail
+        ENC=$(jq -er '.password' ./data/secrets.json)
+        eyaml decrypt -s "$ENC" --pkcs7-public-key=keys/public_key.pkcs7.pem --pkcs7-private-key=keys/private_key.pkcs7.pem
+    preconditions:
+      - sh: command -v eyaml >/dev/null
+        msg: "heira must be installed"
+      - sh: test -f ./data/secrets.json
+        msg: "./data/secrets.json not found"
