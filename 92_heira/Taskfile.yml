@@ -1,0 +1,25 @@
+version: '3'
+
+vars:
+  EXAMPLE_SECRET: "heira_example_value"
+
+tasks:
+  docker-build:
+    desc: Build the docker image
+    cmds:
+      - docker build -t heira_example .
+
+  docker-run:
+    desc: Run the docker image
+    deps:
+      - docker-build
+    cmds:
+      - docker run -it heira_example
+
+  encrypt-secret:
+    desc: Encrypt a secret using heira
+    cmds:
+      - heira encrypt EXAMPLE_SECRET
+    preconditions:
+      - sh: command -v heira >/dev/null
+        msg: "heira must be installed"
