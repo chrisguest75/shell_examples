@@ -4,6 +4,18 @@ NOTES:
 
 * Merging in Git creates a special commit that has two unique parents. A commit with two parents essentially means "I want to include all the work from this parent over here and this one over here, and the set of all their parents."
 
+## Deleting Branches
+
+```sh
+# get remote branches
+git branch -r
+
+git branch -D mybranchtodelete
+git push origin --delete mybranchtodelete
+
+git branch -r
+```
+
 ## How do I look at the latest commit on each branch?
 
 ```sh

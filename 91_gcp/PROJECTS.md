@@ -32,6 +32,12 @@ gcloud resource-manager folders create --display-name="urbane" --organization=00
 gcloud projects create my-staging-01 --name="my-staging-01" --folder=111111111111
 ```
 
+## Parents
+
+```sh
+gcloud projects describe my-staging-01 --format="value(parent)"
+```
+
 ## Delete
 
 ```sh
