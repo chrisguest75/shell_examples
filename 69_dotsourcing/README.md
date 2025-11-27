@@ -2,21 +2,33 @@
 
 Demonstrate how to use dot-sourcing.  
 
+NOTES:
+
+* Dot sourced files do not need execute permissions.  
+
 ## Reason
 
 The ability to dot source scripts gives us the ability to merge scripts into shell sessions.  
 
-## Example
+## Examples
 
 ```sh
-# no dot sourced
+# not dot sourced
 ./test-dotsource.sh            
 ```
 
 ```sh
-# attempted to the dot sourced
+# attempt to dot source
 . ./test-dotsource.sh            
 ```
+
+```sh
+# permissions test
+ls -al
+. ./dot.sh
+```
+
+
 
 ## Resources
 
