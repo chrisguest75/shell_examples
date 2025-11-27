@@ -2,6 +2,10 @@
 
 Quick walkthrough of switching `bases` on a branch.  
 
+NOTES:
+
+* If a branch has been pushed remotely and you want to push your change `git pull --prune --rebase` then `git push`
+
 ## Contents
 
 - [REBASING](#rebasing)
